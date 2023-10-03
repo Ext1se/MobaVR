@@ -21,6 +21,7 @@ namespace MobaVR
 
         [SerializeField] private WizardPlayer m_WizardPlayer;
         [SerializeField] private PlayerMode m_PlayerMode;
+        [SerializeField] private PlayerScore m_PlayerScore;
         [SerializeField] private ClassSwitcher m_ClassSwitcher;
         [SerializeField] private Teammate m_Teammate;
         [SerializeField] private DieView m_DieView;
@@ -73,6 +74,7 @@ namespace MobaVR
         public PlayerMode PlayerMode => m_PlayerMode;
         public Damageable Damageable => m_Damageable;
         public WizardPlayer WizardPlayer => m_WizardPlayer;
+        public PlayerScore PlayerScore => m_PlayerScore;
         public DieView DieView => m_DieView;
         public SkinCollection SkinCollection => m_SkinCollection;
         public CalibrationPol Calibration => m_Calibration;
@@ -124,6 +126,11 @@ namespace MobaVR
             if (m_Calibration == null)
             {
                 m_Calibration = GetComponentInChildren<CalibrationPol>();
+            }
+            
+            if (m_PlayerScore == null)
+            {
+                m_PlayerScore = GetComponentInChildren<PlayerScore>();
             }
 
             /*

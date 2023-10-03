@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Photon.Pun;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -84,8 +85,10 @@ namespace MobaVR
             {
                 //m_Wizard.PlayerVR.DieView.SetDieInfo(m_Killer.photonView.Owner.NickName);
                 m_Wizard.PlayerVR.DieView.SetDieInfo(m_Killer.PlayerData.NickName);
-                SendDeathData();
+                //SendDeathData();
             }
+            
+            SendDeathData();
         }
 
         private void OnPlayerReborn()
@@ -103,17 +106,29 @@ namespace MobaVR
                 return delta.Milliseconds > m_HitCooldown;
             });
             
+            m_HitPlayers = m_Hits.Select(data => data.PlayerVR).ToList();
+            if (m_Killer != null)
+            {
+                m_HitPlayers.Remove(m_Killer);
+            }
+
             DeathPlayerData deathPlayerData = new DeathPlayerData()
             {
                 DeadPlayer = m_Wizard.PlayerVR,
                 KillPlayer = m_Killer,
                 AssistPlayers = m_HitPlayers
             };
+
+            if (m_GameStatistics != null)
+            {
+                m_GameStatistics.SendDeathData(deathPlayerData);
+            }
         }
 
         private void Reset()
         {
             m_HitPlayers.Clear();
+            m_Hits.Clear();
             m_Killer = null;
             m_LastHitPlayer = null;
             m_CurrentTime = 0f;

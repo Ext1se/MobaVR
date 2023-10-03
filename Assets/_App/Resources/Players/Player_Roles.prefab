@@ -27319,6 +27319,7 @@ GameObject:
   - component: {fileID: 2533828398053949694}
   - component: {fileID: 5471118533385866162}
   - component: {fileID: 1805081918052811352}
+  - component: {fileID: 3091059757054163133}
   m_Layer: 0
   m_Name: Player_Roles
   m_TagString: RemotePlayer
@@ -27435,6 +27436,7 @@ MonoBehaviour:
   m_Spells: {fileID: 8274666734879452763}
   m_WizardPlayer: {fileID: 7702456167165704558}
   m_PlayerMode: {fileID: 2951710517302752507}
+  m_PlayerScore: {fileID: 3091059757054163133}
   m_ClassSwitcher: {fileID: 3243804191262069341}
   m_Teammate: {fileID: 4524219345660546153}
   m_DieView: {fileID: 5619093549321284910}
@@ -27725,7 +27727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a47d51d2d824b7b4abc626a0b0a9671a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HitCooldown: 20
+  m_HitCooldown: 20000
   m_Hits: []
 --- !u!114 &1805081918052811352
 MonoBehaviour:
@@ -27743,6 +27745,24 @@ MonoBehaviour:
   - {fileID: 7245311810120021874}
   m_RemoteViews:
   - {fileID: 3040084037820458657}
+--- !u!114 &3091059757054163133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7702456167165704552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49ca77c8fcd4192bcf11748faf1c48e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ScoreData:
+    KillsCount: 0
+    DeathsCount: 0
+    AssistsCount: 0
+    MonsterCount: 0
+    CaloriesCount: 0
 --- !u!1 &7702456167767660269
 GameObject:
   m_ObjectHideFlags: 0

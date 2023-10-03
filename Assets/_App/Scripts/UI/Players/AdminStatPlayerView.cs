@@ -22,16 +22,33 @@ namespace MobaVR
         protected override void OnDestroy()
         {
             base.OnDestroy();
+            if (m_PlayerVR != null)
+            {
+                m_PlayerVR.PlayerScore.OnUpdateScore -= OnUpdateScore;
+            }
         }
 
         protected override void SetPlayerData()
         {
             base.SetPlayerData();
+
+            m_PlayerVR.PlayerScore.OnUpdateScore += OnUpdateScore;
         }
 
         protected override void OnUpdateRole(string idRole)
         {
             m_RoleText.text = idRole;
+        }
+        
+        private void OnUpdateScore()
+        {
+            PlayerScoreData scoreData = m_PlayerVR.PlayerScore.ScoreData;
+            
+            m_KillsCountText.text = scoreData.KillsCount.ToString();
+            m_DeathsCountText.text = scoreData.DeathsCount.ToString();
+            m_AssistsCountText.text = scoreData.AssistsCount.ToString();
+            m_MonsterCountText.text = scoreData.MonsterCount.ToString();
+            m_CaloriesCountText.text = scoreData.CaloriesCount.ToString();
         }
 
         protected override void OnUpdateNickName(string nickName)
