@@ -103,7 +103,7 @@ namespace MobaVR
                 DateTime dateTimeNow = DateTime.Now;
                 TimeSpan delta = dateTimeNow - data.DateTime;
 
-                return delta.Milliseconds > m_HitCooldown;
+                return delta.TotalSeconds > m_HitCooldown;
             });
             
             m_HitPlayers = m_Hits.Select(data => data.PlayerVR).ToList();

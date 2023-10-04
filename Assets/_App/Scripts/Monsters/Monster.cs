@@ -149,7 +149,9 @@ namespace MobaVR
         public Action OnInit;
         public Action OnMove;
         public Action OnAttack;
-        public Action OnDeath;
+        public Action OnDeath; // TODO: Monster Die Action
+        public Action<HitData> OnLastHit; // TODO: Monster Die Action
+        public Action<HitData> OnHit;
 
         #endregion
 
@@ -681,7 +683,9 @@ namespace MobaVR
 
         public void Hit(HitData hitData)
         {
-            RpcHit_Monster(hitData.Amount);
+            //RpcHit_Monster(hitData.Amount);
+            OnHit?.Invoke(hitData);
+            RpcHit_Monster(hitData);
         }
 
         /*
@@ -691,13 +695,16 @@ namespace MobaVR
                 }
         */
         [PunRPC]
-        protected void RpcHit_Monster(float damage)
+        //protected void RpcHit_Monster(float damage)
+        protected void RpcHit_Monster(HitData hitData)
         {
             if (IsLife)
             {
                 //Vector3 position = m_MonsterView.transform.position;
                 Vector3 position = m_DamageNumber.transform.position;
-                GetDamage(position, damage);
+                hitData.Position = position;
+                //GetDamage(position, hitData.Amount);
+                GetDamage(hitData);
             }
         }
 
@@ -765,7 +772,8 @@ namespace MobaVR
             */
         }
 
-        protected virtual void GetDamage(Vector3 position, float damage)
+        //protected virtual void GetDamage(Vector3 position, float damage)
+        protected virtual void GetDamage(HitData hitData)
         {
             if (!IsLife || !m_CanGetDamage)
             {
@@ -776,14 +784,15 @@ namespace MobaVR
             {
                 if (m_CurrentHealth >= 0)
                 {
-                    m_CurrentHealth -= damage;
-                    m_DamageNumber.SpawnNumber(position, damage, MonsterDamageType.HP);
+                    m_CurrentHealth -= hitData.Amount;
+                    m_DamageNumber.SpawnNumber(hitData.Position, hitData.Amount, MonsterDamageType.HP);
                     //m_OrcSoundController.PlayHit();
                     //CreateBlood(position);
 
                     if (m_CurrentHealth <= 0)
                     {
                         m_CurrentHealth = 0;
+                        OnLastHit?.Invoke(hitData);
                         CurrentState = MonsterState.DEATH;
                     }
                     else
@@ -798,7 +807,7 @@ namespace MobaVR
             }
             else
             {
-                m_DamageNumber.SpawnNumber(position, damage, MonsterDamageType.IMMORTAL);
+                m_DamageNumber.SpawnNumber(hitData.Position, hitData.Amount, MonsterDamageType.IMMORTAL);
             }
         }
 

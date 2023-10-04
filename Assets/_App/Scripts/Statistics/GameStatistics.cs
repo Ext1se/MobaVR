@@ -53,6 +53,17 @@ namespace MobaVR
             }
         }
 
+        public void SendMonsterDeathData(PlayerVR playerVR, int score)
+        {
+            if (playerVR == null)
+            {
+                return;
+            }
+
+            playerVR.PlayerScore.ScoreData.MonsterCount += score;
+            playerVR.PlayerScore.UpdateScore();
+        }
+
         public virtual void RemovePlayer(PlayerVR playerVR)
         {
             m_Players.Add(playerVR);
