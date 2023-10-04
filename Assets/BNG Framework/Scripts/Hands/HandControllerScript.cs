@@ -28,7 +28,11 @@ public class HandControllerScript : MonoBehaviour
         }
 
         // Включение нужных рук
-        transform.Find(handType.ToString()).gameObject.SetActive(true);
+        Transform findHand = transform.Find(handType.ToString());
+        if (findHand != null)
+        {
+            findHand.gameObject.SetActive(true);
+        }
         activeHandType = handType;
     }
 }
