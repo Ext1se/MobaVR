@@ -369,6 +369,13 @@ namespace MobaVR
 
             m_AnimalSkinPosition = Math.Clamp(position, 0, m_DeadSkins.Count - 1);
             m_AnimalSkin = m_AnimalSkins[m_AnimalSkinPosition];
+            
+            // TODO: скрываем тело свиньи. Нужно делать в другом месте
+            // + скрываем, но не раскрываем потом. Могут быть траблы.
+            if (m_PhotonView.IsMine && m_IsHideVR)
+            {
+                m_AnimalSkin.SetVisibilityVR(false);
+            }
 
             TeamType teamType = m_PlayerVR != null ? m_PlayerVR.TeamType : TeamType.RED;
             m_AnimalSkin.ActivateSkin(teamType);
