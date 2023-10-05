@@ -82,9 +82,12 @@ namespace MobaVR
         private void OnPerformed()
         {
             m_CurrentTime = 0f;
-            m_ProgressBar.currentPercent = 0f;
-            m_ProgressBar.UpdateUI();
-            
+            if (m_ProgressBar != null)
+            {
+                m_ProgressBar.currentPercent = 0f;
+                m_ProgressBar.UpdateUI();
+            }
+
             UpdateHealthImage();//обновляем картинку
             
             
@@ -101,8 +104,12 @@ namespace MobaVR
             */
             
             m_CurrentTime = 0f;
-            m_ProgressBar.currentPercent = 0f;
-            m_ProgressBar.UpdateUI();
+            if (m_ProgressBar != null)
+            {
+                m_ProgressBar.currentPercent = 0f;
+                m_ProgressBar.UpdateUI();
+            }
+
             UpdateHealthImage();//обновляем картинку
             m_IsCompleted = true;
         }
@@ -111,7 +118,7 @@ namespace MobaVR
         
         private void UpdateHealthImage()
         {
-            if (m_SpellImage != null) 
+            if (m_SpellImage != null && m_ProgressBar != null) 
             {
                 m_SpellImage.OnImage.fillAmount = m_ProgressBar.currentPercent / 100.0f;
             }
@@ -139,16 +146,25 @@ namespace MobaVR
 
             if (m_SpellBehaviour.IsAvailable || !m_SpellBehaviour.UseCooldown)
             {
-                m_ProgressBar.currentPercent = 100f;
-                m_ProgressBar.UpdateUI();
+                if (m_ProgressBar != null)
+                {
+                    m_ProgressBar.currentPercent = 100f;
+                    m_ProgressBar.UpdateUI();
+                }
+
                 UpdateHealthImage();//обновляем картинку
                 
             }
             else
             {
                 m_CurrentTime = m_SpellBehaviour.CurrentTime;
-                m_ProgressBar.currentPercent = m_CurrentTime / m_CooldownTime * 100f;
-                m_ProgressBar.UpdateUI();
+                if (m_ProgressBar != null)
+                {
+                    m_ProgressBar.currentPercent = m_CurrentTime / m_CooldownTime * 100f;
+                    m_ProgressBar.UpdateUI();
+
+                }
+
                 UpdateHealthImage();//обновляем картинку
             }
             
