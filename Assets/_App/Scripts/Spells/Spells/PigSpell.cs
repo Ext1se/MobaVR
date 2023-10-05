@@ -51,7 +51,7 @@ namespace MobaVR
 
         protected override void HandleCollision(Transform interactable)
         {
-            if (!m_IsTransformed)
+            if (!m_IsTransformed && photonView.IsMine)
             {
                 if (interactable.transform.TryGetComponent(out HitCollider hitCollider))
                 {

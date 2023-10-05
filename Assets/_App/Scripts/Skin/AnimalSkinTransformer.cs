@@ -85,11 +85,22 @@ namespace MobaVR
 
         private void OnSkinDeactivated()
         {
+            //if (m_IsAnimalSkin)
+            {
+                m_IsAnimalSkin = false;
+                
+                RestorePrevState();
+                CancelInvoke(nameof(HideSkin));
+                ShowParticle();
+            }
+            
+            /*
             m_IsAnimalSkin = false;
 
             RestorePrevState();
             CancelInvoke(nameof(HideSkin));
             ShowParticle();
+            */
         }
 
         private void ActivateAnimalState()
@@ -97,6 +108,11 @@ namespace MobaVR
             if (m_CurrentPlayerStateSO == null)
             {
                 m_CurrentPlayerStateSO = ScriptableObject.CreateInstance<PlayerStateSO>();
+            }
+
+            if (m_CurrentPlayerStateSO == m_PlayerVR.WizardPlayer.CurrentPlayerState)
+            {
+                return;
             }
             
             m_PrevPlayerStateSO = m_PlayerVR.WizardPlayer.CurrentPlayerState;
