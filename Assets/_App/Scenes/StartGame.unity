@@ -11594,7 +11594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3566a9917494fb419808b8ed6bad39a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsAdmin: 1
+  IsAdmin: 0
   PlayerVR: {fileID: 2683195716764533364}
   PlayerPC: {fileID: 716183762}
   PlayerCrate: 0
@@ -115272,6 +115272,7 @@ MonoBehaviour:
   PreviousHeldObject: {fileID: 0}
   DoUpdateAnimationStates: 1
   DoUpdateHandPoser: 1
+  specifiedObject: {fileID: 0}
 --- !u!1 &8320362178916984843
 GameObject:
   m_ObjectHideFlags: 0
@@ -115494,6 +115495,7 @@ MonoBehaviour:
   PreviousHeldObject: {fileID: 0}
   DoUpdateAnimationStates: 1
   DoUpdateHandPoser: 1
+  specifiedObject: {fileID: 0}
 --- !u!1 &8320362180693419114
 GameObject:
   m_ObjectHideFlags: 0

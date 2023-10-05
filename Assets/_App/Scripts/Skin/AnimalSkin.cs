@@ -22,13 +22,13 @@ namespace MobaVR
         [SerializeField] private bool m_UseSkinHands = true;
         [SerializeField] private GameObject m_LeftHandModel;
         [SerializeField] private GameObject m_RightHandModel;
-        
+
         [Header("Team")]
         [SerializeField] private List<SkinItem> m_TeamRenderers = new();
         [SerializeField] private List<Renderer> m_HiddenVrRenderers = new();
 
         private PhotonView m_PhotonView;
-        
+
         [Space]
         [Header("Events")]
         public UnityEvent OnActivated;
@@ -75,14 +75,14 @@ namespace MobaVR
         }
 
         #region Skin
-        
+
         private void SetEnableHands(bool isEnable)
         {
             if (m_PhotonView != null && !m_PhotonView.IsMine)
             {
                 return;
             }
-            
+
             if (m_UseSkinHands)
             {
                 if (m_LeftHandModel)
