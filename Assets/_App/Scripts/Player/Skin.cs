@@ -244,6 +244,15 @@ namespace MobaVR
             }
         }
 
+        public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
+        {
+            position.y = transform.position.y;
+            transform.position = position;
+            
+            //transform.position = position;
+            //transform.rotation = rotation;
+        }
+
         public void ActivateSkin(TeamType teamType)
         {
             gameObject.SetActive(true);
