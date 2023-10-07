@@ -28,7 +28,7 @@ namespace MobaVR
             }
         }
 
-        protected override void SetPlayerData()
+        public override void SetPlayerData()
         {
             base.SetPlayerData();
 

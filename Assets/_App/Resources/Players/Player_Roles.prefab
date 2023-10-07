@@ -1060,6 +1060,7 @@ GameObject:
   - component: {fileID: 5361989274055860328}
   - component: {fileID: 8413709756666371968}
   - component: {fileID: 2701001236223545836}
+  - component: {fileID: 3605504838486948136}
   m_Layer: 0
   m_Name: ScoreMenu
   m_TagString: Untagged
@@ -1132,8 +1133,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd19bc5020d41e3a21f4b7277358215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StatContentView: {fileID: 3756689767429679226}
+  m_StatContentView: {fileID: 3605504838486948136}
   m_GameSession: {fileID: 0}
+--- !u!114 &3605504838486948136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370918164378811098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6353f20f12ab46179eccbce4bda0aa02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlayerView: {fileID: 3321988113381401155, guid: b61b91ef31f74e64490622bac1523139,
+    type: 3}
+  m_ContentPoint: {fileID: 1754257812633645598}
+  m_PlayerViews: []
 --- !u!1 &378390514004936563
 GameObject:
   m_ObjectHideFlags: 0
@@ -45898,7 +45915,6 @@ GameObject:
   - component: {fileID: 3904697029752362275}
   - component: {fileID: 1269539603832117812}
   - component: {fileID: 3322062737120661016}
-  - component: {fileID: 3756689767429679226}
   m_Layer: 0
   m_Name: StatScrollView
   m_TagString: Untagged
@@ -46017,22 +46033,6 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: 1
   m_LayoutPriority: 1
---- !u!114 &3756689767429679226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7966071545814875054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6353f20f12ab46179eccbce4bda0aa02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PlayerView: {fileID: 3321988113381401155, guid: b61b91ef31f74e64490622bac1523139,
-    type: 3}
-  m_ContentPoint: {fileID: 1754257812633645598}
-  m_PlayerViews: []
 --- !u!1 &7971425969131476299
 GameObject:
   m_ObjectHideFlags: 0

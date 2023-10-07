@@ -39,9 +39,10 @@ namespace MobaVR
             m_GameStatistics = FindObjectOfType<GameStatistics>();
             Reset();
         }
+        
         private void OnMonsterDie(HitData hitData)
         {
-            if (hitData.PlayerVR == null)
+            if (hitData == null || hitData.PlayerVR == null)
             {
                 return;
             }
