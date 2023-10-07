@@ -462,6 +462,7 @@ namespace MobaVR
             }
 
             DeactivateAnimalSkin();
+            m_LastSkinType = SkinType.ALIVE;
 
             TeamType teamType = m_PlayerVR != null ? m_PlayerVR.TeamType : TeamType.RED;
             SetVisibilityDie(false);
