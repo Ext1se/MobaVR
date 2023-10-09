@@ -542,19 +542,19 @@ namespace BNG {
             //Если pose blender не найден, добавьте его и настройте так, чтобы мы могли использовать его в Update()
             if (poseBlender == null || !poseBlender.isActiveAndEnabled)
             {
-                Debug.Log("переменная poseBlender == null");
+                //Debug.Log("переменная poseBlender == null");
                 poseBlender = specifiedObject.GetComponentInChildren<HandPoseBlender>();
-                Debug.Log("Назначили этой переменной компонент HandPoseBlender");
+                // Debug.Log("Назначили этой переменной компонент HandPoseBlender");
             }
  
             // Если pose blender не найден, добавьте его и настройте так, чтобы мы могли использовать его в Update()
             if (poseBlender == null) {
                 if(handPoser != null) {
-                    Debug.Log("У нас есть handPoser, теперь добавим к нему HandPoseBlender");
+                    //  Debug.Log("У нас есть handPoser, теперь добавим к нему HandPoseBlender");
                     poseBlender = handPoser.gameObject.AddComponent<HandPoseBlender>();
                 }
                 else {
-                    Debug.Log("У нас нет handPoser, теперь добавим к нему HandPoseBlender");
+                    //  Debug.Log("У нас нет handPoser, теперь добавим к нему HandPoseBlender");
                     poseBlender = this.gameObject.AddComponent<HandPoseBlender>();
                 }
 
