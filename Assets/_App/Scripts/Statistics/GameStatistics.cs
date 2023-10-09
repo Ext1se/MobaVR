@@ -64,6 +64,17 @@ namespace MobaVR
             playerVR.PlayerScore.UpdateScore();
         }
 
+        public void SendCalories(PlayerVR playerVR, float calories)
+        {
+            if (playerVR == null)
+            {
+                return;
+            }
+
+            playerVR.PlayerScore.ScoreData.CaloriesCount = (int)calories;
+            playerVR.PlayerScore.UpdateScore();
+        }
+
         public virtual void RemovePlayer(PlayerVR playerVR)
         {
             m_Players.Add(playerVR);
