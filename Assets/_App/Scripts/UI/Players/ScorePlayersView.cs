@@ -7,7 +7,8 @@ namespace MobaVR
 {
     public class ScorePlayersView : MonoBehaviourPunCallbacks
     {
-        [SerializeField] private AdminStatContentView m_StatContentView;
+        //[SerializeField] private AdminStatContentView m_StatContentView;
+        [SerializeField] private TeamScoreContentView m_StatContentView;
         [SerializeField] [ReadOnly] private ClassicGameSession m_GameSession;
 
         private void OnDestroy()

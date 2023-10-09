@@ -1,6 +1,5 @@
 ﻿using System;
-using Michsky.MUIP;
-using MobaVR.Utils;
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
@@ -17,6 +16,12 @@ namespace MobaVR
         [SerializeField] private TextMeshProUGUI m_MonsterCountText;
         [SerializeField] private TextMeshProUGUI m_CaloriesCountText;
 
+        [Header("User Settings")]
+        [SerializeField] private Color m_LocalUserColor = Color.white;
+        [SerializeField] private Color m_RemoteUserColor = Color.white;
+        
+        public Action<TeamType> OnUpdateTeamView;
+        
         #region OnUpdate
 
         protected override void OnDestroy()
@@ -53,7 +58,16 @@ namespace MobaVR
 
         protected override void OnUpdateNickName(string nickName)
         {
-            m_NickNameText.text = nickName;
+            if (m_PlayerVR != null && m_PlayerVR.photonView.IsMine)
+            {
+                m_NickNameText.color = m_LocalUserColor;
+                m_NickNameText.text = $"<b>{nickName}</b>";
+            }
+            else
+            {
+                m_NickNameText.color = m_RemoteUserColor;
+                m_NickNameText.text = nickName;
+            }
         }
 
         protected override void OnUpdateTeam(TeamType teamType)
@@ -64,6 +78,8 @@ namespace MobaVR
                 TeamType.BLUE => "<color=blue>BLUE</color>",
                 _ => m_TeamText.text
             };
+            
+            OnUpdateTeamView?.Invoke(teamType);
         }
 
         #endregion
