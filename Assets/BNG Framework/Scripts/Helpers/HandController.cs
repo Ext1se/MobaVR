@@ -519,6 +519,9 @@ namespace BNG {
                     
                     //SetHandAnimator();//заодно проверяем на аниматор
                     HandAnimator = specifiedObject.GetComponentInChildren<Animator>();
+                    
+                    
+                    
                 } 
                 
                 
@@ -535,24 +538,30 @@ namespace BNG {
                 // handPoser = this.gameObject.AddComponent<HandPoser>();
             }
 
-            // If no pose blender is found, add it and set it up so we can use it in Update()
-            if (poseBlender == null || !poseBlender.isActiveAndEnabled) {
-                poseBlender = GetComponentInChildren<HandPoseBlender>();
+           
+            //Если pose blender не найден, добавьте его и настройте так, чтобы мы могли использовать его в Update()
+            if (poseBlender == null || !poseBlender.isActiveAndEnabled)
+            {
+                Debug.Log("переменная poseBlender == null");
+                poseBlender = specifiedObject.GetComponentInChildren<HandPoseBlender>();
+                Debug.Log("Назначили этой переменной компонент HandPoseBlender");
             }
-
-            // If no pose blender is found, add it and set it up so we can use it in Update()
+ 
+            // Если pose blender не найден, добавьте его и настройте так, чтобы мы могли использовать его в Update()
             if (poseBlender == null) {
                 if(handPoser != null) {
+                    Debug.Log("У нас есть handPoser, теперь добавим к нему HandPoseBlender");
                     poseBlender = handPoser.gameObject.AddComponent<HandPoseBlender>();
                 }
                 else {
+                    Debug.Log("У нас нет handPoser, теперь добавим к нему HandPoseBlender");
                     poseBlender = this.gameObject.AddComponent<HandPoseBlender>();
                 }
 
-                // Don't update pose in Update since we will be controlling this ourselves
+                // Не обновляйте позу в обновлении, так как мы будем контролировать это сами
                 poseBlender.UpdatePose = false;
 
-                // Set up the blend to use some default poses
+                // Настройте наложение так, чтобы использовать некоторые позы по умолчанию
                 poseBlender.Pose1 = GetDefaultOpenPose();
                 poseBlender.Pose2 = GetDefaultClosedPose();
             }
