@@ -1,5 +1,6 @@
 using System;
 using Photon.Pun;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace MobaVR
@@ -16,8 +17,8 @@ namespace MobaVR
         private SkinCollection m_SkinCollection;
         private PlayerVR m_PlayerVR;
 
-        private PlayerStateSO m_CurrentPlayerStateSO;
-        private PlayerStateSO m_PrevPlayerStateSO;
+        [SerializeField] [ReadOnly] private PlayerStateSO m_CurrentPlayerStateSO;
+        [SerializeField] [ReadOnly] private PlayerStateSO m_PrevPlayerStateSO;
 
         private bool m_IsAnimalSkin = true;
 
@@ -30,10 +31,15 @@ namespace MobaVR
             m_PlayerVR.WizardPlayer.OnReborn -= OnPlayerReborn;
         }
 
+        private void OnDisable()
+        {
+            
+        }
+
         // TODO: подписываемся тут
         private void Awake()
         {
-            m_CurrentPlayerStateSO = ScriptableObject.CreateInstance<PlayerStateSO>();
+            //m_CurrentPlayerStateSO = ScriptableObject.CreateInstance<PlayerStateSO>();
             
             m_AnimalSkin = GetComponent<AnimalSkin>();
             m_SkinCollection = GetComponentInParent<SkinCollection>();
@@ -108,15 +114,24 @@ namespace MobaVR
             if (m_CurrentPlayerStateSO == null)
             {
                 m_CurrentPlayerStateSO = ScriptableObject.CreateInstance<PlayerStateSO>();
+                m_CurrentPlayerStateSO.State = PlayerState.CUSTOM;
             }
 
+            if (m_PlayerVR.WizardPlayer.CurrentPlayerState.State == PlayerState.CUSTOM)
+            {
+                return;
+            }
+
+            /*
             if (m_CurrentPlayerStateSO == m_PlayerVR.WizardPlayer.CurrentPlayerState)
             {
                 return;
             }
+            */
             
             m_PrevPlayerStateSO = m_PlayerVR.WizardPlayer.CurrentPlayerState;
             m_CurrentPlayerStateSO.PasteCopyValue(m_PrevPlayerStateSO);
+            m_CurrentPlayerStateSO.State = PlayerState.CUSTOM;
             m_CurrentPlayerStateSO.CanCast = m_CanCast;
 
             // TODO: могут быть пробелмы с синхронизацией, но этот метод вызывается через RPC у SkinCollection, поэтому вряд ли
@@ -132,7 +147,14 @@ namespace MobaVR
             }
 
             //if (m_PlayerVR.WizardPlayer.CurrentPlayerState != m_PrevPlayerStateSO)
+            /*
             if (m_PlayerVR.WizardPlayer.CurrentPlayerState != m_CurrentPlayerStateSO)
+            {
+                return;
+            }
+            */
+            
+            if (m_PlayerVR.WizardPlayer.CurrentPlayerState.State != PlayerState.CUSTOM)
             {
                 return;
             }
