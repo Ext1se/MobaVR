@@ -235,6 +235,14 @@ public class AppBuilder
                 return false;
         }
         
+        string cityPath = $"Assets/_App/Scenes/City/{cityName}";
+        if (!Directory.Exists(cityPath))
+        {
+            Debug.LogError($"{TAG}: City by Path: {cityPath} is not exist");
+            scenes = null;
+            return false;
+        }
+        
         int scenesCount = 0;
         scenesCount += isAdmin ? ADMIN_SCENES.Length : 0;
         scenesCount += COMMON_SCENES.Length;
@@ -250,10 +258,10 @@ public class AppBuilder
         
         COMMON_SCENES.CopyTo(scenes, offset);
         offset += COMMON_SCENES.Length;
-        
+     
         for (int i = offset; i < scenes.Length; i++)
         {
-            string scenePath = $"Assets/_App/Scenes/City/{cityName}/{CITY_SCENES[i]}_{cityName}.unity";
+            string scenePath = $"{cityPath}/{CITY_SCENES[i]}_{cityName}.unity";
             scenes[i] = scenePath;
         }
         
