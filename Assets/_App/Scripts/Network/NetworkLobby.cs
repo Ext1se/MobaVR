@@ -18,7 +18,7 @@ namespace MobaVR
         [SerializeField] private bool m_IsGetOnlineFromPlayerPrefs = true;
         [SerializeField] private bool m_GameOnline;
         [SerializeField] private string ipServ;
-        public AppSettingSity appSettings;
+        public AppSetting appSettings;
 
 
         private bool m_IsConnecting = false;
@@ -173,7 +173,7 @@ namespace MobaVR
 
         private void LoadCityScene(string baseSceneName)
         {
-            string sceneName = $"{baseSceneName}_{appSettings.CurrentCity}"; 
+            string sceneName = $"{baseSceneName}_{appSettings.City}"; 
             PhotonNetwork.LoadLevel(sceneName);
         }
         

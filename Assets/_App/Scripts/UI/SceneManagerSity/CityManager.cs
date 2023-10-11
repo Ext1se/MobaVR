@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement; // Для работы со сценами.
 public class CityManager : MonoBehaviour
 {
     public static CityManager Instance;
-    public AppSettingSity appSettings; // Добавьте ссылку на ваш ScriptableObject где есть название города
+    public AppSetting appSettings; // Добавьте ссылку на ваш ScriptableObject где есть название города
     
     private bool isSceneLoading = false;//проверяем, загрузилась ли сцена или нет, чтобы не включать 2 одновременно
 
@@ -50,7 +50,7 @@ public class CityManager : MonoBehaviour
 
         isSceneLoading = true; 
 
-        string sceneName = $"{baseSceneName}_{appSettings.CurrentCity}";
+        string sceneName = $"{baseSceneName}_{appSettings.City}";
 
       
             // bannerDropScript = FindObjectOfType<BannerDropScript>();
