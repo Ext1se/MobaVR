@@ -18,6 +18,7 @@ namespace MobaVR
         [SerializeField] private bool m_IsGetOnlineFromPlayerPrefs = true;
         [SerializeField] private bool m_GameOnline;
         [SerializeField] private string ipServ;
+        [SerializeField] private AppPhotonSettingsSO m_Settings;
         public AppSetting appSettings;
 
 
@@ -87,8 +88,9 @@ namespace MobaVR
                 if (m_GameOnline)
                 {
                     Debug.Log("Запускаем онлайн");
-                    PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime =
-                        "359a2117-3847-4818-b6fe-9058f80cbac0";
+                    PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime = m_Settings.OnlineKey;
+                        //"359a2117-3847-4818-b6fe-9058f80cbac0";
+                        //"2a8deb94-f484-4b03-b45a-b37ae3a077cc";
                     PhotonNetwork.PhotonServerSettings.AppSettings.UseNameServer = true;
                     PhotonNetwork.PhotonServerSettings.AppSettings.Server = "";
                     PhotonNetwork.ConnectUsingSettings();
@@ -96,7 +98,8 @@ namespace MobaVR
                 else
                 {
                     Debug.Log("Запускаем локальный, через IP " + ipServ);
-                    PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime = "1234567890-1234567890-1234567890";
+                    //PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime = "1234567890-1234567890-1234567890";
+                    PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime = m_Settings.OfflineKey;
                     PhotonNetwork.PhotonServerSettings.AppSettings.UseNameServer = false;
                     // PhotonNetwork.PhotonServerSettings.AppSettings.Server = "LocalServer";
                     PhotonNetwork.PhotonServerSettings.AppSettings.Server = ipServ;
