@@ -66,6 +66,7 @@ namespace MobaVR
         private void OnDisable()
         {
             m_SpellBehaviour.OnCompleted -= OnCompleted;
+            m_SpellBehaviour.OnPerformed -= OnPerformed; //
 
             if (photonView.IsMine)
             {

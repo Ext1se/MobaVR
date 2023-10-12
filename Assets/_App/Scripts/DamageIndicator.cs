@@ -45,7 +45,7 @@ namespace MobaVR
             m_DamageImage.enabled = true;
             m_Animator.SetTrigger(m_ShowAnimId);
 
-            if (m_AudioSource != null && m_DamageSounds.Length > 0)
+            if (m_AudioSource != null && m_AudioSource.isActiveAndEnabled && m_DamageSounds.Length > 0)
             {
                 m_AudioSource.PlayOneShot(m_DamageSounds[m_CurrentSoundIndex]);
                 m_CurrentSoundIndex = (m_CurrentSoundIndex + 1) % m_DamageSounds.Length;

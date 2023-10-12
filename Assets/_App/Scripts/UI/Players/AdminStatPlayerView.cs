@@ -37,7 +37,17 @@ namespace MobaVR
         {
             base.SetPlayerData();
 
+            UpdateScore(m_PlayerVR.PlayerScore.ScoreData);
             m_PlayerVR.PlayerScore.OnUpdateScore += OnUpdateScore;
+        }
+
+        private void UpdateScore(PlayerScoreData scoreData)
+        {
+            m_KillsCountText.text = scoreData.KillsCount.ToString();
+            m_DeathsCountText.text = scoreData.DeathsCount.ToString();
+            m_AssistsCountText.text = scoreData.AssistsCount.ToString();
+            m_MonsterCountText.text = scoreData.MonsterCount.ToString();
+            m_CaloriesCountText.text = scoreData.CaloriesCount.ToString();
         }
 
         protected override void OnUpdateRole(string idRole)
@@ -48,14 +58,9 @@ namespace MobaVR
         private void OnUpdateScore()
         {
             PlayerScoreData scoreData = m_PlayerVR.PlayerScore.ScoreData;
-            
-            m_KillsCountText.text = scoreData.KillsCount.ToString();
-            m_DeathsCountText.text = scoreData.DeathsCount.ToString();
-            m_AssistsCountText.text = scoreData.AssistsCount.ToString();
-            m_MonsterCountText.text = scoreData.MonsterCount.ToString();
-            m_CaloriesCountText.text = scoreData.CaloriesCount.ToString();
+            UpdateScore(scoreData);
         }
-
+        
         protected override void OnUpdateNickName(string nickName)
         {
             if (m_PlayerVR != null && m_PlayerVR.photonView.IsMine)
