@@ -32,9 +32,10 @@ namespace MobaVR
                 foreach (PlayerVR playerVR in m_GameSession.Players)
                 {
                     //OnAddPlayer(playerVR);
-                    m_StatContentView.UpdatePlayers();
                 }
-                
+
+                m_StatContentView.UpdatePlayers();
+
                 m_GameSession.OnAddPlayer += OnAddPlayer;
                 m_GameSession.OnRemovePlayer += OnRemovePlayer;
             }

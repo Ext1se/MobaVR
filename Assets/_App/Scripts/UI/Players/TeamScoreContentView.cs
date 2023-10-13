@@ -19,12 +19,7 @@ namespace MobaVR
         public virtual void RemovePlayer(PlayerVR playerVR)
         {
             AdminStatPlayerView playerInfoView = m_PlayerViews.Find(view => view.PlayerVR == playerVR);
-            if (playerInfoView != null)
-            {
-                playerInfoView.OnUpdateTeamView -= (teamType) => OnUpdateTeamView(playerInfoView, teamType);
-                m_PlayerViews.Remove(playerInfoView);
-                Destroy(playerInfoView.gameObject);
-            }
+            RemovePlayerView(playerInfoView);
         }
 
         public virtual void AddPlayer(PlayerVR playerVR)
@@ -40,8 +35,24 @@ namespace MobaVR
             UpdateLayout();
         }
 
+        private void RemovePlayerView(AdminStatPlayerView playerInfoView)
+        {
+            if (playerInfoView != null)
+            {
+                playerInfoView.OnUpdateTeamView -= (teamType) => OnUpdateTeamView(playerInfoView, teamType);
+                m_PlayerViews.Remove(playerInfoView);
+                Destroy(playerInfoView.gameObject);
+            }
+        }
+        
         private void OnUpdateTeamView(AdminStatPlayerView playerInfo, TeamType teamType)
         {
+            if (playerInfo == null)
+            {
+                //TODO
+                return;
+            }
+            
             playerInfo.transform.parent = teamType == TeamType.RED ? m_RedTeamContentPoint : m_BlueTeamContentPoint;
             UpdateLayout();
         }
@@ -66,7 +77,8 @@ namespace MobaVR
         {
             for (int i = m_PlayerViews.Count - 1; i >= 0; i--)
             {
-                Destroy(m_PlayerViews[i].gameObject);
+                //Destroy(m_PlayerViews[i].gameObject);
+                RemovePlayerView(m_PlayerViews[i]);
             }
 
             m_PlayerViews.Clear();

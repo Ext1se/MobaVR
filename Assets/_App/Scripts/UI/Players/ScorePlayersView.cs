@@ -13,7 +13,7 @@ namespace MobaVR
 
         private void OnDestroy()
         {
-            if (!photonView.IsMine &&  m_GameSession != null)
+            if (!photonView.IsMine && m_GameSession != null)
             {
                 m_GameSession.OnAddPlayer -= OnAddPlayer;
                 m_GameSession.OnRemovePlayer -= OnRemovePlayer;
@@ -34,12 +34,13 @@ namespace MobaVR
 
             if (m_GameSession != null)
             {
-                foreach (PlayerVR playerVR in  m_GameSession.Players)
+                foreach (PlayerVR playerVR in m_GameSession.Players)
                 {
                     //OnAddPlayer(playerVR);
-                    m_StatContentView.UpdatePlayers();
                 }
-                
+
+                m_StatContentView.UpdatePlayers();
+
                 m_GameSession.OnAddPlayer += OnAddPlayer;
                 m_GameSession.OnRemovePlayer += OnRemovePlayer;
             }
