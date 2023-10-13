@@ -5,6 +5,7 @@ using UnityEngine;
 public class LocalRepository
 {
     public const string SERVER_MODE = "SERVER_MODE";
+    public const string LAST_IP_ADDRESS = "LastIPAddress";
     
     public void SetLocalServer(bool isLocalServer)
     {
@@ -13,4 +14,5 @@ public class LocalRepository
     }
 
     public bool IsLocalServer => PlayerPrefs.GetInt(SERVER_MODE, 0) == 0;
+    public string LastIPAddress => PlayerPrefs.GetString(LAST_IP_ADDRESS, "");
 }

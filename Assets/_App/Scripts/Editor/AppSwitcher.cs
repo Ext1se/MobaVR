@@ -15,7 +15,7 @@ public class AppSwitcher
             return;
         }
 
-        settings.IsAdmin = isAdmin;
+        settings.AppData.IsAdmin = isAdmin;
         EditorUtility.SetDirty(settings);
         AssetDatabase.SaveAssets();
 

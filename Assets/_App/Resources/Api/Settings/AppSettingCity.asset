@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 691f159a97b4ebd44b505ee06af901f8, type: 3}
   m_Name: AppSettingCity
   m_EditorClassIdentifier: 
-  IsDevelopmentBuild: 0
-  Platform: 3
-  IsAdmin: 0
-  UseLogs: 0
-  City: Arma
+  AppData:
+    Platform: 1
+    IsDevelopmentBuild: 0
+    UseLogs: 1
+    IsAdmin: 0
+    UseVR: 1
+    City: Arma

@@ -331,7 +331,6 @@ GameObject:
   m_Component:
   - component: {fileID: 238973764}
   - component: {fileID: 238973763}
-  - component: {fileID: 238973765}
   - component: {fileID: 238973766}
   m_Layer: 0
   m_Name: NetworkLobby
@@ -354,11 +353,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SceneName: Taverna
   m_MaxPlayersPerRoom: 12
-  m_RoomName: Arena_ARMA_v15
+  m_RoomName: Arena_ARMA_v17
   m_GameVersion: 2
   m_IsGetOnlineFromPlayerPrefs: 1
   m_GameOnline: 0
   ipServ: 
+  isAutoConnect: 1
   m_Settings: {fileID: 11400000, guid: f32aa776feff6f249b0dff1c52fcbe7c, type: 2}
   appSettings: {fileID: 11400000, guid: f007abd55c98ad04c9b81e2c4db4eee7, type: 2}
   OnRoomConnected:
@@ -382,19 +382,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &238973765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238973762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc6ececb356c4cc89f5d89df4b60955a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NetworkLobby: {fileID: 238973763}
 --- !u!114 &238973766
 MonoBehaviour:
   m_ObjectHideFlags: 0

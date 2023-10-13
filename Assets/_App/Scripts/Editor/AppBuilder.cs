@@ -61,7 +61,15 @@ public class AppBuilder
     /// <param name="isAdmin"></param>
     /// <param name="outPath">Example: "C:\Builds</param>
     //public static void Build(string cityName, BuildTarget target, bool isAdmin = false, string outPath = null)
-    public static void Build(string cityName, string targetName, bool isAdmin = false, bool isDevBuild = false, string outPath = null, string appName = null)
+    public static void Build(
+        string cityName, 
+        string targetName, 
+        bool useVR = false,
+        bool isAdmin = false, 
+        bool isDevelopmentBuild = false, 
+        bool useLogs = false, 
+        string outPath = null, 
+        string appName = null)
     {
         targetName = targetName.ToUpper();
         if (!Enum.TryParse(targetName, out PlatformType platformType))
@@ -85,7 +93,7 @@ public class AppBuilder
            return;
         }
 
-        if (!SetAppSettings(cityName, isAdmin, platformType, isDevBuild))
+        if (!SetAppSettings(cityName, isAdmin, platformType, useVR, isDevelopmentBuild, useLogs))
         {
             return;
         }
@@ -276,7 +284,7 @@ public class AppBuilder
         return true;
     }
 
-    private static bool SetAppSettings(string cityName, bool isAdmin, PlatformType platformType, bool isDevBuild)
+    private static bool SetAppSettings(string cityName, bool isAdmin, PlatformType platformType, bool useVR, bool isDevBuild, bool useLogs)
     {
         AppSetting settings = AssetDatabase.LoadAssetAtPath<AppSetting>(CITY_PATH);
         if (settings == null)
@@ -285,10 +293,12 @@ public class AppBuilder
             return false;
         }
         
-        settings.City = cityName;
-        settings.IsAdmin = isAdmin;
-        settings.Platform = platformType;
-        settings.IsDevelopmentBuild = isDevBuild;
+        settings.AppData.City = cityName;
+        settings.AppData.IsAdmin = isAdmin;
+        settings.AppData.Platform = platformType;
+        settings.AppData.IsDevelopmentBuild = isDevBuild;
+        settings.AppData.UseLogs = useLogs;
+        settings.AppData.UseVR = useVR;
 
         EditorUtility.SetDirty(settings);
         AssetDatabase.SaveAssets();

@@ -50,7 +50,7 @@ public class CityManager : MonoBehaviour
 
         isSceneLoading = true; 
 
-        string sceneName = $"{baseSceneName}_{appSettings.City}";
+        string sceneName = $"{baseSceneName}_{appSettings.AppData.City}";
 
       
             // bannerDropScript = FindObjectOfType<BannerDropScript>();

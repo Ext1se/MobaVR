@@ -18,7 +18,7 @@ namespace MobaVR
             {
                 if (AppSetting != null)
                 {
-                    Debug.unityLogger.logEnabled = AppSetting.IsDevelopmentBuild;
+                    Debug.unityLogger.logEnabled = AppSetting.AppData.UseLogs;
                 }
                 
                 //Debug.unityLogger.logEnabled = UseLogs;

@@ -27,7 +27,7 @@ public static class BuildCommon
             Debug.LogError("Не удалось загрузить AppSettings. Убедитесь, что он создан и путь указан верно.");
             return;
         }
-        settings.City = cityName;
+        settings.AppData.City = cityName;
         EditorUtility.SetDirty(settings); // Помечаем объект как измененный
         AssetDatabase.SaveAssets(); // Сохраняем изменения
 

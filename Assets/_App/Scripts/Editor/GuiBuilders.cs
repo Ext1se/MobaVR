@@ -27,10 +27,12 @@ namespace MobaVR
             foreach (BuildSetting buildSetting in buildSettingGroup.BuildSettings)
             {
                 AppBuilder.Build(
-                    buildSetting.City,
-                    buildSetting.Platform.ToString(),
-                    buildSetting.IsAdmin,
-                    buildSetting.IsDevelopmentBuild,
+                    buildSetting.AppData.City,
+                    buildSetting.AppData.Platform.ToString(),
+                    buildSetting.AppData.UseVR,
+                    buildSetting.AppData.IsAdmin,
+                    buildSetting.AppData.IsDevelopmentBuild,
+                    buildSetting.AppData.UseLogs,
                     buildSetting.Path,
                     buildSetting.Name);
             }

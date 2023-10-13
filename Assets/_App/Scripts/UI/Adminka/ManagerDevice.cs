@@ -21,7 +21,7 @@ public class ManagerDevice : MonoBehaviour
 
     public bool PlayerCrate; //создаём игрока или нет
 
-    public bool IsAdmin => AppSetting.IsAdmin;
+    public bool IsAdmin => AppSetting.AppData.IsAdmin;
 
     private void Awake()
     {
@@ -40,7 +40,7 @@ public class ManagerDevice : MonoBehaviour
     private void SimpleDetectPlatform()
     {
         //if (IsAdmin)
-        if (AppSetting.IsAdmin)
+        if (AppSetting.AppData.IsAdmin)
         {
             FunctionForWindows();
         }

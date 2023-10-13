@@ -50,6 +50,19 @@ namespace MobaVR
             }
         }
 
+        public void Build(BuildSetting buildSetting)
+        {
+            AppBuilder.Build(
+                buildSetting.AppData.City,
+                buildSetting.AppData.Platform.ToString(),
+                buildSetting.AppData.UseVR,
+                buildSetting.AppData.IsAdmin,
+                buildSetting.AppData.IsDevelopmentBuild,
+                buildSetting.AppData.UseLogs,
+                buildSetting.Path,
+                buildSetting.Name);
+        }
+
         public void Build()
         {
             BuildSetting buildSetting = serializedObject.targetObject as BuildSetting;
@@ -58,13 +71,7 @@ namespace MobaVR
                 return;
             }
 
-            AppBuilder.Build(
-                buildSetting.City,
-                buildSetting.Platform.ToString(),
-                buildSetting.IsAdmin,
-                buildSetting.IsDevelopmentBuild,
-                buildSetting.Path,
-                buildSetting.Name);
+            Build(buildSetting);
         }
 
         public void Build(PlatformType platformType)
@@ -75,13 +82,8 @@ namespace MobaVR
                 return;
             }
 
-            AppBuilder.Build(
-                buildSetting.City,
-                platformType.ToString(),
-                buildSetting.IsAdmin,
-                buildSetting.IsDevelopmentBuild,
-                buildSetting.Path,
-                buildSetting.Name);
+            buildSetting.AppData.Platform = platformType;
+            Build(buildSetting);
         }
     }
 }
