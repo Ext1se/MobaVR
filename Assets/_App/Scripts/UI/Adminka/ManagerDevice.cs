@@ -4,33 +4,32 @@ using UnityEngine;
 
 public class ManagerDevice : MonoBehaviour
 {
-//нужно сделать, чтобы он переносился в неуничтажаемые объекты
+    //нужно сделать, чтобы он переносился в неуничтажаемые объекты
     //нужно добавить условие, что если он не мастер сервер, то становится им и проверяет это постоянно
     //нужно добавить функции включения разных карт
     //нужно добавить функции старта режимов
-   
-  
-    
-    // Start is called before the first frame update
-    [Header("Тестируем андройд")]
-    private bool TestAndroid; //ставим галочку, если хотим запустить в редакторе версию для андройда
-    public bool IsAdmin; //ставим галочку, если хотим запустить в редакторе версию для андройда
 
-    [Header("Объекты с камерами")] 
+
+    // Start is called before the first frame update
+    public AppSetting AppSetting;
+    //[Header("Тестируем андройд")]
+    //private bool TestAndroid; //ставим галочку, если хотим запустить в редакторе версию для андройда
+    //public bool IsAdmin; //ставим галочку, если хотим запустить в редакторе версию для андройда
+    [Header("Объекты с камерами")]
     public GameObject PlayerVR; // префаб игрока для ВР
     public GameObject PlayerPC; // префаб игрока для компьютера
 
     public bool PlayerCrate; //создаём игрока или нет
-    
-    
+
+    public bool IsAdmin => AppSetting.IsAdmin;
+
     private void Awake()
     {
         //менеджер при старте игры не удаляем
         DontDestroyOnLoad(gameObject);
     }
-    
-    
-    
+
+
     void Start()
     {
         //роверяем на каком устройстве запущена игра
@@ -40,7 +39,8 @@ public class ManagerDevice : MonoBehaviour
 
     private void SimpleDetectPlatform()
     {
-        if (IsAdmin)
+        //if (IsAdmin)
+        if (AppSetting.IsAdmin)
         {
             FunctionForWindows();
         }
@@ -49,7 +49,8 @@ public class ManagerDevice : MonoBehaviour
             FunctionForAndroid();
         }
     }
-    
+
+    /*
     private void DetectPlatformAndExecuteFunction()
     {
         // Проверяем, на какой платформе запущена игра
@@ -77,13 +78,14 @@ public class ManagerDevice : MonoBehaviour
         {
             // Если игра запущена на Android
             FunctionForAndroid();
-        }        
+        }
         else if (Application.isEditor && TestAndroid)
         {
             // Если игра запущена в редакторе, но тестим для андройда
             FunctionForAndroid();
         }
     }
+    */
 
     private void FunctionForEditor()
     {
@@ -93,8 +95,7 @@ public class ManagerDevice : MonoBehaviour
         //включаем для ПК
         PlayerPC.SetActive(true);
 
-        PlayerCrate = false;//не создаём игрока
-
+        PlayerCrate = false; //не создаём игрока
     }
 
     private void FunctionForWindows()
@@ -104,9 +105,8 @@ public class ManagerDevice : MonoBehaviour
         PlayerVR.SetActive(false);
         //включаем для ПК
         PlayerPC.SetActive(true);
-        
-        PlayerCrate = false;//не создаём игрока
 
+        PlayerCrate = false; //не создаём игрока
     }
 
     private void FunctionForAndroid()
@@ -116,8 +116,7 @@ public class ManagerDevice : MonoBehaviour
         PlayerVR.SetActive(true);
         //включаем для ПК
         PlayerPC.SetActive(false);
-        
-        PlayerCrate = true;//создаём игрока
+
+        PlayerCrate = true; //создаём игрока
     }
-    
 }

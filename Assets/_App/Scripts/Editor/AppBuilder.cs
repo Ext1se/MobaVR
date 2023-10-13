@@ -21,36 +21,36 @@ public class AppBuilder
     private const string OCULUS_LOADER = "Unity.XR.Oculus.OculusLoader";
     private const string OPENXR_LOADER = "UnityEngine.XR.OpenXR.OpenXRLoader";
     
-    private const string DEFAULT_OUT_PATH = "../Assets/Builds/";
-    private const string DEFAULT_NAME = "Heroes Arena";
-    private const string CITY_PATH = "Assets/_App/Resources/Api/AppSettingCity.asset";
+    public static readonly string DEFAULT_OUT_PATH = "Builds/";
+    public static readonly string DEFAULT_NAME = "Heroes Arena";
+    public static readonly string CITY_PATH = "Assets/_App/Resources/Api/Settings/AppSettingCity.asset";
 
-    private static readonly string[] ADMIN_SCENES = new[]
+    public static readonly string[] ADMIN_SCENES = new[]
     {
         "Assets/_App/Scenes/Login.unity",
     };
     
-    private static readonly string[] COMMON_SCENES = new string[]
+    public static readonly string[] COMMON_SCENES = new string[]
     {
         "Assets/_App/Scenes/Menu.unity",
         "Assets/_App/Scenes/Lobby.unity"
     };
 
-    private static readonly string[] CITY_SCENES = new string[]
+    public static readonly string[] CITY_SCENES = new string[]
     {
         //Lobby
         "Taverna",
         
         //PVP
-        "SkyArena",
-        "SkyArena_Rift",
-        "Dungeon",
+        //"SkyArena",
+        //"SkyArena_Rift",
+        //"Dungeon",
         
         //PVE
-        "Necropolis",
+        //"Necropolis",
         
         //TD
-        "Tower",
+        //"Tower",
     };
 
     /// <summary>
@@ -61,7 +61,7 @@ public class AppBuilder
     /// <param name="isAdmin"></param>
     /// <param name="outPath">Example: "C:\Builds</param>
     //public static void Build(string cityName, BuildTarget target, bool isAdmin = false, string outPath = null)
-    public static void Build(string cityName, string targetName, bool isAdmin = false, string outPath = null, string appName = null)
+    public static void Build(string cityName, string targetName, bool isAdmin = false, bool isDevBuild = false, string outPath = null, string appName = null)
     {
         targetName = targetName.ToUpper();
         if (!Enum.TryParse(targetName, out PlatformType platformType))
@@ -69,16 +69,23 @@ public class AppBuilder
             Debug.LogError($"{TAG}: is not valid platform");
             return;
         }
-     
-        outPath ??= DEFAULT_OUT_PATH;
-        appName ??= DEFAULT_NAME;
+
+        if (string.IsNullOrEmpty(outPath))
+        {
+            outPath = DEFAULT_OUT_PATH;
+        }
+        
+        if (string.IsNullOrEmpty(appName))
+        {
+            appName = DEFAULT_NAME;
+        }
         
         if (!CheckDirectory(platformType, outPath, appName, out string fullPath))
         {
            return;
         }
 
-        if (!SetAppSettings(cityName, isAdmin, platformType))
+        if (!SetAppSettings(cityName, isAdmin, platformType, isDevBuild))
         {
             return;
         }
@@ -171,12 +178,10 @@ public class AppBuilder
 
         Debug.Log($"{TAG}: start to build");
 
-        return;
-
         BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
         if (report.summary.result == BuildResult.Succeeded)
         {
-            Debug.LogError($"{TAG}: build is completed. OK.");
+            Debug.Log($"{TAG}: build is completed. OK.");
         }
         else
         {
@@ -253,23 +258,25 @@ public class AppBuilder
         if (isAdmin)
         {
             ADMIN_SCENES.CopyTo(scenes, offset);
-            offset += COMMON_SCENES.Length;
+            offset += ADMIN_SCENES.Length;
         }
         
         COMMON_SCENES.CopyTo(scenes, offset);
         offset += COMMON_SCENES.Length;
-     
+
+        int cityScenePosition = 0;
         for (int i = offset; i < scenes.Length; i++)
         {
-            string scenePath = $"{cityPath}/{CITY_SCENES[i]}_{cityName}.unity";
+            string scenePath = $"{cityPath}/{CITY_SCENES[cityScenePosition]}_{cityName}.unity";
             scenes[i] = scenePath;
+            cityScenePosition++;
         }
         
         AddScenesToBuildEditor(scenes);
         return true;
     }
 
-    private static bool SetAppSettings(string cityName, bool isAdmin, PlatformType platformType)
+    private static bool SetAppSettings(string cityName, bool isAdmin, PlatformType platformType, bool isDevBuild)
     {
         AppSetting settings = AssetDatabase.LoadAssetAtPath<AppSetting>(CITY_PATH);
         if (settings == null)
@@ -281,6 +288,7 @@ public class AppBuilder
         settings.City = cityName;
         settings.IsAdmin = isAdmin;
         settings.Platform = platformType;
+        settings.IsDevelopmentBuild = isDevBuild;
 
         EditorUtility.SetDirty(settings);
         AssetDatabase.SaveAssets();
@@ -329,7 +337,7 @@ public class AppBuilder
 
     private static void AddScenesToBuildEditor(string[] scenes)
     {
-        EditorBuildSettingsScene[] editorBuildSettingsScenes = new EditorBuildSettingsScene[CITY_SCENES.Length];
+        EditorBuildSettingsScene[] editorBuildSettingsScenes = new EditorBuildSettingsScene[scenes.Length];
 
         for (var i = 0; i < scenes.Length; i++)
         {

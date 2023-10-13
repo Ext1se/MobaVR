@@ -7,5 +7,6 @@ public class AppSetting : ScriptableObject
     public bool IsDevelopmentBuild = false;
     public PlatformType Platform = PlatformType.WINDOWS;
     public bool IsAdmin = false;
+    public bool UseLogs = false;
     public string City = "Arma";
 }
