@@ -149,7 +149,7 @@ namespace MobaVR
 
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
 
             if (m_InputVR != null)
             {

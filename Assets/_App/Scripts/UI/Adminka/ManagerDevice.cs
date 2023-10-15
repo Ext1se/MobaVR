@@ -26,7 +26,7 @@ public class ManagerDevice : MonoBehaviour
     private void Awake()
     {
         //менеджер при старте игры не удаляем
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
 

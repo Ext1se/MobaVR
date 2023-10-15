@@ -12,14 +12,17 @@ public class FontData : MonoBehaviour
     private void Awake()
     {
         // Убедитесь, что есть только один экземпляр FontData
+        Instance = this;
+        /*
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
+        */
     }
 }

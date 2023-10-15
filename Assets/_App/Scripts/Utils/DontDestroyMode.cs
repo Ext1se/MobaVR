@@ -1,5 +1,6 @@
 ﻿using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MobaVR
 {
@@ -34,6 +35,21 @@ namespace MobaVR
                     PhotonNetwork.LoadLevel(m_DefaultSceneName);
                 }
                 //SceneManager.LoadSceneAsync("SkyArena");
+                
+                SceneManager.sceneLoaded += OnSceneLoaded;
+            }
+        }
+        
+        private void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+        
+        private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        {
+            if (scene.buildIndex == 0 && gameObject != null)
+            {
+                Destroy(gameObject);
             }
         }
     }

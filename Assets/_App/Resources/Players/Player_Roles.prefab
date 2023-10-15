@@ -42730,6 +42730,7 @@ GameObject:
   - component: {fileID: 1805081918052811352}
   - component: {fileID: 3091059757054163133}
   - component: {fileID: 2865683869480248743}
+  - component: {fileID: 6921454058643363171}
   m_Layer: 0
   m_Name: Player_Roles
   m_TagString: RemotePlayer
@@ -42875,6 +42876,7 @@ MonoBehaviour:
     ActorNumber: 0
     IdUser: 
     NickName: 
+    IdRole: 
   m_TeamType: 0
 --- !u!114 &7702456167165704558
 MonoBehaviour:
@@ -43193,6 +43195,18 @@ MonoBehaviour:
   m_KHand: 0.5
   m_KHead: 1
   m_Sum: 0
+--- !u!114 &6921454058643363171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7702456167165704552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f84b535bef41e19016a011ecdbab3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7702456167767660269
 GameObject:
   m_ObjectHideFlags: 0
@@ -58696,6 +58710,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -20
       objectReference: {fileID: 0}
+    - target: {fileID: 1602382576601897520, guid: aa1480eb39466114796b80e249970ae0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1689387428606687349, guid: aa1480eb39466114796b80e249970ae0,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -59056,6 +59075,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960401973635718524, guid: aa1480eb39466114796b80e249970ae0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4069323215129666684, guid: aa1480eb39466114796b80e249970ae0,
         type: 3}
@@ -60223,6 +60247,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -158
+      objectReference: {fileID: 0}
+    - target: {fileID: 8883495437679241448, guid: aa1480eb39466114796b80e249970ae0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8898063017533910757, guid: aa1480eb39466114796b80e249970ae0,
         type: 3}

@@ -1317,6 +1317,7 @@ GameObject:
   - component: {fileID: 90538848}
   - component: {fileID: 90538847}
   - component: {fileID: 90538849}
+  - component: {fileID: 90538850}
   m_Layer: 0
   m_Name: LanguageManager
   m_TagString: Untagged
@@ -1367,6 +1368,18 @@ MonoBehaviour:
   engFont: {fileID: 12800000, guid: ec45607152dacbe4980730951c5296c9, type: 3}
   rusFont: {fileID: 12800000, guid: ec45607152dacbe4980730951c5296c9, type: 3}
   chnFont: {fileID: 12800000, guid: 6e98027033db2554097c418dfee5bd1b, type: 3}
+--- !u!114 &90538850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90538846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f84b535bef41e19016a011ecdbab3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &91729272
 GameObject:
   m_ObjectHideFlags: 0
@@ -8262,6 +8275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 396286248}
   - component: {fileID: 396286247}
+  - component: {fileID: 396286249}
   m_Layer: 0
   m_Name: CityManager
   m_TagString: Untagged
@@ -8298,6 +8312,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &396286249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396286246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f84b535bef41e19016a011ecdbab3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &401457855
 GameObject:
   m_ObjectHideFlags: 0
@@ -13975,6 +14001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 648909436}
   - component: {fileID: 648909435}
+  - component: {fileID: 648909437}
   m_Layer: 0
   m_Name: DeviceManager
   m_TagString: Untagged
@@ -14013,6 +14040,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &648909437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648909434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f84b535bef41e19016a011ecdbab3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &649227362
 GameObject:
   m_ObjectHideFlags: 0
@@ -14972,6 +15011,7 @@ GameObject:
   - component: {fileID: 716183768}
   - component: {fileID: 716183769}
   - component: {fileID: 716183770}
+  - component: {fileID: 716183771}
   m_Layer: 0
   m_Name: AminkaPC
   m_TagString: Untagged
@@ -15142,6 +15182,18 @@ MonoBehaviour:
   m_InfoContentView: {fileID: 810488971}
   m_StatContentView: {fileID: 863515291}
   m_GameSession: {fileID: 0}
+--- !u!114 &716183771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716183762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f84b535bef41e19016a011ecdbab3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &721589666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72166,7 +72218,6 @@ GameObject:
   - component: {fileID: 2683195716797288976}
   - component: {fileID: 2683195716803234464}
   - component: {fileID: 3719865058575847654}
-  - component: {fileID: 4276642494920616908}
   - component: {fileID: 584349350}
   m_Layer: 0
   m_Name: CenterEyeAnchor
@@ -92029,23 +92080,6 @@ Transform:
   m_Father: {fileID: 7098228846478253775}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0.070999995, y: -93.256996, z: 6.6689997}
---- !u!114 &4276642494920616908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2683195716804234268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac09bf699d4234448aa42c086c9f964c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FadeOnSceneLoaded: 1
-  FadeColor: {r: 0, g: 0, b: 0, a: 1}
-  FadeInSpeed: 2
-  FadeOutSpeed: 1
-  SceneFadeInDelay: 0.5
 --- !u!23 &4282916765773949219
 MeshRenderer:
   m_ObjectHideFlags: 0

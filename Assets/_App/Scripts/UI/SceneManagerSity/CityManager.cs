@@ -11,15 +11,18 @@ public class CityManager : MonoBehaviour
     public BannerDropScript bannerDropScript;// скрипт для баннера
     private void Awake()
     {
+        Instance = this;
+        /*
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
         }
         else
         {
             Destroy(this.gameObject);
         }
+        */
     }
     
     private void OnEnable()
