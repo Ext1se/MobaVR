@@ -330,7 +330,8 @@ namespace MobaVR
 
         public void SetTowerTarget(int idPhotonTarget)
         {
-            photonView.RPC(nameof(RpcSetTowerTarget), RpcTarget.AllBuffered, idPhotonTarget);
+            //photonView.RPC(nameof(RpcSetTowerTarget), RpcTarget.AllBuffered, idPhotonTarget);
+            photonView.RPC(nameof(RpcSetTowerTarget), RpcTarget.All, idPhotonTarget);
         }
 
         private void FindTowerTarget()
