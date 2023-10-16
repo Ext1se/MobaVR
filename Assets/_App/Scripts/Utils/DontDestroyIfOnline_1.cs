@@ -3,13 +3,10 @@ using UnityEngine.SceneManagement;
 
 namespace MobaVR
 {
-    public class DontDestroyIfOnline : MonoBehaviour
+    public class DontDestroyIfOnline_1 : MonoBehaviour
     {
-        [SerializeField] private string m_DestroySceneName = "Menu";
-
         private void Awake()
         {
-            //m_ParentSceneName = SceneManager.GetActiveScene().name;
             DontDestroyOnLoad(gameObject);
         }
 
@@ -25,14 +22,7 @@ namespace MobaVR
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
-            /*
             if (scene.buildIndex == 0 && gameObject != null)
-            {
-                Destroy(gameObject);
-            }
-            */
-
-            if (scene.name.Equals(m_DestroySceneName) && gameObject != null)
             {
                 Destroy(gameObject);
             }

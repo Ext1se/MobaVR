@@ -21,10 +21,12 @@ namespace MobaVR
         [SerializeField] private bool m_GameOnline;
         [SerializeField] private string ipServ;
         [SerializeField] private bool isAutoConnect = true;
+        
+        [Header("Settings")]
         [SerializeField] private AppPhotonSettingsSO m_Settings;
-        public AppSetting appSettings;
-
-
+        [SerializeField] public AppSetting appSettings;
+        [SerializeField] public string m_MenuScene = "Menu";
+        
         private bool m_IsConnecting = false;
 
         private LocalRepository localRepository;
@@ -75,7 +77,8 @@ namespace MobaVR
 
         private void BackToMenu()
         {
-            SceneManager.LoadScene(0);
+            //SceneManager.LoadScene(0);
+            SceneManager.LoadScene(m_MenuScene);
         }
 
         private void JoinOrCreateRoom()

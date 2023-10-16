@@ -7,11 +7,12 @@ namespace MobaVR
     public class DontDestroyMode : MonoBehaviour
     {
         [SerializeField] private GameObject m_DontDestroyGroup;
-        
+        [SerializeField] private string m_DestroySceneName = "Menu";
+
         [Header("DefaultScene")]
         [SerializeField] private bool m_IsLoadDefaultScene = false;
         [SerializeField] private string m_DefaultSceneName = "SkyArea";
-        
+
         //[SerializeField] private GameObject m_DontDestroyObject;
 
         private void Awake()
@@ -22,7 +23,7 @@ namespace MobaVR
                 Destroy(gameObject);
                 return;
             }
-            
+
             if (PhotonNetwork.IsConnected)
             {
                 DontDestroyOnLoad(gameObject);
@@ -35,19 +36,20 @@ namespace MobaVR
                     PhotonNetwork.LoadLevel(m_DefaultSceneName);
                 }
                 //SceneManager.LoadSceneAsync("SkyArena");
-                
+
                 SceneManager.sceneLoaded += OnSceneLoaded;
             }
         }
-        
+
         private void OnDestroy()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
-        
+
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
-            if (scene.buildIndex == 0 && gameObject != null)
+            //if (scene.buildIndex == 0 && gameObject != null)
+            if (scene.name.Equals(m_DestroySceneName) && gameObject != null)
             {
                 Destroy(gameObject);
             }
