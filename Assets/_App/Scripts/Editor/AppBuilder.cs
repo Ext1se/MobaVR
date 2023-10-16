@@ -32,6 +32,7 @@ public class AppBuilder
     
     public static readonly string[] COMMON_SCENES = new string[]
     {
+        "Assets/_App/Scenes/Init.unity",
         "Assets/_App/Scenes/Menu.unity",
         "Assets/_App/Scenes/Lobby.unity"
     };
@@ -257,20 +258,22 @@ public class AppBuilder
         }
         
         int scenesCount = 0;
-        scenesCount += isAdmin ? ADMIN_SCENES.Length : 0;
+        //scenesCount += isAdmin ? ADMIN_SCENES.Length : 0;
+        scenesCount += ADMIN_SCENES.Length;
         scenesCount += COMMON_SCENES.Length;
         scenesCount += CITY_SCENES.Length;
         scenes = new string[scenesCount];
 
         int offset = 0;
-        if (isAdmin)
+    
+        COMMON_SCENES.CopyTo(scenes, offset);
+        offset += COMMON_SCENES.Length;
+        
+        //if (isAdmin)
         {
             ADMIN_SCENES.CopyTo(scenes, offset);
             offset += ADMIN_SCENES.Length;
         }
-        
-        COMMON_SCENES.CopyTo(scenes, offset);
-        offset += COMMON_SCENES.Length;
 
         int cityScenePosition = 0;
         for (int i = offset; i < scenes.Length; i++)
