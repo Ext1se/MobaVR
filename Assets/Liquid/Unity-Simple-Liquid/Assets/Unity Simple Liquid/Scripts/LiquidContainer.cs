@@ -51,6 +51,10 @@ namespace UnitySimpleLiquid
         private void Start()
         {
             splitController = GetComponent<SplitController>();
+            
+            LiquidColor = liquidColor;
+            FillAmountPercent = fillAmountPercent;
+            IsOpen = isOpen;
         }
 
         #region Liquid Amount
