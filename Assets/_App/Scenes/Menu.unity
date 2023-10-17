@@ -4914,9 +4914,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
-        m_MethodName: ChnLangle
+      - m_Target: {fileID: 854404605}
+        m_TargetAssemblyTypeName: MobaVR.Menu, Assembly-CSharp
+        m_MethodName: SetChinaLanguage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8250,7 +8250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f84b535bef41e19016a011ecdbab3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ParentSceneName: 
+  m_DestroySceneName: Menu
 --- !u!1 &401457855
 GameObject:
   m_ObjectHideFlags: 0
@@ -9256,9 +9256,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
-        m_MethodName: EngLangle
+      - m_Target: {fileID: 854404605}
+        m_TargetAssemblyTypeName: MobaVR.Menu, Assembly-CSharp
+        m_MethodName: SetEnglishLanguage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13979,7 +13979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f84b535bef41e19016a011ecdbab3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ParentSceneName: 
+  m_DestroySceneName: Menu
 --- !u!1 &649227362
 GameObject:
   m_ObjectHideFlags: 0
@@ -14946,7 +14946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &716183763
 Transform:
   m_ObjectHideFlags: 0
@@ -15122,7 +15122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f84b535bef41e19016a011ecdbab3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ParentSceneName: 
+  m_DestroySceneName: Menu
 --- !u!114 &721589666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18046,9 +18046,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
-        m_MethodName: ChnLangle
+      - m_Target: {fileID: 854404605}
+        m_TargetAssemblyTypeName: MobaVR.Menu, Assembly-CSharp
+        m_MethodName: SetChinaLanguage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18115,6 +18115,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &854404604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 854404606}
+  - component: {fileID: 854404605}
+  m_Layer: 0
+  m_Name: Menu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &854404605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854404604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df371abfada34966b56f44ad1d741920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &854404606
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854404604}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &862478626
 GameObject:
   m_ObjectHideFlags: 0
@@ -18229,9 +18273,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
-        m_MethodName: RusLangle
+      - m_Target: {fileID: 854404605}
+        m_TargetAssemblyTypeName: MobaVR.Menu, Assembly-CSharp
+        m_MethodName: SetRusLanguage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18903,7 +18947,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902007665}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20055,9 +20099,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
-        m_MethodName: EngLangle
+      - m_Target: {fileID: 854404605}
+        m_TargetAssemblyTypeName: MobaVR.Menu, Assembly-CSharp
+        m_MethodName: SetEnglishLanguage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21537,7 +21581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textEng: Dungeon
+  textEng: "SkyLand \nRift"
   textRus: "\u0421\u043A\u0430\u0439\u043B\u0435\u043D\u0434\n(\u0440\u0430\u0437\u0434\u0435\u043B\u0435\u043D\u043D\u044B\u0439)"
   textChn: "\u5730\u7262"
 --- !u!114 &1015429068
@@ -35475,9 +35519,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LanguageManager, Assembly-CSharp
-        m_MethodName: RusLangle
+      - m_Target: {fileID: 854404605}
+        m_TargetAssemblyTypeName: MobaVR.Menu, Assembly-CSharp
+        m_MethodName: SetRusLanguage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
