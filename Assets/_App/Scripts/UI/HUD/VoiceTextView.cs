@@ -6,10 +6,12 @@ namespace MobaVR
 {
     public class VoiceTextView : MonoBehaviour
     {
-        [SerializeField] private List<string> m_Phrases = new(); // Объект, который нужно включить/выключить
-        [SerializeField] GameObject m_VoicePanel; // Объект, который нужно включить/выключить
-        [SerializeField] TextMeshProUGUI m_Text; // Объект, который нужно включить/выключить
-        [SerializeField] float m_Delay = 5f; // время, через которое объект нужно отключить
+        [SerializeField] private List<string> m_PhrasesEng = new(); // Фразы на английском
+        [SerializeField] private List<string> m_PhrasesRus = new(); // Фразы на русском
+        [SerializeField] private List<string> m_PhrasesChn = new(); // Фразы на китайском
+        [SerializeField] private GameObject m_VoicePanel;
+        [SerializeField] private TextMeshProUGUI m_Text;
+        [SerializeField] private float m_Delay = 5f;
 
         private void OnEnable()
         {
@@ -21,7 +23,8 @@ namespace MobaVR
             CancelInvoke(nameof(Hide));
             
             m_VoicePanel.SetActive(true);
-            string phrase = m_Phrases[Random.Range(0, m_Phrases.Count)];
+            List<string> currentPhrases = GetCurrentPhrases();
+            string phrase = currentPhrases[Random.Range(0, currentPhrases.Count)];
             m_Text.text = phrase;
 
             Invoke(nameof(Hide), m_Delay);
@@ -30,6 +33,21 @@ namespace MobaVR
         public void Hide()
         {
             m_VoicePanel.SetActive(false);
+        }
+
+        private List<string> GetCurrentPhrases()
+        {
+            switch (LanguageManager.Instance.currentLanguage)
+            {
+                case LanguageManager.Language.Eng:
+                    return m_PhrasesEng;
+                case LanguageManager.Language.Rus:
+                    return m_PhrasesRus;
+                case LanguageManager.Language.Chn:
+                    return m_PhrasesChn;
+                default:
+                    return m_PhrasesEng; // Вернуть английский как язык по умолчанию
+            }
         }
     }
 }
