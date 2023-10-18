@@ -1,11 +1,13 @@
 ﻿using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace MobaVR
 {
-    public class DontDestroyMode : MonoBehaviour
+    public class DontDestroyMode : MonoBehaviourPunCallbacks
     {
+        [SerializeField] private bool m_IsCreateOnAwake = false;
         [SerializeField] private GameObject m_DontDestroyGroup;
         [SerializeField] private string m_DestroySceneName = "Menu";
 
@@ -15,7 +17,34 @@ namespace MobaVR
 
         //[SerializeField] private GameObject m_DontDestroyObject;
 
-        private void Awake()
+        private void Awake() 
+        {
+            if (m_IsCreateOnAwake)
+            {
+                CreateGameSession();
+            }
+        }
+
+        private void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        {
+            //if (scene.buildIndex == 0 && gameObject != null)
+            if (gameObject == null)
+            {
+                return;
+            }
+            
+            if (scene.name.Equals(m_DestroySceneName) && gameObject != null)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        public void CreateGameSession()
         {
             GameObject oldGameObject = GameObject.Find(gameObject.name);
             if (oldGameObject != null && oldGameObject != gameObject)
@@ -41,18 +70,17 @@ namespace MobaVR
             }
         }
 
-        private void OnDestroy()
+        public override void OnJoinedRoom()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            //CreateGameSession();
+            base.OnJoinedRoom();
         }
 
-        private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        public override void OnDisconnected(DisconnectCause cause)
         {
-            //if (scene.buildIndex == 0 && gameObject != null)
-            if (scene.name.Equals(m_DestroySceneName) && gameObject != null)
-            {
-                Destroy(gameObject);
-            }
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            Destroy(gameObject);
+            base.OnDisconnected(cause);
         }
     }
 }

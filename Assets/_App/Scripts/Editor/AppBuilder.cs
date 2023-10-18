@@ -43,15 +43,15 @@ public class AppBuilder
         "Taverna",
         
         //PVP
-        //"SkyArena",
-        //"SkyArena_Rift",
-        //"Dungeon",
+        "SkyArena",
+        "SkyArena_Rift",
+        "Dungeon",
         
         //PVE
-        //"Necropolis",
+        "Necropolis",
         
         //TD
-        //"Tower",
+        "Tower",
     };
 
     /// <summary>

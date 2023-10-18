@@ -32,7 +32,7 @@ namespace MobaVR
         private LocalRepository localRepository;
         private RoomOptions roomOptions;
 
-        public UnityEvent OnRoomConnected;
+        public UnityEvent OnRoomJoined;
         public UnityEvent OnRoomDisconnected;
 
         #region Photon
@@ -146,8 +146,6 @@ namespace MobaVR
                 PhotonNetwork.GameVersion = m_GameVersion;
                 //PhotonNetwork.UseRpcMonoBehaviourCache = true;
             }
-
-            OnRoomConnected?.Invoke();
         }
 
         public override void OnConnectedToMaster()
@@ -209,6 +207,7 @@ namespace MobaVR
             Debug.Log(
                 $"{name}: Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.\nFrom here on, your game would be running.");
 
+            OnRoomJoined?.Invoke();
             LoadCityScene(m_SceneName); // Здесь мы вызываем новый метод
         }
 
