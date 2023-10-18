@@ -143,7 +143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &112593521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f84b535bef41e19016a011ecdbab3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DestroySceneName: Menu
 --- !u!1 &118483161
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,6 +360,7 @@ MonoBehaviour:
   isAutoConnect: 1
   m_Settings: {fileID: 11400000, guid: f32aa776feff6f249b0dff1c52fcbe7c, type: 2}
   appSettings: {fileID: 11400000, guid: f007abd55c98ad04c9b81e2c4db4eee7, type: 2}
+  m_MenuScene: Menu
   OnRoomConnected:
     m_PersistentCalls:
       m_Calls: []
@@ -498,7 +500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1939781981
 RectTransform:
   m_ObjectHideFlags: 0
