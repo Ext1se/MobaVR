@@ -10,6 +10,9 @@ public class LocalRepository
     public const string LAST_IP_ADDRESS = "LastIPAddress";
     public const string BACKUP_PLAYER = "BACKUP_PLAYER";
     
+    public const string SESSION_END_TIME = "SESSION_END_TIME";
+    public const string SESSION_START_TIME = "SESSION_START_TIME";
+    
     public void SetLocalServer(bool isLocalServer)
     {
         PlayerPrefs.SetInt(SERVER_MODE, isLocalServer ? 0 : 1);
@@ -37,6 +40,20 @@ public class LocalRepository
         return true;
     }
 
+    public void SetStartTime(DateTime dateTime)
+    {
+        PlayerPrefs.SetInt(SESSION_START_TIME, dateTime.Second);
+        PlayerPrefs.Save();
+    }
+    
+    public void SetEndTime(DateTime dateTime)
+    {
+        PlayerPrefs.SetInt(SESSION_END_TIME, dateTime.Second);
+        PlayerPrefs.Save();
+    }
+
     public bool IsLocalServer => PlayerPrefs.GetInt(SERVER_MODE, 0) == 0;
     public string LastIPAddress => PlayerPrefs.GetString(LAST_IP_ADDRESS, "");
+    public long GetEndTime => PlayerPrefs.GetInt(SESSION_END_TIME, 0) * 1000;
+    public long GetStartTime => PlayerPrefs.GetInt(SESSION_START_TIME, 0) * 1000;
 }

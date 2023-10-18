@@ -5,36 +5,57 @@ namespace MobaVR
 {
     public class Menu : MonoBehaviour
     {
-        private LanguageManager m_LanguageManager;
-        
+        private LocalRepository m_LocalRepository;
+
+        private DateTime m_StartDateTime;
+        private DateTime m_EndDateTime;
+
         private void Awake()
         {
-            m_LanguageManager = FindObjectOfType<LanguageManager>();
+            m_LocalRepository = new LocalRepository();
         }
-        
+
+        #region Language
+
         public void ChangeLanguage(LanguageManager.Language newLanguage)
         {
-            if (m_LanguageManager == null)
+            if (LanguageManager.Instance == null)
             {
                 return;
             }
 
-            m_LanguageManager.ChangeLanguage(newLanguage);
+            LanguageManager.Instance.ChangeLanguage(newLanguage);
         }
-        
+
         public void SetRusLanguage()
         {
             ChangeLanguage(LanguageManager.Language.Rus);
         }
-    
+
         public void SetEnglishLanguage()
         {
             ChangeLanguage(LanguageManager.Language.Eng);
         }
-    
+
         public void SetChinaLanguage()
         {
             ChangeLanguage(LanguageManager.Language.Chn);
         }
+
+        #endregion
+
+        #region Game Session
+
+        public void StartSession()
+        {
+            m_StartDateTime = DateTime.Now;
+        }
+
+        public void CompleteSession()
+        {
+            m_EndDateTime = DateTime.Now;
+        }
+
+        #endregion
     }
 }
