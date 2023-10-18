@@ -87,6 +87,10 @@ namespace MobaVR
                 m_Wizard.PlayerVR.DieView.SetDieInfo(m_Killer.PlayerData.NickName);
                 //SendDeathData();
             }
+            else
+            {
+                m_Wizard.PlayerVR.DieView.SetDieInfo("-");
+            }
             
             SendDeathData();
         }
