@@ -33,18 +33,21 @@ public class LanguageManager : MonoBehaviour
     }
 
     // Вызывается при нажатии кнопки для изменения на русский язык
+    [ContextMenu("Set rus")]
     public void RusLangle()
     {
         ChangeLanguage(Language.Rus);
     }
     
     // Вызывается при нажатии кнопки для изменения на английский язык
+    [ContextMenu("Set en")]
     public void EngLangle()
     {
         ChangeLanguage(Language.Eng);
     }
     
     // Вызывается при нажатии кнопки для изменения на китайский язык
+    [ContextMenu("Set china")]
     public void ChnLangle()
     {
         ChangeLanguage(Language.Chn);
