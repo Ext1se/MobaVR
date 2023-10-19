@@ -85,6 +85,7 @@ namespace MobaVR
         {
             if (appSettings.AppData.IsDevelopmentBuild)
             {
+                m_RoomName += "_Dev";
                 PhotonNetwork.JoinOrCreateRoom(m_RoomName,
                                                roomOptions,
                                                TypedLobby.Default);
@@ -93,9 +94,10 @@ namespace MobaVR
             {
                 if (appSettings.AppData.IsAdmin)
                 {
-                    PhotonNetwork.CreateRoom(m_RoomName,
-                                             roomOptions,
-                                             TypedLobby.Default);
+                    //PhotonNetwork.CreateRoom(m_RoomName,
+                    PhotonNetwork.JoinOrCreateRoom(m_RoomName,
+                                                   roomOptions,
+                                                   TypedLobby.Default);
                 }
                 else
                 {

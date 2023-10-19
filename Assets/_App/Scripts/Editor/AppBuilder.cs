@@ -52,6 +52,7 @@ public class AppBuilder
         
         //TD
         "Tower",
+        "Tower_v3",
     };
 
     /// <summary>
