@@ -6,6 +6,7 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Events;
 using ExitGames.Client.Photon;
+using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
 
 namespace MobaVR
@@ -13,7 +14,7 @@ namespace MobaVR
     public class NetworkLobby : MonoBehaviourPunCallbacks
     {
         [Header("Photon")]
-        [SerializeField] private string m_SceneName = "Room";
+        [SerializeField] [ReadOnly] private string m_SceneName = "Room";
         [SerializeField] private byte m_MaxPlayersPerRoom = 12;
         [SerializeField] private string m_RoomName = "MobaVR";
         [SerializeField] private string m_GameVersion = "1";
@@ -39,6 +40,8 @@ namespace MobaVR
 
         private void Awake()
         {
+            m_RoomName = appSettings.AppData.City;
+            
             localRepository = new LocalRepository();
             if (m_IsGetOnlineFromPlayerPrefs)
             {
@@ -202,6 +205,11 @@ namespace MobaVR
                 PhotonNetwork.LoadLevel(m_SceneName);
             }
         }*/
+
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        {
+            base.OnPlayerEnteredRoom(newPlayer);
+        }
 
         public override void OnJoinedRoom()
         {
