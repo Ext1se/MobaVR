@@ -907,7 +907,8 @@ namespace MobaVR
         [ContextMenu("Heal")]
         public void Heal(float amount)
         {
-            photonView.RPC(nameof(RpcHeal_Player), RpcTarget.AllBuffered, amount);
+            //photonView.RPC(nameof(RpcHeal_Player), RpcTarget.AllBuffered, amount);
+            photonView.RPC(nameof(RpcHeal_Player), RpcTarget.All, amount);
         }
 
         [PunRPC]
@@ -932,7 +933,8 @@ namespace MobaVR
         [ContextMenu("Reborn")]
         public void Reborn()
         {
-            photonView.RPC(nameof(RpcReborn_Player), RpcTarget.AllBuffered);
+            //photonView.RPC(nameof(RpcReborn_Player), RpcTarget.AllBuffered);
+            photonView.RPC(nameof(RpcReborn_Player), RpcTarget.All);
         }
 
         [PunRPC]
@@ -960,7 +962,8 @@ namespace MobaVR
 
         public void RestoreHp()
         {
-            photonView.RPC(nameof(RpcRestoreHp_Player), RpcTarget.AllBuffered);
+            //photonView.RPC(nameof(RpcRestoreHp_Player), RpcTarget.AllBuffered);
+            photonView.RPC(nameof(RpcRestoreHp_Player), RpcTarget.All);
         }
 
         [PunRPC]

@@ -43,10 +43,17 @@ public class SliderMenu : MonoBehaviour
 
     public void OnCharacterButtonEnter(int buttonIndex)
     {
+        if (buttonIndex >= characterButtons.Length)
+        {
+            return;
+        }
+        
+        if (buttonIndex >= originalScales.Length)
+        {
+            return;
+        }
         
         characterButtons[buttonIndex].transform.localScale = originalScales[buttonIndex] * 1.2f;
-
-      
         PlaySound(hoverSound);
     }
 
@@ -55,7 +62,16 @@ public class SliderMenu : MonoBehaviour
 
     public void OnCharacterButtonExit(int buttonIndex)
     {
-      
+        if (buttonIndex >= characterButtons.Length)
+        {
+            return;
+        }
+        
+        if (buttonIndex >= originalScales.Length)
+        {
+            return;
+        }
+        
         characterButtons[buttonIndex].transform.localScale = originalScales[buttonIndex];
     }
 
