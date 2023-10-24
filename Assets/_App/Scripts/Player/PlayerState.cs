@@ -7,6 +7,7 @@
         GOD,
         PLAY_PVP,
         PLAY_PVE,
-        DIE
+        DIE,
+        CUSTOM,
     }
 }
