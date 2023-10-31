@@ -12,6 +12,9 @@ namespace UnitySimpleLiquid
     /// </summary>
     public class SplitController : MonoBehaviour
     {
+	    [SerializeField] private bool m_IsOverrideColor = true;
+	    [SerializeField] private Color m_OverrideColor =new Color(0.84f, 0.63f, 0.22f, 0.50f);
+	    
         public LiquidContainer liquidContainer;
         [SerializeField]
         private float bottleneckRadius = 0.1f;
@@ -47,7 +50,7 @@ namespace UnitySimpleLiquid
                 return;
 
             var mainModule = particlesInst.main;
-            mainModule.startColor = liquidContainer.LiquidColor;
+            mainModule.startColor = m_IsOverrideColor ? m_OverrideColor : liquidContainer.LiquidColor;
 
             particlesInst.transform.localScale = Vector3.one * BottleneckRadiusWorld * scale;
             particlesInst.transform.position = splitPos;
@@ -107,7 +110,7 @@ namespace UnitySimpleLiquid
             // Draws bottleneck direction and radius
             var bottleneckPlane = GenerateBottleneckPlane();
             BottleneckRadiusWorld = bottleneckRadius * transform.lossyScale.magnitude;
-
+            
             Gizmos.color = Color.red;
             GizmosHelper.DrawPlaneGizmos(bottleneckPlane, transform);
 
@@ -324,7 +327,11 @@ namespace UnitySimpleLiquid
 		private void SendLiquidContainer(LiquidContainer lc)
 		{
 			//find the color and split speed
-			Color newColor = liquidContainer.LiquidColor;
+			//Color newColor = liquidContainer.LiquidColor;
+			
+			Color newColor  = m_IsOverrideColor ? m_OverrideColor : liquidContainer.LiquidColor;
+
+			
 			float ss = liquidContainer.GetSplitController.splitSpeed;
 
 			//we find the coefficient of the volume of the tank and the volume of the incoming fluid

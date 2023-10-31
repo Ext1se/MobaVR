@@ -72,6 +72,12 @@ namespace MobaVR
                 return;
             }
             
+            //TODO:
+            if (m_IsPerformed)
+            {
+                return;
+            }
+            
             m_CanUseMicrophone = true;
             StartRecord();
             
