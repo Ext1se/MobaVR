@@ -25,10 +25,12 @@ namespace MetaConference
 
         private void Awake()
         {
+            /*
             if (!PhotonNetwork.IsConnected)
             {
                 LoadLauncherScene();
             }
+            */
         }
 
         #endregion

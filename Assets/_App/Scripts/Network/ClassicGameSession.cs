@@ -72,23 +72,24 @@ namespace MobaVR
 
         private void Awake()
         {
-            managerDevice = GameObject.Find("DeviceManager").GetComponent<ManagerDevice>();
+            managerDevice = FindObjectOfType<ManagerDevice>();
             //TODO: 
+            /*
             PhotonCustomHitData.Register();
             #if !UNITY_EDITOR
                 CustomComposites.Init();
             #endif
+            */
         }
 
         private void Start()
         {
-            //InitPlayer();
-            //InitMode();
-            if (managerDevice != null && managerDevice.PlayerCrate) // Проверяем, нужно ли создавать игрока
+            /*
+            if (managerDevice != null && managerDevice.CanCreatePlayer) // Проверяем, нужно ли создавать игрока
             {
                 Invoke(nameof(InitPlayer), 2f);
             }
-            //Invoke(nameof(InitMode), 3f);
+            */
         }
 
         #region Scenes
@@ -216,11 +217,47 @@ namespace MobaVR
             SetTeam(TeamType.BLUE);
         }
 
+        public void SetRole(string idClass)
+        {
+            if (m_LocalPlayer != null)
+            {
+                m_LocalPlayer.PlayerData.IdRole = idClass;
+                SwitchRoleAndSkin();
+            }
+        }
+        
+        public void SetGender(bool isMale)
+        {
+            if (m_LocalPlayer != null)
+            {
+                m_LocalPlayer.PlayerData.IsMale = isMale;
+                SwitchRoleAndSkin();
+            }
+        }
+
         public void SwitchRole(string idClass)
+        {
+            SwitchRole(idClass, true);
+        }
+
+        public void SwitchRole(string idClass, bool isMale)
         {
             if (m_LocalPlayer.TryGetComponent(out ClassSwitcher classSwitcher))
             {
-                classSwitcher.SetRole(idClass);
+                m_LocalPlayer.PlayerData.IdRole = idClass;
+                m_LocalPlayer.PlayerData.IsMale = isMale;
+                
+                classSwitcher.SetRole(idClass, isMale);
+            }
+        }
+
+        public void SwitchRoleAndSkin()
+        {
+            if (m_LocalPlayer.TryGetComponent(out ClassSwitcher classSwitcher))
+            {
+                classSwitcher.SetRole(
+                    m_LocalPlayer.PlayerData.IdRole,
+                    m_LocalPlayer.PlayerData.IsMale);
             }
         }
 
@@ -435,6 +472,11 @@ namespace MobaVR
 
         public override void OnJoinedRoom()
         {
+            if (managerDevice != null && managerDevice.CanCreatePlayer) // Проверяем, нужно ли создавать игрока
+            {
+                Invoke(nameof(InitPlayer), 2f);
+            }
+
             base.OnJoinedRoom();
 
             //InitPlayer();

@@ -1,7 +1,14 @@
-﻿namespace _App.Scripts.Inputs
+﻿using UnityEngine;
+
+namespace MobaVR
 {
-    public class InputHelper
+    public class InputHelper : MonoBehaviour
     {
-        
+        private void Awake()
+        {
+            #if !UNITY_EDITOR
+                CustomComposites.Init();
+            #endif
+        }
     }
 }

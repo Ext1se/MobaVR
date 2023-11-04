@@ -86,22 +86,26 @@ namespace MobaVR
             m_DefenderSpellsHandler.gameObject.SetActive(true);
         }
 
-        public void SetRole(string idClass)
+        public void SetRole(string idClass, bool isMale = true)
         {
             photonView.RPC(nameof(RpcSetRole), RpcTarget.AllBuffered, idClass);
         }
 
         [PunRPC]
-        private void RpcSetRole(string idClass)
+        private void RpcSetRole(string idClass, bool isMale = true)
         {
             ClassStats role = m_Roles.Find(role => role.ClassId.Equals(idClass));
             if (role != null)
             {
                 m_CurrentIdClass = idClass;
+
+                m_WizardPlayer.PlayerVR.PlayerData.IdRole = idClass;
+                m_WizardPlayer.PlayerVR.PlayerData.IsMale = isMale;
                 
                 m_WizardPlayer.Stats = role.ClassStatsSo;
-                m_SkinCollection.SetAliveSkin(role.Skin);
-
+                //m_SkinCollection.SetAliveSkin(role.Skin);
+                m_SkinCollection.SetAliveSkin(role.GetGenderSkin(isMale));
+                
                 Clear();
                 role.gameObject.SetActive(true);
                 

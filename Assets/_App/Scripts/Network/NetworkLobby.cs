@@ -14,9 +14,9 @@ namespace MobaVR
     public class NetworkLobby : MonoBehaviourPunCallbacks
     {
         [Header("Photon")]
-        [SerializeField] [ReadOnly] private string m_SceneName = "Room";
+        [SerializeField] [ReadOnly] private string m_RoomName = "MobaVR";
+        [SerializeField] private string m_SceneName = "Room";
         [SerializeField] private byte m_MaxPlayersPerRoom = 12;
-        [SerializeField] private string m_RoomName = "MobaVR";
         [SerializeField] private string m_GameVersion = "1";
         [SerializeField] private bool m_IsGetOnlineFromPlayerPrefs = true;
         [SerializeField] private bool m_GameOnline;

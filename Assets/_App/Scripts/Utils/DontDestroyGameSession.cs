@@ -8,29 +8,18 @@ namespace MobaVR
 {
     public class DontDestroyGameSession : MonoBehaviourPunCallbacks
     {
-        private static DontDestroyGameSession Instance;
-        
-        [SerializeField] private GameObject m_GameSessionPrefab;
-        private GameObject m_GameSession;
+        [SerializeField] private GameObject m_GameSession;
 
         private void Awake()
         {
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
+            DontDestroyOnLoad(gameObject);
         }
 
         public void CreateGameSession()
         {
             if (PhotonNetwork.IsConnected)
             {
-                m_GameSession = Instantiate(m_GameSessionPrefab, transform);
+                m_GameSession.SetActive(true);
                 PhotonNetwork.AutomaticallySyncScene = true;
             }
         }
@@ -44,6 +33,7 @@ namespace MobaVR
         public override void OnDisconnected(DisconnectCause cause)
         {
             Destroy(m_GameSession.gameObject);
+            Destroy(gameObject);
             base.OnDisconnected(cause);
         }
     }

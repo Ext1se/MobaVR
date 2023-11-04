@@ -19,7 +19,7 @@ public class ManagerDevice : MonoBehaviour
     public GameObject PlayerVR; // префаб игрока для ВР
     public GameObject PlayerPC; // префаб игрока для компьютера
 
-    public bool PlayerCrate; //создаём игрока или нет
+    public bool CanCreatePlayer; //создаём игрока или нет
 
     public bool IsAdmin => AppSetting.AppData.IsAdmin;
 
@@ -95,7 +95,7 @@ public class ManagerDevice : MonoBehaviour
         //включаем для ПК
         PlayerPC.SetActive(true);
 
-        PlayerCrate = false; //не создаём игрока
+        CanCreatePlayer = false; //не создаём игрока
     }
 
     private void FunctionForWindows()
@@ -106,7 +106,7 @@ public class ManagerDevice : MonoBehaviour
         //включаем для ПК
         PlayerPC.SetActive(true);
 
-        PlayerCrate = false; //не создаём игрока
+        CanCreatePlayer = false; //не создаём игрока
     }
 
     private void FunctionForAndroid()
@@ -117,6 +117,6 @@ public class ManagerDevice : MonoBehaviour
         //включаем для ПК
         PlayerPC.SetActive(false);
 
-        PlayerCrate = true; //создаём игрока
+        CanCreatePlayer = true; //создаём игрока
     }
 }

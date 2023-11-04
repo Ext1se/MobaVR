@@ -1,7 +1,13 @@
-﻿namespace _App.Scripts.Photon
+﻿using System;
+using UnityEngine;
+
+namespace MobaVR
 {
-    public class CustomPhotonDataRegister
+    public class CustomPhotonDataRegister : MonoBehaviour
     {
-        
+        private void Awake()
+        {
+            PhotonCustomHitData.Register();
+        }
     }
 }

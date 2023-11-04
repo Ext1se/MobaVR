@@ -9,6 +9,7 @@ namespace MobaVR
     public class GameStatistics : MonoBehaviourPunCallbacks
     {
         [SerializeField] private bool m_IsBackupData = false;
+        [SerializeField] private bool m_IsAutoStartSession = true;
 
         private ClassicGameSession m_GameSession;
 
@@ -21,8 +22,9 @@ namespace MobaVR
 
         public int MaxCountPlayers => m_MaxCountPlayers;
 
-        private void OnEnable()
+        public override void OnEnable()
         {
+            base.OnEnable();
             if (m_GameSession != null)
             {
                 m_GameSession.OnAddPlayer += AddPlayer;
@@ -30,8 +32,9 @@ namespace MobaVR
             }
         }
 
-        private void OnDisable()
+        public override void OnDisable()
         {
+            base.OnDisable();
             if (m_GameSession != null)
             {
                 m_GameSession.OnAddPlayer -= AddPlayer;
@@ -47,7 +50,10 @@ namespace MobaVR
 
         private void Start()
         {
-            StartSession();
+            if (m_IsAutoStartSession)
+            {
+                StartSession();
+            }
         }
 
         #region Player Score
