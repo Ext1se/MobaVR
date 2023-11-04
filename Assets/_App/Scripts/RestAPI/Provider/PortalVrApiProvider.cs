@@ -9,6 +9,7 @@ namespace MobaVR
     public class PortalVrApiProvider : BaseApiProvider
     {
         private const string MESSAGE_TOKEN_EMPTY = "Token is empty";
+        private const string AUTH_ERROR = "Auth error";
 
         //private const string BASE_API_PATH_COMMON = "https://api.portal-vr.pro:5000/";
         private const string BASE_API_PATH_COMMON = "http://51.250.54.116:8000/";
@@ -70,12 +71,14 @@ namespace MobaVR
 
         public override void ValidateLicense(string key, int idGame, int idClub, RequestResultCallback<LicenseKeyResponse> callback)
         {
+            /*
             if (IsEmptyToken())
             {
                 callback.OnError?.Invoke(MESSAGE_TOKEN_EMPTY);
                 callback.OnFinish?.Invoke();
                 return;
             }
+            */
 
             StartCoroutine(SendRequest_ValidateLicense(key, idGame, idClub, callback));
         }
@@ -84,7 +87,7 @@ namespace MobaVR
         {
             //string url = $"{BASE_API_PATH_COMMON}/{PATH_COMPANY}/company";
             //url = $"{url}?license_key={key}";
-            string url = $"{BASE_API_PATH_COMMON}/verify_keys";
+            string url = $"{BASE_API_PATH_COMMON}verify_keys";
             url = $"{url}?key={key}&game_id={idGame}&club_id={idClub}";
 
             UnityWebRequest www = UnityWebRequest.Get(url);

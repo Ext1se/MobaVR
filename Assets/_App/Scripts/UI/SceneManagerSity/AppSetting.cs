@@ -4,7 +4,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AppSettingCity", menuName = "MobaVR/API/AppSettingCity", order = 1)]
 public class AppSetting : ScriptableObject
 {
-    public int IdClub = -1;
+    [Header("Game")]
     public int IdGame = -1;
+    
+    [Space]
+    [Header("Build")]
+    public int IdClub = -1;
+    [Space]
     public AppData AppData = new AppData();
 }

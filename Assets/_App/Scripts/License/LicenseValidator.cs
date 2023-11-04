@@ -47,24 +47,30 @@ namespace MobaVR
             m_ValidateButton.interactable = false;
             string key = m_InputField.text;
             
-            m_ApiProvider.ValidateLicense(key, new RequestResultCallback<LicenseKeyResponse>()
+            m_ApiProvider.ValidateLicense(key, 
+                                          m_CompanyHandler.AppSetting.IdGame,
+                                          m_CompanyHandler.AppSetting.IdClub,
+                                          new RequestResultCallback<LicenseKeyResponse>()
             {
                 OnSuccess = response =>
                 {
                     m_CompanyHandler.LicenseKeyResponse = response;
                     m_CompanyHandler.LicenseKey = response.Key;
-                    SceneManager.LoadScene(m_NextScene);
+                    SceneManager.LoadSceneAsync(m_NextScene);
                 },
                 
                 OnError = message =>
                 {
                     ShowNotification("Error", message);
+                    
+                    m_ProgressBar.SetActive(false);
+                    m_ValidateButton.interactable = true;
                 },
                 
                 OnFinish = () =>
                 {
-                    m_ProgressBar.SetActive(false);
-                    m_ValidateButton.interactable = true;
+                    //m_ProgressBar.SetActive(false);
+                    //m_ValidateButton.interactable = true;
                 }
             });
         }

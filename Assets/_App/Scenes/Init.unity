@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -937,7 +937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d750930d778344f6b2a19143f96259ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ProviderType: 0
+  m_ProviderType: 1
   m_LocalProvider: {fileID: 5064198372372110776, guid: 1ca3ad22389e3e14193b1851ee9a09a7,
     type: 3}
   m_RemoteProvider: {fileID: 1085396324416168407, guid: 779eea89d52ca55498f491672e8cc957,
@@ -986,6 +986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58faaba6fce74c9da61d1ef70facd321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_AppSetting: {fileID: 11400000, guid: f007abd55c98ad04c9b81e2c4db4eee7, type: 2}
   LicenseKey: 
 --- !u!4 &2051362289
 Transform:

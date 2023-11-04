@@ -7,10 +7,14 @@ namespace MobaVR
     public class CompanyHandler : MonoBehaviour
     {
         public static CompanyHandler Instance;
+
+        [SerializeField] private AppSetting m_AppSetting;
         
         [ReadOnly] public Club Club;
         [ReadOnly] public string LicenseKey;
         [ReadOnly] public LicenseKeyResponse LicenseKeyResponse;
+
+        public AppSetting AppSetting => m_AppSetting;
 
         private void Awake()
         {
