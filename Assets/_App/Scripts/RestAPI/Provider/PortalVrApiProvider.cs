@@ -10,16 +10,19 @@ namespace MobaVR
     {
         private const string MESSAGE_TOKEN_EMPTY = "Token is empty";
 
-        private const string BASE_API_PATH_COMMON = "https://api.portal-vr.pro:5000/";
-        private const string BASE_API_PATH_STATISTICS = "https://api.portal-vr.pro:5001/";
+        //private const string BASE_API_PATH_COMMON = "https://api.portal-vr.pro:5000/";
+        private const string BASE_API_PATH_COMMON = "http://51.250.54.116:8000/";
+        //private const string BASE_API_PATH_STATISTICS = "https://api.portal-vr.pro:5001/";
+        private const string BASE_API_PATH_STATISTICS = "http://51.250.54.116:8001/";
 
         private const string PATH_COMPANY = "company/";
 
         private LocalRepository m_LocalRepository;
         private string m_Token = null;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             m_LocalRepository = new LocalRepository();
         }
 
@@ -62,6 +65,11 @@ namespace MobaVR
 
         public override void ValidateLicense(string key, RequestResultCallback<LicenseKeyResponse> callback)
         {
+            ValidateLicense(key, m_AppSetting.IdGame, m_AppSetting.IdClub, callback);
+        }
+
+        public override void ValidateLicense(string key, int idGame, int idClub, RequestResultCallback<LicenseKeyResponse> callback)
+        {
             if (IsEmptyToken())
             {
                 callback.OnError?.Invoke(MESSAGE_TOKEN_EMPTY);
@@ -69,16 +77,18 @@ namespace MobaVR
                 return;
             }
 
-            StartCoroutine(SendRequest_ValidateLicense(key, callback));
+            StartCoroutine(SendRequest_ValidateLicense(key, idGame, idClub, callback));
         }
 
-        private IEnumerator SendRequest_ValidateLicense(string key, RequestResultCallback<LicenseKeyResponse> callback)
+        private IEnumerator SendRequest_ValidateLicense(string key, int idGame, int idClub, RequestResultCallback<LicenseKeyResponse> callback)
         {
-            string url = $"{BASE_API_PATH_COMMON}/{PATH_COMPANY}/company";
-            url = $"{url}?license_key={key}";
+            //string url = $"{BASE_API_PATH_COMMON}/{PATH_COMPANY}/company";
+            //url = $"{url}?license_key={key}";
+            string url = $"{BASE_API_PATH_COMMON}/verify_keys";
+            url = $"{url}?key={key}&game_id={idGame}&club_id={idClub}";
 
             UnityWebRequest www = UnityWebRequest.Get(url);
-            www.SetRequestHeader("Authorization", "Bearer " + m_Token);
+            //www.SetRequestHeader("Authorization", "Bearer " + m_Token);
             www.SetRequestHeader("Content-Type", "application/json");
             yield return www.SendWebRequest();
 
@@ -103,6 +113,11 @@ namespace MobaVR
                         }
 
                         break;
+                    case (404):
+                    {
+                        callback.OnError?.Invoke("A key with such id is not exist");
+                        break;
+                    }
                     default:
                         callback.OnSuccess?.Invoke(null);
                         break;
@@ -127,6 +142,7 @@ namespace MobaVR
             www.SetRequestHeader("Content-Type", "application/json");
 
             yield break;
+            
         }
 
         #endregion

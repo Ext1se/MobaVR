@@ -14,14 +14,14 @@ namespace MobaVR
 
         private void Awake()
         {
-            managerDevice = GameObject.Find("DeviceManager").GetComponent<ManagerDevice>();
+            managerDevice = FindObjectOfType<ManagerDevice>();
         }
 
         public override PlayerVR SpawnPlayer(Team team)
         {
             string prefabName = $"Players/{m_PlayerPrefab.name}";
 
-            if (managerDevice.PlayerCrate) // Проверяем, нужно ли создавать игрока
+            if (managerDevice.CanCreatePlayer) // Проверяем, нужно ли создавать игрока
             {
                 EventSystemVR.SetActive(true);
                 localPlayer = PhotonNetwork.Instantiate(prefabName, Vector3.zero, Quaternion.identity);
