@@ -50,6 +50,64 @@ namespace MobaVR
 
         #endregion
 
+        #region Club
+
+        public override void GetClubInfo(int idClub, RequestResultCallback<Club> callback)
+        {
+            StartCoroutine(SendRequest_GetClubInfo(idClub, callback));
+
+        }
+
+        private IEnumerator SendRequest_GetClubInfo(int idClub,
+                                                    RequestResultCallback<Club> callback)
+        {
+            string url = $"{BASE_API_PATH_COMMON}clubs/{idClub}";
+            UnityWebRequest www = UnityWebRequest.Get(url);
+            www.SetRequestHeader("Content-Type", "application/json");
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                callback.OnError?.Invoke(www.error);
+            }
+            else
+            {
+                switch (www.responseCode)
+                {
+                    case (200):
+                        Club club = JsonConvert.DeserializeObject<Club>(www.downloadHandler.text);
+                        if (club != null)
+                        {
+                            callback.OnSuccess?.Invoke(club);
+                        }
+                        else
+                        {
+                            callback.OnSuccess?.Invoke(null);
+                        }
+
+                        break;
+                    case (404):
+                    {
+                        callback.OnError?.Invoke("Club is not exist");
+                        break;
+                    }
+                    case (422):
+                    {
+                        callback.OnError?.Invoke("Validation Error");
+                        break;
+                    }
+                    default:
+                        callback.OnSuccess?.Invoke(null);
+                        break;
+                }
+            }
+
+            callback.OnFinish?.Invoke();
+        }
+
+
+        #endregion
+
         #region License
 
         public override void ValidateLicense(string key, RequestResultCallback<bool> callback)

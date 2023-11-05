@@ -1,5 +1,4 @@
-﻿using QuickType;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace MobaVR

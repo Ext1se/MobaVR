@@ -38,6 +38,24 @@ namespace MobaVR
 
         #endregion
 
+        #region Club
+
+        public override void GetClubInfo(int idClub, RequestResultCallback<Club> callback)
+        {
+            Club club = new Club()
+            {
+                Title = "Development club",
+                ShortTitle = "ARMA",
+                Address = "Moscow",
+                Id = 1
+            };
+
+            callback.OnSuccess?.Invoke(club);
+            callback.OnFinish?.Invoke();
+        }
+
+        #endregion
+
         #region License
 
         public override void ValidateLicense(string key, RequestResultCallback<bool> callback)

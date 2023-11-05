@@ -51,28 +51,28 @@ namespace MobaVR
                                           m_CompanyHandler.AppSetting.IdGame,
                                           m_CompanyHandler.AppSetting.IdClub,
                                           new RequestResultCallback<LicenseKeyResponse>()
-            {
-                OnSuccess = response =>
-                {
-                    m_CompanyHandler.LicenseKeyResponse = response;
-                    m_CompanyHandler.LicenseKey = response.Key;
-                    SceneManager.LoadSceneAsync(m_NextScene);
-                },
+                                          {
+                                              OnSuccess = response =>
+                                              {
+                                                  m_CompanyHandler.LicenseKeyResponse = response;
+                                                  m_CompanyHandler.LicenseKey = response.Key;
+                                                  SceneManager.LoadSceneAsync(m_NextScene);
+                                              },
                 
-                OnError = message =>
-                {
-                    ShowNotification("Error", message);
+                                              OnError = message =>
+                                              {
+                                                  ShowNotification("Error", message);
                     
-                    m_ProgressBar.SetActive(false);
-                    m_ValidateButton.interactable = true;
-                },
+                                                  m_ProgressBar.SetActive(false);
+                                                  m_ValidateButton.interactable = true;
+                                              },
                 
-                OnFinish = () =>
-                {
-                    //m_ProgressBar.SetActive(false);
-                    //m_ValidateButton.interactable = true;
-                }
-            });
+                                              OnFinish = () =>
+                                              {
+                                                  //m_ProgressBar.SetActive(false);
+                                                  //m_ValidateButton.interactable = true;
+                                              }
+                                          });
         }
     }
 }

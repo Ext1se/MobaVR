@@ -24,6 +24,7 @@ namespace MobaVR
         public abstract void ValidateLicense(string key, RequestResultCallback<bool> callback);
         public abstract void ValidateLicense(string key, RequestResultCallback<LicenseKeyResponse> callback);
         public abstract void ValidateLicense(string key, int idGame, int idClub, RequestResultCallback<LicenseKeyResponse> callback);
+        public abstract void GetClubInfo(int idClub, RequestResultCallback<Club> callback);
         public abstract void SendGameSession(string key, RequestResultCallback<bool> callback);
     }
 }

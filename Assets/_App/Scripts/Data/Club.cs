@@ -1,10 +1,9 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace QuickType
+namespace MobaVR
 {
-
-    public partial class Club
+    public class Club
     {
         [JsonProperty("address")]
         public string Address { get; set; }
