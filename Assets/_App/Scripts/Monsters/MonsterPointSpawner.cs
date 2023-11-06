@@ -63,7 +63,8 @@ namespace MobaVR
             }
             
             
-            photonView.RPC(nameof(RpcGenerateMonsters), RpcTarget.AllBuffered);
+            //photonView.RPC(nameof(RpcGenerateMonsters), RpcTarget.AllBuffered);
+            photonView.RPC(nameof(RpcGenerateMonsters), RpcTarget.All);
         }
 
         [PunRPC]
@@ -99,7 +100,8 @@ namespace MobaVR
                 return;
             }
             
-            photonView.RPC(nameof(RpcClearMonsters), RpcTarget.AllBuffered, isDie);
+            //photonView.RPC(nameof(RpcClearMonsters), RpcTarget.AllBuffered, isDie);
+            photonView.RPC(nameof(RpcClearMonsters), RpcTarget.All, isDie);
         }
 
         [PunRPC]

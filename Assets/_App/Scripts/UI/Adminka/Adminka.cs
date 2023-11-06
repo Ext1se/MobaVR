@@ -49,7 +49,7 @@ public class Adminka : MonoBehaviourPunCallbacks
     private void Awake()
     {
         //админку при старте игры не удаляем
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         RunGames = false;
          LoadSavedIPAddress(); // Загрузить сохраненный IP-адрес при запуске приложения

@@ -139,7 +139,8 @@ namespace MobaVR
             }
 
             //������ ����� �����
-            photonView.RPC(nameof(SetHealth), RpcTarget.AllBuffered, value);
+            //photonView.RPC(nameof(SetHealth), RpcTarget.AllBuffered, value);
+            photonView.RPC(nameof(SetHealth), RpcTarget.All, value);
         }
 
         [PunRPC]

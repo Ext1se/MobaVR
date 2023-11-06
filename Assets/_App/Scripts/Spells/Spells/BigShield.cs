@@ -63,7 +63,8 @@ namespace MobaVR
 
         public void Place()
         {
-            photonView.RPC(nameof(RpcPlace), RpcTarget.AllBuffered);
+            //photonView.RPC(nameof(RpcPlace), RpcTarget.AllBuffered);
+            photonView.RPC(nameof(RpcPlace), RpcTarget.All);
         }
 
         [PunRPC]
