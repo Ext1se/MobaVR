@@ -55,7 +55,7 @@ public class AppSwitcher
             return;
         }
 
-        settings.AppData.IsDevelopmentBuild = isDevelopment;
+        settings.AppData.IsDevBuild = isDevelopment;
         EditorUtility.SetDirty(settings);
         AssetDatabase.SaveAssets();
     }
@@ -75,8 +75,6 @@ public class AppSwitcher
     [MenuItem("MobaVR/Mode/Select App Settings", priority = 1)]
     public static void SelectAppSettingsFile()
     {
-        SwitchDevelopmentMode(false);
-        
         AppSetting settings = AssetDatabase.LoadAssetAtPath<AppSetting>(AppBuilder.CITY_PATH);
         if (settings == null)
         {

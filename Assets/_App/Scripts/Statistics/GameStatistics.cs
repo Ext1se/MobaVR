@@ -8,10 +8,12 @@ namespace MobaVR
 {
     public class GameStatistics : MonoBehaviourPunCallbacks
     {
+        [SerializeField] private AppSetting m_AppSetting;
         [SerializeField] private bool m_IsBackupData = false;
         [SerializeField] private bool m_IsAutoStartSession = true;
 
         private ClassicGameSession m_GameSession;
+        private StatSessionView m_StatSessionView;
 
         private LocalRepository m_LocalRepository;
         private List<PlayerVR> m_Players = new();
@@ -45,6 +47,7 @@ namespace MobaVR
         private void Awake()
         {
             m_GameSession = FindObjectOfType<ClassicGameSession>();
+            m_StatSessionView = FindObjectOfType<StatSessionView>();
             m_LocalRepository = new LocalRepository();
         }
 
@@ -103,6 +106,28 @@ namespace MobaVR
 
         #endregion
 
+        #region Session
+
+        public GameSessionStat GetSessionStat()
+        {
+            //string format = "yyyy-MM-dd'T'HH:mm:ss.fff'Z'";
+            string format = "yyyy-MM-dd'T'HH:mm:ss.fff";
+            string startDate = m_StartDateTime.ToString(format);
+            string endDate = m_EndDateTime.ToString(format);
+
+            GameSessionStat gameSessionStat = new GameSessionStat()
+            {
+                ClubId = m_AppSetting.IdClub,
+                GameId = m_AppSetting.IdGame,
+                GameVersion = m_AppSetting.GameVersion,
+                CountPlayers = MaxCountPlayers,
+                EndTime = endDate,
+                StartTime = startDate,
+            };
+
+            return gameSessionStat;
+        }
+
         public void StartSession()
         {
             m_StartDateTime = DateTime.Now;
@@ -114,6 +139,8 @@ namespace MobaVR
             m_EndDateTime = DateTime.Now;
             m_LocalRepository.SetEndTime(m_EndDateTime);
         }
+        
+        #endregion
 
         #region Listeners
 
@@ -164,6 +191,12 @@ namespace MobaVR
         {
             SavePlayerData();
             base.OnDisconnected(cause);
+        }
+
+        public override void OnConnected()
+        {
+            base.OnConnected();
+            StartSession();
         }
 
         public override void OnLeftRoom()

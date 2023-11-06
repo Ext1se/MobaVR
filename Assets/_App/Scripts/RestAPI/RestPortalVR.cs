@@ -24,7 +24,7 @@
         #region Statistics
 
         //TODO
-        public void SendGameSession(string key, RequestResultCallback<bool> callback);
+        public void SendGameSession(GameSessionStat gameSessionStat, RequestResultCallback<GameSessionStat> callback);
 
         #endregion
     }

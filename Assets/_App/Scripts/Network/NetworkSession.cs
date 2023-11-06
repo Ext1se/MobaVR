@@ -35,11 +35,16 @@ namespace MetaConference
 
         #endregion
 
+        private void WaitAndBackToMenu()
+        {
+            SceneManager.LoadScene(m_MenuScene);
+        }
 
         private void LoadLauncherScene()
         {
             //SceneManager.LoadScene(0);
             SceneManager.LoadScene(m_MenuScene);
+            //Invoke(nameof(WaitAndBackToMenu), 4f);
         }
 
         public void BackToLaunch()

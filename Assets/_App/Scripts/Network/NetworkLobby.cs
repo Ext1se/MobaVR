@@ -81,12 +81,18 @@ namespace MobaVR
         private void BackToMenu()
         {
             //SceneManager.LoadScene(0);
+            //SceneManager.LoadScene(m_MenuScene);
+            Invoke(nameof(WaitAndBackToMenu), 4f);
+        }
+
+        private void WaitAndBackToMenu()
+        {
             SceneManager.LoadScene(m_MenuScene);
         }
 
         private void JoinOrCreateRoom()
         {
-            if (appSettings.AppData.IsDevelopmentBuild)
+            if (appSettings.AppData.IsDevBuild)
             {
                 m_RoomName += "_Dev";
                 PhotonNetwork.JoinOrCreateRoom(m_RoomName,
@@ -146,6 +152,7 @@ namespace MobaVR
 
                 // PhotonNetwork.ConnectUsingSettings();
 
+                PhotonNetwork.EnableCloseConnection = true;
                 PhotonNetwork.AutomaticallySyncScene = true;
                 PhotonNetwork.OfflineMode = false;
                 PhotonNetwork.GameVersion = m_GameVersion;

@@ -31,7 +31,7 @@ namespace MobaVR
                     buildSetting.AppData.Platform.ToString(),
                     buildSetting.AppData.UseVR,
                     buildSetting.AppData.IsAdmin,
-                    buildSetting.AppData.IsDevelopmentBuild,
+                    buildSetting.AppData.IsDevBuild,
                     buildSetting.AppData.UseLogs,
                     buildSetting.Path,
                     buildSetting.Name);

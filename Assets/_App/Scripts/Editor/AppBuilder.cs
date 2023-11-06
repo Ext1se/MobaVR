@@ -300,7 +300,7 @@ public class AppBuilder
         settings.AppData.City = cityName;
         settings.AppData.IsAdmin = isAdmin;
         settings.AppData.Platform = platformType;
-        settings.AppData.IsDevelopmentBuild = isDevBuild;
+        settings.AppData.IsDevBuild = isDevBuild;
         settings.AppData.UseLogs = useLogs;
         settings.AppData.UseVR = useVR;
 

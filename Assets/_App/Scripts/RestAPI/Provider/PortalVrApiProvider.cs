@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Text;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -192,18 +193,44 @@ namespace MobaVR
 
         #region Statistics
 
-        public override void SendGameSession(string key, RequestResultCallback<bool> callback)
+        public override void SendGameSession(GameSessionStat sessionStat, RequestResultCallback<GameSessionStat> callback)
         {
+            StartCoroutine(SendRequest_SendGameSession(sessionStat, callback));
         }
 
-        private IEnumerator SendRequest_SendGameSession(string key, RequestResultCallback<bool> callback)
+        private IEnumerator SendRequest_SendGameSession(GameSessionStat sessionStat, RequestResultCallback<GameSessionStat> callback)
         {
-            UnityWebRequest www = UnityWebRequest.Get("https://api.z-boom.ru/balance/monets-list");
-            www.SetRequestHeader("Authorization", "Bearer " + m_Token);
+            string url = $"{BASE_API_PATH_STATISTICS}game_sessions";
+            string jsonSessionStat = JsonConvert.SerializeObject(sessionStat,Formatting.Indented);
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonSessionStat);
+            WWWForm formData = new WWWForm();
+            UnityWebRequest www = UnityWebRequest.Post(url, jsonSessionStat);
+            www.uploadHandler =  (UploadHandler) new UploadHandlerRaw(bodyRaw);
+            //ww.SetRequestHeader("Authorization", "Bearer " + m_Token);
+            www.SetRequestHeader("Accept", "application/json");
             www.SetRequestHeader("Content-Type", "application/json");
-
-            yield break;
             
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                callback.OnError?.Invoke(www.error);
+            }
+            else
+            {
+                switch (www.responseCode)
+                {
+                    case (200):
+                        callback.OnSuccess?.Invoke(sessionStat);
+                        break;
+                    default:
+                        //callback.OnSuccess?.Invoke(null);
+                        callback.OnError?.Invoke("Vallidation Error");
+                        break;
+                }
+            }
+
+            callback.OnFinish?.Invoke();
         }
 
         #endregion

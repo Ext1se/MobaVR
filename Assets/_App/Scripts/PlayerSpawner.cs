@@ -12,9 +12,12 @@ namespace MobaVR
         public ManagerDevice managerDevice; // Ссылка на объект ManagerDevice
         public GameObject EventSystemVR; //евент систем из других сцен
 
-        private void Awake()
+        private void Start()
         {
-            managerDevice = FindObjectOfType<ManagerDevice>();
+            if (managerDevice == null)
+            {
+                managerDevice = FindObjectOfType<ManagerDevice>();
+            }
         }
 
         public override PlayerVR SpawnPlayer(Team team)

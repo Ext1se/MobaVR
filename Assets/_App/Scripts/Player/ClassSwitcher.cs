@@ -88,11 +88,11 @@ namespace MobaVR
 
         public void SetRole(string idClass, bool isMale = true)
         {
-            photonView.RPC(nameof(RpcSetRole), RpcTarget.AllBuffered, idClass);
+            photonView.RPC(nameof(RpcSetRole), RpcTarget.AllBuffered, idClass, isMale);
         }
 
         [PunRPC]
-        private void RpcSetRole(string idClass, bool isMale = true)
+        private void RpcSetRole(string idClass, bool isMale)
         {
             ClassStats role = m_Roles.Find(role => role.ClassId.Equals(idClass));
             if (role != null)

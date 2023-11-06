@@ -72,7 +72,7 @@ namespace MobaVR
 
         private void Awake()
         {
-            managerDevice = FindObjectOfType<ManagerDevice>();
+            //managerDevice = FindObjectOfType<ManagerDevice>();
             //TODO: 
             /*
             PhotonCustomHitData.Register();
@@ -84,6 +84,10 @@ namespace MobaVR
 
         private void Start()
         {
+            if (managerDevice == null)
+            {
+                managerDevice = FindObjectOfType<ManagerDevice>();
+            }
             /*
             if (managerDevice != null && managerDevice.CanCreatePlayer) // Проверяем, нужно ли создавать игрока
             {
@@ -106,6 +110,56 @@ namespace MobaVR
         private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
         {
             m_Mode = FindObjectOfType<GameMode>();
+        }
+
+        #endregion
+
+        #region Connection
+        
+        public void CloseGame()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                //PhotonNetwork.EnableCloseConnection = true;
+                //PhotonNetwork.CurrentRoom.IsOpen = false;
+                //PhotonNetwork.CurrentRoom.PlayerTtl = 0;
+                //PhotonNetwork.CurrentRoom.EmptyRoomTtl = 0;
+
+                foreach (Player player in PhotonNetwork.PlayerList)
+                {
+                    if (Equals(player, PhotonNetwork.LocalPlayer))
+                    {
+                        continue;
+                    }
+                    
+                    //PhotonNetwork.CloseConnection(player);
+                }
+
+                //PhotonNetwork.CloseConnection(PhotonNetwork.LocalPlayer);
+                //PhotonNetwork.Disconnect();
+            }
+            
+            photonView.RPC(nameof(RpcDisconnect), RpcTarget.All);
+        }
+
+        [PunRPC]
+        private void RpcDisconnect()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                Invoke(nameof(WaitAndDisconnect), 5f);
+            }
+            else
+            {
+                Invoke(nameof(WaitAndDisconnect), 0f);
+            }
+        }
+
+        private void WaitAndDisconnect()
+        {
+            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.Disconnect();
+            //SceneManager.LoadScene("Menu");
         }
 
         #endregion

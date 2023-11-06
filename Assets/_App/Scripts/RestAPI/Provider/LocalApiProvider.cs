@@ -94,8 +94,10 @@ namespace MobaVR
 
         #region Statistics
 
-        public override void SendGameSession(string key, RequestResultCallback<bool> callback)
+        public override void SendGameSession(GameSessionStat sessionStat, RequestResultCallback<GameSessionStat> callback)
         {
+            callback.OnSuccess?.Invoke(new GameSessionStat());
+            callback.OnFinish?.Invoke();
         }
 
         #endregion

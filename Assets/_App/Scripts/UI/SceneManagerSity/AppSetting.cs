@@ -6,6 +6,7 @@ public class AppSetting : ScriptableObject
 {
     [Header("Game")]
     public int IdGame = -1;
+    public string GameVersion = "1.0.0";
     
     [Space]
     [Header("Build")]
