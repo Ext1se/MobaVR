@@ -82,7 +82,19 @@ namespace MobaVR
         {
             //SceneManager.LoadScene(0);
             //SceneManager.LoadScene(m_MenuScene);
-            Invoke(nameof(WaitAndBackToMenu), 4f);
+            
+            ///
+            /// Так как теперь GameSession находится в Меню, то и там отлавливается выход и лефт из румы
+            ///
+            
+            if (ExtensionSceneManager.Instance != null)
+            {
+                ExtensionSceneManager.Instance.LoadScene(m_MenuScene, 4f);
+            }
+            else
+            {
+                Invoke(nameof(WaitAndBackToMenu), 4f);
+            }
         }
 
         private void WaitAndBackToMenu()
@@ -175,7 +187,7 @@ namespace MobaVR
         {
             base.OnJoinRoomFailed(returnCode, message);
             Debug.Log($"{name}: Launcher:OnJoinRoomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
-            BackToMenu();
+            //BackToMenu();
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
@@ -189,7 +201,7 @@ namespace MobaVR
                                      roomOptions);
             */
             
-            BackToMenu();
+            //BackToMenu();
         }
 
         public override void OnDisconnected(DisconnectCause cause)
@@ -199,7 +211,7 @@ namespace MobaVR
 
             m_IsConnecting = false;
             OnRoomDisconnected?.Invoke();
-            BackToMenu();
+            //BackToMenu();
         }
 
         /*public override void OnJoinedRoom()

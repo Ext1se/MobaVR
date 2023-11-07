@@ -1,4 +1,6 @@
-﻿using Photon.Pun;
+﻿using MobaVR;
+using MobaVR.Utils;
+using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Events;
@@ -43,7 +45,14 @@ namespace MetaConference
         private void LoadLauncherScene()
         {
             //SceneManager.LoadScene(0);
-            SceneManager.LoadScene(m_MenuScene);
+            if (ExtensionSceneManager.Instance != null)
+            {
+                ExtensionSceneManager.Instance.LoadScene(m_MenuScene, 4f);
+            }
+            else
+            {
+                SceneManager.LoadScene(m_MenuScene);
+            }
             //Invoke(nameof(WaitAndBackToMenu), 4f);
         }
 
