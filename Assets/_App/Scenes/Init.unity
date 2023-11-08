@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 90538848}
   - component: {fileID: 90538847}
   - component: {fileID: 90538849}
-  - component: {fileID: 90538850}
   m_Layer: 0
   m_Name: LanguageManager
   m_TagString: Untagged
@@ -188,19 +187,6 @@ MonoBehaviour:
   engFontTMP: {fileID: 11400000, guid: d0e88bb26bb336842b6a0e54d27a48b9, type: 2}
   rusFontTMP: {fileID: 11400000, guid: d0e88bb26bb336842b6a0e54d27a48b9, type: 2}
   chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
---- !u!114 &90538850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90538846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53f84b535bef41e19016a011ecdbab3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_DestroySceneName: Init
 --- !u!1 &599026361
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +760,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: accb69beeea244fca98466ec91bd4287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IsCheckExist: 0
 --- !u!114 &1298565976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -937,7 +922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d750930d778344f6b2a19143f96259ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ProviderType: 1
+  m_ProviderType: 0
   m_LocalProvider: {fileID: 5064198372372110776, guid: 1ca3ad22389e3e14193b1851ee9a09a7,
     type: 3}
   m_RemoteProvider: {fileID: 1085396324416168407, guid: 779eea89d52ca55498f491672e8cc957,

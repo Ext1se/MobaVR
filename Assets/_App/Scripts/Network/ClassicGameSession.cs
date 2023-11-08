@@ -12,8 +12,8 @@ namespace MobaVR
 {
     public class ClassicGameSession : BaseGameSession
     {
-        [Header("Network")]
-        [SerializeField] private NetworkSession m_NetworkSession;
+        //[Header("Network")]
+        //[SerializeField] private NetworkSession m_NetworkSession;
 
         [Header("Modes")]
         [FormerlySerializedAs("m_Mode")]
