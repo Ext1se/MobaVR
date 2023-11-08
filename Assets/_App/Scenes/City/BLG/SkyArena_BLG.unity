@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.27534032, g: 0.56264615, b: 0.71592605, a: 1}
+  m_IndirectSpecularColor: {r: 0.2749875, g: 0.56207615, b: 0.7128879, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1097,16 +1097,20 @@ PrefabInstance:
       value: 0.8496094
       objectReference: {fileID: 0}
     - target: {fileID: 4061793643387540, guid: 361f515f9011ead4aa20043583cec301, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6351
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061793643387540, guid: 361f515f9011ead4aa20043583cec301, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5173466
+      value: 1.3847966
       objectReference: {fileID: 0}
     - target: {fileID: 4061793643387540, guid: 361f515f9011ead4aa20043583cec301, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -289.23
+      value: -289.1704
       objectReference: {fileID: 0}
     - target: {fileID: 4061793643387540, guid: 361f515f9011ead4aa20043583cec301, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -452.46832
+      value: -452.4835
       objectReference: {fileID: 0}
     - target: {fileID: 4061793643387540, guid: 361f515f9011ead4aa20043583cec301, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1162,16 +1166,20 @@ PrefabInstance:
       value: 0.7418699
       objectReference: {fileID: 0}
     - target: {fileID: 4061793643387540, guid: 361f515f9011ead4aa20043583cec301, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7793
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061793643387540, guid: 361f515f9011ead4aa20043583cec301, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2471
+      value: 1.0766137
       objectReference: {fileID: 0}
     - target: {fileID: 4061793643387540, guid: 361f515f9011ead4aa20043583cec301, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -278.036
+      value: -278.0075
       objectReference: {fileID: 0}
     - target: {fileID: 4061793643387540, guid: 361f515f9011ead4aa20043583cec301, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -452.46832
+      value: -452.4775
       objectReference: {fileID: 0}
     - target: {fileID: 4061793643387540, guid: 361f515f9011ead4aa20043583cec301, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13679,7 +13687,7 @@ PrefabInstance:
     - target: {fileID: 4558209950282661617, guid: 8de19163f1134ae4eb16c898eb194ef6,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6742861321316608245, guid: 8de19163f1134ae4eb16c898eb194ef6,
         type: 3}
