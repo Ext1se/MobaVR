@@ -86,7 +86,12 @@ namespace MobaVR
             m_DefenderSpellsHandler.gameObject.SetActive(true);
         }
 
-        public void SetRole(string idClass, bool isMale = true)
+        public void SetRole(string idClass)
+        {
+            photonView.RPC(nameof(RpcSetRole), RpcTarget.AllBuffered, idClass, true);
+        }
+
+        public void SetRole(string idClass, bool isMale)
         {
             photonView.RPC(nameof(RpcSetRole), RpcTarget.AllBuffered, idClass, isMale);
         }
