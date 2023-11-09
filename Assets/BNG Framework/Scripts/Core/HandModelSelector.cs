@@ -99,7 +99,7 @@ namespace BNG {
             activatedLeftModel.gameObject.SetActive(true);
             activatedRightModel.gameObject.SetActive(true);
 
-            // Обновляем аниматоры для рук
+            /*// Обновляем аниматоры для рук
             HandController leftControl = LeftHandGFXHolder.parent.GetComponent<HandController>();
             HandController rightControl = RightHandGFXHolder.parent.GetComponent<HandController>();
 
@@ -112,7 +112,7 @@ namespace BNG {
             else if (leftControl && rightControl) {
                 leftControl.HandAnimator = activatedLeftModel.GetComponentInChildren<Animator>(true);
                 rightControl.HandAnimator = activatedRightModel.GetComponentInChildren<Animator>(true);
-            }
+            }*/
 
             // Включаем / выключаем IK для тела (только для демо)
             if (IKBody != null) {

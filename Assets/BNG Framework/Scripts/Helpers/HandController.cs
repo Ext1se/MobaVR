@@ -10,69 +10,71 @@ namespace BNG {
     public class HandController : MonoBehaviour {
 
         [Tooltip("HandController parent will be set to this on Start if specified")]
-        public Transform HandAnchor;
+        public Transform HandAnchor;// Публичная переменная для установки родителя контроллера руки
 
         [Tooltip("If true, this transform will be parented to HandAnchor and it's position / rotation set to 0,0,0.")]
-        public bool ResetHandAnchorPosition = true;
+        public bool ResetHandAnchorPosition = true;// Флаг для сброса позиции и поворота руки
 
-        public Animator HandAnimator;
+        public Animator HandAnimator; // Аниматор руки для управления анимациями
 
         [Tooltip("(Optional) If specified, this HandPoser can be used when setting poses retrieved from a grabbed Grabbable.")]
-        public HandPoser handPoser;
+        public HandPoser handPoser;// Опциональный компонент HandPoser для установки поз руки
 
         [Tooltip("(Optional) If specified, this AutoPoser component can be used when if set on the Grabbable, or if AutoPose is set to true")]
-        public AutoPoser autoPoser;
+        public AutoPoser autoPoser;// Опциональный компонент AutoPoser для автоматической позиции руки
 
-        // We can use the HandPoseBlender to blend between an open and closed hand pose, using controller inputs such as grip and trigger as the blend values
+        // Компонент для смешивания поз руки между открытой и закрытой позицией
         HandPoseBlender poseBlender;
 
         [Tooltip("How to handle the hand when nothing is being grabbed / idle. Ex : Can use an Animator to control the hand via blending, a HandPoser to control via blend states, AutoPoser to continually auto pose while nothing is being held, or 'None' if you want to handle the idle state yourself.")]
-        public HandPoserType IdlePoseType = HandPoserType.HandPoser;
+        public HandPoserType IdlePoseType = HandPoserType.HandPoser;// Тип обработки позы руки в режиме ожидания
 
         [Tooltip("If true, the idle hand pose will be determined by the connected Valve Index Controller's finger tracking. Requires the SteamVR SDK. Make sure IdlePoseType is set to 'HandPoser'")]
-        public bool UseIndexFingerTracking = true;
+        public bool UseIndexFingerTracking = true;// Использовать ли трекинг пальцев от контроллера Valve Index
 
         /// <summary>
         /// How fast to Lerp the Layer Animations
         /// </summary>
         [Tooltip("How fast to Lerp the Layer Animations")]
-        public float HandAnimationSpeed = 20f;
+        public float HandAnimationSpeed = 20f;// Скорость анимации руки
 
         [Tooltip("Check the state of this grabber to determine animation state. If null, a child Grabber component will be used.")]
-        public Grabber grabber;
+        public Grabber grabber; // Компонент Grabber для управления захватом объектов
 
         [Header("Shown for Debug : ")]
         /// <summary>
         /// 0 = Open Hand, 1 = Full Grip
         /// </summary>
-        public float GripAmount;
-        private float _prevGrip;
+        public float GripAmount;// Степень сжатия руки (0 - открыта, 1 - закрыта)
+        private float _prevGrip;// Предыдущее значение сжатия руки (для интерполяции)
 
         /// <summary>
         /// 0 = Index Curled in,  1 = Pointing Finger
         /// </summary>
-        public float PointAmount;
-        private float _prevPoint;
+        public float PointAmount;// Степень вытягивания указательного пальца (0 - согнут, 1 - вытянут)
+        private float _prevPoint; // Предыдущее значение вытягивания указательного пальца (для интерполяции)
 
         /// <summary>
         /// 0 = Thumb Down, 1 = Thumbs Up
         /// </summary>
-        public float ThumbAmount;
-        private float _prevThumb;
+        public float ThumbAmount;// Степень поднятия большого пальца (0 - вниз, 1 - вверх)
+        private float _prevThumb; // Предыдущее значение поднятия большого пальца (для интерполяции)
         
         // Raw input values
-        private bool _thumbIsNear = false;
-        private bool _indexIsNear = false;
-        private float _triggerValue = 0f;
-        private float _gripValue = 0f;
+        private bool _thumbIsNear = false;// Близко ли большой палец к контроллеру
+        private bool _indexIsNear = false; // Близко ли указательный палец к контроллеру
+        private float _triggerValue = 0f;// Значение триггера на контроллере
+        private float _gripValue = 0f;// Значение захвата на контроллере
 
-        public int PoseId;
-
+        public int PoseId; // Идентификатор позы руки
+        
+        // Дополнительные приватные переменные для управления смещением и вводом
         ControllerOffsetHelper offset;
         InputBridge input;
         Rigidbody rigid;
         Transform offsetTransform;
 
+        // Свойства для получения смещенных значений позиции и поворота
         Vector3 offsetPosition {
             get {
                 if(offset) {
@@ -92,12 +94,13 @@ namespace BNG {
         }
 
         void Start() {
-
+            // Получение компонентов Rigidbody, ControllerOffsetHelper и создание нового объекта для управления смещением
             rigid = GetComponent<Rigidbody>();
             offset = GetComponent<ControllerOffsetHelper>();
             offsetTransform = new GameObject("OffsetHelper").transform;
             offsetTransform.parent = transform;
 
+            // Установка родительского объекта для руки и смещение, если указано
             if (HandAnchor) {
                 transform.parent = HandAnchor;
                 offsetTransform.parent = HandAnchor;
@@ -107,31 +110,31 @@ namespace BNG {
                     transform.localEulerAngles = offsetRotation;
                 }
             }
-            
+            // Поиск компонента Grabber, если он не указан
             if(grabber == null) {
                 grabber = GetComponentInChildren<Grabber>();
             }
 
-            // Subscribe to grab / release events
+            // Подписка на события захвата и освобождения
             if(grabber != null) {
                 grabber.onAfterGrabEvent.AddListener(OnGrabberGrabbed);
                 grabber.onReleaseEvent.AddListener(OnGrabberReleased);
             }
 
-            // Try getting child animator
+            // Попытка получения дочернего аниматора
             SetHandAnimator();
-
+            // Получение экземпляра InputBridge для ввода данных
             input = InputBridge.Instance;
         }
 
         public void Update() {
-
+            // Проверка изменения состояния захвата
             CheckForGrabChange();
 
-            // Set Hand state according to InputBridge
+            // Обновление состояний руки в соответствии с вводом
             UpdateFromInputs();
             
-            // Holding something - update the appropriate component
+            // Обновление состояний в зависимости от того, держится ли что-то в руке
             if(HoldingObject()) {
                 UpdateHeldObjectState();
             }
@@ -140,23 +143,25 @@ namespace BNG {
             }
         }
 
+        // Обновление состояний объекта, удерживаемого в руке
         public virtual void UpdateHeldObjectState() {
-            // Holding Animator Grabbable
+            // Если удерживаемый объект использует аниматор, обновить анимационные состояния
             if (IsAnimatorGrabbable()) {
                 UpdateAnimimationStates();
             }
-            // Holding Hand Poser Grabbable
+            // Если удерживаемый объект использует HandPoser, обновить HandPoser
             else if (IsHandPoserGrabbable()) {                
                 UpdateHandPoser();
             }
-            // Holding Auto Poser Grabbable
+            // Если удерживаемый объект использует AutoPoser, обновить AutoPoser
             else if (IsAutoPoserGrabbable()) {
                 //EnableAutoPoser();
             }
         }
 
+        // Обновление состояний покоя
         public virtual void UpdateIdleState() {
-            // Not holding something - update the idle state
+            // Если ничего не удерживается, обновить состояние покоя
             if (IdlePoseType == HandPoserType.Animator) {
                 UpdateAnimimationStates();
             }
@@ -169,9 +174,10 @@ namespace BNG {
                 EnableAutoPoser(true);
             }
         }
-
+        // Предыдущий удерживаемый объект для отслеживания изменений захвата
         public GameObject PreviousHeldObject;
-
+        
+        // Проверка, удерживается ли что-то в руке
         public virtual bool HoldingObject() {
 
             if(grabber != null && grabber.HeldGrabbable != null) {
@@ -180,27 +186,29 @@ namespace BNG {
 
             return false;
         }
-
+        // Проверка на изменение захвата
         public virtual void CheckForGrabChange() {
             if(grabber != null) {
 
-                // Check for null object but no animator enabled
+                // Проверка на отсутствие объекта, но включенный аниматор
                 if(grabber.HeldGrabbable == null && PreviousHeldObject != null) {                    
                     OnGrabDrop();
                 }
+                // Проверка на изменение удерживаемого объекта
                 else if(grabber.HeldGrabbable != null && !GameObject.ReferenceEquals(grabber.HeldGrabbable.gameObject, PreviousHeldObject)) {
                     OnGrabChange(grabber.HeldGrabbable.gameObject);
                 }
             }
         }
 
+        // Вызывается при изменении захвата
         public virtual void OnGrabChange(GameObject newlyHeldObject) {
 
-            // Update Component state if the held object has changed
+            // Обновление состояний компонентов, если удерживаемый объект изменился
             if(HoldingObject()) {
 
-                // Switch components based on held object properties
-                // Animator
+                // Переключение компонентов в зависимости от свойств удерживаемого объекта
+                // Аниматор
                 if (grabber.HeldGrabbable.handPoseType == HandPoseType.AnimatorID) {
                     EnableHandAnimator();
                 }
@@ -214,11 +222,11 @@ namespace BNG {
                 }
                 // Hand Poser
                 else if (grabber.HeldGrabbable.handPoseType == HandPoseType.HandPose) {
-                    // If we have a valid hand pose use it, otherwise fall back to a default closed pose
+                    // Если у нас есть допустимая поза руки, используйте ее, в противном случае вернитесь к стандартной закрытой позе
                     if (grabber.HeldGrabbable.SelectedHandPose != null) {
                         EnableHandPoser();
 
-                        // Make sure blender isn't active
+                        // Убедитесь, что смешивание не активно
                         if(poseBlender != null) {
                             poseBlender.UpdatePose = false;
                         }
@@ -236,12 +244,13 @@ namespace BNG {
             PreviousHeldObject = newlyHeldObject;
         }
 
+        // Вызывается, когда удерживаемый объект отпущен - в руках ничего нет
         /// <summary>
         /// Dropped our held item - nothing currently in our hands
         /// </summary>
         public virtual void OnGrabDrop() {
 
-            // Should we use auto pose when nothing in the hand?
+            // Использовать автоматическую позу, когда в руке ничего нет?
             if (IdlePoseType == HandPoserType.AutoPoser) {
                 EnableAutoPoser(true);
             }
@@ -257,6 +266,7 @@ namespace BNG {
             PreviousHeldObject = null;
         }       
 
+        // Установка аниматора руки
         public virtual void SetHandAnimator() {
             if (HandAnimator == null || !HandAnimator.gameObject.activeInHierarchy) {
                 HandAnimator = GetComponentInChildren<Animator>();
@@ -268,7 +278,7 @@ namespace BNG {
         /// </summary>
         public virtual void UpdateFromInputs() {
 
-            // Grabber may have been deactivated
+            // Grabber может быть деактивирован
             if (grabber == null || !grabber.isActiveAndEnabled) {
                 grabber = GetComponentInChildren<Grabber>();
                 GripAmount = 0;
@@ -277,7 +287,7 @@ namespace BNG {
                 return;
             }
 
-            // Update raw values based on hand side
+            // Обновление необработанных значений в зависимости от стороны руки
             if (grabber.HandSide == ControllerHand.Left) {
                 _indexIsNear = input.LeftTriggerNear;
                 _thumbIsNear = input.LeftThumbNear;
@@ -291,56 +301,60 @@ namespace BNG {
                 _gripValue = input.RightGrip;
             }
 
-            // Massage raw values to get a better value set the animator can use
+            // Массажирование необработанных значений для получения лучшего набора значений, которые аниматор может использовать
             GripAmount = _gripValue;
             ThumbAmount = _thumbIsNear ? 0 : 1;
 
-            // Point Amount can vary depending on if touching or our input source
-            PointAmount = 1 - _triggerValue; // Range between 0 and 1. 1 == Finger all the way out
-            PointAmount *= InputBridge.Instance.InputSource == XRInputSource.SteamVR ? 0.25F : 0.5F; // Reduce the amount our finger points out if Oculus or XRInput
+            // Количество точек может изменяться в зависимости от касания или нашего источника ввода
+            PointAmount = 1 - _triggerValue;// Диапазон от 0 до 1. 1 == палец полностью вытянут
+            PointAmount *= InputBridge.Instance.InputSource == XRInputSource.SteamVR ? 0.25F : 0.5F;// Уменьшить количество, когда палец указывает, если Oculus или XRInput
 
-            // If not near the trigger, point finger all the way out
+            // Если палец не находится у спускового крючка, вытяните палец
             if (input.SupportsIndexTouch && _indexIsNear == false && PointAmount != 0) {
                 PointAmount = 1f;
             }
-            // Does not support touch, stick finger out as if pointing if no trigger found
+            // Не поддерживает касание, вытяните палец, как если бы он указывал, если спусковой крючок не найден
             else if (!input.SupportsIndexTouch && _triggerValue == 0) {
                 PointAmount = 1;
             }
         }
 
+        // Определение, следует ли обновлять анимационные состояния
         public bool DoUpdateAnimationStates = true;
+        // Определение, следует ли обновлять HandPoser
         public bool DoUpdateHandPoser = true;
 
+        // Обновление анимационных состояний каждый кадр
         public virtual void UpdateAnimimationStates()
         {
             if(DoUpdateAnimationStates == false) {
                 return;
             }
 
-            // Enable Animator if it was disabled by the hand poser
+            // Включение аниматора, если он был отключен HandPoser
             if(IsAnimatorGrabbable() && !HandAnimator.isActiveAndEnabled) {
                 EnableHandAnimator();
             }
 
-            // Update Hand Animator info
+            // Обновление информации аниматора руки
             if (HandAnimator != null && HandAnimator.isActiveAndEnabled && HandAnimator.runtimeAnimatorController != null) {
 
                 _prevGrip = Mathf.Lerp(_prevGrip, GripAmount, Time.deltaTime * HandAnimationSpeed);
                 _prevThumb = Mathf.Lerp(_prevThumb, ThumbAmount, Time.deltaTime * HandAnimationSpeed);
                 _prevPoint = Mathf.Lerp(_prevPoint, PointAmount, Time.deltaTime * HandAnimationSpeed);
 
-                // 0 = Hands Open, 1 = Grip closes                        
+                // 0 = открытая рука, 1 = полный захват                          
                 HandAnimator.SetFloat("Flex", _prevGrip);
 
+                // 0 = большой палец вниз, 1 = большой палец вверх
                 HandAnimator.SetLayerWeight(1, _prevThumb);
 
-                //// 0 = pointer finger inwards, 1 = pointing out    
-                //// Point is played as a blend
-                //// Near trigger? Push finger down a bit
+                //// 0 = указательный палец внутрь, 1 = указывает наружу    
+                //// Точка воспроизводится как смесь
+                //// Рядом с курком? Нажмите палец вниз немного
                 HandAnimator.SetLayerWeight(2, _prevPoint);
 
-                // Should we use a custom hand pose?
+                // Должны ли мы использовать пользовательскую позу руки?
                 if (grabber != null && grabber.HeldGrabbable != null) {
                     HandAnimator.SetLayerWeight(0, 0);
                     HandAnimator.SetLayerWeight(1, 0);
@@ -350,27 +364,27 @@ namespace BNG {
 
                     if (grabber.HeldGrabbable.ActiveGrabPoint != null) {
 
-                        // Default Grip to 1 when holding an item
+                        // Установите сжатие по умолчанию в 1 при удержании предмета
                         HandAnimator.SetLayerWeight(0, 1);
                         HandAnimator.SetFloat("Flex", 1);
 
-                        // Get the Min / Max of our finger blends if set by the user
-                        // This allows a pose to blend between states
-                        // Index Finger
+                        // Получить минимальное / максимальное значение нашего смешивания пальцев, если оно установлено пользователем
+                        // Это позволяет позе смешиваться между состояниями
+                        // Указательный палец
                         setAnimatorBlend(grabber.HeldGrabbable.ActiveGrabPoint.IndexBlendMin, grabber.HeldGrabbable.ActiveGrabPoint.IndexBlendMax, PointAmount, 2);
 
-                        // Thumb
+                        // Большой палец
                         setAnimatorBlend(grabber.HeldGrabbable.ActiveGrabPoint.ThumbBlendMin, grabber.HeldGrabbable.ActiveGrabPoint.ThumbBlendMax, ThumbAmount, 1);                       
                     }
                     else {
-                        // Force everything to grab if we're holding something
+                        // Если нет текущей точки захвата, убедитесь, что слои возвращены в стандартное состояние
                         if (grabber.HoldingItem) {
                             GripAmount = 1;
                             PointAmount = 0;
                             ThumbAmount = 0;
                         }
                     }
-
+                    // Это позволяет нам использовать разные слои для нашего захвата, если необходимо
                     HandAnimator.SetInteger("Pose", PoseId);
                     
                 }
@@ -392,17 +406,31 @@ namespace BNG {
             return HandAnimator != null && grabber != null && grabber.HeldGrabbable != null && grabber.HeldGrabbable.handPoseType == HandPoseType.AnimatorID;
         }
 
+        public GameObject specifiedObject;//переменная. в которой будем искать дочерние объекты с handPoser
+        
+        
+        // Обновление состояния HandPoser
         public virtual void UpdateHandPoser() {
 
             if (DoUpdateHandPoser == false) {
                 return;
             }
 
+            /*//если ханд позер равен нулю, то ищем в дочерних элементах объект, у которого его есть  HandPoser
             // HandPoser may have changed - check for new component
             if (handPoser == null || !handPoser.isActiveAndEnabled) {
                 handPoser = GetComponentInChildren<HandPoser>();
-            }                        
-
+            }    */               
+            
+            
+            // Если handPoser равен нулю, то ищем в дочерних элементах определенного объекта, указанного через инспектор
+            if (handPoser == null || !handPoser.isActiveAndEnabled) {
+                if (specifiedObject != null) {
+                    handPoser = specifiedObject.GetComponentInChildren<HandPoser>();
+                    HandAnimator = specifiedObject.GetComponentInChildren<Animator>();
+                } 
+            }
+            
             // Bail early if missing any info
             if(handPoser == null || grabber == null || grabber.HeldGrabbable == null || grabber.HeldGrabbable.handPoseType != HandPoseType.HandPose) {
                 return;
@@ -485,8 +513,23 @@ namespace BNG {
 
             // Make sure we have a valid handPoser to work with
             if(handPoser == null || !handPoser.isActiveAndEnabled) {
-                handPoser = GetComponentInChildren<HandPoser>(false);
+                //handPoser = GetComponentInChildren<HandPoser>(false);
+                if (specifiedObject != null) {
+                    handPoser = specifiedObject.GetComponentInChildren<HandPoser>();
+                    
+                    //SetHandAnimator();//заодно проверяем на аниматор
+                    HandAnimator = specifiedObject.GetComponentInChildren<Animator>();
+                    
+                    
+                    
+                } 
+                
+                
             }
+            
+            
+            
+            
 
             // No HandPoser is found, we should just exit
             if (handPoser == null) {
@@ -495,24 +538,30 @@ namespace BNG {
                 // handPoser = this.gameObject.AddComponent<HandPoser>();
             }
 
-            // If no pose blender is found, add it and set it up so we can use it in Update()
-            if (poseBlender == null || !poseBlender.isActiveAndEnabled) {
-                poseBlender = GetComponentInChildren<HandPoseBlender>();
+           
+            //Если pose blender не найден, добавьте его и настройте так, чтобы мы могли использовать его в Update()
+            if (poseBlender == null || !poseBlender.isActiveAndEnabled)
+            {
+                //Debug.Log("переменная poseBlender == null");
+                poseBlender = specifiedObject.GetComponentInChildren<HandPoseBlender>();
+                // Debug.Log("Назначили этой переменной компонент HandPoseBlender");
             }
-
-            // If no pose blender is found, add it and set it up so we can use it in Update()
+ 
+            // Если pose blender не найден, добавьте его и настройте так, чтобы мы могли использовать его в Update()
             if (poseBlender == null) {
                 if(handPoser != null) {
+                    //  Debug.Log("У нас есть handPoser, теперь добавим к нему HandPoseBlender");
                     poseBlender = handPoser.gameObject.AddComponent<HandPoseBlender>();
                 }
                 else {
+                    //  Debug.Log("У нас нет handPoser, теперь добавим к нему HandPoseBlender");
                     poseBlender = this.gameObject.AddComponent<HandPoseBlender>();
                 }
 
-                // Don't update pose in Update since we will be controlling this ourselves
+                // Не обновляйте позу в обновлении, так как мы будем контролировать это сами
                 poseBlender.UpdatePose = false;
 
-                // Set up the blend to use some default poses
+                // Настройте наложение так, чтобы использовать некоторые позы по умолчанию
                 poseBlender.Pose1 = GetDefaultOpenPose();
                 poseBlender.Pose2 = GetDefaultClosedPose();
             }

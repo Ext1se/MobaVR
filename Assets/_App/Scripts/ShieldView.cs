@@ -58,7 +58,8 @@ namespace MobaVR
                 gameObject.SetActive(true);
             }
             
-            photonView.RPC(nameof(RpcSetDefenceValue), RpcTarget.AllBuffered, value);
+            //photonView.RPC(nameof(RpcSetDefenceValue), RpcTarget.AllBuffered, value);
+            photonView.RPC(nameof(RpcSetDefenceValue), RpcTarget.All, value);
         }
 
         [PunRPC]

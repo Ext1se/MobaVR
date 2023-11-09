@@ -93,6 +93,8 @@ namespace MobaVR
         private List<Renderer> m_MeshRenderers = new();
         private List<Material> m_CopyUniqMaterials = new();
 
+        private HitData m_LastHitData = null;
+
         #endregion
 
         #region Properties
@@ -149,7 +151,9 @@ namespace MobaVR
         public Action OnInit;
         public Action OnMove;
         public Action OnAttack;
-        public Action OnDeath;
+        public Action OnDeath; // TODO: Monster Die Action
+        public Action<HitData> OnLastHit; // TODO: Monster Die Action
+        public Action<HitData> OnHit;
 
         #endregion
 
@@ -214,6 +218,9 @@ namespace MobaVR
 
         protected virtual void Awake()
         {
+            m_CurrentHealth = m_Health;
+            m_CurrentForwardSpeed = 0f;
+            
             m_ChildRigidbodies.AddRange(m_Root.GetComponentsInChildren<Rigidbody>());
             m_ChildColliders.AddRange(m_Root.GetComponentsInChildren<Collider>());
 
@@ -323,7 +330,8 @@ namespace MobaVR
 
         public void SetTowerTarget(int idPhotonTarget)
         {
-            photonView.RPC(nameof(RpcSetTowerTarget), RpcTarget.AllBuffered, idPhotonTarget);
+            //photonView.RPC(nameof(RpcSetTowerTarget), RpcTarget.AllBuffered, idPhotonTarget);
+            photonView.RPC(nameof(RpcSetTowerTarget), RpcTarget.All, idPhotonTarget);
         }
 
         private void FindTowerTarget()
@@ -681,7 +689,9 @@ namespace MobaVR
 
         public void Hit(HitData hitData)
         {
-            RpcHit_Monster(hitData.Amount);
+            //RpcHit_Monster(hitData.Amount);
+            OnHit?.Invoke(hitData);
+            RpcHit_Monster(hitData);
         }
 
         /*
@@ -691,27 +701,30 @@ namespace MobaVR
                 }
         */
         [PunRPC]
-        protected void RpcHit_Monster(float damage)
+        //protected void RpcHit_Monster(float damage)
+        protected void RpcHit_Monster(HitData hitData)
         {
             if (IsLife)
             {
                 //Vector3 position = m_MonsterView.transform.position;
                 Vector3 position = m_DamageNumber.transform.position;
-                GetDamage(position, damage);
+                hitData.Position = position;
+                //GetDamage(position, hitData.Amount);
+                GetDamage(hitData);
             }
         }
 
         public void Die()
         {
-            photonView.RPC(nameof(RpcDie_Monster), RpcTarget.All);
+            photonView.RPC(nameof(RpcDie_Monster), RpcTarget.All, m_LastHitData);
         }
 
         [PunRPC]
-        protected void RpcDie_Monster()
+        protected void RpcDie_Monster(HitData hitData)
         {
             //Destroy(m_Rigidbody);
             ToggleRagDolls(true);
-            Die(true);
+            Die(true, hitData);
         }
 
         public void Explode(float explosionForce, Vector3 position, float radius, float modifier)
@@ -765,7 +778,8 @@ namespace MobaVR
             */
         }
 
-        protected virtual void GetDamage(Vector3 position, float damage)
+        //protected virtual void GetDamage(Vector3 position, float damage)
+        protected virtual void GetDamage(HitData hitData)
         {
             if (!IsLife || !m_CanGetDamage)
             {
@@ -776,14 +790,21 @@ namespace MobaVR
             {
                 if (m_CurrentHealth >= 0)
                 {
-                    m_CurrentHealth -= damage;
-                    m_DamageNumber.SpawnNumber(position, damage, MonsterDamageType.HP);
+                    m_CurrentHealth -= hitData.Amount;
+                    m_DamageNumber.SpawnNumber(hitData.Position, hitData.Amount, MonsterDamageType.HP);
                     //m_OrcSoundController.PlayHit();
                     //CreateBlood(position);
 
                     if (m_CurrentHealth <= 0)
                     {
                         m_CurrentHealth = 0;
+
+                        if (PhotonNetwork.IsMasterClient)
+                        {
+                            m_LastHitData = hitData;
+                        }
+                        
+                        //OnLastHit?.Invoke(hitData);
                         CurrentState = MonsterState.DEATH;
                     }
                     else
@@ -798,11 +819,11 @@ namespace MobaVR
             }
             else
             {
-                m_DamageNumber.SpawnNumber(position, damage, MonsterDamageType.IMMORTAL);
+                m_DamageNumber.SpawnNumber(hitData.Position, hitData.Amount, MonsterDamageType.IMMORTAL);
             }
         }
 
-        protected virtual void Die(bool isGiveTreasure)
+        protected virtual void Die(bool isGiveTreasure, HitData hitData)
         {
             m_CurrentHealth = 0f;
             m_CanMove = false;
@@ -818,6 +839,10 @@ namespace MobaVR
 
             m_MonsterView.SetEnabled(false);
             OnDeath?.Invoke();
+            if (hitData != null)
+            {
+                OnLastHit?.Invoke(hitData);
+            }
 
             foreach (Collider childCollider in transform.GetComponentsInChildren<Collider>())
             {

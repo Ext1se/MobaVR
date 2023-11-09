@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,11 +16,13 @@ public class LocalizeText : MonoBehaviour
     [SerializeField]
     private string textChn;
 
-    private Text textField;
+    private Text uiText;
+    private TextMeshProUGUI tmpText;
 
     private void Start()
     {
-        textField = GetComponent<Text>();
+        uiText = GetComponent<Text>();
+        tmpText = GetComponent<TextMeshProUGUI>();
         UpdateText();
 
         LanguageManager.Instance.LanguageChanged += UpdateText;
@@ -32,17 +35,23 @@ public class LocalizeText : MonoBehaviour
 
     private void UpdateText()
     {
+        string newText = "";
         switch (LanguageManager.Instance.currentLanguage)
         {
             case LanguageManager.Language.Eng:
-                textField.text = textEng;
+                newText = textEng;
                 break;
             case LanguageManager.Language.Rus:
-                textField.text = textRus;
+                newText = textRus;
                 break;
             case LanguageManager.Language.Chn:
-                textField.text = textChn;
+                newText = textChn;
                 break;
         }
+
+        if (uiText != null) 
+            uiText.text = newText;
+        if (tmpText != null) 
+            tmpText.text = newText;
     }
 }
