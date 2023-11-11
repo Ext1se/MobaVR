@@ -85,4 +85,18 @@ public class AppSwitcher
         EditorGUIUtility.PingObject(settings);
         Selection.activeObject = settings;
     }
+    
+    [MenuItem("MobaVR/Mode/Select Build Group", priority = 2)]
+    public static void SelectAppGroupSettingsFile()
+    {
+        BuildSettingGroup settings = AssetDatabase.LoadAssetAtPath<BuildSettingGroup>(AppBuilder.BUILD_GROUP_PATH);
+        if (settings == null)
+        {
+            Debug.LogError($"{TAG}: group settings is null or invalid path");
+            return;
+        }
+
+        EditorGUIUtility.PingObject(settings);
+        Selection.activeObject = settings;
+    }
 }

@@ -23,11 +23,15 @@ namespace MobaVR
             {
                 return;
             }
+
             
             foreach (BuildSetting buildSetting in buildSettingGroup.BuildSettings)
             {
+                string cityName = buildSettingGroup.IsOverrideCity ? buildSettingGroup.CityName : buildSetting.AppData.City;
+                
                 AppBuilder.Build(
-                    buildSetting.AppData.City,
+                    //buildSetting.AppData.City,
+                    cityName,
                     buildSetting.AppData.Platform.ToString(),
                     buildSetting.AppData.UseVR,
                     buildSetting.AppData.IsAdmin,

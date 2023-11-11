@@ -24,6 +24,7 @@ public class AppBuilder
     public static readonly string DEFAULT_OUT_PATH = "Builds/";
     public static readonly string DEFAULT_NAME = "Heroes Arena";
     public static readonly string CITY_PATH = "Assets/_App/Resources/Api/Settings/AppSettingCity.asset";
+    public static readonly string BUILD_GROUP_PATH = "Assets/_App/Resources/Api/Builds/Groups/BuildGroup.asset";
 
     public static readonly string[] ADMIN_SCENES = new[]
     {
@@ -44,7 +45,6 @@ public class AppBuilder
         
         //PVP
         "SkyArena",
-        "SkyArena_Rift",
         "Dungeon",
         
         //PVE
@@ -52,14 +52,13 @@ public class AppBuilder
         
         //TD
         "Tower",
-        "Tower_v3",
     };
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="cityName"></param>
-    /// <param name="targetName"></param>
+    /// <param name="targetName">windows, android, pico, meta</param>
     /// <param name="isAdmin"></param>
     /// <param name="outPath">Example: "C:\Builds</param>
     //public static void Build(string cityName, BuildTarget target, bool isAdmin = false, string outPath = null)
@@ -70,6 +69,7 @@ public class AppBuilder
         bool isAdmin = false, 
         bool isDevelopmentBuild = false, 
         bool useLogs = false, 
+        string version = "0",
         string outPath = null, 
         string appName = null)
     {
