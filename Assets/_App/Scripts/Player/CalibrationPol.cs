@@ -255,7 +255,10 @@ namespace MobaVR
         [PunRPC]
         private void RpcSetHeight()
         {
-            kalibr_rost();
+            if (photonView.IsMine)
+            {
+                kalibr_rost();
+            }
         }
     }
 }

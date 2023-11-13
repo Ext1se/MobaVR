@@ -52,6 +52,7 @@ public class PartnerPostProcessBuild : IPreprocessBuildWithReport
         }
         else if(url == DEMO_SUBDOMAIN)
         {
+            /*
             if (!Application.isBatchMode)
             {
                 bool result = EditorUtility.DisplayDialog(BUILD_WARNING,
@@ -63,6 +64,7 @@ public class PartnerPostProcessBuild : IPreprocessBuildWithReport
                     throw new BuildFailedException(USING_DEMO_SUBDOMAIN);
                 }
             }
+            */
         }
     }
 }

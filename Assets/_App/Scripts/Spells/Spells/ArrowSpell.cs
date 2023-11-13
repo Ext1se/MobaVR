@@ -94,7 +94,8 @@ namespace MobaVR
 
         public void Show(bool isShow)
         {
-            photonView.RPC(nameof(RpcShow), RpcTarget.AllBuffered, isShow);
+            //photonView.RPC(nameof(RpcShow), RpcTarget.AllBuffered, isShow);
+            photonView.RPC(nameof(RpcShow), RpcTarget.All, isShow);
         }
 
         [PunRPC]
@@ -113,8 +114,16 @@ namespace MobaVR
                     m_PhotonTransformView.enabled = false;
                 }
                 
+                /*
                 photonView.RPC(nameof(RpcReleaseArrow), 
                                RpcTarget.AllBuffered,
+                               m_Arrow.transform.position, 
+                               m_Arrow.transform.rotation, 
+                               force);
+                               */
+                
+                photonView.RPC(nameof(RpcReleaseArrow), 
+                               RpcTarget.All,
                                m_Arrow.transform.position, 
                                m_Arrow.transform.rotation, 
                                force);
@@ -155,7 +164,8 @@ namespace MobaVR
 
         public void Release()
         {
-            photonView.RPC(nameof(RpcRelease), RpcTarget.AllBuffered);
+            //photonView.RPC(nameof(RpcRelease), RpcTarget.AllBuffered);
+            photonView.RPC(nameof(RpcRelease), RpcTarget.All);
         }
 
         [PunRPC]

@@ -3799,6 +3799,7 @@ GameObject:
   - component: {fileID: 5635595898679589355}
   - component: {fileID: -7065002223360263926}
   - component: {fileID: 156706080111938466}
+  - component: {fileID: -3835337785734708340}
   m_Layer: 11
   m_Name: TombShade
   m_TagString: Enemy
@@ -4116,6 +4117,19 @@ MonoBehaviour:
   OnReborn:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-3835337785734708340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3498065838638342069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d850560d97d4fcc9e0c3d7223ab0b4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MonsterScore: 1
 --- !u!1 &3546919927064436728
 GameObject:
   m_ObjectHideFlags: 0

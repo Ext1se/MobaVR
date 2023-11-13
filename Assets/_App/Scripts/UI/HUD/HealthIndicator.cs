@@ -40,6 +40,11 @@ public class HealthIndicator : MonoBehaviour
 
     private void OnHealthChange(float value)
     {
+        if (value < 0)
+        {
+            value = 0;
+        }
+        
         m_HealthText.text = $"{value}{m_Postfix}";
         healthImage.fillAmount = value / m_WizardPlayer.MaxHp;
         

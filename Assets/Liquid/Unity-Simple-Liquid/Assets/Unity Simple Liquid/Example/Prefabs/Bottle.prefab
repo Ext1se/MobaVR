@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f97c0cadc5f88b46b59a38d17fac88e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UseLiquidRender: 1
   liquidRender: {fileID: 8479694515570843939}
   liquidMaterial: {fileID: 2100000, guid: 8dec526bbd84d684da6f40f79c3ab1bd, type: 2}
   cap: {fileID: 7634469175278025645}
@@ -84,6 +85,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb562255fca9b544b4583d4e7147e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_IsOverrideColor: 1
+  m_OverrideColor: {r: 0.84, g: 0.63, b: 0.22, a: 0.5}
   liquidContainer: {fileID: 4290243747654017780}
   bottleneckRadius: 0.02
   splitSpeed: 60
