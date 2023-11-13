@@ -1,4 +1,5 @@
 ﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace MobaVR
@@ -7,6 +8,11 @@ namespace MobaVR
     public class BuildSetting : ScriptableObject
     {
         public AppData AppData = new AppData();
+        
+        [Space]
+        public bool IsShowDialogPath = true;
+        [EnableIf("IsShowDialogPath", false)]
+        [ShowIf("IsShowDialogPath")]
         public string Path = "../Assets/Builds/";
         public string Name = "Heroes Arena";
     }

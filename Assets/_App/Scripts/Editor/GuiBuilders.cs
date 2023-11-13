@@ -28,6 +28,11 @@ namespace MobaVR
             foreach (BuildSetting buildSetting in buildSettingGroup.BuildSettings)
             {
                 string cityName = buildSettingGroup.IsOverrideCity ? buildSettingGroup.CityName : buildSetting.AppData.City;
+                string path = buildSetting.Path;
+                if (buildSettingGroup.IsOverridePath)
+                {
+                    path = $"{buildSettingGroup.BasePath}{buildSetting.name}";
+                }
                 
                 AppBuilder.Build(
                     //buildSetting.AppData.City,
@@ -37,7 +42,8 @@ namespace MobaVR
                     buildSetting.AppData.IsAdmin,
                     buildSetting.AppData.IsDevBuild,
                     buildSetting.AppData.UseLogs,
-                    buildSetting.Path,
+                    "1.0.0",
+                    path,
                     buildSetting.Name);
             }
         }

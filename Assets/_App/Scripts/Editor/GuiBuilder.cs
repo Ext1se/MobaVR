@@ -59,6 +59,7 @@ namespace MobaVR
                 buildSetting.AppData.IsAdmin,
                 buildSetting.AppData.IsDevBuild,
                 buildSetting.AppData.UseLogs,
+                "1.0.0",
                 buildSetting.Path,
                 buildSetting.Name);
         }
