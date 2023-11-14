@@ -14,7 +14,11 @@ namespace MobaVR
         public PlayerVR PlayerVR
         {
             get => m_PlayerVR;
-            set => m_PlayerVR = value;
+            set
+            {
+                m_PlayerVR = value;
+                SetPlayerData();
+            }
         }
 
         protected virtual void OnDestroy()
@@ -29,19 +33,32 @@ namespace MobaVR
 
         protected virtual void Awake()
         {
-            m_GameSession = FindObjectOfType<ClassicGameSession>();
+            FindGameSession();
         }
 
         protected virtual void Start()
         {
+            /*
             if (m_PlayerVR != null)
             {
                 SetPlayerData();
             }
+            */
         }
 
-        protected virtual void SetPlayerData()
+        private void FindGameSession()
         {
+            if (m_GameSession == null)
+            {
+                m_GameSession = FindObjectOfType<ClassicGameSession>();
+            }
+        }
+        
+
+        public virtual void SetPlayerData()
+        {
+            FindGameSession();
+            
             OnUpdateNickName(m_PlayerVR.PlayerData.NickName);
             m_PlayerVR.OnNickNameChange += OnUpdateNickName;
 

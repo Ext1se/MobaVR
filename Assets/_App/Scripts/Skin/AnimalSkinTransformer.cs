@@ -1,20 +1,24 @@
+using System;
 using Photon.Pun;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace MobaVR
 {
     public class AnimalSkinTransformer : MonoBehaviourPun
     {
+        [SerializeField] private bool m_CanCast = false;
         [SerializeField] private float m_Duration = 5f;
         [SerializeField] private ParticleSystem m_ParticleSystem;
-        [SerializeField] private PlayerStateSO m_PlayerStateSO;
+        [SerializeField] private Transform m_ParticlePoint;
+        //[SerializeField] private PlayerStateSO m_PlayerStateSO;
 
         private AnimalSkin m_AnimalSkin;
         private SkinCollection m_SkinCollection;
         private PlayerVR m_PlayerVR;
 
-        private PlayerStateSO m_CurrentPlayerStateSO;
-        private PlayerStateSO m_PrevPlayerStateSO;
+        [SerializeField] [ReadOnly] private PlayerStateSO m_CurrentPlayerStateSO;
+        [SerializeField] [ReadOnly] private PlayerStateSO m_PrevPlayerStateSO;
 
         private bool m_IsAnimalSkin = true;
 
@@ -27,9 +31,16 @@ namespace MobaVR
             m_PlayerVR.WizardPlayer.OnReborn -= OnPlayerReborn;
         }
 
+        private void OnDisable()
+        {
+            
+        }
+
         // TODO: подписываемся тут
         private void Awake()
         {
+            //m_CurrentPlayerStateSO = ScriptableObject.CreateInstance<PlayerStateSO>();
+            
             m_AnimalSkin = GetComponent<AnimalSkin>();
             m_SkinCollection = GetComponentInParent<SkinCollection>();
             m_PlayerVR = GetComponentInParent<PlayerVR>();
@@ -49,7 +60,7 @@ namespace MobaVR
             }
 
             m_IsAnimalSkin = false;
-            
+
             CancelInvoke(nameof(HideSkin));
             ShowParticle();
         }
@@ -62,7 +73,7 @@ namespace MobaVR
             }
 
             m_IsAnimalSkin = false;
-            
+
             CancelInvoke(nameof(HideSkin));
             ShowParticle();
         }
@@ -72,6 +83,7 @@ namespace MobaVR
             CancelInvoke(nameof(HideSkin));
 
             m_IsAnimalSkin = true;
+            ActivateAnimalState();
             
             ShowParticle();
             Invoke(nameof(HideSkin), m_Duration);
@@ -79,10 +91,75 @@ namespace MobaVR
 
         private void OnSkinDeactivated()
         {
-            m_IsAnimalSkin = false;
+            //if (m_IsAnimalSkin)
+            {
+                m_IsAnimalSkin = false;
+                
+                RestorePrevState();
+                CancelInvoke(nameof(HideSkin));
+                ShowParticle();
+            }
             
+            /*
+            m_IsAnimalSkin = false;
+
+            RestorePrevState();
             CancelInvoke(nameof(HideSkin));
             ShowParticle();
+            */
+        }
+
+        private void ActivateAnimalState()
+        {
+            if (m_CurrentPlayerStateSO == null)
+            {
+                m_CurrentPlayerStateSO = ScriptableObject.CreateInstance<PlayerStateSO>();
+                m_CurrentPlayerStateSO.State = PlayerState.CUSTOM;
+            }
+
+            if (m_PlayerVR.WizardPlayer.CurrentPlayerState.State == PlayerState.CUSTOM)
+            {
+                return;
+            }
+
+            /*
+            if (m_CurrentPlayerStateSO == m_PlayerVR.WizardPlayer.CurrentPlayerState)
+            {
+                return;
+            }
+            */
+            
+            m_PrevPlayerStateSO = m_PlayerVR.WizardPlayer.CurrentPlayerState;
+            m_CurrentPlayerStateSO.PasteCopyValue(m_PrevPlayerStateSO);
+            m_CurrentPlayerStateSO.State = PlayerState.CUSTOM;
+            m_CurrentPlayerStateSO.CanCast = m_CanCast;
+
+            // TODO: могут быть пробелмы с синхронизацией, но этот метод вызывается через RPC у SkinCollection, поэтому вряд ли
+            m_PlayerVR.WizardPlayer.PlayerState.SetState(m_CurrentPlayerStateSO);
+            //m_PlayerVR.SetState(m_CurrentPlayerStateSO);
+        }
+
+        private void RestorePrevState()
+        {
+            if (m_PrevPlayerStateSO == null || m_CurrentPlayerStateSO == null)
+            {
+                return;
+            }
+
+            //if (m_PlayerVR.WizardPlayer.CurrentPlayerState != m_PrevPlayerStateSO)
+            /*
+            if (m_PlayerVR.WizardPlayer.CurrentPlayerState != m_CurrentPlayerStateSO)
+            {
+                return;
+            }
+            */
+            
+            if (m_PlayerVR.WizardPlayer.CurrentPlayerState.State != PlayerState.CUSTOM)
+            {
+                return;
+            }
+
+            m_PlayerVR.SetState(m_PrevPlayerStateSO);
         }
 
         private void HideSkin()
@@ -96,14 +173,15 @@ namespace MobaVR
 
             CancelInvoke(nameof(HideSkin));
             m_IsAnimalSkin = false;
-            
+
             ShowParticle();
             m_SkinCollection.RpcRestoreSkin();
         }
 
         private void ShowParticle()
         {
-            m_ParticleSystem.transform.position = m_AnimalSkin.Armature.position;
+            //m_ParticleSystem.transform.position = m_AnimalSkin.transform.position;
+            m_ParticleSystem.transform.position = m_ParticlePoint.transform.position;
             m_ParticleSystem.Play();
         }
 
