@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Photon.Pun;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -15,6 +16,7 @@ namespace MobaVR
 
         [FormerlySerializedAs("m_Skins")]
         [Header("Skins")]
+        [SerializeField] [ReadOnly] private SkinType m_LastSkinType = SkinType.ALIVE;
         [SerializeField] private List<Skin> m_AliveSkins = new();
         [SerializeField] private List<Skin> m_DeadSkins = new();
         [Header("Animal Skins")]
@@ -28,6 +30,9 @@ namespace MobaVR
 
         private AnimalSkin m_AnimalSkin = null;
         private int m_AnimalSkinPosition = 0;
+        
+        private Vector3 m_LastPosition = Vector3.zero;
+        private Quaternion m_LastRotation = Quaternion.identity;
 
         public List<Skin> AliveSkins => m_AliveSkins;
         public Skin AliveActiveSkin => m_AliveActiveSkin;
@@ -226,6 +231,7 @@ namespace MobaVR
                 m_AnimalSkin.DeactivateSkin();
             }
             */
+            SaveLastPositionAndRotation();
             DeactivateAnimalSkin();
 
             if (m_DeadActiveSkin != null)
@@ -240,8 +246,10 @@ namespace MobaVR
 
             m_AliveSkinPosition = Math.Clamp(position, 0, m_AliveSkins.Count - 1);
             m_AliveActiveSkin = m_AliveSkins[m_AliveSkinPosition];
+            m_LastSkinType = SkinType.ALIVE;
 
             TeamType teamType = m_PlayerVR != null ? m_PlayerVR.TeamType : TeamType.RED;
+            m_AliveActiveSkin.SetPositionAndRotation(m_LastPosition, m_LastRotation);
             m_AliveActiveSkin.ActivateSkin(teamType);
         }
 
@@ -259,6 +267,7 @@ namespace MobaVR
             Skin skin = m_AliveSkins.Find(skin => skin.ID.Equals(idSkin));
             if (skin != null)
             {
+                SaveLastPositionAndRotation();
                 DeactivateAnimalSkin();
 
                 if (m_DeadActiveSkin != null)
@@ -272,8 +281,10 @@ namespace MobaVR
                 }
 
                 m_AliveActiveSkin = skin;
+                m_LastSkinType = SkinType.ALIVE;
 
                 TeamType teamType = m_PlayerVR != null ? m_PlayerVR.TeamType : TeamType.RED;
+                m_AliveActiveSkin.SetPositionAndRotation(m_LastPosition, m_LastRotation);
                 m_AliveActiveSkin.ActivateSkin(teamType);
             }
         }
@@ -300,13 +311,16 @@ namespace MobaVR
         [PunRPC]
         public void RpcSetDeadSkin(int position = 0)
         {
+            SaveLastPositionAndRotation();
             DeactivateAnimalSkin();
 
             if (m_AliveActiveSkin != null)
             {
                 //TODO:
                 //m_AliveActiveSkin.DeactivateSkin();
+                
                 SetVisibilityDie(true);
+                m_AliveActiveSkin.SetPositionAndRotation(m_LastPosition, m_LastRotation);
                 m_AliveActiveSkin.SetDieSkin();
             }
 
@@ -314,11 +328,16 @@ namespace MobaVR
             {
                 m_DeadActiveSkin.DeactivateSkin();
             }
-
+            
+            m_LastSkinType = SkinType.DEAD;
+            
             m_DeadSkinPosition = Math.Clamp(position, 0, m_DeadSkins.Count - 1);
             m_DeadActiveSkin = m_DeadSkins[m_DeadSkinPosition];
 
             TeamType teamType = m_PlayerVR != null ? m_PlayerVR.TeamType : TeamType.RED;
+            
+            // TODO: add last position and rotation for dead skin
+            m_DeadActiveSkin.SetPositionAndRotation(m_LastPosition, m_LastRotation);
             m_DeadActiveSkin.ActivateSkin(teamType);
         }
 
@@ -355,6 +374,8 @@ namespace MobaVR
         [PunRPC]
         public void RpcSetAnimalSkin(int position = 0)
         {
+            SaveLastPositionAndRotation();
+            
             if (m_AliveActiveSkin != null)
             {
                 m_AliveActiveSkin.DeactivateSkin();
@@ -366,15 +387,55 @@ namespace MobaVR
             }
 
             DeactivateAnimalSkin();
+            
+            m_LastSkinType = SkinType.ANIMAL;
 
             m_AnimalSkinPosition = Math.Clamp(position, 0, m_DeadSkins.Count - 1);
             m_AnimalSkin = m_AnimalSkins[m_AnimalSkinPosition];
+            
+            // TODO: скрываем тело свиньи. Нужно делать в другом месте
+            // + скрываем, но не раскрываем потом. Могут быть траблы.
+            if (m_PhotonView.IsMine && m_IsHideVR)
+            {
+                m_AnimalSkin.SetVisibilityVR(false);
+            }
 
             TeamType teamType = m_PlayerVR != null ? m_PlayerVR.TeamType : TeamType.RED;
+            m_AnimalSkin.SetPositionAndRotation(m_LastPosition, m_LastRotation);
             m_AnimalSkin.ActivateSkin(teamType);
         }
 
         #endregion
+
+        private void SaveLastPositionAndRotation()
+        {
+            switch (m_LastSkinType)
+            {
+                case SkinType.ALIVE:
+                    if (m_AliveActiveSkin != null)
+                    {
+                        m_LastPosition = m_AliveActiveSkin.transform.position;
+                        m_LastRotation = m_AliveActiveSkin.transform.rotation;
+                    }
+                    break;
+                case SkinType.DEAD:
+                    if (m_DeadActiveSkin != null)
+                    {
+                        m_LastPosition = m_DeadActiveSkin.transform.position;
+                        m_LastRotation = m_DeadActiveSkin.transform.rotation;
+                    }
+                    break;
+                case SkinType.ANIMAL:
+                    if (m_AnimalSkin != null)
+                    {
+                        m_LastPosition = m_AnimalSkin.transform.position;
+                        m_LastRotation = m_AnimalSkin.transform.rotation;
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
 
         [ContextMenu("RestoreSkin")]
         public void RestoreSkin()
@@ -388,6 +449,8 @@ namespace MobaVR
         [PunRPC]
         public void RpcRestoreSkin()
         {
+            SaveLastPositionAndRotation();
+            
             if (m_AliveActiveSkin == null)
             {
                 return;
@@ -399,9 +462,11 @@ namespace MobaVR
             }
 
             DeactivateAnimalSkin();
+            m_LastSkinType = SkinType.ALIVE;
 
             TeamType teamType = m_PlayerVR != null ? m_PlayerVR.TeamType : TeamType.RED;
             SetVisibilityDie(false);
+            m_AliveActiveSkin.SetPositionAndRotation(m_LastPosition, m_LastRotation);
             m_AliveActiveSkin.ActivateSkin(teamType);
         }
 
