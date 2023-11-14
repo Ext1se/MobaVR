@@ -13,12 +13,14 @@ namespace MobaVR
 
         public void Show()
         {
-            photonView.RPC(nameof(RpcShow), RpcTarget.AllBuffered);
+            //photonView.RPC(nameof(RpcShow), RpcTarget.AllBuffered);
+            photonView.RPC(nameof(RpcShow), RpcTarget.All);
         }
         
         public void Hide()
         {
-            photonView.RPC(nameof(RpcHide), RpcTarget.AllBuffered);
+            //photonView.RPC(nameof(RpcHide), RpcTarget.AllBuffered);
+            photonView.RPC(nameof(RpcHide), RpcTarget.All);
         }
         
         [PunRPC]

@@ -488,6 +488,7 @@ GameObject:
   - component: {fileID: 4416012648919080085}
   - component: {fileID: 5102510610403529140}
   - component: {fileID: 2539827702480820390}
+  - component: {fileID: 7388232152422305699}
   m_Layer: 11
   m_Name: SkeletonArcher
   m_TagString: Enemy
@@ -800,6 +801,19 @@ MonoBehaviour:
   OnReborn:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7388232152422305699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798137429811982015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d850560d97d4fcc9e0c3d7223ab0b4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MonsterScore: 1
 --- !u!1 &984965783007979433
 GameObject:
   m_ObjectHideFlags: 0

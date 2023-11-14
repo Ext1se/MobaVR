@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Photon.Pun;
+﻿using Photon.Pun;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
