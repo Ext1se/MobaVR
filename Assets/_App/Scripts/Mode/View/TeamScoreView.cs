@@ -15,7 +15,8 @@ namespace MobaVR
             
             if (PhotonNetwork.IsMasterClient)
             {
-                m_PhotonView.RPC(nameof(RpcSetScore), RpcTarget.AllBuffered, score);
+                //m_PhotonView.RPC(nameof(RpcSetScore), RpcTarget.AllBuffered, score);
+                m_PhotonView.RPC(nameof(RpcSetScore), RpcTarget.All, score);
             }
         }
 
