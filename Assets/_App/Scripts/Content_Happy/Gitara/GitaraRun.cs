@@ -16,7 +16,8 @@ public class GitaraRun : MonoBehaviourPunCallbacks
         if (grabber != null && canPlaySound)
         {
            // PlayNextSound();
-            photonView.RPC("PlayNextSoundRPC", RpcTarget.AllBuffered);
+            //photonView.RPC("PlayNextSoundRPC", RpcTarget.AllBuffered);
+            photonView.RPC("PlayNextSoundRPC", RpcTarget.All);
         }
     }
 

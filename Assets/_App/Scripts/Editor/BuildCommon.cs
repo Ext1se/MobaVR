@@ -21,13 +21,13 @@ public static class BuildCommon
         }
 
         // Загрузка и установка значения в AppSettings 
-        AppSettingSity settings = AssetDatabase.LoadAssetAtPath<AppSettingSity>("Assets/_App/Scripts/UI/SceneManagerSity/AppSettingSity.asset");
+        AppSetting settings = AssetDatabase.LoadAssetAtPath<AppSetting>("Assets/_App/Scripts/UI/SceneManagerSity/AppSettingSity.asset");
         if (settings == null)
         {
             Debug.LogError("Не удалось загрузить AppSettings. Убедитесь, что он создан и путь указан верно.");
             return;
         }
-        settings.CurrentCity = cityName;
+        settings.AppData.City = cityName;
         EditorUtility.SetDirty(settings); // Помечаем объект как измененный
         AssetDatabase.SaveAssets(); // Сохраняем изменения
 

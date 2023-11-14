@@ -86,7 +86,8 @@ namespace MobaVR
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                photonView.RPC(nameof(RpcInitMode), RpcTarget.AllBuffered);
+                //photonView.RPC(nameof(RpcInitMode), RpcTarget.AllBuffered);
+                photonView.RPC(nameof(RpcInitMode), RpcTarget.All);
             }
         }
 
@@ -101,7 +102,8 @@ namespace MobaVR
         {
             //if (PhotonNetwork.IsMasterClient)
             {
-                photonView.RPC(nameof(RpcDeactivateMode), RpcTarget.AllBuffered);
+                //photonView.RPC(nameof(RpcDeactivateMode), RpcTarget.AllBuffered);
+                photonView.RPC(nameof(RpcDeactivateMode), RpcTarget.All);
             }
         }
 
@@ -116,7 +118,8 @@ namespace MobaVR
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                photonView.RPC(nameof(RpcStartMode), RpcTarget.AllBuffered);
+                //photonView.RPC(nameof(RpcStartMode), RpcTarget.AllBuffered);
+                photonView.RPC(nameof(RpcStartMode), RpcTarget.All);
             }
         }
 
@@ -131,7 +134,8 @@ namespace MobaVR
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                photonView.RPC(nameof(RpcReadyRound), RpcTarget.AllBuffered);
+                //photonView.RPC(nameof(RpcReadyRound), RpcTarget.AllBuffered);
+                photonView.RPC(nameof(RpcReadyRound), RpcTarget.All);
             }
         }
 
@@ -146,7 +150,8 @@ namespace MobaVR
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                photonView.RPC(nameof(RpcPlayRound), RpcTarget.AllBuffered);
+                //photonView.RPC(nameof(RpcPlayRound), RpcTarget.AllBuffered);
+                photonView.RPC(nameof(RpcPlayRound), RpcTarget.All);
             }
         }
 
@@ -161,7 +166,8 @@ namespace MobaVR
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                photonView.RPC(nameof(RpcCompleteRound), RpcTarget.AllBuffered);
+                //photonView.RPC(nameof(RpcCompleteRound), RpcTarget.AllBuffered);
+                photonView.RPC(nameof(RpcCompleteRound), RpcTarget.All);
             }
         }
 
@@ -176,7 +182,8 @@ namespace MobaVR
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                photonView.RPC(nameof(RpcCompleteMode), RpcTarget.AllBuffered);
+                //photonView.RPC(nameof(RpcCompleteMode), RpcTarget.AllBuffered);
+                photonView.RPC(nameof(RpcCompleteMode), RpcTarget.All);
             }
         }
 
