@@ -1,6 +1,5 @@
 ﻿using System;
-using Michsky.MUIP;
-using MobaVR.Utils;
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
@@ -17,26 +16,63 @@ namespace MobaVR
         [SerializeField] private TextMeshProUGUI m_MonsterCountText;
         [SerializeField] private TextMeshProUGUI m_CaloriesCountText;
 
+        [Header("User Settings")]
+        [SerializeField] private Color m_LocalUserColor = Color.white;
+        [SerializeField] private Color m_RemoteUserColor = Color.white;
+        
+        public Action<TeamType> OnUpdateTeamView;
+        
         #region OnUpdate
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
+            if (m_PlayerVR != null)
+            {
+                m_PlayerVR.PlayerScore.OnUpdateScore -= OnUpdateScore;
+            }
         }
 
-        protected override void SetPlayerData()
+        public override void SetPlayerData()
         {
             base.SetPlayerData();
+
+            UpdateScore(m_PlayerVR.PlayerScore.ScoreData);
+            m_PlayerVR.PlayerScore.OnUpdateScore += OnUpdateScore;
+        }
+
+        private void UpdateScore(PlayerScoreData scoreData)
+        {
+            m_KillsCountText.text = scoreData.KillsCount.ToString();
+            m_DeathsCountText.text = scoreData.DeathsCount.ToString();
+            m_AssistsCountText.text = scoreData.AssistsCount.ToString();
+            m_MonsterCountText.text = scoreData.MonsterCount.ToString();
+            m_CaloriesCountText.text = scoreData.CaloriesCount.ToString();
         }
 
         protected override void OnUpdateRole(string idRole)
         {
             m_RoleText.text = idRole;
         }
-
+        
+        private void OnUpdateScore()
+        {
+            PlayerScoreData scoreData = m_PlayerVR.PlayerScore.ScoreData;
+            UpdateScore(scoreData);
+        }
+        
         protected override void OnUpdateNickName(string nickName)
         {
-            m_NickNameText.text = nickName;
+            if (m_PlayerVR != null && m_PlayerVR.photonView.IsMine)
+            {
+                m_NickNameText.color = m_LocalUserColor;
+                m_NickNameText.text = $"<b>{nickName}</b>";
+            }
+            else
+            {
+                m_NickNameText.color = m_RemoteUserColor;
+                m_NickNameText.text = nickName;
+            }
         }
 
         protected override void OnUpdateTeam(TeamType teamType)
@@ -47,6 +83,8 @@ namespace MobaVR
                 TeamType.BLUE => "<color=blue>BLUE</color>",
                 _ => m_TeamText.text
             };
+            
+            OnUpdateTeamView?.Invoke(teamType);
         }
 
         #endregion

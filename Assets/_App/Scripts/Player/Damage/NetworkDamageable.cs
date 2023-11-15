@@ -94,7 +94,9 @@ namespace MobaVR
 
             if (m_PhotonView != null)
             {
-                m_PhotonView.RPC(nameof(RpcHit), RpcTarget.AllBuffered, hitData);
+                //TODO: AllBuffered hit damage
+                //m_PhotonView.RPC(nameof(RpcHit), RpcTarget.AllBuffered, hitData);
+                m_PhotonView.RPC(nameof(RpcHit), RpcTarget.All, hitData);
             }
         }
 
@@ -108,7 +110,9 @@ namespace MobaVR
         {
             if (m_PhotonView != null)
             {
-                m_PhotonView.RPC(nameof(RpcDie), RpcTarget.AllBuffered);
+                //TODO: AllBuffered hit damage
+                //m_PhotonView.RPC(nameof(RpcDie), RpcTarget.AllBuffered);
+                m_PhotonView.RPC(nameof(RpcDie), RpcTarget.All);
             }
         }
 
@@ -122,7 +126,9 @@ namespace MobaVR
         {
             if (m_PhotonView != null)
             {
-                m_PhotonView.RPC(nameof(RpcReborn), RpcTarget.AllBuffered);
+                //TODO: AllBuffered hit damage
+                //m_PhotonView.RPC(nameof(RpcReborn), RpcTarget.AllBuffered);
+                m_PhotonView.RPC(nameof(RpcReborn), RpcTarget.All);
             }
         }
 

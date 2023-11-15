@@ -14,7 +14,7 @@ namespace MobaVR
 
         public void ResetCalibration()
         {
-            if (m_PlayerVR == null && m_PlayerVR.Calibration != null)
+            if (m_PlayerVR == null && m_PlayerVR.Calibration == null)
             {
                 return;
             }
@@ -24,7 +24,7 @@ namespace MobaVR
 
         public void SetHeight()
         {
-            if (m_PlayerVR == null && m_PlayerVR.Calibration != null)
+            if (m_PlayerVR == null && m_PlayerVR.Calibration == null)
             {
                 return;
             }
