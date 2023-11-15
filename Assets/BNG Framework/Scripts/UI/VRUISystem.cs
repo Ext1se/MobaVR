@@ -147,6 +147,11 @@ namespace BNG {
                 return;
             }
 
+            if (cameraCaster == null)
+            {
+                return;
+            }
+
             EventData.position = new Vector2(cameraCaster.pixelWidth / 2, cameraCaster.pixelHeight / 2);
 
             eventSystem.RaycastAll(EventData, m_RaycastResultCache);

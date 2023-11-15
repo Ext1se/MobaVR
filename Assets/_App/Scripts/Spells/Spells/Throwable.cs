@@ -117,8 +117,16 @@ namespace MobaVR
                 gravityType = wizardPlayer.GravityFireballType;
             }
 
+            /*
             m_PhotonView.RPC(nameof(RpcSetPhysics),
                              RpcTarget.AllBuffered,
+                             gravityType,
+                             force,
+                             useAim
+                             */
+                             
+            m_PhotonView.RPC(nameof(RpcSetPhysics),
+                             RpcTarget.All,
                              gravityType,
                              force,
                              useAim
@@ -128,7 +136,8 @@ namespace MobaVR
         public void Init(WizardPlayer wizardPlayer, TeamType teamType)
         {
             m_PhotonView.RPC(nameof(RpcSetPhysics),
-                             RpcTarget.AllBuffered,
+                             //RpcTarget.AllBuffered,
+                             RpcTarget.All,
                              wizardPlayer.GravityFireballType,
                              wizardPlayer.ThrowForce,
                              wizardPlayer.UseAim);
@@ -206,13 +215,15 @@ namespace MobaVR
 
         public void Throw()
         {
-            m_PhotonView.RPC(nameof(RpcThrow), RpcTarget.AllBuffered);
+            //m_PhotonView.RPC(nameof(RpcThrow), RpcTarget.AllBuffered);
+            m_PhotonView.RPC(nameof(RpcThrow), RpcTarget.All);
         }
 
         public void ThrowByVelocity(Vector3 velocity, Quaternion quaternion, Vector3 angularVelocity)
         {
             m_PhotonView.RPC(nameof(RpcThrowByVelocity),
-                             RpcTarget.AllBuffered,
+                             //RpcTarget.AllBuffered,
+                             RpcTarget.All,
                              transform.position,
                              transform.rotation,
                              velocity,
@@ -221,7 +232,8 @@ namespace MobaVR
 
         public void ThrowByDirection(Vector3 direction)
         {
-            m_PhotonView.RPC(nameof(RpcThrowByDirection), RpcTarget.AllBuffered, direction);
+            //m_PhotonView.RPC(nameof(RpcThrowByDirection), RpcTarget.AllBuffered, direction);
+            m_PhotonView.RPC(nameof(RpcThrowByDirection), RpcTarget.All, direction);
         }
 
         private void InitThrow()
