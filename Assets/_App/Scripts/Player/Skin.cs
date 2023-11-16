@@ -17,6 +17,11 @@ namespace MobaVR
         [SerializeField] private Transform m_Armature;
         [SerializeField] [ReadOnly] private float m_ArmatureScale = 0.54f;
 
+        [Header("Hand")]
+        [SerializeField] private bool m_UseSkinHands = true;
+        [SerializeField] private GameObject m_LeftHandModel;
+        [SerializeField] private GameObject m_RightHandModel;
+        
         [Header("Team")]
         [SerializeField] private List<SkinItem> m_TeamRenderers = new();
 
@@ -213,6 +218,22 @@ namespace MobaVR
 
         #region Skin
 
+        private void SetEnableHands(bool isEnable)
+        {
+            if (m_UseSkinHands)
+            {
+                if (m_LeftHandModel)
+                {
+                    m_LeftHandModel.gameObject.SetActive(isEnable);
+                }
+
+                if (m_RightHandModel)
+                {
+                    m_RightHandModel.gameObject.SetActive(isEnable);
+                }
+            }
+        }
+
         public override void SetTeam(TeamType teamType)
         {
             base.SetTeam(teamType);
@@ -223,9 +244,20 @@ namespace MobaVR
             }
         }
 
+        public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
+        {
+            position.y = transform.position.y;
+            transform.position = position;
+            
+            //transform.position = position;
+            //transform.rotation = rotation;
+        }
+
         public void ActivateSkin(TeamType teamType)
         {
             gameObject.SetActive(true);
+            SetEnableHands(true);
+
             SetTeam(teamType);
 
             OnActivated?.Invoke();
@@ -234,6 +266,8 @@ namespace MobaVR
         public void DeactivateSkin()
         {
             gameObject.SetActive(false);
+            SetEnableHands(false);
+
             OnDeactivated?.Invoke();
         }
         
@@ -242,8 +276,10 @@ namespace MobaVR
             if (m_SetInactiveOnDie)
             {
                 gameObject.SetActive(false);
-
             }
+            
+            // TODO: check hands on Die
+            SetEnableHands(false);
 
             OnDie?.Invoke();
         }

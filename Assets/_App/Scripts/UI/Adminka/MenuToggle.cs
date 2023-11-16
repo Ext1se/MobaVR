@@ -22,11 +22,18 @@ public class MenuToggle : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.H) && Input.GetKey(KeyCode.LeftAlt))
+        {
+            ToggleMenu();
+        }
+        
+        /*
         // Проверка на нажатие кнопки 'h'
         if (Input.GetKeyDown(KeyCode.H))
         {
             ToggleMenu();
         }
+        */
     }
 
     // Функция, вызываемая кнопкой, чтобы переключить видимость объектов
