@@ -9,6 +9,7 @@ namespace MobaVR
         public int ActorNumber;
         public string IdUser;
         public string NickName;
+        public string IdRole;
 
         public Player Player;
 

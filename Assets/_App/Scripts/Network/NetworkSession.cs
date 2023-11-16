@@ -8,6 +8,8 @@ namespace MetaConference
 {
     public class NetworkSession : MonoBehaviourPunCallbacks
     {
+        [SerializeField] public string m_MenuScene = "Menu";
+        
         private Player m_Player;
 
         public Player Player => m_Player;
@@ -34,7 +36,8 @@ namespace MetaConference
 
         private void LoadLauncherScene()
         {
-            SceneManager.LoadScene(0);
+            //SceneManager.LoadScene(0);
+            SceneManager.LoadScene(m_MenuScene);
         }
 
         public void BackToLaunch()

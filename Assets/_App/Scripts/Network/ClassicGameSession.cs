@@ -110,7 +110,7 @@ namespace MobaVR
         #endregion
 
         #region Player and Team
-        
+
         [PunRPC]
         private void RpcAddPlayer(int idPhotonView)
         {
@@ -123,7 +123,7 @@ namespace MobaVR
                 }
             }
         }
-        
+
         [PunRPC]
         private void RpcRemovePlayer(int idPhotonView)
         {
@@ -146,7 +146,7 @@ namespace MobaVR
             m_LocalPlayer = m_PlayerSpawner.SpawnPlayer(team);
             m_Player = m_LocalPlayer.gameObject;
             team.AddPlayer(m_LocalPlayer);
-            
+
             photonView.RPC(nameof(RpcAddPlayer), RpcTarget.AllBuffered, m_LocalPlayer.photonView.ViewID);
         }
 
@@ -179,7 +179,7 @@ namespace MobaVR
         {
             SetTeam(teamType, m_LocalPlayer);
         }
-        
+
         public void SetTeam(TeamType teamType, PlayerVR playerVR)
         {
             if (playerVR == null)
@@ -242,7 +242,7 @@ namespace MobaVR
             {
                 return;
             }
-            
+
             if (m_Mode != null)
             {
                 m_Mode.DeactivateMode();
@@ -255,7 +255,7 @@ namespace MobaVR
             {
                 return;
             }
-            
+
             if (m_Mode != null)
             {
                 m_Mode.StartMode();
@@ -268,7 +268,7 @@ namespace MobaVR
             {
                 return;
             }
-            
+
             if (m_Mode != null)
             {
                 m_Mode.CompleteMode();
@@ -362,7 +362,7 @@ namespace MobaVR
         #endregion
 
         #region Photon
-        
+
         public void SetMaster()
         {
             //ResetModes();
@@ -373,8 +373,7 @@ namespace MobaVR
         {
             base.OnDisconnected(cause);
         }
-        
-        
+
 
         public override void OnLeftRoom()
         {
@@ -400,17 +399,26 @@ namespace MobaVR
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                foreach (PlayerVR playerVR in m_Players)
+                //foreach (PlayerVR playerVR in m_Players)
+                try
                 {
-                    if (playerVR.PlayerData.ActorNumber == otherPlayer.ActorNumber)
+                    foreach (PlayerVR playerVR in m_Players)
                     {
-                        photonView.RPC(nameof(RpcRemovePlayer), RpcTarget.AllBuffered, playerVR.photonView.ViewID);
+                        if (playerVR.PlayerData.ActorNumber == otherPlayer.ActorNumber)
+                        {
+                            photonView.RPC(nameof(RpcRemovePlayer), RpcTarget.AllBuffered, playerVR.photonView.ViewID);
+                        }
                     }
                 }
-                
+                catch (Exception e)
+                {
+                    //Console.WriteLine(e);
+                    //throw;
+                }
+
                 //ResetModes();
             }
-            
+
             base.OnPlayerLeftRoom(otherPlayer);
         }
 
