@@ -42,7 +42,8 @@ public class ChangeSkinPlayerRemote : MonoBehaviourPun
     {
         NomerSkins = 0;
         PV = GetComponent<PhotonView>();
-        PV.RPC("DisableAllSkinsExceptFirst", RpcTarget.AllBuffered);
+        //PV.RPC("DisableAllSkinsExceptFirst", RpcTarget.AllBuffered);
+        PV.RPC("DisableAllSkinsExceptFirst", RpcTarget.All);
     }
 
 

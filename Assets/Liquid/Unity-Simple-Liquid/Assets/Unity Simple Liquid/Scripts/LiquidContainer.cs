@@ -11,6 +11,7 @@ namespace UnitySimpleLiquid
     [ExecuteInEditMode]
     public class LiquidContainer : MonoBehaviour
     {
+        public bool UseLiquidRender = true;
         public MeshRenderer liquidRender;
         private MeshFilter meshFilter;
 
@@ -50,6 +51,10 @@ namespace UnitySimpleLiquid
         private void Start()
         {
             splitController = GetComponent<SplitController>();
+            
+            LiquidColor = liquidColor;
+            FillAmountPercent = fillAmountPercent;
+            IsOpen = isOpen;
         }
 
         #region Liquid Amount
@@ -174,6 +179,11 @@ namespace UnitySimpleLiquid
 
         private void UpdateSurfacePos()
         {
+            if (!UseLiquidRender)
+            {
+                return;
+            }
+            
             if (fillAmountPercent > 0f)
             {
                 SurfaceLevel = CalculateWoldSurfaceLevel();
@@ -350,7 +360,7 @@ namespace UnitySimpleLiquid
 
         private void Update()
         {
-            if (liquidRender == null)
+            if (!UseLiquidRender || liquidRender == null)
                 return;
 
             // Update surface volume
@@ -368,6 +378,8 @@ namespace UnitySimpleLiquid
         {
             if (liquidRender == null)
                 return;
+
+            liquidRender.enabled = UseLiquidRender;
 
             LiquidColor = liquidColor;
             FillAmountPercent = fillAmountPercent;

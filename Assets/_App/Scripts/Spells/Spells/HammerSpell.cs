@@ -154,7 +154,8 @@ namespace MobaVR
         {
             if (!isGoodThrow)
             {
-                photonView.RPC(nameof(RpcDestroyThrowable), RpcTarget.AllBuffered);
+                //photonView.RPC(nameof(RpcDestroyThrowable), RpcTarget.AllBuffered);
+                photonView.RPC(nameof(RpcDestroyThrowable), RpcTarget.All);
                 StopAllCoroutines();
             }
         }
