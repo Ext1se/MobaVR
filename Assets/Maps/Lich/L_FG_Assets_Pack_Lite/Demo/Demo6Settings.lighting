@@ -22,7 +22,7 @@ LightingSettings:
   m_Padding: 2
   m_LightmapCompression: 0
   m_AO: 1
-  m_AOMaxDistance: 1
+  m_AOMaxDistance: 5
   m_CompAOExponent: 2
   m_CompAOExponentDirect: 2
   m_ExtractAO: 0
@@ -40,9 +40,9 @@ LightingSettings:
   m_FinalGatherFiltering: 1
   m_PVRCulling: 0
   m_PVRSampling: 1
-  m_PVRDirectSampleCount: 16
-  m_PVRSampleCount: 32
-  m_PVREnvironmentSampleCount: 32
+  m_PVRDirectSampleCount: 64
+  m_PVRSampleCount: 128
+  m_PVREnvironmentSampleCount: 128
   m_PVREnvironmentReferencePointCount: 2048
   m_LightProbeSampleCountMultiplier: 4
   m_PVRBounces: 2
