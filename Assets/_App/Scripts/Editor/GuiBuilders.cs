@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using WebSocketSharp;
 
 namespace MobaVR
 {
@@ -24,16 +25,24 @@ namespace MobaVR
                 return;
             }
 
+            string folderPath = EditorUtility.SaveFolderPanel(
+                $"Build application", 
+                "",
+                "Arena Heroes");
+
+            if (folderPath.IsNullOrEmpty() || folderPath.Length == 0)
+            {
+                return;
+            }
             
             foreach (BuildSetting buildSetting in buildSettingGroup.BuildSettings)
             {
                 string cityName = buildSettingGroup.IsOverrideCity ? buildSettingGroup.CityName : buildSetting.AppData.City;
-                string path = buildSetting.Path;
-                if (buildSettingGroup.IsOverridePath)
+                string path = $"{folderPath}/{buildSetting.name}";
+                //if (buildSettingGroup.IsOverridePath)
                 {
-                    path = $"{buildSettingGroup.BasePath}{buildSetting.name}";
+                  //  path = $"{buildSettingGroup.BasePath}{buildSetting.name}";
                 }
-                
                 AppBuilder.Build(
                     //buildSetting.AppData.City,
                     cityName,
@@ -42,7 +51,7 @@ namespace MobaVR
                     buildSetting.AppData.IsAdmin,
                     buildSetting.AppData.IsDevBuild,
                     buildSetting.AppData.UseLogs,
-                    "1.0.0",
+                    Application.version,
                     path,
                     buildSetting.Name);
             }

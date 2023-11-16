@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace MobaVR
 {
-    public class DontDestroyGameSession : MonoBehaviourPunCallbacks
+    public class DontDestroyGameSession_2 : MonoBehaviourPunCallbacks
     {
         [SerializeField] private GameObject m_GameSession;
         [SerializeField] private string m_DestroySceneName = "Menu";

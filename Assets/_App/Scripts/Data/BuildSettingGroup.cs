@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace MobaVR
@@ -9,9 +10,6 @@ namespace MobaVR
         [Header("Override Data")]
         public bool IsOverrideCity = false;
         public string CityName = "Arma";
-        
-        public bool IsOverridePath = false;
-        public string BasePath = "";
         
         [Space]
         public List<BuildSetting> BuildSettings = new List<BuildSetting>();

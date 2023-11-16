@@ -9,8 +9,9 @@ public class AppSetting : ScriptableObject
     public string GameVersion = "1.0.0";
     
     [Space]
-    [Header("Build")]
+    [Header("Company")]
     public int IdClub = -1;
+    
     [Space]
     public AppData AppData = new AppData();
 }
