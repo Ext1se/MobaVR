@@ -8,9 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 4
     smallestHole: 0.2
     backfaceThreshold: 100
-  m_SceneGUID: 1804084e413cfe54784cf388f38ca63b
-  m_OcclusionCullingData: {fileID: 36300000, guid: 5b1c96e3331cb8e43a45293a6bd9b58e,
-    type: 2}
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -2561,6 +2560,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68b861655e2be0d46af723b2e0ad60b5, type: 3}
+--- !u!1 &821699858 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1461530279189008, guid: 68b861655e2be0d46af723b2e0ad60b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 821699857}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &821699859
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821699858}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.89150596, y: 2.4798672, z: 0.87220645}
+  m_Center: {x: 0.00041312518, y: 1.2399334, z: 0.0028294423}
 --- !u!43 &884922895
 Mesh:
   m_ObjectHideFlags: 0
@@ -10827,10 +10845,20 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -4.4
       objectReference: {fileID: 0}
+    - target: {fileID: 6712785433218497082, guid: 46463677e53200b439285931ea425c4f,
+        type: 3}
+      propertyPath: m_TeamType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6712785433553965251, guid: 46463677e53200b439285931ea425c4f,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 4.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712785433553965305, guid: 46463677e53200b439285931ea425c4f,
+        type: 3}
+      propertyPath: m_TeamType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46463677e53200b439285931ea425c4f, type: 3}
