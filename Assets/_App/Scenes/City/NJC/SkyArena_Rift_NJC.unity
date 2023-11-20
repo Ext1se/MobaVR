@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.27529082, g: 0.56286913, b: 0.7154905, a: 1}
+  m_IndirectSpecularColor: {r: 0.2749875, g: 0.56207615, b: 0.7128879, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6676,6 +6676,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NJC
       objectReference: {fileID: 0}
+    - target: {fileID: 7655841963259816818, guid: 1e349ca590d8d6342b9b0093c3915b8d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8801901489287149554, guid: 1e349ca590d8d6342b9b0093c3915b8d,
         type: 3}
       propertyPath: m_RootOrder
@@ -10323,6 +10328,26 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 964142518}
+    - target: {fileID: 8537911492099935704, guid: d39f250dfcdcded4ca66d982f3a9484d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537911492099935704, guid: d39f250dfcdcded4ca66d982f3a9484d,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537911492099935704, guid: d39f250dfcdcded4ca66d982f3a9484d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537911492099935704, guid: d39f250dfcdcded4ca66d982f3a9484d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8537911492103508131, guid: d39f250dfcdcded4ca66d982f3a9484d,
         type: 3}
       propertyPath: m_Mesh
@@ -10383,6 +10408,26 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1668979387}
+    - target: {fileID: 8537911492122571385, guid: d39f250dfcdcded4ca66d982f3a9484d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537911492122571385, guid: d39f250dfcdcded4ca66d982f3a9484d,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537911492122571385, guid: d39f250dfcdcded4ca66d982f3a9484d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537911492122571385, guid: d39f250dfcdcded4ca66d982f3a9484d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8537911492126598486, guid: d39f250dfcdcded4ca66d982f3a9484d,
         type: 3}
       propertyPath: m_Mesh
