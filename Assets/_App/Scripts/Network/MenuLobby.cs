@@ -57,8 +57,11 @@ namespace MobaVR
 
         private void LoadGameScene(string baseSceneName)
         {
-            string sceneName = $"{baseSceneName}_{appSettings.AppData.City}";
-            PhotonNetwork.LoadLevel(sceneName);
+            if (!PhotonNetwork.AutomaticallySyncScene || PhotonNetwork.IsMasterClient)
+            {
+                string sceneName = $"{baseSceneName}_{appSettings.AppData.City}";
+                PhotonNetwork.LoadLevel(sceneName);
+            }
         }
 
         private void WaitAndLoadMenuScene()
