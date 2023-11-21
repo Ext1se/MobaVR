@@ -8,9 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 4
     smallestHole: 0.2
     backfaceThreshold: 100
-  m_SceneGUID: 1804084e413cfe54784cf388f38ca63b
-  m_OcclusionCullingData: {fileID: 36300000, guid: 5b1c96e3331cb8e43a45293a6bd9b58e,
-    type: 2}
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -4607,6 +4606,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68b861655e2be0d46af723b2e0ad60b5, type: 3}
+--- !u!1 &1678646872 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1461530279189008, guid: 68b861655e2be0d46af723b2e0ad60b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1678646871}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1678646873
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678646872}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9335766, y: 2.4798672, z: 0.8632443}
+  m_Center: {x: -0.011186405, y: 1.2399334, z: -0.0060145436}
 --- !u!1001 &1682018261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4676,6 +4694,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68b861655e2be0d46af723b2e0ad60b5, type: 3}
+--- !u!1 &1682018262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1461530279189008, guid: 68b861655e2be0d46af723b2e0ad60b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1682018261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1682018263
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682018262}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9335766, y: 2.4798672, z: 0.8632443}
+  m_Center: {x: -0.011186405, y: 1.2399334, z: -0.0060145436}
 --- !u!43 &1893286663
 Mesh:
   m_ObjectHideFlags: 0
@@ -11633,12 +11670,17 @@ PrefabInstance:
     - target: {fileID: 3917909240419818715, guid: 4420d0e32c1feec47b6474d16fbe5e55,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.37
+      value: -0.0799987
+      objectReference: {fileID: 0}
+    - target: {fileID: 3917909240419818715, guid: 4420d0e32c1feec47b6474d16fbe5e55,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0037505627
       objectReference: {fileID: 0}
     - target: {fileID: 3917909240419818715, guid: 4420d0e32c1feec47b6474d16fbe5e55,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.349
+      value: 5.3489995
       objectReference: {fileID: 0}
     - target: {fileID: 3917909240450201986, guid: 4420d0e32c1feec47b6474d16fbe5e55,
         type: 3}
@@ -11703,7 +11745,7 @@ PrefabInstance:
     - target: {fileID: 3917909240624900166, guid: 4420d0e32c1feec47b6474d16fbe5e55,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.5
+      value: -13.570001
       objectReference: {fileID: 0}
     - target: {fileID: 3917909240624900166, guid: 4420d0e32c1feec47b6474d16fbe5e55,
         type: 3}
@@ -11878,7 +11920,12 @@ PrefabInstance:
     - target: {fileID: 3917909241483366205, guid: 4420d0e32c1feec47b6474d16fbe5e55,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.331
+      value: -13.383
+      objectReference: {fileID: 0}
+    - target: {fileID: 3917909241483366205, guid: 4420d0e32c1feec47b6474d16fbe5e55,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0037505627
       objectReference: {fileID: 0}
     - target: {fileID: 3917909241483366205, guid: 4420d0e32c1feec47b6474d16fbe5e55,
         type: 3}
@@ -11893,7 +11940,7 @@ PrefabInstance:
     - target: {fileID: 3917909241494098458, guid: 4420d0e32c1feec47b6474d16fbe5e55,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.76
+      value: -0.09899798
       objectReference: {fileID: 0}
     - target: {fileID: 3917909241494098458, guid: 4420d0e32c1feec47b6474d16fbe5e55,
         type: 3}
