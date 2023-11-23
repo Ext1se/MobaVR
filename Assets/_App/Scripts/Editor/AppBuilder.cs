@@ -35,6 +35,7 @@ public partial class AppBuilder
 
     public static readonly string DEFAULT_OUT_PATH = "Builds/";
     public static readonly string DEFAULT_NAME = "Arena Heroes";
+    public static readonly string DEFAULT_COMPANY = "PortalVR";
     public static readonly string CITY_PATH = "Assets/_App/Resources/Api/Settings/AppSettingCity.asset";
     public static readonly string BUILD_GROUP_PATH = "Assets/_App/Resources/Api/Builds/Groups/BuildGroup.asset";
 
@@ -459,8 +460,14 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
             options = BuildOptions.None
         };
 
+        //TODO: Update Player Settings
         string prevVersion = Application.version;
+        string prevName = PlayerSettings.productName;
+        string prevPackageName = PlayerSettings.applicationIdentifier;
+        
         PlayerSettings.bundleVersion = version;
+        PlayerSettings.productName = $"{DEFAULT_NAME} {version}";
+        PlayerSettings.applicationIdentifier = $"com.portal_vr.arena_heroes_{version}";
 
         BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
         if (report.summary.result == BuildResult.Succeeded)
@@ -473,6 +480,8 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
         }
 
         PlayerSettings.bundleVersion = prevVersion;
+        PlayerSettings.productName = prevName;
+        PlayerSettings.applicationIdentifier = prevPackageName;
     }
 
     private static bool SetScenes(string cityName, PlatformType platformType, bool isAdmin, out string[] scenes)
