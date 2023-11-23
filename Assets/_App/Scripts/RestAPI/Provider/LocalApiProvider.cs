@@ -19,8 +19,9 @@ namespace MobaVR
         private string m_Token = null;
         private float m_Delay = 3f;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             m_LocalRepository = new LocalRepository();
         }
 
@@ -33,7 +34,24 @@ namespace MobaVR
 
         public override void GetToken(string username, string password, RequestResultCallback<AccessToken> callback)
         {
-            
+        }
+
+        #endregion
+
+        #region Club
+
+        public override void GetClubInfo(int idClub, RequestResultCallback<Club> callback)
+        {
+            Club club = new Club()
+            {
+                Title = "Development club",
+                ShortTitle = "ARMA",
+                Address = "Moscow",
+                Id = 1
+            };
+
+            callback.OnSuccess?.Invoke(club);
+            callback.OnFinish?.Invoke();
         }
 
         #endregion
@@ -46,10 +64,17 @@ namespace MobaVR
 
         public override void ValidateLicense(string key, RequestResultCallback<LicenseKeyResponse> callback)
         {
-            StartCoroutine(SendRequest_ValidateLicense(key, callback));
+            ValidateLicense(key, m_AppSetting.IdGame, m_AppSetting.IdClub, callback);
         }
-        
-        private IEnumerator SendRequest_ValidateLicense(string key, RequestResultCallback<LicenseKeyResponse> callback)
+
+        public override void ValidateLicense(string key, int idGame, int idClub,
+                                             RequestResultCallback<LicenseKeyResponse> callback)
+        {
+            StartCoroutine(SendRequest_ValidateLicense(key, idGame, idClub, callback));
+        }
+
+        private IEnumerator SendRequest_ValidateLicense(string key, int idGame, int idClub,
+                                                        RequestResultCallback<LicenseKeyResponse> callback)
         {
             yield return new WaitForSeconds(m_Delay);
             if (key.Equals("123456"))
@@ -61,7 +86,7 @@ namespace MobaVR
             {
                 callback.OnError?.Invoke("Invalid key");
             }
-           
+
             callback.OnFinish?.Invoke();
         }
 
@@ -69,8 +94,10 @@ namespace MobaVR
 
         #region Statistics
 
-        public override void SendGameSession(string key, RequestResultCallback<bool> callback)
+        public override void SendGameSession(GameSessionStat sessionStat, RequestResultCallback<GameSessionStat> callback)
         {
+            callback.OnSuccess?.Invoke(new GameSessionStat());
+            callback.OnFinish?.Invoke();
         }
 
         #endregion
