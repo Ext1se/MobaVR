@@ -13,15 +13,20 @@ namespace MobaVR
         {
             base.OnInspectorGUI();
 
+            GUIStyle guiStyle = new GUIStyle();
+            guiStyle.alignment = TextAnchor.MiddleCenter;
+            guiStyle.normal.textColor = Color.white;
+            
             GUILayout.Space(32);
-            GUILayout.Label("Click to find and add new scenes by City Name to Build Settings");
+            
+            GUILayout.Label("Click to find and add new scenes by City Name to Build Settings", guiStyle);
             if (GUILayout.Button("Update Scenes for Build Settings"))
             {
                 AddScene();
             }
             
             GUILayout.Space(32);
-            GUILayout.Label("Click to update photon components in all scenes");
+            GUILayout.Label("Click to update photon components in all scenes", guiStyle);
             
             if (GUILayout.Button("Open all Scenes"))
             {
