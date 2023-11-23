@@ -467,7 +467,8 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
         
         PlayerSettings.bundleVersion = version;
         PlayerSettings.productName = $"{DEFAULT_NAME} {version}";
-        PlayerSettings.applicationIdentifier = $"com.portal_vr.arena_heroes_{version}";
+        string stringVersion = version.Replace('.', '_');
+        PlayerSettings.applicationIdentifier = $"com.portal_vr.arena_heroes_{stringVersion}";
 
         BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
         if (report.summary.result == BuildResult.Succeeded)
