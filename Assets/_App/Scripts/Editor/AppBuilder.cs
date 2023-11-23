@@ -484,7 +484,7 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
         PlayerSettings.applicationIdentifier = prevPackageName;
     }
 
-    private static bool SetScenes(string cityName, PlatformType platformType, bool isAdmin, out string[] scenes)
+    public static bool SetScenes(string cityName, PlatformType platformType, bool isAdmin, out string[] scenes, bool isAddSceneToEditor = true)
     {
         switch (platformType)
         {
@@ -548,7 +548,11 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
             cityScenePosition++;
         }
 
-        AddScenesToBuildEditor(scenes);
+        if (isAddSceneToEditor)
+        {
+            AddScenesToBuildEditor(scenes);
+        }
+
         return true;
     }
 
@@ -656,7 +660,7 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
         return true;
     }
 
-    private static void AddScenesToBuildEditor(string[] scenes)
+    public static void AddScenesToBuildEditor(string[] scenes)
     {
         EditorBuildSettingsScene[] editorBuildSettingsScenes = new EditorBuildSettingsScene[scenes.Length];
 
