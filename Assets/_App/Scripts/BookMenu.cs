@@ -20,6 +20,14 @@ namespace MobaVR
             }
         }
         
+        public void LoadRole(string id, bool isMale)
+        {
+            if (m_ClassicGameSession != null)
+            {
+                m_ClassicGameSession.SwitchRole(id, isMale);
+            }
+        }
+        
         public void SetRedTeam()
         {
             if (m_ClassicGameSession != null)

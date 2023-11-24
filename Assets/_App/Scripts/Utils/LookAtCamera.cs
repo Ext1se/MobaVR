@@ -18,6 +18,10 @@ namespace MobaVR.Utils
             {
                 transform.LookAt(m_Camera.transform);
             }
+            else
+            {
+                m_Camera = Camera.main;
+            }
         }
     }
 }
