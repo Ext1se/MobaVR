@@ -26,7 +26,7 @@ public class AppSwitcher
             {
                 if (editorBuildSettingsScene.path.Equals(adminScene))
                 {
-                    editorBuildSettingsScene.enabled = isAdmin;
+                    //editorBuildSettingsScene.enabled = isAdmin;
                 }
             }
         }
@@ -44,6 +44,13 @@ public class AppSwitcher
     public static void SetClient()
     {
         SwitchAdminMode(false);
+    }
+
+    [MenuItem("MobaVR/Mode/Set UpdatePackageName")]
+    public static void UpdatePackageName()
+    {
+        PlayerSettings.productName = "Heroes 999";
+        PlayerSettings.applicationIdentifier = "com.ext1se.hs";
     }
 
     private static void SwitchDevelopmentMode(bool isDevelopment)
@@ -98,5 +105,9 @@ public class AppSwitcher
 
         EditorGUIUtility.PingObject(settings);
         Selection.activeObject = settings;
+    }
+    
+    public static void UpdatePhotonScenes(){
+    
     }
 }

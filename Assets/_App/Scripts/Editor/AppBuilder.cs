@@ -467,7 +467,8 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
         
         PlayerSettings.bundleVersion = version;
         PlayerSettings.productName = $"{DEFAULT_NAME} {version}";
-        PlayerSettings.applicationIdentifier = $"com.portal_vr.arena_heroes_{version}";
+        string stringVersion = version.Replace('.', '_');
+        PlayerSettings.applicationIdentifier = $"com.portal_vr.arena_heroes_{stringVersion}";
 
         BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
         if (report.summary.result == BuildResult.Succeeded)
@@ -484,7 +485,7 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
         PlayerSettings.applicationIdentifier = prevPackageName;
     }
 
-    private static bool SetScenes(string cityName, PlatformType platformType, bool isAdmin, out string[] scenes)
+    public static bool SetScenes(string cityName, PlatformType platformType, bool isAdmin, out string[] scenes, bool isAddSceneToEditor = true)
     {
         switch (platformType)
         {
@@ -548,7 +549,11 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
             cityScenePosition++;
         }
 
-        AddScenesToBuildEditor(scenes);
+        if (isAddSceneToEditor)
+        {
+            AddScenesToBuildEditor(scenes);
+        }
+
         return true;
     }
 
@@ -656,7 +661,7 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
         return true;
     }
 
-    private static void AddScenesToBuildEditor(string[] scenes)
+    public static void AddScenesToBuildEditor(string[] scenes)
     {
         EditorBuildSettingsScene[] editorBuildSettingsScenes = new EditorBuildSettingsScene[scenes.Length];
 
