@@ -14580,6 +14580,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bd321ca96bbb5d84eaaa08bb55b4b325, type: 3}
   - {fileID: 8300000, guid: 573a6caeb181bbe479e3dc6a3470386e, type: 3}
   - {fileID: 8300000, guid: 709e3e5eea7fb284dbd96e00ddb8eabb, type: 3}
+  canInterrupt: 0
   maxFadeInVolume: 0.5
   minFadeOutVolume: 0
   fadeDuration: 1
@@ -14728,6 +14729,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: caac636ef5d6d30449f1bfb1a60c4824, type: 3}
   - {fileID: 8300000, guid: 61f39493efa3e354e83e7b07202355b8, type: 3}
   - {fileID: 8300000, guid: d9121498546ccc543aca17c407638ede, type: 3}
+  canInterrupt: 0
   maxFadeInVolume: 0.5
   minFadeOutVolume: 0
   fadeDuration: 1
@@ -26233,6 +26235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds: []
+  canInterrupt: 0
   maxFadeInVolume: 0.5
   minFadeOutVolume: 0
   fadeDuration: 1
@@ -26459,7 +26462,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.08655816, g: 0.015408737, b: 0.1397059, a: 0.266}
-      maxColor: {r: 0.20784314, g: 0.38039216, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.339553, b: 0.20784312, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -41144,7 +41147,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.20784314, g: 0.38039216, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.339553, b: 0.20784312, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
