@@ -1,11 +1,12 @@
-﻿using UnityEditor;
+﻿using Sirenix.OdinInspector.Editor;
+using UnityEditor;
 using UnityEngine;
 using WebSocketSharp;
 
 namespace MobaVR
 {
     [CustomEditor(typeof(BuildSettingGroup))]
-    public class GuiBuilders : Editor
+    public class GuiBuilders : OdinEditor
     {
         public override void OnInspectorGUI()
         {
@@ -38,6 +39,7 @@ namespace MobaVR
             foreach (BuildSetting buildSetting in buildSettingGroup.BuildSettings)
             {
                 string cityName = buildSettingGroup.IsOverrideCity ? buildSettingGroup.CityName : buildSetting.AppData.City;
+                string roomName = buildSettingGroup.IsOverrideRoom ? buildSettingGroup.RoomName : buildSetting.AppData.Room;
                 string path = $"{folderPath}/{buildSetting.name}";
                 //if (buildSettingGroup.IsOverridePath)
                 {
@@ -47,6 +49,7 @@ namespace MobaVR
                     //buildSetting.AppData.City,
                     cityName,
                     buildSetting.AppData.Platform.ToString(),
+                    roomName,
                     buildSetting.AppData.UseVR,
                     buildSetting.AppData.IsAdmin,
                     buildSetting.AppData.IsDevBuild,

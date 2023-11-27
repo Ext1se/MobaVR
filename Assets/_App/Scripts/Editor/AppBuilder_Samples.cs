@@ -39,6 +39,7 @@ public partial class AppBuilder
         }
 
         string cityName = settings.AppData.City;
+        string roomName = settings.AppData.Room;
         int idClub = settings.IdClub;
         int idGame = settings.IdGame;
         string targetName = PlatformType.WINDOWS.ToString();
@@ -91,6 +92,7 @@ public partial class AppBuilder
 
 
         Build(cityName,
+              roomName,
               targetName,
               version,
               idClub,
@@ -113,6 +115,7 @@ public partial class AppBuilder
         }
 
         string cityName = settings.AppData.City;
+        string roomName = settings.AppData.Room;
         int idClub = settings.IdClub;
         int idGame = settings.IdGame;
         string targetName = PlatformType.ANDROID.ToString();
@@ -161,6 +164,7 @@ public partial class AppBuilder
 
 
         Build(cityName,
+              roomName,
               targetName,
               version,
               idClub,
@@ -183,6 +187,7 @@ public partial class AppBuilder
         }
 
         string cityName = settings.AppData.City;
+        string roomName = settings.AppData.Room;
         int idClub = settings.IdClub;
         int idGame = settings.IdGame;
         string targetName = PlatformType.PICO.ToString();
@@ -231,6 +236,7 @@ public partial class AppBuilder
 
 
         Build(cityName,
+              roomName,
               targetName,
               version,
               idClub,
@@ -253,6 +259,7 @@ public partial class AppBuilder
         }
 
         string cityName = settings.AppData.City;
+        string roomName = settings.AppData.Room;
         int idClub = settings.IdClub;
         int idGame = settings.IdGame;
         string targetName = PlatformType.META.ToString();
@@ -301,6 +308,7 @@ public partial class AppBuilder
 
 
         Build(cityName,
+              roomName,
               targetName,
               version,
               idClub,
