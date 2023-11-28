@@ -13,6 +13,7 @@ using UnityEngine.XR.OpenXR.Features;
 using UnityEngine.XR.OpenXR.Features.Interactions;
 using UnityEngine.XR.OpenXR.Features.OculusQuestSupport;
 using UnityEngine.XR.OpenXR.Features.PICOSupport;
+using WebSocketSharp;
 
 public partial class AppBuilder
 {
@@ -22,6 +23,7 @@ public partial class AppBuilder
     private const string OPENXR_LOADER = "UnityEngine.XR.OpenXR.OpenXRLoader";
 
     public const string KEY_CITY_NAME = "-cityName";
+    public const string KEY_ROOM_NAME = "-roomName";
     public const string KEY_CLUB_ID = "-idClub";
     public const string KEY_GAME_ID = "-idGame";
     public const string KEY_PLATFORM_NAME = "-targetName";
@@ -71,6 +73,7 @@ public partial class AppBuilder
     public static void OpenDialogAndBuild(string cityName,
                                           string targetName,
                                           string version,
+                                          string roomName = null,
                                           bool useVR = false,
                                           bool isAdmin = false,
                                           bool isDevelopmentBuild = false,
@@ -117,6 +120,7 @@ public partial class AppBuilder
         Build(
             cityName,
             targetName,
+            roomName,
             useVR,
             isAdmin,
             isDevelopmentBuild,
@@ -141,6 +145,11 @@ public partial class AppBuilder
         if (!TryGetArgumentValue(KEY_CITY_NAME, out string cityName))
         {
             cityName = settings.AppData.City;
+        }
+
+        if (!TryGetArgumentValue(KEY_ROOM_NAME, out string roomName))
+        {
+            roomName = settings.AppData.Room;
         }
 
         if (!TryGetArgumentValue(KEY_CLUB_ID, out int idClub))
@@ -212,6 +221,7 @@ public partial class AppBuilder
         Console.WriteLine($"{TAG}: ---");
         Console.WriteLine($"{TAG}: Input Console Arguments: ");
         Console.WriteLine($"{TAG}: cityName = {cityName};");
+        Console.WriteLine($"{TAG}: roomName = {roomName};");
         Console.WriteLine($"{TAG}: idClub = {idClub};");
         Console.WriteLine($"{TAG}: idGame = {idGame};");
         Console.WriteLine($"{TAG}: targetName = {targetName};");
@@ -226,6 +236,7 @@ public partial class AppBuilder
 
 
         Build(cityName,
+              roomName,
               targetName,
               version,
               idClub,
@@ -240,6 +251,7 @@ public partial class AppBuilder
 
     public static void Build(
         string cityName,
+        string roomName,
         string targetName,
         string version,
         int idClub,
@@ -273,7 +285,15 @@ public partial class AppBuilder
             return;
         }
 
-        if (!SetAppSettings(cityName, isAdmin, platformType, idClub, idGame, version, useVR, isDevelopmentBuild,
+        if (!SetAppSettings(cityName,
+                            roomName,
+                            isAdmin,
+                            platformType,
+                            idClub,
+                            idGame,
+                            version,
+                            useVR,
+                            isDevelopmentBuild,
                             useLogs))
         {
             return;
@@ -308,6 +328,7 @@ public partial class AppBuilder
     /// </summary>
     /// <param name="cityName"></param>
     /// <param name="targetName"></param>
+    /// <param name="roomName"></param>
     /// <param name="useVR"></param>
     /// <param name="isAdmin"></param>
     /// <param name="isDevelopmentBuild"></param>
@@ -318,6 +339,7 @@ public partial class AppBuilder
     public static void Build(
         string cityName,
         string targetName,
+        string roomName = null,
         bool useVR = false,
         bool isAdmin = false,
         bool isDevelopmentBuild = false,
@@ -348,7 +370,7 @@ public partial class AppBuilder
             return;
         }
 
-        if (!SetAppSettings(cityName, isAdmin, platformType, useVR, isDevelopmentBuild, useLogs))
+        if (!SetAppSettings(cityName, roomName, isAdmin, platformType, useVR, isDevelopmentBuild, useLogs))
         {
             return;
         }
@@ -374,7 +396,7 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
                   $"fullPath = {fullPath}"
 );
 */
-        
+
         TryBuild(targetName, version, useVR, fullPath, scenes);
     }
 
@@ -464,7 +486,7 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
         string prevVersion = Application.version;
         string prevName = PlayerSettings.productName;
         string prevPackageName = PlayerSettings.applicationIdentifier;
-        
+
         PlayerSettings.bundleVersion = version;
         PlayerSettings.productName = $"{DEFAULT_NAME} {version}";
         string stringVersion = version.Replace('.', '_');
@@ -485,7 +507,8 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
         PlayerSettings.applicationIdentifier = prevPackageName;
     }
 
-    public static bool SetScenes(string cityName, PlatformType platformType, bool isAdmin, out string[] scenes, bool isAddSceneToEditor = true)
+    public static bool SetScenes(string cityName, PlatformType platformType, bool isAdmin, out string[] scenes,
+                                 bool isAddSceneToEditor = true)
     {
         switch (platformType)
         {
@@ -558,6 +581,7 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
     }
 
     private static bool SetAppSettings(string cityName,
+                                       string roomName,
                                        bool isAdmin,
                                        PlatformType platformType,
                                        int idClub,
@@ -579,12 +603,15 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
         settings.GameVersion = version;
 
         settings.AppData.City = cityName;
-        settings.AppData.City = cityName;
         settings.AppData.IsAdmin = isAdmin;
         settings.AppData.Platform = platformType;
         settings.AppData.IsDevBuild = isDevBuild;
         settings.AppData.UseLogs = useLogs;
         settings.AppData.UseVR = useVR;
+
+        //TODO: room name
+        settings.AppData.Room = roomName.IsNullOrEmpty() ? cityName : roomName;
+
 
         EditorUtility.SetDirty(settings);
         AssetDatabase.SaveAssets();
@@ -592,6 +619,7 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
     }
 
     private static bool SetAppSettings(string cityName,
+                                       string roomName,
                                        bool isAdmin,
                                        PlatformType platformType,
                                        bool useVR,
@@ -611,6 +639,7 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
         settings.AppData.IsDevBuild = isDevBuild;
         settings.AppData.UseLogs = useLogs;
         settings.AppData.UseVR = useVR;
+        settings.AppData.Room = roomName.IsNullOrEmpty() ? cityName : roomName;
 
         EditorUtility.SetDirty(settings);
         AssetDatabase.SaveAssets();
@@ -672,7 +701,7 @@ Console.WriteLine($"{TAG}: Build Arguments: " +
 
         EditorBuildSettings.scenes = editorBuildSettingsScenes;
     }
-    
+
     #region Console
 
     private static bool TryGetArgumentValue<T>(string name, out T value) where T : IConvertible

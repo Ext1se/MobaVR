@@ -7,37 +7,37 @@ public class MenuAppBuilder
     [MenuItem("MobaVR/Build/Test/Android Client")]
     public static void BuildAndroidClient_Test()
     {
-        AppBuilder.Build("ARMA", "android", false);
+        AppBuilder.Build("ARMA", "android", isAdmin: false);
     }
-    
+
     [MenuItem("MobaVR/Build/Test/Android Admin")]
     public static void BuildAndroidAdmin_Test()
     {
-        AppBuilder.Build("ARMA", "android", true);
+        AppBuilder.Build("ARMA", "android", isAdmin: true);
     }
 
     [MenuItem("MobaVR/Build/Test/Meta")]
     public static void BuildMeta_Test()
     {
-        AppBuilder.Build("ARMA", "meta", false);
+        AppBuilder.Build("ARMA", "meta", isAdmin: false);
     }
 
     [MenuItem("MobaVR/Build/Test/Pico")]
     public static void BuildPico_Test()
     {
-        AppBuilder.Build("ARMA", "pico", false);
+        AppBuilder.Build("ARMA", "pico", isAdmin: false);
     }
 
     [MenuItem("MobaVR/Build/Test/Windows Client")]
     public static void BuildWindowsClient_Test()
     {
-        AppBuilder.Build("ARMA", "windows", false);
+        AppBuilder.Build("ARMA", "windows", isAdmin: false);
     }
-    
+
     [MenuItem("MobaVR/Build/Test/Windows Admin")]
     public static void BuildWindowsAdmin_Test()
     {
-        AppBuilder.Build("ARMA", "windows", true);
+        AppBuilder.Build("ARMA", "windows", isAdmin: true);
     }
 
     #endregion
