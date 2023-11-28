@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 691f159a97b4ebd44b505ee06af901f8, type: 3}
   m_Name: AppSettingCity
   m_EditorClassIdentifier: 
+  IdGame: -1
+  GameVersion: 1.0.0
+  IdClub: -1
   AppData:
-    Platform: 2
-    IsDevelopmentBuild: 0
+    Platform: 3
+    IsDevBuild: 0
     UseLogs: 0
-    IsAdmin: 1
-    UseVR: 0
+    IsAdmin: 0
+    UseVR: 1
     City: ASK
+    Room: ASK
