@@ -1,3 +1,4 @@
+using System;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
@@ -29,6 +30,9 @@ namespace MobaVR
         [SerializeField] [ReadOnly] private bool m_IsGameOnline;
         [SerializeField] [ReadOnly] private string m_IpServer;
 
+        [Space]
+        [SerializeField] private bool m_IsOfflineMode = false;
+        
         private bool m_IsConnecting = false;
         private LocalRepository m_LocalRepository;
         private RoomOptions m_RoomOptions;
@@ -44,13 +48,26 @@ namespace MobaVR
             PhotonNetwork.NetworkingClient.SerializationProtocol = SerializationProtocol.GpBinaryV16;
             PhotonNetwork.EnableCloseConnection = true;
             PhotonNetwork.AutomaticallySyncScene = true;
-            PhotonNetwork.OfflineMode = false;
             PhotonNetwork.GameVersion = m_GameVersion;
+            //PhotonNetwork.OfflineMode = false;
 
             m_RoomOptions = new RoomOptions()
             {
                 MaxPlayers = m_MaxPlayersPerRoom,
             };
+        }
+
+        private void Start()
+        {
+            if (!m_IsOfflineMode)
+            {
+                PhotonNetwork.OfflineMode = false;
+            }
+            else
+            {
+                m_IsConnecting = true;
+                PhotonNetwork.OfflineMode = true;
+            }
         }
 
         #region Scenes
