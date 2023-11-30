@@ -1,10 +1,12 @@
-﻿using UnityEditor;
+﻿using Sirenix.OdinInspector.Editor;
+using UnityEditor;
 using UnityEngine;
+using WebSocketSharp;
 
 namespace MobaVR
 {
     [CustomEditor(typeof(BuildSettingGroup))]
-    public class GuiBuilders : Editor
+    public class GuiBuilders : OdinEditor
     {
         public override void OnInspectorGUI()
         {
@@ -23,17 +25,37 @@ namespace MobaVR
             {
                 return;
             }
+
+            string folderPath = EditorUtility.SaveFolderPanel(
+                $"Build application", 
+                "",
+                "Arena Heroes");
+
+            if (folderPath.IsNullOrEmpty() || folderPath.Length == 0)
+            {
+                return;
+            }
             
             foreach (BuildSetting buildSetting in buildSettingGroup.BuildSettings)
             {
+                string cityName = buildSettingGroup.IsOverrideCity ? buildSettingGroup.CityName : buildSetting.AppData.City;
+                string roomName = buildSettingGroup.IsOverrideRoom ? buildSettingGroup.RoomName : buildSetting.AppData.Room;
+                string path = $"{folderPath}/{buildSetting.name}";
+                //if (buildSettingGroup.IsOverridePath)
+                {
+                  //  path = $"{buildSettingGroup.BasePath}{buildSetting.name}";
+                }
                 AppBuilder.Build(
-                    buildSetting.AppData.City,
+                    //buildSetting.AppData.City,
+                    cityName,
                     buildSetting.AppData.Platform.ToString(),
+                    roomName,
                     buildSetting.AppData.UseVR,
                     buildSetting.AppData.IsAdmin,
-                    buildSetting.AppData.IsDevelopmentBuild,
+                    buildSetting.AppData.IsDevBuild,
                     buildSetting.AppData.UseLogs,
-                    buildSetting.Path,
+                    Application.version,
+                    path,
                     buildSetting.Name);
             }
         }
