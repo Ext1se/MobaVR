@@ -7,8 +7,26 @@ namespace MobaVR
     public class PigSpellBehaviour : InputSpellBehaviour
     {
         [SerializeField] private PigSpell m_PigSpellPrefab;
+        [SerializeField] private GameObject m_PigLine;
 
         private PigSpell m_PigSpell;
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            if (m_PigLine != null)
+            {
+                m_PigLine.SetActive(false);
+            }
+        }
+
+        protected override void OnDisable()
+        {
+            if (m_PigLine != null)
+            {
+                m_PigLine.SetActive(false);
+            }
+        }
 
         protected override void OnPerformedCast(InputAction.CallbackContext context)
         {
@@ -22,9 +40,33 @@ namespace MobaVR
                 return;
             }
 
+            if (m_PigLine != null)
+            {
+                m_PigLine.SetActive(true);
+            }
+
+            m_IsPerformed = true;
+        }
+
+        protected override void OnCanceledCast(InputAction.CallbackContext context)
+        {
+            base.OnCanceledCast(context);
+            
+            if (m_PigLine != null)
+            {
+                m_PigLine.SetActive(false);
+            }
+
+            if (!m_IsPerformed)
+            {
+                return;
+            }
+            
             CreateSpell(m_MainHandInputVR.FingerPoint);
             Shoot(m_MainHandInputVR.Grabber.transform.forward);
             WaitCooldown();
+            
+            m_IsPerformed = false;
         }
 
         private void CreateSpell(Transform point)
@@ -58,6 +100,23 @@ namespace MobaVR
             {
                 m_PigSpell.Shoot(direction);
             }
+        }
+
+        protected override void Interrupt()
+        {
+            base.Interrupt();
+            if (m_PigLine != null)
+            {
+                m_PigLine.SetActive(false);
+            }
+
+            m_IsPerformed = false;
+        }
+
+        protected override void SetAvailable()
+        {
+            base.SetAvailable();
+            m_IsPerformed = false;
         }
     }
 }
