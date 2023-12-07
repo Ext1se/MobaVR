@@ -13,23 +13,40 @@ using UnityEngine.XR.OpenXR.Features;
 using UnityEngine.XR.OpenXR.Features.Interactions;
 using UnityEngine.XR.OpenXR.Features.OculusQuestSupport;
 using UnityEngine.XR.OpenXR.Features.PICOSupport;
+using WebSocketSharp;
 
-public class AppBuilder
+public partial class AppBuilder
 {
     private const string TAG = nameof(AppBuilder);
 
     private const string OCULUS_LOADER = "Unity.XR.Oculus.OculusLoader";
     private const string OPENXR_LOADER = "UnityEngine.XR.OpenXR.OpenXRLoader";
-    
+
+    public const string KEY_CITY_NAME = "-cityName";
+    public const string KEY_ROOM_NAME = "-roomName";
+    public const string KEY_CLUB_ID = "-idClub";
+    public const string KEY_GAME_ID = "-idGame";
+    public const string KEY_PLATFORM_NAME = "-targetName";
+    public const string KEY_VERSION = "-appVersion";
+    public const string KEY_USE_VR = "-useVR";
+    public const string KEY_IS_ADMIN = "-isAdmin";
+    public const string KEY_IS_DEV_BUILD = "-isDev";
+    public const string KEY_USE_LOGS = "-useLogs";
+    public const string KEY_OUT_PATH = "-outPath";
+    public const string KEY_APP_NAME = "-appName";
+
     public static readonly string DEFAULT_OUT_PATH = "Builds/";
-    public static readonly string DEFAULT_NAME = "Heroes Arena";
+    public static readonly string DEFAULT_NAME = "Arena Heroes";
+    public static readonly string DEFAULT_COMPANY = "PortalVR";
     public static readonly string CITY_PATH = "Assets/_App/Resources/Api/Settings/AppSettingCity.asset";
+    public static readonly string BUILD_GROUP_PATH = "Assets/_App/Resources/Api/Builds/Groups/BuildGroup.asset";
+
 
     public static readonly string[] ADMIN_SCENES = new[]
     {
         "Assets/_App/Scenes/Login.unity",
     };
-    
+
     public static readonly string[] COMMON_SCENES = new string[]
     {
         "Assets/_App/Scenes/Init.unity",
@@ -41,36 +58,294 @@ public class AppBuilder
     {
         //Lobby
         "Taverna",
-        
+
         //PVP
         "SkyArena",
-        "SkyArena_Rift",
         "Dungeon",
-        
+
         //PVE
         "Necropolis",
-        
+
         //TD
         "Tower",
-        "Tower_v3",
     };
+
+    public static void OpenDialogAndBuild(string cityName,
+                                          string targetName,
+                                          string version,
+                                          string roomName = null,
+                                          bool useVR = false,
+                                          bool isAdmin = false,
+                                          bool isDevelopmentBuild = false,
+                                          bool useLogs = false)
+    {
+        string extension = "";
+        targetName = targetName.ToUpper();
+        if (!Enum.TryParse(targetName, out PlatformType platformType))
+        {
+            Debug.LogError($"{TAG}: is not valid platform");
+            return;
+        }
+
+        switch (platformType)
+        {
+            case PlatformType.WINDOWS:
+                extension += "exe";
+                break;
+            case PlatformType.ANDROID:
+            case PlatformType.META:
+            case PlatformType.PICO:
+                extension += "apk";
+                break;
+            default:
+                Debug.LogError($"{TAG}: is not valid platform");
+                return;
+        }
+
+        string pathToSaveFile = EditorUtility.SaveFilePanel(
+            $"Build application: {platformType}",
+            "",
+            "Arena Heroes",
+            extension);
+
+        if (string.IsNullOrEmpty(pathToSaveFile) || pathToSaveFile.Length == 0)
+        {
+            return;
+        }
+
+        string outPath = pathToSaveFile.Substring(0, pathToSaveFile.LastIndexOf('/') + 1);
+        string appName = pathToSaveFile.Substring(pathToSaveFile.LastIndexOf('/') + 1);
+        appName = appName.Substring(0, appName.LastIndexOf('.') - 1);
+
+        Build(
+            cityName,
+            targetName,
+            roomName,
+            useVR,
+            isAdmin,
+            isDevelopmentBuild,
+            useLogs,
+            version,
+            outPath,
+            appName);
+    }
+
+    public static void Build()
+    {
+        Debug.Log($"{TAG}: Build: from Debug.Log");
+        Console.WriteLine($"{TAG}: Build: from Debug.Log");
+
+        AppSetting settings = AssetDatabase.LoadAssetAtPath<AppSetting>(CITY_PATH);
+        if (settings == null)
+        {
+            Debug.LogError($"{TAG}: App Settings is null or invalid path");
+            return;
+        }
+
+        if (!TryGetArgumentValue(KEY_CITY_NAME, out string cityName))
+        {
+            cityName = settings.AppData.City;
+        }
+
+        if (!TryGetArgumentValue(KEY_ROOM_NAME, out string roomName))
+        {
+            roomName = settings.AppData.Room;
+        }
+
+        if (!TryGetArgumentValue(KEY_CLUB_ID, out int idClub))
+        {
+            idClub = settings.IdClub;
+        }
+
+        if (!TryGetArgumentValue(KEY_GAME_ID, out int idGame))
+        {
+            idGame = settings.IdGame;
+        }
+
+        if (!TryGetArgumentValue(KEY_PLATFORM_NAME, out string targetName))
+        {
+            targetName = settings.AppData.Platform.ToString();
+        }
+
+        if (!TryGetArgumentValue(KEY_VERSION, out string version))
+        {
+            version = settings.GameVersion;
+        }
+
+        if (!TryGetArgumentValue(KEY_USE_VR, out bool useVR))
+        {
+            useVR = false;
+        }
+
+        if (!TryGetArgumentValue(KEY_IS_ADMIN, out bool isAdmin))
+        {
+            isAdmin = false;
+        }
+
+        if (!TryGetArgumentValue(KEY_IS_DEV_BUILD, out bool isDevelopmentBuild))
+        {
+            isDevelopmentBuild = false;
+        }
+
+        if (!TryGetArgumentValue(KEY_USE_LOGS, out bool useLogs))
+        {
+            useLogs = false;
+        }
+
+        if (!TryGetArgumentValue(KEY_OUT_PATH, out string outPath))
+        {
+            outPath = DEFAULT_OUT_PATH;
+        }
+
+        if (!TryGetArgumentValue(KEY_APP_NAME, out string appName))
+        {
+            appName = DEFAULT_NAME;
+        }
+
+        /*
+        Console.WriteLine($"{TAG}: Build Arguments: " +
+                          $"cityName = {cityName}; " +
+                          $"idClub = {idClub}; " +
+                          $"idGame = {idGame}; " +
+                          $"targetName = {targetName}; " +
+                          $"version = {version}; " +
+                          $"useVR = {useVR}; " +
+                          $"isAdmin = {isAdmin}; " +
+                          $"isDevelopmentBuild = {isDevelopmentBuild}; " +
+                          $"useLogs = {useLogs}; " +
+                          $"outPath = {outPath}; " +
+                          $"appName = {appName}; "
+        );
+        */
+
+        Console.WriteLine($"{TAG}: ---");
+        Console.WriteLine($"{TAG}: Input Console Arguments: ");
+        Console.WriteLine($"{TAG}: cityName = {cityName};");
+        Console.WriteLine($"{TAG}: roomName = {roomName};");
+        Console.WriteLine($"{TAG}: idClub = {idClub};");
+        Console.WriteLine($"{TAG}: idGame = {idGame};");
+        Console.WriteLine($"{TAG}: targetName = {targetName};");
+        Console.WriteLine($"{TAG}: version = {version};");
+        Console.WriteLine($"{TAG}: useVR = {useVR};");
+        Console.WriteLine($"{TAG}: isAdmin = {isAdmin};");
+        Console.WriteLine($"{TAG}: isDevelopmentBuild = {isDevelopmentBuild};");
+        Console.WriteLine($"{TAG}: useLogs = {useLogs};");
+        Console.WriteLine($"{TAG}: outPath = {outPath};");
+        Console.WriteLine($"{TAG}: appName = {appName};");
+        Console.WriteLine($"{TAG}: ---");
+
+
+        Build(cityName,
+              roomName,
+              targetName,
+              version,
+              idClub,
+              idGame,
+              useVR,
+              isAdmin,
+              isDevelopmentBuild,
+              useLogs,
+              outPath,
+              appName);
+    }
+
+    public static void Build(
+        string cityName,
+        string roomName,
+        string targetName,
+        string version,
+        int idClub,
+        int idGame,
+        bool useVR,
+        bool isAdmin,
+        bool isDevelopmentBuild,
+        bool useLogs,
+        string outPath,
+        string appName)
+    {
+        targetName = targetName.ToUpper();
+        if (!Enum.TryParse(targetName, out PlatformType platformType))
+        {
+            Debug.LogError($"{TAG}: {targetName} is not valid platform");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(outPath))
+        {
+            outPath = DEFAULT_OUT_PATH;
+        }
+
+        if (string.IsNullOrEmpty(appName))
+        {
+            appName = DEFAULT_NAME;
+        }
+
+        if (!CheckDirectory(platformType, outPath, appName, out string fullPath))
+        {
+            return;
+        }
+
+        if (!SetAppSettings(cityName,
+                            roomName,
+                            isAdmin,
+                            platformType,
+                            idClub,
+                            idGame,
+                            version,
+                            useVR,
+                            isDevelopmentBuild,
+                            useLogs))
+        {
+            return;
+        }
+
+        if (!SetScenes(cityName, platformType, isAdmin, out string[] scenes))
+        {
+            return;
+        }
+
+        Console.WriteLine($"{TAG}: ---");
+        Console.WriteLine($"{TAG}: Arguments before build: ");
+        Console.WriteLine($"{TAG}: cityName = {cityName};");
+        Console.WriteLine($"{TAG}: idClub = {idClub};");
+        Console.WriteLine($"{TAG}: idGame = {idGame};");
+        Console.WriteLine($"{TAG}: targetName = {targetName};");
+        Console.WriteLine($"{TAG}: version = {version};");
+        Console.WriteLine($"{TAG}: useVR = {useVR};");
+        Console.WriteLine($"{TAG}: isAdmin = {isAdmin};");
+        Console.WriteLine($"{TAG}: isDevelopmentBuild = {isDevelopmentBuild};");
+        Console.WriteLine($"{TAG}: useLogs = {useLogs};");
+        Console.WriteLine($"{TAG}: outPath = {outPath};");
+        Console.WriteLine($"{TAG}: appName = {appName};");
+        Console.WriteLine($"{TAG}: fullPath = {fullPath};");
+        Console.WriteLine($"{TAG}: ---");
+
+        TryBuild(targetName, version, useVR, fullPath, scenes);
+    }
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="cityName"></param>
     /// <param name="targetName"></param>
+    /// <param name="roomName"></param>
+    /// <param name="useVR"></param>
     /// <param name="isAdmin"></param>
-    /// <param name="outPath">Example: "C:\Builds</param>
-    //public static void Build(string cityName, BuildTarget target, bool isAdmin = false, string outPath = null)
+    /// <param name="isDevelopmentBuild"></param>
+    /// <param name="useLogs"></param>
+    /// <param name="version"></param>
+    /// <param name="outPath"></param>
+    /// <param name="appName"></param>
     public static void Build(
-        string cityName, 
-        string targetName, 
+        string cityName,
+        string targetName,
+        string roomName = null,
         bool useVR = false,
-        bool isAdmin = false, 
-        bool isDevelopmentBuild = false, 
-        bool useLogs = false, 
-        string outPath = null, 
+        bool isAdmin = false,
+        bool isDevelopmentBuild = false,
+        bool useLogs = false,
+        string version = "0",
+        string outPath = null,
         string appName = null)
     {
         targetName = targetName.ToUpper();
@@ -84,34 +359,51 @@ public class AppBuilder
         {
             outPath = DEFAULT_OUT_PATH;
         }
-        
+
         if (string.IsNullOrEmpty(appName))
         {
             appName = DEFAULT_NAME;
         }
-        
-        if (!CheckDirectory(platformType, outPath, appName, out string fullPath))
-        {
-           return;
-        }
 
-        if (!SetAppSettings(cityName, isAdmin, platformType, useVR, isDevelopmentBuild, useLogs))
+        if (!CheckDirectory(platformType, outPath, appName, out string fullPath))
         {
             return;
         }
-  
+
+        if (!SetAppSettings(cityName, roomName, isAdmin, platformType, useVR, isDevelopmentBuild, useLogs))
+        {
+            return;
+        }
+
         if (!SetScenes(cityName, platformType, isAdmin, out string[] scenes))
         {
             return;
         }
 
-        TryBuild(targetName, !isAdmin, fullPath, scenes);
+        /*
+Console.WriteLine($"{TAG}: Build Arguments: " +
+                  $"cityName = {cityName}; " +
+                  $"idClub = {idClub}; " +
+                  $"idGame = {idGame}; " +
+                  $"targetName = {targetName}; " +
+                  $"version = {version}; " +
+                  $"useVR = {useVR}; " +
+                  $"isAdmin = {isAdmin}; " +
+                  $"isDevelopmentBuild = {isDevelopmentBuild}; " +
+                  $"useLogs = {useLogs}; " +
+                  $"outPath = {outPath}; " +
+                  $"appName = {appName}; " +
+                  $"fullPath = {fullPath}"
+);
+*/
+
+        TryBuild(targetName, version, useVR, fullPath, scenes);
     }
 
-    private static void TryBuild(string targetName, bool useVR, string outPath, string[] scenes)
+    private static void TryBuild(string targetName, string version, bool useVR, string outPath, string[] scenes)
     {
         //EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows64);
-        
+
         BuildTarget buildTarget;
         BuildTargetGroup buildTargetGroup;
         List<Type> xrTypes = new List<Type>();
@@ -124,9 +416,13 @@ public class AppBuilder
                 buildTargetGroup = BuildTargetGroup.Standalone;
                 if (useVR)
                 {
+                    //xrTypes.Add(typeof(OculusTouchControllerProfile));
+                    //xrTypes.Add(typeof(PICOTouchControllerProfile));
+
+                    xrTypes.Add(typeof(OculusQuestFeature));
                     xrTypes.Add(typeof(OculusTouchControllerProfile));
-                    xrTypes.Add(typeof(PICOTouchControllerProfile));
                 }
+
                 break;
             case (nameof(PlatformType.ANDROID)):
                 buildTarget = BuildTarget.Android;
@@ -152,9 +448,10 @@ public class AppBuilder
                 return;
         }
 
-        EditorBuildSettings.TryGetConfigObject(XRGeneralSettings.k_SettingsKey, out XRGeneralSettingsPerBuildTarget buildTargetSettings);
+        EditorBuildSettings.TryGetConfigObject(XRGeneralSettings.k_SettingsKey,
+                                               out XRGeneralSettingsPerBuildTarget buildTargetSettings);
         XRGeneralSettings xrGeneralSettings = buildTargetSettings.SettingsForBuildTarget(buildTargetGroup);
-        
+
         if (useVR)
         {
             XRPackageMetadataStore.RemoveLoader(xrGeneralSettings.Manager, OCULUS_LOADER, buildTargetGroup);
@@ -171,12 +468,12 @@ public class AppBuilder
         {
             xrFeature.enabled = xrTypes.Contains(xrFeature.GetType());
         }
-        
+
         EditorUtility.SetDirty(buildTargetSettings);
         EditorUtility.SetDirty(xrGeneralSettings);
         EditorUtility.SetDirty(openXRSettings);
         AssetDatabase.SaveAssets();
-        
+
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions
         {
             scenes = scenes,
@@ -184,9 +481,16 @@ public class AppBuilder
             target = buildTarget,
             options = BuildOptions.None
         };
-        
 
-        Debug.Log($"{TAG}: start to build");
+        //TODO: Update Player Settings
+        string prevVersion = Application.version;
+        string prevName = PlayerSettings.productName;
+        string prevPackageName = PlayerSettings.applicationIdentifier;
+
+        PlayerSettings.bundleVersion = version;
+        PlayerSettings.productName = $"{DEFAULT_NAME} {version}";
+        string stringVersion = version.Replace('.', '_');
+        PlayerSettings.applicationIdentifier = $"com.portal_vr.arena_heroes_{stringVersion}";
 
         BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
         if (report.summary.result == BuildResult.Succeeded)
@@ -197,32 +501,14 @@ public class AppBuilder
         {
             Debug.LogError($"{TAG}: build is failed");
         }
+
+        PlayerSettings.bundleVersion = prevVersion;
+        PlayerSettings.productName = prevName;
+        PlayerSettings.applicationIdentifier = prevPackageName;
     }
 
-    private static void TryBuild(BuildTarget target, string outPath, string[] scenes)
-    {
-        BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions
-        {
-            scenes = scenes,
-            locationPathName = outPath,
-            target = target,
-            options = BuildOptions.None
-        };
-
-        Debug.LogError($"{TAG}: start to build");
-
-        BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
-        if (report.summary.result == BuildResult.Succeeded)
-        {
-            Debug.LogError($"{TAG}: build is completed. OK.");
-        }
-        else
-        {
-            Debug.LogError($"{TAG}: build is failed");
-        }
-    }
-
-    private static bool SetScenes(string cityName, PlatformType platformType, bool isAdmin, out string[] scenes)
+    public static bool SetScenes(string cityName, PlatformType platformType, bool isAdmin, out string[] scenes,
+                                 bool isAddSceneToEditor = true)
     {
         switch (platformType)
         {
@@ -235,6 +521,7 @@ public class AppBuilder
                     scenes = null;
                     return false;
                 }
+
                 break;
             case PlatformType.META:
             case PlatformType.PICO:
@@ -244,12 +531,13 @@ public class AppBuilder
                     scenes = null;
                     return false;
                 }
+
                 break;
             default:
                 scenes = null;
                 return false;
         }
-        
+
         string cityPath = $"Assets/_App/Scenes/City/{cityName}";
         if (!Directory.Exists(cityPath))
         {
@@ -257,7 +545,7 @@ public class AppBuilder
             scenes = null;
             return false;
         }
-        
+
         int scenesCount = 0;
         //scenesCount += isAdmin ? ADMIN_SCENES.Length : 0;
         scenesCount += ADMIN_SCENES.Length;
@@ -266,10 +554,10 @@ public class AppBuilder
         scenes = new string[scenesCount];
 
         int offset = 0;
-    
+
         COMMON_SCENES.CopyTo(scenes, offset);
         offset += COMMON_SCENES.Length;
-        
+
         //if (isAdmin)
         {
             ADMIN_SCENES.CopyTo(scenes, offset);
@@ -283,12 +571,60 @@ public class AppBuilder
             scenes[i] = scenePath;
             cityScenePosition++;
         }
-        
-        AddScenesToBuildEditor(scenes);
+
+        if (isAddSceneToEditor)
+        {
+            AddScenesToBuildEditor(scenes);
+        }
+
         return true;
     }
 
-    private static bool SetAppSettings(string cityName, bool isAdmin, PlatformType platformType, bool useVR, bool isDevBuild, bool useLogs)
+    private static bool SetAppSettings(string cityName,
+                                       string roomName,
+                                       bool isAdmin,
+                                       PlatformType platformType,
+                                       int idClub,
+                                       int idGame,
+                                       string version,
+                                       bool useVR,
+                                       bool isDevBuild,
+                                       bool useLogs)
+    {
+        AppSetting settings = AssetDatabase.LoadAssetAtPath<AppSetting>(CITY_PATH);
+        if (settings == null)
+        {
+            Debug.LogError($"{TAG}: settings is null or invalid path");
+            return false;
+        }
+
+        settings.IdClub = idClub;
+        settings.IdGame = idGame;
+        settings.GameVersion = version;
+
+        settings.AppData.City = cityName;
+        settings.AppData.IsAdmin = isAdmin;
+        settings.AppData.Platform = platformType;
+        settings.AppData.IsDevBuild = isDevBuild;
+        settings.AppData.UseLogs = useLogs;
+        settings.AppData.UseVR = useVR;
+
+        //TODO: room name
+        settings.AppData.Room = roomName.IsNullOrEmpty() ? cityName : roomName;
+
+
+        EditorUtility.SetDirty(settings);
+        AssetDatabase.SaveAssets();
+        return true;
+    }
+
+    private static bool SetAppSettings(string cityName,
+                                       string roomName,
+                                       bool isAdmin,
+                                       PlatformType platformType,
+                                       bool useVR,
+                                       bool isDevBuild,
+                                       bool useLogs)
     {
         AppSetting settings = AssetDatabase.LoadAssetAtPath<AppSetting>(CITY_PATH);
         if (settings == null)
@@ -296,20 +632,24 @@ public class AppBuilder
             Debug.LogError($"{TAG}: city settings is null or invalid path");
             return false;
         }
-        
+
         settings.AppData.City = cityName;
         settings.AppData.IsAdmin = isAdmin;
         settings.AppData.Platform = platformType;
-        settings.AppData.IsDevelopmentBuild = isDevBuild;
+        settings.AppData.IsDevBuild = isDevBuild;
         settings.AppData.UseLogs = useLogs;
         settings.AppData.UseVR = useVR;
+        settings.AppData.Room = roomName.IsNullOrEmpty() ? cityName : roomName;
 
         EditorUtility.SetDirty(settings);
         AssetDatabase.SaveAssets();
         return true;
     }
-    
-    private static bool CheckDirectory(PlatformType platformType, string outPath, string appName, out string fullPath)
+
+    private static bool CheckDirectory(PlatformType platformType,
+                                       string outPath,
+                                       string appName,
+                                       out string fullPath)
     {
         switch (platformType)
         {
@@ -323,16 +663,17 @@ public class AppBuilder
                 break;
             default:
                 Debug.LogError($"{TAG}: is not valid platform");
-                
+
                 fullPath = null;
                 return false;
         }
 
-        fullPath = $"{outPath}{appName}";
-        
+        //fullPath = $"{outPath}{appName}";
+        fullPath = Path.Combine(outPath, appName);
+
         if (!Directory.Exists(outPath))
         {
-            Debug.Log($"{TAG}: {fullPath} is not exists. Try to create it.");
+            Debug.Log($"{TAG}: {outPath} is not exists. Try to create it.");
 
             DirectoryInfo info = Directory.CreateDirectory(outPath);
             if (info.Exists)
@@ -349,7 +690,7 @@ public class AppBuilder
         return true;
     }
 
-    private static void AddScenesToBuildEditor(string[] scenes)
+    public static void AddScenesToBuildEditor(string[] scenes)
     {
         EditorBuildSettingsScene[] editorBuildSettingsScenes = new EditorBuildSettingsScene[scenes.Length];
 
@@ -357,7 +698,35 @@ public class AppBuilder
         {
             editorBuildSettingsScenes[i] = new EditorBuildSettingsScene(scenes[i], true);
         }
-        
+
         EditorBuildSettings.scenes = editorBuildSettingsScenes;
     }
+
+    #region Console
+
+    private static bool TryGetArgumentValue<T>(string name, out T value) where T : IConvertible
+    {
+        string[] args = System.Environment.GetCommandLineArgs();
+        for (int i = 0; i < args.Length; i++)
+        {
+            if (args[i].Equals(name) && (args.Length > i + 1))
+            {
+                try
+                {
+                    value = (T)Convert.ChangeType(args[i + 1], typeof(T));
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    value = default;
+                    return false;
+                }
+            }
+        }
+
+        value = default;
+        return false;
+    }
+
+    #endregion
 }

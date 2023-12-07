@@ -1,31 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OffEventSystemVR : MonoBehaviour
 {
-    //скрипт, который отключает EventSystem, если игра запущена на компьютере
-    public ManagerDevice managerDevice; // Ссылка на объект ManagerDevice
-
+    private ManagerDevice _managerDevice; 
+    
     private void Awake()
     {
-        managerDevice = GameObject.Find("DeviceManager").GetComponent<ManagerDevice>();
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-
+        _managerDevice = FindObjectOfType<ManagerDevice>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        if (!managerDevice.PlayerCrate && gameObject.activeSelf) // Проверяем, нужно ли создавать игрока
+        if (_managerDevice.IsAdmin)
         {
-            // Выключаем (деактивируем) объект
             gameObject.SetActive(false);
-            
         }
     }
 }
