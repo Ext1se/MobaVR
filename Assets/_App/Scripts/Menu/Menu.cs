@@ -1,18 +1,32 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MobaVR
 {
     public class Menu : MonoBehaviour
     {
-        private LocalRepository m_LocalRepository;
+        [SerializeField] private MenuLobby m_Lobby;
 
-        private DateTime m_StartDateTime;
-        private DateTime m_EndDateTime;
+        private LocalRepository m_LocalRepository;
+        private string m_IpAddress = "";
 
         private void Awake()
         {
             m_LocalRepository = new LocalRepository();
+        }
+
+        private void Update()
+        {
+            /*
+            if (Input.GetKeyDown(KeyCode.O) && Input.GetKey(KeyCode.LeftAlt))
+            {
+                ConnectToOnlineMode();
+            }
+
+            if (Input.GetKeyDown(KeyCode.L) && Input.GetKey(KeyCode.LeftAlt))
+            {
+                ConnectToLocalMode();
+            }
+            */
         }
 
         #region Language
@@ -44,16 +58,27 @@ namespace MobaVR
 
         #endregion
 
-        #region Game Session
+        #region Server
 
-        public void StartSession()
+        public void SetIpAddress(string ip)
         {
-            m_StartDateTime = DateTime.Now;
+            m_IpAddress = ip;
         }
 
-        public void CompleteSession()
+        public void ConnectToOnlineMode()
         {
-            m_EndDateTime = DateTime.Now;
+            m_LocalRepository.SetLocalServer(false);
+            m_Lobby.ConnectOnlineMode();
+        }
+
+        public void ConnectToLocalMode()
+        {
+            m_LocalRepository.SetLocalServer(true);
+            if (!string.IsNullOrEmpty(m_IpAddress))
+            {
+                m_LocalRepository.SaveIpAddress(m_IpAddress);
+                m_Lobby.ConnectLocalMode(m_IpAddress);
+            }
         }
 
         #endregion

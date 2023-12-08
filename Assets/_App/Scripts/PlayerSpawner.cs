@@ -12,16 +12,19 @@ namespace MobaVR
         public ManagerDevice managerDevice; // Ссылка на объект ManagerDevice
         public GameObject EventSystemVR; //евент систем из других сцен
 
-        private void Awake()
+        private void Start()
         {
-            managerDevice = GameObject.Find("DeviceManager").GetComponent<ManagerDevice>();
+            if (managerDevice == null)
+            {
+                managerDevice = FindObjectOfType<ManagerDevice>();
+            }
         }
 
         public override PlayerVR SpawnPlayer(Team team)
         {
             string prefabName = $"Players/{m_PlayerPrefab.name}";
 
-            if (managerDevice.PlayerCrate) // Проверяем, нужно ли создавать игрока
+            if (managerDevice.CanCreatePlayer) // Проверяем, нужно ли создавать игрока
             {
                 EventSystemVR.SetActive(true);
                 localPlayer = PhotonNetwork.Instantiate(prefabName, Vector3.zero, Quaternion.identity);
