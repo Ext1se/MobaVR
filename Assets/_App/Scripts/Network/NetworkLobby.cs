@@ -6,6 +6,7 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Events;
 using ExitGames.Client.Photon;
+using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
 
 namespace MobaVR
@@ -13,9 +14,9 @@ namespace MobaVR
     public class NetworkLobby : MonoBehaviourPunCallbacks
     {
         [Header("Photon")]
+        [SerializeField] [ReadOnly] private string m_RoomName = "MobaVR";
         [SerializeField] private string m_SceneName = "Room";
         [SerializeField] private byte m_MaxPlayersPerRoom = 12;
-        [SerializeField] private string m_RoomName = "MobaVR";
         [SerializeField] private string m_GameVersion = "1";
         [SerializeField] private bool m_IsGetOnlineFromPlayerPrefs = true;
         [SerializeField] private bool m_GameOnline;
@@ -39,6 +40,8 @@ namespace MobaVR
 
         private void Awake()
         {
+            m_RoomName = appSettings.AppData.City;
+            
             localRepository = new LocalRepository();
             if (m_IsGetOnlineFromPlayerPrefs)
             {
@@ -78,12 +81,30 @@ namespace MobaVR
         private void BackToMenu()
         {
             //SceneManager.LoadScene(0);
+            //SceneManager.LoadScene(m_MenuScene);
+            
+            ///
+            /// Так как теперь GameSession находится в Меню, то и там отлавливается выход и лефт из румы
+            ///
+            
+            if (ExtensionSceneManager.Instance != null)
+            {
+                ExtensionSceneManager.Instance.LoadScene(m_MenuScene, 4f);
+            }
+            else
+            {
+                Invoke(nameof(WaitAndBackToMenu), 4f);
+            }
+        }
+
+        private void WaitAndBackToMenu()
+        {
             SceneManager.LoadScene(m_MenuScene);
         }
 
         private void JoinOrCreateRoom()
         {
-            if (appSettings.AppData.IsDevelopmentBuild)
+            if (appSettings.AppData.IsDevBuild)
             {
                 m_RoomName += "_Dev";
                 PhotonNetwork.JoinOrCreateRoom(m_RoomName,
@@ -143,6 +164,7 @@ namespace MobaVR
 
                 // PhotonNetwork.ConnectUsingSettings();
 
+                PhotonNetwork.EnableCloseConnection = true;
                 PhotonNetwork.AutomaticallySyncScene = true;
                 PhotonNetwork.OfflineMode = false;
                 PhotonNetwork.GameVersion = m_GameVersion;
@@ -165,7 +187,7 @@ namespace MobaVR
         {
             base.OnJoinRoomFailed(returnCode, message);
             Debug.Log($"{name}: Launcher:OnJoinRoomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
-            BackToMenu();
+            //BackToMenu();
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
@@ -179,7 +201,7 @@ namespace MobaVR
                                      roomOptions);
             */
             
-            BackToMenu();
+            //BackToMenu();
         }
 
         public override void OnDisconnected(DisconnectCause cause)
@@ -189,7 +211,7 @@ namespace MobaVR
 
             m_IsConnecting = false;
             OnRoomDisconnected?.Invoke();
-            BackToMenu();
+            //BackToMenu();
         }
 
         /*public override void OnJoinedRoom()
@@ -202,6 +224,11 @@ namespace MobaVR
                 PhotonNetwork.LoadLevel(m_SceneName);
             }
         }*/
+
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        {
+            base.OnPlayerEnteredRoom(newPlayer);
+        }
 
         public override void OnJoinedRoom()
         {

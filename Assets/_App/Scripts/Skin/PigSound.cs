@@ -34,7 +34,7 @@ namespace MobaVR
 
         private void OnInputPerformed(InputAction.CallbackContext obj)
         {
-            if (m_AudioSource.isPlaying)
+            if (m_AudioSource == null || m_AudioSource.isPlaying)
             {
                 return;
             }
@@ -46,7 +46,7 @@ namespace MobaVR
         [PunRPC]
         private void RpcPlaySoundClip(int position)
         {
-            if (m_AudioSource.isPlaying)
+            if (m_AudioSource == null || m_AudioSource.isPlaying)
             {
                 return;
             }

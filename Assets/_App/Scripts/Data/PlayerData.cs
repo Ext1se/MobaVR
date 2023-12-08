@@ -10,6 +10,7 @@ namespace MobaVR
         public string IdUser;
         public string NickName;
         public string IdRole;
+        public bool IsMale = true;
 
         public Player Player;
 
