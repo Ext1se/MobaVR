@@ -11,7 +11,13 @@ namespace MobaVR
             base.OnInspectorGUI();
 
             GUILayout.Space(32);
-            
+
+            if (GUILayout.Button("Build"))
+            {
+                Build();
+            }
+
+            /*
             if (GUILayout.Button("Build Selected Platform"))
             {
                 Build();
@@ -48,19 +54,34 @@ namespace MobaVR
             {
                 Build(PlatformType.PICO);
             }
+            */
         }
 
         public void Build(BuildSetting buildSetting)
         {
+            AppBuilder.OpenDialogAndBuild(
+                buildSetting.AppData.City,
+                buildSetting.AppData.Platform.ToString(),
+                Application.version,
+                buildSetting.AppData.Room,
+                buildSetting.AppData.UseVR,
+                buildSetting.AppData.IsAdmin,
+                buildSetting.AppData.IsDevBuild,
+                buildSetting.AppData.UseLogs
+            );
+
+            /*
             AppBuilder.Build(
                 buildSetting.AppData.City,
                 buildSetting.AppData.Platform.ToString(),
                 buildSetting.AppData.UseVR,
                 buildSetting.AppData.IsAdmin,
-                buildSetting.AppData.IsDevelopmentBuild,
+                buildSetting.AppData.IsDevBuild,
                 buildSetting.AppData.UseLogs,
+                "1.0.0",
                 buildSetting.Path,
                 buildSetting.Name);
+                */
         }
 
         public void Build()
