@@ -60,6 +60,7 @@ namespace BNG {
 
                 fadeImage = fadeObject.AddComponent<Image>();
                 fadeImage.color = FadeColor;
+                canvasGroup.alpha = 0f;
                 fadeImage.raycastTarget = false;
 
                 // Stretch the image
