@@ -1,7 +1,4 @@
-using System;
 using Photon.Pun;
-using Sirenix.OdinInspector;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -42,19 +39,21 @@ namespace MobaVR
             ClearScenes();
         }
 
+        //TODO: Remove this
         private void OnEnable()
         {
-            SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
-            //SceneManager.sceneUnloaded += SceneManagerOnsceneUnloaded;
+            //SceneManager.sceneLoaded += SceneManagerOnSceneLoaded;
+            //SceneManager.sceneUnloaded += SceneManagerOnSceneUnloaded;
         }
 
+        //TODO: Remove this
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= SceneManagerOnsceneLoaded;
-            //SceneManager.sceneUnloaded -= SceneManagerOnsceneUnloaded;
+            //SceneManager.sceneLoaded -= SceneManagerOnSceneLoaded;
+            //SceneManager.sceneUnloaded -= SceneManagerOnSceneUnloaded;
         }
 
-        private void SceneManagerOnsceneUnloaded(Scene arg0)
+        private void SceneManagerOnSceneUnloaded(Scene arg0)
         {
             if (!string.IsNullOrEmpty(m_CurrentMap))
             {
@@ -62,7 +61,7 @@ namespace MobaVR
             }
         }
 
-        private void SceneManagerOnsceneLoaded(Scene scene, LoadSceneMode arg1)
+        private void SceneManagerOnSceneLoaded(Scene scene, LoadSceneMode arg1)
         {
             if (scene.name.Equals(m_DefaultMap))
             {

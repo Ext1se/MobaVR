@@ -12,8 +12,8 @@ namespace MobaVR
 {
     public class ClassicGameSession : BaseGameSession
     {
-        [Header("Network")]
-        [SerializeField] private NetworkSession m_NetworkSession;
+        //[Header("Network")]
+        //[SerializeField] private NetworkSession m_NetworkSession;
 
         [Header("Modes")]
         [FormerlySerializedAs("m_Mode")]
@@ -72,23 +72,28 @@ namespace MobaVR
 
         private void Awake()
         {
-            managerDevice = GameObject.Find("DeviceManager").GetComponent<ManagerDevice>();
+            //managerDevice = FindObjectOfType<ManagerDevice>();
             //TODO: 
+            /*
             PhotonCustomHitData.Register();
             #if !UNITY_EDITOR
                 CustomComposites.Init();
             #endif
+            */
         }
 
         private void Start()
         {
-            //InitPlayer();
-            //InitMode();
-            if (managerDevice != null && managerDevice.PlayerCrate) // Проверяем, нужно ли создавать игрока
+            if (managerDevice == null)
+            {
+                managerDevice = FindObjectOfType<ManagerDevice>();
+            }
+            /*
+            if (managerDevice != null && managerDevice.CanCreatePlayer) // Проверяем, нужно ли создавать игрока
             {
                 Invoke(nameof(InitPlayer), 2f);
             }
-            //Invoke(nameof(InitMode), 3f);
+            */
         }
 
         #region Scenes
@@ -105,6 +110,56 @@ namespace MobaVR
         private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
         {
             m_Mode = FindObjectOfType<GameMode>();
+        }
+
+        #endregion
+
+        #region Connection
+        
+        public void CloseGame()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                //PhotonNetwork.EnableCloseConnection = true;
+                //PhotonNetwork.CurrentRoom.IsOpen = false;
+                //PhotonNetwork.CurrentRoom.PlayerTtl = 0;
+                //PhotonNetwork.CurrentRoom.EmptyRoomTtl = 0;
+
+                foreach (Player player in PhotonNetwork.PlayerList)
+                {
+                    if (Equals(player, PhotonNetwork.LocalPlayer))
+                    {
+                        continue;
+                    }
+                    
+                    //PhotonNetwork.CloseConnection(player);
+                }
+
+                //PhotonNetwork.CloseConnection(PhotonNetwork.LocalPlayer);
+                //PhotonNetwork.Disconnect();
+            }
+            
+            photonView.RPC(nameof(RpcDisconnect), RpcTarget.All);
+        }
+
+        [PunRPC]
+        private void RpcDisconnect()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                Invoke(nameof(WaitAndDisconnect), 5f);
+            }
+            else
+            {
+                Invoke(nameof(WaitAndDisconnect), 0f);
+            }
+        }
+
+        private void WaitAndDisconnect()
+        {
+            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.Disconnect();
+            //SceneManager.LoadScene("Menu");
         }
 
         #endregion
@@ -216,11 +271,47 @@ namespace MobaVR
             SetTeam(TeamType.BLUE);
         }
 
+        public void SetRole(string idClass)
+        {
+            if (m_LocalPlayer != null)
+            {
+                m_LocalPlayer.PlayerData.IdRole = idClass;
+                SwitchRoleAndSkin();
+            }
+        }
+        
+        public void SetGender(bool isMale)
+        {
+            if (m_LocalPlayer != null)
+            {
+                m_LocalPlayer.PlayerData.IsMale = isMale;
+                SwitchRoleAndSkin();
+            }
+        }
+
         public void SwitchRole(string idClass)
+        {
+            SwitchRole(idClass, true);
+        }
+
+        public void SwitchRole(string idClass, bool isMale)
         {
             if (m_LocalPlayer.TryGetComponent(out ClassSwitcher classSwitcher))
             {
-                classSwitcher.SetRole(idClass);
+                m_LocalPlayer.PlayerData.IdRole = idClass;
+                m_LocalPlayer.PlayerData.IsMale = isMale;
+                
+                classSwitcher.SetRole(idClass, isMale);
+            }
+        }
+
+        public void SwitchRoleAndSkin()
+        {
+            if (m_LocalPlayer.TryGetComponent(out ClassSwitcher classSwitcher))
+            {
+                classSwitcher.SetRole(
+                    m_LocalPlayer.PlayerData.IdRole,
+                    m_LocalPlayer.PlayerData.IsMale);
             }
         }
 
@@ -435,6 +526,11 @@ namespace MobaVR
 
         public override void OnJoinedRoom()
         {
+            if (managerDevice != null && managerDevice.CanCreatePlayer) // Проверяем, нужно ли создавать игрока
+            {
+                Invoke(nameof(InitPlayer), 2f);
+            }
+
             base.OnJoinedRoom();
 
             //InitPlayer();
