@@ -26,7 +26,7 @@ public class AppSwitcher
             {
                 if (editorBuildSettingsScene.path.Equals(adminScene))
                 {
-                    editorBuildSettingsScene.enabled = isAdmin;
+                    //editorBuildSettingsScene.enabled = isAdmin;
                 }
             }
         }
@@ -46,6 +46,13 @@ public class AppSwitcher
         SwitchAdminMode(false);
     }
 
+    [MenuItem("MobaVR/Mode/Set UpdatePackageName")]
+    public static void UpdatePackageName()
+    {
+        PlayerSettings.productName = "Heroes 999";
+        PlayerSettings.applicationIdentifier = "com.ext1se.hs";
+    }
+
     private static void SwitchDevelopmentMode(bool isDevelopment)
     {
         AppSetting settings = AssetDatabase.LoadAssetAtPath<AppSetting>(AppBuilder.CITY_PATH);
@@ -55,7 +62,7 @@ public class AppSwitcher
             return;
         }
 
-        settings.AppData.IsDevelopmentBuild = isDevelopment;
+        settings.AppData.IsDevBuild = isDevelopment;
         EditorUtility.SetDirty(settings);
         AssetDatabase.SaveAssets();
     }
@@ -75,8 +82,6 @@ public class AppSwitcher
     [MenuItem("MobaVR/Mode/Select App Settings", priority = 1)]
     public static void SelectAppSettingsFile()
     {
-        SwitchDevelopmentMode(false);
-        
         AppSetting settings = AssetDatabase.LoadAssetAtPath<AppSetting>(AppBuilder.CITY_PATH);
         if (settings == null)
         {
@@ -86,5 +91,23 @@ public class AppSwitcher
 
         EditorGUIUtility.PingObject(settings);
         Selection.activeObject = settings;
+    }
+    
+    [MenuItem("MobaVR/Mode/Select Build Group", priority = 2)]
+    public static void SelectAppGroupSettingsFile()
+    {
+        BuildSettingGroup settings = AssetDatabase.LoadAssetAtPath<BuildSettingGroup>(AppBuilder.BUILD_GROUP_PATH);
+        if (settings == null)
+        {
+            Debug.LogError($"{TAG}: group settings is null or invalid path");
+            return;
+        }
+
+        EditorGUIUtility.PingObject(settings);
+        Selection.activeObject = settings;
+    }
+    
+    public static void UpdatePhotonScenes(){
+    
     }
 }
