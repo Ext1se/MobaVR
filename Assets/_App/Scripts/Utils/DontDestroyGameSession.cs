@@ -8,21 +8,32 @@ namespace MobaVR
 {
     public class DontDestroyGameSession : MonoBehaviourPunCallbacks
     {
-        private static DontDestroyGameSession Instance;
-        
-        [SerializeField] private GameObject m_GameSessionPrefab;
-        private GameObject m_GameSession;
+        [SerializeField] private GameObject m_GameSession;
 
         private void Awake()
         {
-            if (Instance != null)
+            DontDestroyGameSession[] dontDestroyGameSessions = FindObjectsOfType<DontDestroyGameSession>();
+            foreach (DontDestroyGameSession dontDestroyGameSession in dontDestroyGameSessions)
+            {
+                if (dontDestroyGameSession != this)
+                {
+                    Destroy(dontDestroyGameSession.gameObject);
+                }
+            }
+            
+            DontDestroyOnLoad(gameObject);
+        }
+        
+        private void DestroyObjects()
+        {
+            if (m_GameSession.gameObject != null)
+            {
+                Destroy(m_GameSession.gameObject);
+            }
+
+            if (gameObject != null)
             {
                 Destroy(gameObject);
-            }
-            else
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
         }
 
@@ -30,9 +41,21 @@ namespace MobaVR
         {
             if (PhotonNetwork.IsConnected)
             {
-                m_GameSession = Instantiate(m_GameSessionPrefab, transform);
+                m_GameSession.SetActive(true);
                 PhotonNetwork.AutomaticallySyncScene = true;
             }
+        }
+
+        public override void OnLeftLobby()
+        {
+            DestroyObjects();
+            base.OnLeftLobby();
+        }
+
+        public override void OnLeftRoom()
+        {
+            DestroyObjects();
+            base.OnLeftRoom();
         }
 
         public override void OnJoinedRoom()
@@ -43,8 +66,20 @@ namespace MobaVR
 
         public override void OnDisconnected(DisconnectCause cause)
         {
-            Destroy(m_GameSession.gameObject);
+            DestroyObjects();
             base.OnDisconnected(cause);
+        }
+
+        public override void OnJoinRoomFailed(short returnCode, string message)
+        {
+            DestroyObjects();
+            base.OnJoinRoomFailed(returnCode, message);
+        }
+
+        public override void OnJoinRandomFailed(short returnCode, string message)
+        {
+            DestroyObjects();
+            base.OnJoinRandomFailed(returnCode, message);
         }
     }
 }

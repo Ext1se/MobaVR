@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace MobaVR
 {
@@ -13,6 +14,8 @@ namespace MobaVR
 
         private void Awake()
         {
+            //DateTimeOffset dateTimeOffset = DateTimeOffset.Now;
+            //string c = dateTimeOffset.ToString("yyyy-MM-dd'T'HH:mm:ss.ffK");
             CreateProvider();
         }
 
