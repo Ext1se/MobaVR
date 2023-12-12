@@ -4544,7 +4544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1574347450
 Transform:
   m_ObjectHideFlags: 0
@@ -4558,7 +4558,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1988698557}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1574347451
 BoxCollider:
@@ -7675,7 +7675,7 @@ PrefabInstance:
     - target: {fileID: 7405715877936150713, guid: 522d572cbbead2e418a71fd4ac3cf980,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4
+      value: -5.09
       objectReference: {fileID: 0}
     - target: {fileID: 7405715877936150713, guid: 522d572cbbead2e418a71fd4ac3cf980,
         type: 3}
@@ -9325,7 +9325,7 @@ PrefabInstance:
     - target: {fileID: 7405715878675589813, guid: 522d572cbbead2e418a71fd4ac3cf980,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7405715878682157001, guid: 522d572cbbead2e418a71fd4ac3cf980,
         type: 3}
@@ -11432,6 +11432,16 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2087314306}
+    - target: {fileID: 7405715879711218004, guid: 522d572cbbead2e418a71fd4ac3cf980,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 7405715879711218005, guid: 522d572cbbead2e418a71fd4ac3cf980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7405715879711218006, guid: 522d572cbbead2e418a71fd4ac3cf980,
         type: 3}
       propertyPath: sceneViewId
