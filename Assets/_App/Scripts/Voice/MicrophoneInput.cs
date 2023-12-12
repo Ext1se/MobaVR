@@ -9,7 +9,7 @@ public class MicrophoneInput : MonoBehaviour
     private int _sampleWindow = 1024;
     private bool _isInitialized;
     private bool _isRecorded = false;
-    
+
     public bool IsInitialized => _isInitialized;
     public bool IsRecorded => _isRecorded;
 
@@ -52,6 +52,12 @@ public class MicrophoneInput : MonoBehaviour
 
     public void InitMicrophone()
     {
+        if (Microphone.devices.Length == 0)
+        {
+            _isInitialized = false;
+            return;
+        }
+
         if (_device == null)
         {
             _device = Microphone.devices[0];
@@ -78,6 +84,11 @@ public class MicrophoneInput : MonoBehaviour
 
     public void Stop()
     {
+        if (_device == null)
+        {
+            return;
+        }
+
         Microphone.End(_device);
         _isInitialized = false;
         _isRecorded = false;
@@ -109,13 +120,20 @@ public class MicrophoneInput : MonoBehaviour
 
     public void MicrophoneToAudioClip()
     {
-        string microphoneName = Microphone.devices[0];
-        _clip = Microphone.Start(microphoneName, true, 20, AudioSettings.outputSampleRate);
+        if (_device != null)
+        {
+            _clip = Microphone.Start(_device, true, 20, AudioSettings.outputSampleRate);
+        }
     }
 
     public float GetLoundessFromMicrophone()
     {
-        return GetLoudnessFromAudioClip(Microphone.GetPosition(Microphone.devices[0]), _clip);
+        if (_device != null)
+        {
+            return GetLoudnessFromAudioClip(Microphone.GetPosition(_device), _clip);
+        }
+
+        return 0;
     }
 
     public float GetLoudnessFromAudioClip(int clipPosition, AudioClip clip)
