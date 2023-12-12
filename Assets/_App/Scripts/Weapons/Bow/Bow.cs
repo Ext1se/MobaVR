@@ -171,7 +171,7 @@ namespace MobaVR.Weapons.Bow
             alignBow();
         }
 
-        Transform getArrowRest()
+        public Transform getArrowRest()
         {
             if (bowGrabbable.GetPrimaryGrabber() != null &&
                 bowGrabbable.GetPrimaryGrabber().HandSide == ControllerHand.Right && ArrowRestLeftHanded != null)
@@ -446,7 +446,11 @@ namespace MobaVR.Weapons.Bow
             // Calculate shot force
             float shotForce = BowForce * StringDistance;
             Vector3 transformForward = GrabbedArrow.transform.forward * shotForce;
-            GrabbedArrow.ShootArrow(transformForward);
+            if (GrabbedArrow != null && GrabbedArrow.isActiveAndEnabled)
+            {
+                GrabbedArrow.ShootArrow(transformForward);
+            }
+
             OnReleaseArrow?.Invoke(GrabbedArrow, transformForward);
 
             // Make sure hands are showing if we hid them
