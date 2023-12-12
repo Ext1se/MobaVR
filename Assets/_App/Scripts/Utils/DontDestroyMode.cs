@@ -70,9 +70,14 @@ namespace MobaVR
             }
         }
 
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        {
+            base.OnPlayerEnteredRoom(newPlayer);
+        }
+
         public override void OnJoinedRoom()
         {
-            //CreateGameSession();
+            CreateGameSession();
             base.OnJoinedRoom();
         }
 
