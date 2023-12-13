@@ -58369,7 +58369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TeamType: 0
-  ID: Defender
+  ID: DefenderWoman
   m_Armature: {fileID: 4328285151786029471}
   m_ArmatureScale: 0.54
   m_UseSkinHands: 1
@@ -60429,7 +60429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TeamType: 0
-  ID: Wizard
+  ID: WizardWoman
   m_Armature: {fileID: 1794702482751539218}
   m_ArmatureScale: 0.54
   m_UseSkinHands: 1
@@ -62730,7 +62730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TeamType: 0
-  ID: Ranger
+  ID: RangerWoman
   m_Armature: {fileID: 3283456452498083272}
   m_ArmatureScale: 0.54
   m_UseSkinHands: 1
@@ -68682,6 +68682,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delay: 0.1
   m_Sum: 0
+--- !u!114 &9064670001920980628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513465060831857217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f1cee1f395d574cad709495692b1a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - {fileID: 6067134338397593222}
+  - {fileID: 1497854644240835468}
+  - {fileID: 4298004780761832017}
+  - {fileID: 4568195535854486969}
+  - {fileID: 2050126704744137950}
+  - {fileID: 8174672849686797393}
 --- !u!114 &1590339894759993594 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6243918028450656639, guid: 46c7acdf4b2b0564681dd4c4b7d39ea1,
@@ -68918,6 +68937,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delay: 0.1
   m_Sum: 0
+--- !u!114 &6148823559346500071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6490837525926514695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f1cee1f395d574cad709495692b1a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects:
+  - {fileID: 4889833352641488107}
+  - {fileID: 3563422524857376284}
+  - {fileID: 1560446477740159092}
+  - {fileID: 3747334607315834031}
+  - {fileID: 8908604178874661705}
+  - {fileID: 3529277622701855027}
 --- !u!114 &6762646984440882715 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2120457042837596062, guid: 46c7acdf4b2b0564681dd4c4b7d39ea1,

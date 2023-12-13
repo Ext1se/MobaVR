@@ -39,6 +39,11 @@ public class CharacterActions : MonoBehaviour
     
     private IEnumerator _rotateCoroutine;
     private bool continueTutorial = false;
+    
+    
+    // Новая переменная для хранения объекта, к которому будет двигаться персонаж.
+    public GameObject TargetWay;
+    
 
     // Класс, описывающий каждый шаг обучения.
     [System.Serializable]
@@ -47,6 +52,8 @@ public class CharacterActions : MonoBehaviour
         public int NomerUroka;
         public string description; // Описание шага.
         public AudioClip startSound; // Звук при старте шага.
+        
+        public Transform TransformTargetWay; //точка в которую будет стрелять луч от игрока
         public string startAnimation; // Анимация при старте шага.
         public GameObject SubStart;//субтитры старта
         public bool startSoundRun; //звук проигрался
@@ -122,7 +129,13 @@ public class CharacterActions : MonoBehaviour
         {
             //Debug.Log("Звук есть, запускаем корутину  PlaySoundAndAnimation и отправляем в неё звук из урока номер: ");
             
-
+            // Перемещаем указатель куда нужно идти в заданную точку
+            if (step.TransformTargetWay != null && TargetWay != null)
+            {
+                TargetWay.transform.position = step.TransformTargetWay.position;
+            }
+            
+            
             //включаем субтитры
             if (step.SubMainTask)
             {step.SubMainTask.SetActive(false);}

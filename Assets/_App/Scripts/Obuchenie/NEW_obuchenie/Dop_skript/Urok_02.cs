@@ -10,9 +10,15 @@ public class Urok_02 : MonoBehaviour
     
     [SerializeField]
     private Transform targetRed; // Точка для команды "RED"
+    
+    [SerializeField]
+    private Transform targetRedWay; // Точка куда будет смотреть указатель от игрока для команды "RED"
 
     [SerializeField]
     private Transform targetBlue; // Точка для команды "BLUE"
+    
+    [SerializeField]
+    private Transform targetBlueWay; //  Точка куда будет смотреть указатель от игрока для команды "BLUE"
 
     private CharacterActions characterActions;
 
@@ -82,10 +88,12 @@ public class Urok_02 : MonoBehaviour
         if (team == "RED")
         {
             characterActions.tutorialSteps[characterActions.CurrentStepIndex].targetPoint = targetRed;
+            characterActions.tutorialSteps[characterActions.CurrentStepIndex].TransformTargetWay = targetRedWay;
         }
         else if (team == "BLUE")
         {
             characterActions.tutorialSteps[characterActions.CurrentStepIndex].targetPoint = targetBlue;
+            characterActions.tutorialSteps[characterActions.CurrentStepIndex].TransformTargetWay = targetBlueWay;
         }
         //путь указан и команда выбрана
         RunTeamTarget = true;
@@ -104,6 +112,7 @@ public class Urok_02 : MonoBehaviour
         {
             //обнуляем переменную, чтобы использовать скрипт повторно
             characterActions.tutorialSteps[characterActions.CurrentStepIndex].targetPoint = null;
+            characterActions.tutorialSteps[characterActions.CurrentStepIndex].TransformTargetWay = null;
             characterActions.tutorialSteps[1].isTaskCompleted = true;
         }
     }
