@@ -29,6 +29,9 @@ public class Urok_02 : MonoBehaviour
     
     private void OnEnable()
     {
+        // Найти и назначить объекты
+        FindAndAssignTargets();
+        
         //находим компонент с уроками
         characterActions = GetComponent<CharacterActions>();
         RunTeamTarget =false;
@@ -81,6 +84,27 @@ public class Urok_02 : MonoBehaviour
             SetTargetPointBasedOnTeam();
         }
     }
+    
+    
+    private void FindAndAssignTargets()
+    {
+        // Найти объекты с заданными именами
+        GameObject redWayObject = GameObject.Find("FX_Heal_02_Red");
+        GameObject blueWayObject = GameObject.Find("FX_Heal_02_Blue");
+
+        // Проверить, найдены ли объекты, и назначить их соответствующим переменным
+        if (redWayObject != null)
+            targetRedWay = redWayObject.transform;
+        else
+             Debug.LogError("FX_Heal_02_Red object not found!");
+
+        if (blueWayObject != null)
+            targetBlueWay = blueWayObject.transform;
+        else
+            Debug.LogError("FX_Heal_02_Blue object not found!");
+    }
+    
+    
 
     //отправляем позиции в зависимости от команды персонаж топает к кинге
     private void SetTargetPointBasedOnTeam()

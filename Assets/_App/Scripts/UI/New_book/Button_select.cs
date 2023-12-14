@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems; // Для работы с событиями UI
 
+//Скрипт который воспроизводит наведение на кнопку курсора (звук и элементы UI включает дополнительные, типа подчёркивания)
+
 public class Button_select : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public GameObject object1; // Первый объект для активации

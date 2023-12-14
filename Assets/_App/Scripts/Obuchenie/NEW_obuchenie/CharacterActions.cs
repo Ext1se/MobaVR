@@ -129,19 +129,24 @@ public class CharacterActions : MonoBehaviour
         {
             //Debug.Log("Звук есть, запускаем корутину  PlaySoundAndAnimation и отправляем в неё звук из урока номер: ");
             
+            /*
             // Перемещаем указатель куда нужно идти в заданную точку
             if (step.TransformTargetWay != null && TargetWay != null)
             {
                 TargetWay.transform.position = step.TransformTargetWay.position;
-            }
+            }*/
             
             
             //включаем субтитры
             if (step.SubMainTask)
             {step.SubMainTask.SetActive(false);}
-            if (step.SubStart)
-            {step.SubStart.SetActive(true); }
 
+            if (step.SubStart)
+            {
+                step.SubStart.SetActive(true); 
+             
+            }
+            
             
             
             
@@ -164,6 +169,17 @@ public class CharacterActions : MonoBehaviour
         // Если есть целевая точка, двигаемся к ней.
         if (step.targetPoint)
         {
+            // Перемещаем указатель куда нужно идти в заданную точку и делаем его дочерним элементом
+            if (step.TransformTargetWay)
+            {
+                // Устанавливаем родительский элемент для TargetWay
+                TargetWay.transform.SetParent(step.TransformTargetWay);
+
+                // Устанавливаем локальные позицию и поворот в 0, чтобы TargetWay был точно в позиции TransformTargetWay
+                TargetWay.transform.localPosition = Vector3.zero;
+                TargetWay.transform.localRotation = Quaternion.identity;
+            }
+            
             //отправляем игрока к точке
             mover.MoveToPoint(step.targetPoint.position);
         
@@ -185,7 +201,8 @@ public class CharacterActions : MonoBehaviour
 
         // Запускаем корутину ожидания игрока.
         yield return StartCoroutine(WaitForPlayerRoutine(step));
-       
+        
+
     }
 
    // Корутина ожидания игрока.

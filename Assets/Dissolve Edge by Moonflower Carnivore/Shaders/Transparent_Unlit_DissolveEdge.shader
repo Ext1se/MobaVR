@@ -27,6 +27,7 @@
 			Cull[_CullMode] Lighting Off ZWrite[_ZWrite]
 
 			CGPROGRAM
+			#pragma target 3.0
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma shader_feature EDGE_COLOR

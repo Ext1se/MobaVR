@@ -6,6 +6,8 @@ public class ActivateAfterSound : MonoBehaviour
 {
     public AudioSource audioSource;  // Ссылка на источник звука
     public GameObject objectToActivate;  // GameObject для активации
+    public GameObject What;  // GameObject для активации
+    public GameObject WhatEnd;  // GameObject для активации
 
     void Start()
     {
@@ -28,5 +30,7 @@ public class ActivateAfterSound : MonoBehaviour
 
         // Активировать объект
         objectToActivate.SetActive(true);
+        WhatEnd.SetActive(true);
+        What.SetActive(false);
     }
 }

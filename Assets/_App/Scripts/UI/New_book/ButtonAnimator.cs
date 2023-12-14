@@ -1,19 +1,32 @@
 using UnityEngine;
 using System.Collections;
 
+//Скорипт, который начинает плавно увеличивать кнопку Далее, если выбран один из пунктов меню
+
 public class ButtonAnimator : MonoBehaviour
 {
     public RectTransform buttonTransform; // RectTransform кнопки
     public float animationDuration = 1.0f; // Длительность одного цикла анимации (увеличение или уменьшение)
 
     private Vector3 originalScale; // Исходный размер кнопки
+    private Vector3 originalScaleOLD; // Созраняем Исходный размер кнопки
 
     void OnEnable()
     {
         if (buttonTransform != null)
         {
+            
             originalScale = buttonTransform.localScale; // Сохраняем исходный размер
+            originalScaleOLD = originalScale;
             StartCoroutine(AnimateButton());
+        }
+    }
+
+    void OnDisable()
+    {
+        if (buttonTransform != null)
+        {
+            originalScale = originalScaleOLD;
         }
     }
 
