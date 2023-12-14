@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ManagerDevice : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class ManagerDevice : MonoBehaviour
     [Header("Объекты с камерами")]
     public GameObject PlayerVR; // префаб игрока для ВР
     public GameObject PlayerPC; // префаб игрока для компьютера
+    
+    public EventSystem EventSystemVR; // префаб игрока для ВР
+    public EventSystem EventSystemPC; // префаб игрока для компьютера
 
     public bool CanCreatePlayer; //создаём игрока или нет
 
@@ -89,10 +93,10 @@ public class ManagerDevice : MonoBehaviour
 
     private void FunctionForEditor()
     {
-        // Реализация функции для редактора Unity
-        //выключаем вр режим
+        EventSystemVR.gameObject.SetActive(false);
+        EventSystemPC.gameObject.SetActive(true);
+        
         PlayerVR.SetActive(false);
-        //включаем для ПК
         PlayerPC.SetActive(true);
 
         CanCreatePlayer = false; //не создаём игрока
@@ -100,22 +104,22 @@ public class ManagerDevice : MonoBehaviour
 
     private void FunctionForWindows()
     {
-        // Реализация функции для Windows
-        //выключаем вр режим
+        EventSystemVR.gameObject.SetActive(false);
+        EventSystemPC.gameObject.SetActive(true);
+        
         PlayerVR.SetActive(false);
-        //включаем для ПК
         PlayerPC.SetActive(true);
-
+        
         CanCreatePlayer = false; //не создаём игрока
     }
 
     private void FunctionForAndroid()
     {
-        // Реализация функции для Android
-        //включаем вр режим
-        PlayerVR.SetActive(true);
-        //включаем для ПК
+        EventSystemPC.gameObject.SetActive(false);
+        EventSystemVR.gameObject.SetActive(true);
+        
         PlayerPC.SetActive(false);
+        PlayerVR.SetActive(true);
 
         CanCreatePlayer = true; //создаём игрока
     }

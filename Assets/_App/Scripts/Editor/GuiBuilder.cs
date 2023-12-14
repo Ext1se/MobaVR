@@ -63,6 +63,7 @@ namespace MobaVR
                 buildSetting.AppData.City,
                 buildSetting.AppData.Platform.ToString(),
                 Application.version,
+                buildSetting.AppData.Room,
                 buildSetting.AppData.UseVR,
                 buildSetting.AppData.IsAdmin,
                 buildSetting.AppData.IsDevBuild,

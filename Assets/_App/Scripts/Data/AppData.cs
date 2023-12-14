@@ -11,5 +11,6 @@ namespace MobaVR
         public bool IsAdmin = false;
         public bool UseVR = false;
         public string City = "Arma";
+        public string Room = "Arma";
     }
 }
