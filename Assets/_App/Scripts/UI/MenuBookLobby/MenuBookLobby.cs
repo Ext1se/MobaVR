@@ -1,3 +1,5 @@
+using System;
+using MobaVR;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +12,17 @@ public class MenuBookLobby : MonoBehaviour
   //  public GameObject VideoKurok;
    // public GameObject descriptor;
 
-    public void OnButtonClick(string buttonId)
+   [SerializeField] private BookMenu m_BookMenu;
+
+   private void Awake()
+   {
+       if (m_BookMenu == null)
+       {
+           m_BookMenu = GetComponentInParent<BookMenu>(true);
+       }
+   }
+
+   public void OnButtonClick(string buttonId)
     {
       //  VideoKurok.SetActive(false);
       //  descriptor.SetActive(false);
@@ -34,6 +46,11 @@ public class MenuBookLobby : MonoBehaviour
         zonaBook.UpdateTargetID(buttonId);
 
         _SaveInfoClass.targetID = buttonId;
+
+        if (m_BookMenu != null)
+        {
+            m_BookMenu.LoadRole(buttonId);
+        }
     }
 }
 
