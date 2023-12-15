@@ -134,6 +134,7 @@ namespace MobaVR
             PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime = m_Settings.OnlineKey;
             PhotonNetwork.PhotonServerSettings.AppSettings.UseNameServer = true;
             PhotonNetwork.PhotonServerSettings.AppSettings.Server = "";
+            //PhotonNetwork.PhotonServerSettings.AppSettings.UseNameServer = false;//TODO
             PhotonNetwork.ConnectUsingSettings();
         }
 
@@ -206,8 +207,10 @@ namespace MobaVR
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
-            Debug.Log($"{TAG}: OnJoinedRoom");
-
+            Debug.Log($"{TAG}: OnJoinedRoom: {PhotonNetwork.PhotonServerSettings.AppSettings.Port}");
+            var z=PhotonNetwork.CloudRegion;
+            var z1=PhotonNetwork.ServerAddress;
+            var z2=PhotonNetwork.Server;
             OnRoomJoined?.Invoke();
             LoadGameScene(m_GameScene);
         }
