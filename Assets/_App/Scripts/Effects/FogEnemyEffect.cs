@@ -11,6 +11,7 @@ namespace MobaVR
         {
             ParticleSystem.MainModule particleSystemMain = m_ParticleSystem.main;
             particleSystemMain.duration = duration;
+            particleSystemMain.startLifetime = duration;
             m_ParticleSystem.Play();
         }
         
