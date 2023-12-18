@@ -56,6 +56,7 @@ namespace MobaVR
         [SerializeField] private float m_RotationSpeed = 45f;
         [SerializeField] [ReadOnly] private float m_CurrentHealth = 100f;
         [SerializeField] [ReadOnly] private float m_CurrentForwardSpeed = 0f;
+        [SerializeField] [ReadOnly] private bool m_IsBlind = false;
         [SerializeField] private float m_AttackRange = 4.0f;
         [SerializeField] private float m_AttackCooldown = 0.5f;
         [SerializeField] private float m_KForce = 2f;
@@ -277,8 +278,8 @@ namespace MobaVR
                 }
             }
 
-
             if (IsLife
+                && !m_IsBlind
                 && CurrentState != MonsterState.NOT_ACTIVE
                 && CurrentState != MonsterState.DEATH)
             {
@@ -686,6 +687,31 @@ namespace MobaVR
         }
 
         #region Hit
+
+        public void Blind()
+        {
+            //TODO
+            //photonView.RPC(nameof(RpcBlind), RpcTarget.All);
+        }
+
+        [PunRPC]
+        private void RpcBlind()
+        {
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                return;
+            }
+
+            DeactivateNavAgent();
+            m_IsBlind = true;
+            Invoke(nameof(ResetBlind), 10f);
+        }
+
+        private void ResetBlind()
+        {
+            m_IsBlind = false;
+            ActivateNavAgent();
+        }
 
         public void Hit(HitData hitData)
         {
