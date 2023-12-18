@@ -46,6 +46,13 @@ namespace MobaVR
 
         #endregion
 
+        #region Effects
+
+        [SerializeField] private FogEnemyEffect m_BlindEffect;
+        [SerializeField] private float m_BlindDuration = 3f;
+
+        #endregion
+
         #region Points
 
         [Space]
@@ -75,6 +82,8 @@ namespace MobaVR
         private readonly int m_HashAttack = Animator.StringToHash("Attack");
         private readonly int m_HashHurt = Animator.StringToHash("Hit");
         private readonly int m_HashDeath = Animator.StringToHash("Die");
+        private readonly int m_Stun = Animator.StringToHash("Stun");
+        private readonly int m_Ready = Animator.StringToHash("Ready");
 
         #endregion
 
@@ -178,6 +187,11 @@ namespace MobaVR
             if (m_NavMeshObstacle == null)
             {
                 TryGetComponent(out m_NavMeshObstacle);
+            }
+
+            if (m_BlindEffect == null)
+            {
+                m_BlindEffect = GetComponentInChildren<FogEnemyEffect>();
             }
 
             /*
@@ -691,12 +705,17 @@ namespace MobaVR
         public void Blind()
         {
             //TODO
-            //photonView.RPC(nameof(RpcBlind), RpcTarget.All);
+            photonView.RPC(nameof(RpcBlind), RpcTarget.All);
         }
 
         [PunRPC]
-        private void RpcBlind()
+        protected void RpcBlind()
         {
+            if (m_BlindEffect != null && m_BlindDuration > 0)
+            {
+                m_BlindEffect.Show(m_BlindDuration);
+            }
+            
             if (!PhotonNetwork.IsMasterClient)
             {
                 return;
@@ -704,11 +723,17 @@ namespace MobaVR
 
             DeactivateNavAgent();
             m_IsBlind = true;
-            Invoke(nameof(ResetBlind), 10f);
+            
+            m_Animator.SetTrigger(m_Stun);
+            
+            CancelInvoke(nameof(ResetBlind));
+            Invoke(nameof(ResetBlind), m_BlindDuration);
         }
 
         private void ResetBlind()
         {
+            m_Animator.SetTrigger(m_Ready);
+            
             m_IsBlind = false;
             ActivateNavAgent();
         }

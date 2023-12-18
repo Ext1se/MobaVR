@@ -12,7 +12,6 @@ namespace MobaVR
         [SerializeField] private float m_TeamDamage = 1f;
         [SerializeField] private float m_EnemyDamage = 5f;
 
-        private ClassicGameSession m_GameSession;
         private bool m_CanDamage = false;
 
         private HitData m_OwnerHitData;
@@ -23,11 +22,6 @@ namespace MobaVR
         {
             base.OnEnable();
             m_CanDamage = true;
-        }
-
-        private void Awake()
-        {
-            m_GameSession = FindObjectOfType<ClassicGameSession>();
         }
 
         public override void Init(SpellHandler spellHandler, PlayerVR playerVR)

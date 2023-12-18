@@ -568,12 +568,15 @@ MonoBehaviour:
   m_Rigidbody: {fileID: 5082972544926147250}
   m_NavMeshAgent: {fileID: 8843435461800265055}
   m_NavMeshObstacle: {fileID: 8843435461800265024}
+  m_BlindEffect: {fileID: 0}
+  m_BlindDuration: 6
   m_CurrentState: 0
   m_Health: 25
   m_Damage: 10
   m_RotationSpeed: 4
   m_CurrentHealth: 100
   m_CurrentForwardSpeed: 0
+  m_IsBlind: 0
   m_AttackRange: 100
   m_AttackCooldown: 1
   m_KForce: 0.5
@@ -776,6 +779,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0225251665a48b494c8a6bd938224e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_IsValidateSourceDamage: 0
+  m_DeltaMs: 100
+  m_Hits: []
   OnHit:
     m_PersistentCalls:
       m_Calls:

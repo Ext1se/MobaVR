@@ -41,6 +41,7 @@ namespace MobaVR
             if (m_GameSession.Mode.GameModeType is GameModeType.PVE or GameModeType.TD)
             {
                 BlindMonsters();
+                Invoke(nameof(EnableFog), m_FogDelay);
             }
         }
 
