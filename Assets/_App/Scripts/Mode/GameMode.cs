@@ -15,6 +15,7 @@ namespace MobaVR
         public Team RedTeam => m_GameSession != null ? m_GameSession.RedTeam : null;
         public Team BlueTeam => m_GameSession != null ? m_GameSession.BlueTeam : null;
         public BaseStateMachine StateMachine => m_StateMachine;
+        public PlayerVR Player => m_GameSession.LocalPlayer;
         public List<PlayerVR> Players
         {
             get

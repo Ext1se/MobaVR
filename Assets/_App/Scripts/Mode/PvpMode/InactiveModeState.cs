@@ -15,6 +15,7 @@ namespace MobaVR.ClassicModeStateMachine.PVP
                 UpdatePlayers();
             }
 
+            m_Content.ModeView.InfoView.Show();
             m_Content.ModeView.BlueTeamScoreView.Hide();
             m_Content.ModeView.BlueTeamKillScoreView.Hide();
             m_Content.ModeView.RedTeamScoreView.Hide();
