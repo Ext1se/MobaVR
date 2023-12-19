@@ -95,7 +95,6 @@ namespace MobaVR
                 CalibrovkaText.SetActive(true);
                 CalibrovkaText2.SetActive(false);
                 CalibrovkaText3.SetActive(false);
-               
             }
         }
         
@@ -103,6 +102,16 @@ namespace MobaVR
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                if (CalibrovkaText != null && CalibrovkaText2 != null && CalibrovkaText3 != null) 
+                {
+                    CalibrovkaText.SetActive(false);
+                    CalibrovkaText2.SetActive(false);
+                    CalibrovkaText3.SetActive(false);
+                }
+            }
+
             //калибровка
             if (calibr == false)
             {
