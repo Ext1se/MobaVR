@@ -15,7 +15,7 @@ public class ButtonAnimator : MonoBehaviour
     {
         if (buttonTransform != null)
         {
-            
+            originalScale = Vector3.one; // Устанавливаем исходный размер как 1, 1, 1
             originalScale = buttonTransform.localScale; // Сохраняем исходный размер
             originalScaleOLD = originalScale;
             StartCoroutine(AnimateButton());

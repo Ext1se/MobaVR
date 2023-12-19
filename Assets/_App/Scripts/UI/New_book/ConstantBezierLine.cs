@@ -9,6 +9,7 @@ public class ConstantBezierLine : MonoBehaviour {
 
     public GameObject startPoint; // Начальная точка линии
     public GameObject endPoint;   // Конечная точка линии
+    public GameObject Strelka;   // Стрелка
     public LineRenderer lineRenderer; // Компонент LineRenderer для рисования линии
 
     public int segmentCount = 100; // Количество сегментов в линии
@@ -27,13 +28,16 @@ public class ConstantBezierLine : MonoBehaviour {
             if(Vector3.Distance(startPoint.transform.position, endPoint.transform.position) >= minDistance) {
                 DrawBezierCurve();
                 lineRenderer.enabled = true;
+                Strelka.SetActive(true);
             } else {
                 // Выключаем линию, если объекты слишком близко друг к другу
                 lineRenderer.enabled = false;
+                Strelka.SetActive(false);
             }
         } else {
             // Выключаем линию, если один из объектов отключен или исчез
             lineRenderer.enabled = false;
+            Strelka.SetActive(false);
         }
     }
 

@@ -33,6 +33,8 @@ public class ZonaBook : MonoBehaviour
     private bool isInTrigger = false; // Находится ли в триггере
     private float initialFogDensity; // Начальная плотность тумана
     private float transitionTimer = 0f; // Таймер для перехода тумана
+    
+    public GameObject[] BookPapper;//страницы книги, когда выходим из книги, чтобы страницы перематывались в исходные.
 
     private void Start()
     {
@@ -123,6 +125,8 @@ public class ZonaBook : MonoBehaviour
                     child.localRotation = Quaternion.identity;
                     child.localScale = Vector3.one;
                 }
+                
+                
 
                 UpdateTargetID(targetID); // Обновление ID цели
             }
@@ -175,6 +179,17 @@ public class ZonaBook : MonoBehaviour
                         hitCollider.enabled = false;
                     }
                 }
+                
+                
+                // Выключение всех страниц в книге
+                foreach (GameObject paper in BookPapper)
+                {
+                    if (paper != null)
+                    {
+                        paper.SetActive(false);
+                    }
+                }
+                
             }
         }
     }
