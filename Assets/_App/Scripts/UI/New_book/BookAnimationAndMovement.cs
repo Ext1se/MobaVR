@@ -9,6 +9,7 @@ public class BookAnimationAndMovement : MonoBehaviour
     public bool ExitBook = false; // Указывает на необходимость выхода из скрипта
 
     private bool animationEnded = false; // Флаг завершения анимации
+    public AudioSource audioSource;//звук который будет воспроизводится, после того как книга прилетит в руку, типа нажмите на Х, чтобы получить подсказки
 
     void Start()
     {
@@ -29,6 +30,13 @@ public class BookAnimationAndMovement : MonoBehaviour
             isMoving = true;
             animationEnded = true;
             animator.enabled = false; // Отключить компонент Animator
+            
+            if (audioSource != null)
+            {
+                audioSource.enabled = true; // Включить компонент AudioSource
+                audioSource.Play(); // Воспроизвести звук
+            }
+
         }
 
         if (isMoving)
