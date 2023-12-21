@@ -4,11 +4,17 @@ using UnityEngine;
 using Photon.Pun; // Убедитесь, что у вас подключен Photon PUN
 
 //этот скрипт отсылает ID в скрипт MassivHandsPlayer, который будет включать нужные нам руки. в данном случае контроллеры, при входе в зону книги
+//этот стрипт так же находит руку для обучения нажатия клавиш, и включает нужншую анимацию.
 public class TriggerHandler : MonoBehaviour
 {
    public MassivHandsPlayer leftTargetScript;
     public MassivHandsPlayer rightTargetScript;
-    
+
+    public HandAnimationController triggerRight;//рука с анимациями нажатия на курок
+    public HandAnimationController triggerLeft;//рука с анимациями нажатия на курок
+
+    public string NameAnimationRight;//название анимации для правой руки
+    public string NameAnimationLeft;//название анимации для левой руки
     
 
     //как только входим в зону обучения у нас включаются контроллеры 
@@ -17,8 +23,8 @@ public class TriggerHandler : MonoBehaviour
         FindFunction();
         if (other.CompareTag("TriggerLocalPlayer"))
         {
-            leftTargetScript?.ActivateObject(3);
-            rightTargetScript?.ActivateObject(3);
+            leftTargetScript?.ActivateObject(2);
+            rightTargetScript?.ActivateObject(2);
         }
     }
 
@@ -32,6 +38,7 @@ public class TriggerHandler : MonoBehaviour
             rightTargetScript?.ActivateObject(0);
         }
     }
+
 
 
     void FindFunction()
@@ -53,6 +60,28 @@ public class TriggerHandler : MonoBehaviour
                 {
                     rightTargetScript = photonView.GetComponent<MassivHandsPlayer>();
                 }
+                else if (photonView.gameObject.name == "TriggerRight")
+                {
+                    triggerRight = photonView.GetComponent<HandAnimationController>();
+                    
+                    // Отправляем команду для запуска триггера
+                    if (triggerRight != null)
+                    {
+                        triggerRight.GetComponent<HandAnimationController>().SetTrigger(NameAnimationRight);
+                    }
+                    
+                }                
+                else if (photonView.gameObject.name == "TriggerLeft")
+                {
+                    triggerLeft = photonView.GetComponent<HandAnimationController>();
+                    
+                    // Отправляем команду для запуска триггера
+                    if (triggerLeft  != null)
+                    {
+                        triggerLeft .GetComponent<HandAnimationController>().SetTrigger(NameAnimationLeft);
+                    }
+                }
+
             }
         }
     }
