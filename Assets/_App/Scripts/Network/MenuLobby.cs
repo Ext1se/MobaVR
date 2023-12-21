@@ -43,7 +43,7 @@ namespace MobaVR
 
         private void Awake()
         {
-            m_RoomName = appSettings.AppData.City;
+            m_RoomName = !string.IsNullOrEmpty(appSettings.AppData.Room) ? appSettings.AppData.Room : appSettings.AppData.City;
 
             PhotonNetwork.NetworkingClient.SerializationProtocol = SerializationProtocol.GpBinaryV16;
             PhotonNetwork.EnableCloseConnection = true;
