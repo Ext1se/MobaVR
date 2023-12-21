@@ -449,9 +449,10 @@ namespace MobaVR.Weapons.Bow
             if (GrabbedArrow != null && GrabbedArrow.isActiveAndEnabled)
             {
                 GrabbedArrow.ShootArrow(transformForward);
+                OnReleaseArrow?.Invoke(GrabbedArrow, transformForward);
             }
 
-            OnReleaseArrow?.Invoke(GrabbedArrow, transformForward);
+            //OnReleaseArrow?.Invoke(GrabbedArrow, transformForward);
 
             // Make sure hands are showing if we hid them
             arrowGrabber.ResetHandGraphics();

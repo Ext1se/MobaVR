@@ -31,7 +31,7 @@ namespace MobaVR.Weapons.Bow
 
         private void Start()
         {
-            m_Bow.OnReleaseArrow.AddListener(OnReleaseArrow);
+            //m_Bow.OnReleaseArrow.AddListener(OnReleaseArrow);
         }
 
         private void OnReleaseArrow(Arrow arrow, Vector3 direction)
