@@ -13,23 +13,26 @@ using Random = UnityEngine.Random;
 namespace MobaVR
 {
     public partial class Monster : MonoBehaviourPunCallbacks,
-                                   IMonsterAnimatorListener,
-                                   IExploding
+        IMonsterAnimatorListener,
+        IExploding
     {
         #region Dependencies
 
         [Header("Dependencies")]
         //[SerializeField] private Transform m_Target;
-        [SerializeField] protected MonsterPelvis m_MonsterPelvis;
+        [SerializeField]
+        protected MonsterPelvis m_MonsterPelvis;
+
         [SerializeField] protected MonsterView m_MonsterView;
         [SerializeField] protected DamageNumberView m_DamageNumber;
         [SerializeField] protected MonsterWeapon m_Weapon;
+
         [SerializeField] protected Treasure m_Treasure;
+
         //[SerializeField] protected Material m_Material;
         [SerializeField] protected List<Material> m_UniqMaterials;
 
-        [Header("Targets")]
-        [SerializeField] protected TargetType m_TargetType = TargetType.PLAYER;
+        [Header("Targets")] [SerializeField] protected TargetType m_TargetType = TargetType.PLAYER;
         [SerializeField] protected WizardPlayer m_Wizard;
         [SerializeField] protected Tower m_Tower;
 
@@ -55,9 +58,9 @@ namespace MobaVR
 
         #region Points
 
-        [Space]
-        [Header("Stats")]
-        [SerializeField] [ReadOnly] private MonsterState m_CurrentState = MonsterState.NOT_ACTIVE;
+        [Space] [Header("Stats")] [SerializeField] [ReadOnly]
+        private MonsterState m_CurrentState = MonsterState.NOT_ACTIVE;
+
         [SerializeField] private float m_Health = 100f;
         [SerializeField] private float m_Damage = 20f;
         [SerializeField] private float m_RotationSpeed = 45f;
@@ -90,6 +93,7 @@ namespace MobaVR
         #region Fields
 
         private int m_CurrentHashAttack;
+        private bool m_IsReady = false;
         private bool m_CanAttack = false;
         private bool m_CanMove = false;
         private bool m_IsImmortal = false;
@@ -113,6 +117,7 @@ namespace MobaVR
         public float CurrentHealth => m_CurrentHealth;
         public bool IsAttacking => m_IsAttacking;
         public bool IsLife => m_CurrentHealth > 0f;
+
         public TargetType TargetType
         {
             get => m_TargetType;
@@ -235,7 +240,7 @@ namespace MobaVR
         {
             m_CurrentHealth = m_Health;
             m_CurrentForwardSpeed = 0f;
-            
+
             m_ChildRigidbodies.AddRange(m_Root.GetComponentsInChildren<Rigidbody>());
             m_ChildColliders.AddRange(m_Root.GetComponentsInChildren<Collider>());
 
@@ -541,6 +546,7 @@ namespace MobaVR
 
         public virtual void CompleteActivation()
         {
+            m_IsReady = true;
             m_IsAttacking = false;
             m_CanAttack = true;
             m_IsImmortal = false;
@@ -550,12 +556,14 @@ namespace MobaVR
 
             //ActivateNavAgent();
 
-            photonView.RPC(nameof(RpcCompleteActivate), RpcTarget.OthersBuffered);
+            //photonView.RPC(nameof(RpcCompleteActivate), RpcTarget.OthersBuffered);
+            photonView.RPC(nameof(RpcCompleteActivate), RpcTarget.All);
         }
 
         [PunRPC]
         protected void RpcCompleteActivate()
         {
+            m_IsReady = true;
             m_Animator.SetTrigger(m_HashFastActivate);
         }
 
@@ -711,11 +719,16 @@ namespace MobaVR
         [PunRPC]
         protected void RpcBlind()
         {
+            if (!m_IsReady)
+            {
+               return;
+            }
+
             if (m_BlindEffect != null && m_BlindDuration > 0)
             {
                 m_BlindEffect.Show(m_BlindDuration);
             }
-            
+
             if (!PhotonNetwork.IsMasterClient)
             {
                 return;
@@ -723,9 +736,9 @@ namespace MobaVR
 
             DeactivateNavAgent();
             m_IsBlind = true;
-            
+
             m_Animator.SetTrigger(m_Stun);
-            
+
             CancelInvoke(nameof(ResetBlind));
             Invoke(nameof(ResetBlind), m_BlindDuration);
         }
@@ -733,7 +746,7 @@ namespace MobaVR
         private void ResetBlind()
         {
             m_Animator.SetTrigger(m_Ready);
-            
+
             m_IsBlind = false;
             ActivateNavAgent();
         }
@@ -811,10 +824,10 @@ namespace MobaVR
                 //if (!m_Rigidbody.isKinematic)
                 {
                     childRigidbody.AddExplosionForce(explosionForce * m_KForce,
-                                                     //childRigidbody.AddExplosionForce(explosionForce * 1f,
-                                                     position,
-                                                     radius,
-                                                     modifier);
+                        //childRigidbody.AddExplosionForce(explosionForce * 1f,
+                        position,
+                        radius,
+                        modifier);
                 }
             }
 
@@ -854,7 +867,7 @@ namespace MobaVR
                         {
                             m_LastHitData = hitData;
                         }
-                        
+
                         //OnLastHit?.Invoke(hitData);
                         CurrentState = MonsterState.DEATH;
                     }
@@ -934,7 +947,7 @@ namespace MobaVR
         {
             List<Renderer> meshRenderers = new();
             meshRenderers.AddRange(GetComponentsInChildren<Renderer>());
-            
+
             foreach (Renderer meshRenderer in meshRenderers)
             {
                 if (!m_UniqMaterials.Contains(meshRenderer.sharedMaterial))
@@ -942,16 +955,15 @@ namespace MobaVR
                     m_UniqMaterials.Add(meshRenderer.sharedMaterial);
                 }
             }
-
         }
-        
+
         protected virtual void InitRenderer()
         {
             foreach (Material uniqMaterial in m_UniqMaterials)
             {
                 m_CopyUniqMaterials.Add(new Material(uniqMaterial));
             }
-            
+
             m_MeshRenderers.AddRange(GetComponentsInChildren<Renderer>());
             foreach (Renderer meshRenderer in m_MeshRenderers)
             {
@@ -964,7 +976,7 @@ namespace MobaVR
                     }
                 }
             }
-            
+
             /*
             foreach (Renderer meshRenderer in m_MeshRenderers)
             {
@@ -974,7 +986,7 @@ namespace MobaVR
                 }
             }
             */
-            
+
             /*
             foreach (Renderer meshRenderer in m_MeshRenderers)
             {
@@ -991,13 +1003,13 @@ namespace MobaVR
                 .OnUpdate(() =>
                 {
                     //Dissolve(m_Material, clip);
-                    
+
                     //foreach (Material material in m_UniqMaterials)
                     foreach (Material material in m_CopyUniqMaterials)
                     {
                         Dissolve(material, clip);
                     }
-                    
+
                     /*
                     foreach (Renderer meshRenderer in m_MeshRenderers)
                     {
