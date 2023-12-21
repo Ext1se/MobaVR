@@ -727,6 +727,7 @@ namespace MobaVR
             if (m_BlindEffect != null && m_BlindDuration > 0)
             {
                 m_BlindEffect.Show(m_BlindDuration);
+                m_Animator.SetTrigger(m_Stun);
             }
 
             if (!PhotonNetwork.IsMasterClient)
@@ -737,7 +738,7 @@ namespace MobaVR
             DeactivateNavAgent();
             m_IsBlind = true;
 
-            m_Animator.SetTrigger(m_Stun);
+            //m_Animator.SetTrigger(m_Stun);
 
             CancelInvoke(nameof(ResetBlind));
             Invoke(nameof(ResetBlind), m_BlindDuration);
