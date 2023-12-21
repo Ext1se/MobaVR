@@ -56,12 +56,15 @@ namespace MobaVR.ClassicModeStateMachine.PVP
             
             m_Content.ModeView.InfoView.Hide();
 
-            m_Mode.Player.WizardPlayer.OnDie -= OnDieLocalPlayer;
-            m_Mode.Player.WizardPlayer.OnReborn -= OnRebornLocalPlayer;
-            
-            m_Mode.Player.WizardPlayer.OnDie += OnDieLocalPlayer;
-            m_Mode.Player.WizardPlayer.OnReborn += OnRebornLocalPlayer;
-            
+            if (m_Mode.Player != null)
+            {
+                m_Mode.Player.WizardPlayer.OnDie -= OnDieLocalPlayer;
+                m_Mode.Player.WizardPlayer.OnReborn -= OnRebornLocalPlayer;
+
+                m_Mode.Player.WizardPlayer.OnDie += OnDieLocalPlayer;
+                m_Mode.Player.WizardPlayer.OnReborn += OnRebornLocalPlayer;
+            }
+
             foreach (PlayerVR player in m_Mode.RedTeam.Players)
             {
                 player.WizardPlayer.OnDie += OnDieRedPlayer;
@@ -190,9 +193,12 @@ namespace MobaVR.ClassicModeStateMachine.PVP
                 player.WizardPlayer.OnDie -= OnDieRedPlayer;
                 player.WizardPlayer.OnDie -= OnDieBluePlayer;
             }
-            
-            m_Mode.Player.WizardPlayer.OnDie -= OnDieLocalPlayer;
-            m_Mode.Player.WizardPlayer.OnReborn -= OnRebornLocalPlayer;
+
+            if (m_Mode.Player != null)
+            {
+                m_Mode.Player.WizardPlayer.OnDie -= OnDieLocalPlayer;
+                m_Mode.Player.WizardPlayer.OnReborn -= OnRebornLocalPlayer;
+            }
         }
     }
 }
