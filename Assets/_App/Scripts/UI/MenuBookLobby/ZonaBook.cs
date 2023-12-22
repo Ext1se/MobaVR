@@ -124,6 +124,12 @@ public class ZonaBook : MonoBehaviour
                     child.localPosition = Vector3.zero;
                     child.localRotation = Quaternion.identity;
                     child.localScale = Vector3.one;
+                    
+                    Collider[] colliders = child.GetComponentsInChildren<Collider>(true);
+                    foreach (Collider hitCollider in colliders)
+                    {
+                        hitCollider.enabled = false;
+                    }
                 }
                 
                 
@@ -173,7 +179,7 @@ public class ZonaBook : MonoBehaviour
                     childTransform.localScale = Vector3.one;
                     childObject.SetActive(false);
 
-                    Collider[] colliders = childTransform.GetComponentsInChildren<Collider>();
+                    Collider[] colliders = childTransform.GetComponentsInChildren<Collider>(true);
                     foreach (Collider hitCollider in colliders)
                     {
                         hitCollider.enabled = false;

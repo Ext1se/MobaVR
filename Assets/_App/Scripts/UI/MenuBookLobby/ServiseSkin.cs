@@ -63,6 +63,12 @@ public class ServiseSkin : MonoBehaviour
                 skin.SetVisibilityFace(true);
                 skin.SetVisibilityVR(true);
             }
+            
+            Collider[] colliders = copiedChild.GetComponentsInChildren<Collider>(true);
+            foreach (Collider hitCollider in colliders)
+            {
+                hitCollider.enabled = false;
+            }
 
             // Скрывание копированного объекта
             copiedChild.gameObject.SetActive(false);
