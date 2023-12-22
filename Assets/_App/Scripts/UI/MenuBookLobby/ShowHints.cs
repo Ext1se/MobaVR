@@ -4,9 +4,11 @@ using BNG;
 public class ShowHints : MonoBehaviour
 {
     public GameObject hintsBook; // Объект книги с подсказками
-    public GameObject mockupBook; // Объект книги-муляжа
+    public GameObject mockupBook; // Объект книги-муляжа, её отключаю
     public ControllerBinding Button_X = ControllerBinding.XButtonDown;
 
+    public bool BookHelpActive; // Включена сейчас книга или нет 
+    
     public bool test = false;
 
     void Start()
@@ -16,6 +18,7 @@ public class ShowHints : MonoBehaviour
         if (hintsBook != null)
         {
             hintsBook.SetActive(false);
+            BookHelpActive = false;
         }
         else
         {
@@ -39,31 +42,29 @@ public class ShowHints : MonoBehaviour
 
     private void ToggleBooks()
     {
+        
         // Проверяем, активна ли книга с подсказками
-        if (hintsBook != null && hintsBook.activeSelf)
+        if (hintsBook != null && !BookHelpActive)
         {
-            // Найти книгу-муляж на сцене
-            mockupBook = GameObject.Find("BookPolet");
-            if (mockupBook == null)
+           
+            //включаем книгу на руке
+            if (hintsBook != null)
             {
-                Debug.LogError("BookPolet not found in the scene");
+                hintsBook.SetActive(true);
             }
-            
-            // Скрыть книгу с подсказками
-            hintsBook.SetActive(false);
+
+            BookHelpActive = true;
+
         }
         else
         {
             // Показать книгу с подсказками и скрыть книгу-муляж, если она есть
             if (hintsBook != null)
             {
-                hintsBook.SetActive(true);
+                hintsBook.SetActive(false);
             }
 
-            if (mockupBook != null)
-            {
-                mockupBook.SetActive(false);
-            }
+            BookHelpActive = false;
         }
     }
 }

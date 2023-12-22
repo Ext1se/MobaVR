@@ -9,7 +9,7 @@ public class MenuBookLobby : MonoBehaviour
     public ZonaBook zonaBook;
     public SaveInfoClass _SaveInfoClass;
     // Ссылка на Urok_02, чтобы завершить обучение
-    public Urok_02 urok02Script;
+   // public Urok_02 urok02Script;
 
   //  public GameObject VideoKurok;
    // public GameObject descriptor;
@@ -27,7 +27,7 @@ public class MenuBookLobby : MonoBehaviour
    
        
    //функция для запуска FinishUrok02() если он включен т.е. если обучение идёт
-   public void TriggerFinishUrok02()
+ /*  public void TriggerFinishUrok02()
    {
        if (urok02Script != null)
        {
@@ -47,7 +47,7 @@ public class MenuBookLobby : MonoBehaviour
        }
    }
    
-   
+   */
    public void OnButtonClick(string buttonId)
     {
       //  VideoKurok.SetActive(false);

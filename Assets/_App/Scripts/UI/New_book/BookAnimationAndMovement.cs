@@ -1,4 +1,5 @@
 using UnityEngine;
+using BNG; 
 
 public class BookAnimationAndMovement : MonoBehaviour
 {
@@ -6,11 +7,47 @@ public class BookAnimationAndMovement : MonoBehaviour
     public Animator animator; // Ссылка на компонент аниматора
     public Transform targetBookHand; // Цель для перемещения
     private bool isMoving = false; // Указывает, перемещается ли книга
-    public bool ExitBook = false; // Указывает на необходимость выхода из скрипта
-
+    private bool Exit = false; // Выходим из скрипта
     private bool animationEnded = false; // Флаг завершения анимации
-    public AudioSource audioSource;//звук который будет воспроизводится, после того как книга прилетит в руку, типа нажмите на Х, чтобы получить подсказки
+    public AudioClip soundClip;//звук который будет воспроизводится, после того как книга прилетит в руку, типа нажмите на Х, чтобы получить подсказки
+    
+    // Ссылка на Urok_02, чтобы завершить обучение в книге
+    public Urok_02 urok02Script;
 
+    public GameObject BookMulyag;//муляж книги, которая будет перемещаться в заданную точку
+
+   public AudioSource audioSourceToPlay; // Ссылка на AudioSource для воспроизведения звука который возпроизводится, когда игрок нажал на кнопку включения книги
+   
+   public ControllerBinding Button_X = ControllerBinding.XButtonDown;
+   
+    private void OffBook()
+    {
+      // Проверяем, что у нас есть ссылка на AudioSource и он не равен null
+        if (audioSourceToPlay != null)
+        {
+            // Воспроизводим звук из указанного AudioSource
+            audioSourceToPlay.Play();
+            
+        }
+
+        BookMulyag.SetActive(false);//выключаем книгу
+
+        Exit = true;
+        
+        //функция для запуска FinishUrok02() если он включен т.е. если обучение идёт
+        if (urok02Script != null)
+        {
+            Debug.Log("включаю второй урок этап 1");
+            // Проверка, является ли объект, на котором находится скрипт Urok_02, активным
+            if (urok02Script.gameObject.activeInHierarchy)
+            {
+                Debug.Log("включаю второй урок этап 1");
+                urok02Script.FinishUrok02();
+            }
+        }
+    }
+    
+    
     void Start()
     {
         targetBookHand = GameObject.Find("TargetBookHand").transform;
@@ -22,6 +59,8 @@ public class BookAnimationAndMovement : MonoBehaviour
 
         animator.SetTrigger("runPoletBook");
     }
+    
+    
 
     void Update()
     {
@@ -31,12 +70,12 @@ public class BookAnimationAndMovement : MonoBehaviour
             animationEnded = true;
             animator.enabled = false; // Отключить компонент Animator
             
-            if (audioSource != null)
+            //включаем звук, который говорит нажать на X
+            if (soundClip != null)
             {
-                audioSource.enabled = true; // Включить компонент AudioSource
-                audioSource.Play(); // Воспроизвести звук
+                AudioSource.PlayClipAtPoint(soundClip, transform.position);
             }
-
+            
         }
 
         if (isMoving)
@@ -44,9 +83,13 @@ public class BookAnimationAndMovement : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, targetBookHand.position, moveSpeed * Time.deltaTime);
         }
 
-        if (ExitBook)
+        // Проверка нажатия кнопки X, после чего включаем звук и выключаем книгу
+        if (InputBridge.Instance.GetControllerBindingValue(Button_X) && !Exit)
         {
-            gameObject.SetActive(false);
+            OffBook();
         }
+        
     }
+    
+    
 }
