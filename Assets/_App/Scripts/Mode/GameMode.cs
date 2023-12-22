@@ -7,7 +7,8 @@ namespace MobaVR
     public abstract class GameMode : MonoBehaviourPun
     {
         [SerializeField] private GameModeType m_GameModeType = GameModeType.PVP;
-        [SerializeField] protected ClassicGameSession m_GameSession;
+        //[SerializeField] 
+        protected ClassicGameSession m_GameSession;
         //[SerializeField] protected StateMachine m_StateMachine;
         [SerializeField] protected BaseStateMachine m_StateMachine;
 

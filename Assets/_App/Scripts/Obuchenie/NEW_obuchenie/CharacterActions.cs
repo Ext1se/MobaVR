@@ -428,12 +428,25 @@ public class CharacterActions : MonoBehaviour
     {
         while (true)
         {
-           
+            Vector3 targetPoint = playerTransform.position;
+            //if (!mover.Agent.isStopped)
+            
+            if (!mover.HasReachedDestination())
+            {
+                mover.Agent.updateRotation = true;
+                targetPoint = mover.Agent.destination;
+            }
+            else
+            {
+                mover.Agent.updateRotation = false;
+            }
                 
-                Vector3 directionToPlayer = playerTransform.position - transform.position;
+                //Vector3 directionToPlayer = playerTransform.position - transform.position;
+                Vector3 directionToPlayer = targetPoint - transform.position;
                 directionToPlayer.y = 0; // Убедитесь, что вращение происходит только по горизонтали
                 Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+                //transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 0.5f);
 
                 yield return null; // Это будет выполнять корутину каждый кадр
 
