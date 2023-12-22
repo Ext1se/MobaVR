@@ -1,12 +1,16 @@
 using UnityEngine;
 using BNG; 
+using Photon.Pun; // Убедитесь, что у вас подключен Photon PUN
+
+    //скрипт управления анимацией книги
 
 public class BookAnimationAndMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Скорость перемещения к цели
+    public TriggerHandler triggerHandlerScript;// скрипт, в котором я активирую визуальных помощников рук, которые показывают как нажать на Х
+    
+    public PoletBookMulayg poletBookMulaygScript;//Скрипт который отвечает за полёт книги к руке
     public Animator animator; // Ссылка на компонент аниматора
-    public Transform targetBookHand; // Цель для перемещения
-    private bool isMoving = false; // Указывает, перемещается ли книга
+    
     private bool Exit = false; // Выходим из скрипта
     private bool animationEnded = false; // Флаг завершения анимации
     public AudioClip soundClip;//звук который будет воспроизводится, после того как книга прилетит в руку, типа нажмите на Х, чтобы получить подсказки
@@ -33,7 +37,8 @@ public class BookAnimationAndMovement : MonoBehaviour
         BookMulyag.SetActive(false);//выключаем книгу
 
         Exit = true;
-        
+ 
+
         //функция для запуска FinishUrok02() если он включен т.е. если обучение идёт
         if (urok02Script != null)
         {
@@ -50,7 +55,7 @@ public class BookAnimationAndMovement : MonoBehaviour
     
     void Start()
     {
-        targetBookHand = GameObject.Find("TargetBookHand").transform;
+ 
 
         if (animator == null)
         {
@@ -66,22 +71,30 @@ public class BookAnimationAndMovement : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("PoletBook") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f && !animationEnded)
         {
-            isMoving = true;
+
             animationEnded = true;
             animator.enabled = false; // Отключить компонент Animator
+            
+            // Проверка, что ссылка на скрипт PoletBookMulayg установлена
+            if (poletBookMulaygScript != null)
+            {
+                // Изменение переменной isMoving в скрипте PoletBookMulayg теперь книга будет летать за моей рукой
+                poletBookMulaygScript.isMoving = true;
+            }
             
             //включаем звук, который говорит нажать на X
             if (soundClip != null)
             {
                 AudioSource.PlayClipAtPoint(soundClip, transform.position);
             }
+            /*if (triggerHandlerScript != null)
+            {
+                triggerHandlerScript.Button_x();
+            }*/
             
-        }
 
-        if (isMoving)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, targetBookHand.position, moveSpeed * Time.deltaTime);
         }
+        
 
         // Проверка нажатия кнопки X, после чего включаем звук и выключаем книгу
         if (InputBridge.Instance.GetControllerBindingValue(Button_X) && !Exit)
@@ -90,6 +103,8 @@ public class BookAnimationAndMovement : MonoBehaviour
         }
         
     }
-    
-    
+
+
+
+
 }

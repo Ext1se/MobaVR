@@ -7,6 +7,7 @@ using Photon.Pun; // Убедитесь, что у вас подключен Pho
 //он их включает. И после нажатия на нужную кнопку, возвращает руки на базу
 public class HandAnimationController : MonoBehaviour
 {
+    public ControllerDisplayScript controllerDisplayScript;//скрипт, который перемещает контроллеры к лицу
     private Animator handAnimator;
     private HandPoseBlender handPoseBlender; // Добавление переменной для компонента HandPoseBlender
     
@@ -29,6 +30,7 @@ public class HandAnimationController : MonoBehaviour
     public MassivHandsPlayer rightTargetScript;
     
     private bool canVibrate = true;//вибрация
+    private bool HelpVisard = false;//анимация взлёта к лицу
     
     /*
     Trigger_Left
@@ -65,15 +67,23 @@ public class HandAnimationController : MonoBehaviour
     {
         // Включение триггера Stay
         SetTrigger("Stay");
+        HelpVisard= false;
+        canVibrate = false;
     }
 
     // Публичная функция для установки триггера аниматора. Сюда приходит название Анимации, которую хотим включить. Она приходит именно в нужную руку.
     public void SetTrigger(string triggerName)
     {
+       
+        
+        
         if (handAnimator != null)
         {
+            Debug.Log("Обана");
+            Debug.Log(triggerName);
             handAnimator.SetTrigger(triggerName);
             NameTriggerAnim = triggerName;
+            Debug.Log(NameTriggerAnim);
         }
     }
 
@@ -81,6 +91,15 @@ public class HandAnimationController : MonoBehaviour
     {
         if (NameTriggerAnim  == "Trigger_Right")
         {
+            //запускаем один раз анимацию у лица
+            if (controllerDisplayScript != null && !HelpVisard)
+            {
+                controllerDisplayScript.Activate();
+                HelpVisard = true;
+            }
+            
+            
+            
             // Если можем вибрировать, запускаем метод вибрации с задержкой
             if (canVibrate)
             {
@@ -101,6 +120,14 @@ public class HandAnimationController : MonoBehaviour
 
         if (NameTriggerAnim  == "Trigger_Left")
         {
+            //запускаем один раз анимацию у лица
+            if (controllerDisplayScript != null && !HelpVisard)
+            {
+                controllerDisplayScript.Activate();
+                HelpVisard = true;
+            }
+
+            
             // Если можем вибрировать, запускаем метод вибрации с задержкой
             if (canVibrate)
             {
@@ -116,11 +143,21 @@ public class HandAnimationController : MonoBehaviour
                 //отменяем повторение вибрации и сбрасываем флаг
                 CancelInvoke(nameof(StartVibration));
                 canVibrate = false;
+                SetTrigger("Stay");
             }
         }
         
         if (NameTriggerAnim  == "Grab_Right")
         {
+            
+            //запускаем один раз анимацию у лица
+            if (controllerDisplayScript != null && !HelpVisard)
+            {
+                controllerDisplayScript.Activate();
+                HelpVisard = true;
+            }
+
+            
             // Если можем вибрировать, запускаем метод вибрации с задержкой
             if (canVibrate)
             {
@@ -136,11 +173,21 @@ public class HandAnimationController : MonoBehaviour
                 //отменяем повторение вибрации и сбрасываем флаг
                 CancelInvoke(nameof(StartVibration));
                 canVibrate = false;
+                SetTrigger("Stay");
             }
         }
         
         if (NameTriggerAnim  == "Grab_Left")
         {
+            
+            //запускаем один раз анимацию у лица
+            if (controllerDisplayScript != null && !HelpVisard)
+            {
+                controllerDisplayScript.Activate();
+                HelpVisard = true;
+            }
+
+            
             // Если можем вибрировать, запускаем метод вибрации с задержкой
             if (canVibrate)
             {
@@ -156,11 +203,20 @@ public class HandAnimationController : MonoBehaviour
                 //отменяем повторение вибрации и сбрасываем флаг
                 CancelInvoke(nameof(StartVibration));
                 canVibrate = false;
+                SetTrigger("Stay");
             }
         }
         
         if (NameTriggerAnim  == "Button1_Left")
         {
+            
+            //запускаем один раз анимацию у лица
+            if (controllerDisplayScript != null && !HelpVisard)
+            {
+                controllerDisplayScript.Activate();
+                HelpVisard = true;
+            }
+
             // Если можем вибрировать, запускаем метод вибрации с задержкой
             if (canVibrate)
             {
@@ -176,11 +232,20 @@ public class HandAnimationController : MonoBehaviour
                 //отменяем повторение вибрации и сбрасываем флаг
                 CancelInvoke(nameof(StartVibration));
                 canVibrate = false;
+                SetTrigger("Stay");
             }
         }
         
         if (NameTriggerAnim  == "Button2_Left")
         {
+            
+            //запускаем один раз анимацию у лица
+            if (controllerDisplayScript != null && !HelpVisard)
+            {
+                controllerDisplayScript.Activate();
+                HelpVisard = true;
+            }
+
             // Если можем вибрировать, запускаем метод вибрации с задержкой
             if (canVibrate)
             {
@@ -196,11 +261,20 @@ public class HandAnimationController : MonoBehaviour
                 //отменяем повторение вибрации и сбрасываем флаг
                 CancelInvoke(nameof(StartVibration));
                 canVibrate = false;
+                SetTrigger("Stay");
             }
         }
         
         if (NameTriggerAnim  == "Button1_Right")
         {
+            
+            //запускаем один раз анимацию у лица
+            if (controllerDisplayScript != null && !HelpVisard)
+            {
+                controllerDisplayScript.Activate();
+                HelpVisard = true;
+            }
+
             // Если можем вибрировать, запускаем метод вибрации с задержкой
             if (canVibrate)
             {
@@ -216,11 +290,20 @@ public class HandAnimationController : MonoBehaviour
                 //отменяем повторение вибрации и сбрасываем флаг
                 CancelInvoke(nameof(StartVibration));
                 canVibrate = false;
+                SetTrigger("Stay");
             }
         }
         
         if (NameTriggerAnim  == "Button2_Right")
         {
+            
+            //запускаем один раз анимацию у лица
+            if (controllerDisplayScript != null && !HelpVisard)
+            {
+                controllerDisplayScript.Activate();
+                HelpVisard = true;
+            }
+
             // Если можем вибрировать, запускаем метод вибрации с задержкой
             if (canVibrate)
             {
@@ -236,6 +319,7 @@ public class HandAnimationController : MonoBehaviour
                 //отменяем повторение вибрации и сбрасываем флаг
                 CancelInvoke(nameof(StartVibration));
                 canVibrate = false;
+                SetTrigger("Stay");
             }
         }
         
