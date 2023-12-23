@@ -59,6 +59,11 @@ namespace MobaVR
                 }
             }
 
+            if (m_GameSession.Mode.GameModeType == GameModeType.LOBBY)
+            {
+                ApplyForDummy();
+            }
+
             if (m_GameSession.Mode.GameModeType is GameModeType.PVP or GameModeType.MOBA)
             {
                 DamagePlayers();
@@ -69,7 +74,16 @@ namespace MobaVR
                 DamageMonsters();
             }
 
-            Invoke(nameof(EnableHealing), m_DamageDelay);
+            Invoke(nameof(EnableVoice), m_DamageDelay);
+        }
+
+        private void ApplyForDummy()
+        {
+            Dummy dummy = FindObjectOfType<Dummy>();
+            if (dummy != null)
+            {
+                dummy.ShowFire();
+            }
         }
 
         private void DamagePlayers()
@@ -110,7 +124,7 @@ namespace MobaVR
             }
         }
 
-        protected void EnableHealing()
+        protected void EnableVoice()
         {
             m_CanDamage = true;
         }

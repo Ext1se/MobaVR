@@ -31,6 +31,12 @@ namespace MobaVR
             }
 
             m_CanFog = false;
+
+            if (m_GameSession.Mode.GameModeType == GameModeType.LOBBY)
+            {
+                ApplyForDummy();
+                Invoke(nameof(EnableFog), m_FogDelay);
+            }
             
             if (m_GameSession.Mode.GameModeType is GameModeType.PVP or GameModeType.MOBA or GameModeType.LOBBY)
             {
@@ -42,6 +48,15 @@ namespace MobaVR
             {
                 BlindMonsters();
                 Invoke(nameof(EnableFog), m_FogDelay);
+            }
+        }
+        
+        private void ApplyForDummy()
+        {
+            Dummy dummy = FindObjectOfType<Dummy>();
+            if (dummy != null)
+            {
+                dummy.ShowFog();
             }
         }
 

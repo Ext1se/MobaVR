@@ -65,7 +65,22 @@ namespace MobaVR
                 }
             }
 
+            if (m_GameSession.Mode.GameModeType == GameModeType.LOBBY)
+            {
+                ApplyForDummy();
+            }
+            
             Invoke(nameof(EnableHealing), m_HealDelay);
+        }
+
+
+        private void ApplyForDummy()
+        {
+            Dummy dummy = FindObjectOfType<Dummy>();
+            if (dummy != null)
+            {
+                dummy.ShowHeal();
+            }
         }
 
         protected void EnableHealing()
