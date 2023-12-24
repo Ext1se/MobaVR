@@ -31,6 +31,8 @@ public class HandAnimationController : MonoBehaviour
     
     private bool canVibrate = true;//вибрация
     private bool HelpVisard = false;//анимация взлёта к лицу
+
+    public RessetObuchHansHUDVibr OffVibr;//сюда добавляем скрипт, который выключает вибрацию, при отключении этого скрипта
     
     /*
     Trigger_Left
@@ -69,19 +71,26 @@ public class HandAnimationController : MonoBehaviour
         SetTrigger("Stay");
         HelpVisard= false;
         canVibrate = false;
+        OffVibr.OffVibro();//выключаем вибрацию
+    }
+    
+    
+    void OnEnable()
+    {
+        canVibrate = true;
     }
 
     // Публичная функция для установки триггера аниматора. Сюда приходит название Анимации, которую хотим включить. Она приходит именно в нужную руку.
     public void SetTrigger(string triggerName)
     {
        
-        
+        Debug.Log("Выполнили функцию. в неё пришла анимация");
+        Debug.Log(triggerName);
         
         if (handAnimator != null)
         {
             Debug.Log("Обана");
-            Debug.Log(triggerName);
-            handAnimator.SetTrigger(triggerName);
+            handAnimator.SetTrigger(triggerName);//типа включаем в аниматоре триггер
             NameTriggerAnim = triggerName;
             Debug.Log(NameTriggerAnim);
         }
@@ -97,9 +106,7 @@ public class HandAnimationController : MonoBehaviour
                 controllerDisplayScript.Activate();
                 HelpVisard = true;
             }
-            
-            
-            
+
             // Если можем вибрировать, запускаем метод вибрации с задержкой
             if (canVibrate)
             {
@@ -115,6 +122,14 @@ public class HandAnimationController : MonoBehaviour
                     //отменяем повторение вибрации и сбрасываем флаг
                     CancelInvoke(nameof(StartVibration));
                     canVibrate = false;
+                    SetTrigger("Stay");
+                    if (controllerDisplayScript != null)
+                    {
+                        controllerDisplayScript.Deactivate();
+                    }
+                    CancelInvoke();
+                    InputBridge.Instance.VibrateController(0f, 0f, 0f, grab.HandSide); //выключаем вибрацию
+                    
             }
         }
 
@@ -144,8 +159,87 @@ public class HandAnimationController : MonoBehaviour
                 CancelInvoke(nameof(StartVibration));
                 canVibrate = false;
                 SetTrigger("Stay");
+                if (controllerDisplayScript != null)
+                {
+                    controllerDisplayScript.Deactivate();
+                }
+                CancelInvoke();
+                InputBridge.Instance.VibrateController(0f, 0f, 0f, grab.HandSide); //выключаем вибрацию
             }
         }
+        
+        if (NameTriggerAnim  == "Trig_Grab_Left")
+        {
+            //запускаем один раз анимацию у лица
+            if (controllerDisplayScript != null && !HelpVisard)
+            {
+                controllerDisplayScript.Activate();
+                HelpVisard = true;
+            }
+
+            
+            // Если можем вибрировать, запускаем метод вибрации с задержкой
+            if (canVibrate)
+            {
+                InvokeRepeating(nameof(StartVibration), 0f, 1.5f); // Запуск каждые 1.5 секунды
+                canVibrate = false; // Устанавливаем флаг, что вибрация уже начата
+            }
+            // Проверка нажатия кнопки
+            if (InputBridge.Instance.GetControllerBindingValue(LeftTriggerDown) && InputBridge.Instance.GetControllerBindingValue(LeftGripDown))
+            {
+                //если нажали на кнопку, то сбрасываем контроллеры на стандартные
+                leftTargetScript?.ActivateObject(0);
+                rightTargetScript?.ActivateObject(0);
+                //отменяем повторение вибрации и сбрасываем флаг
+                CancelInvoke(nameof(StartVibration));
+                canVibrate = false;
+                SetTrigger("Stay");
+                
+                if (controllerDisplayScript != null)
+                {
+                    controllerDisplayScript.Deactivate();
+                }
+                CancelInvoke();
+                InputBridge.Instance.VibrateController(0f, 0f, 0f, grab.HandSide); //выключаем вибрацию
+            }
+        }
+        
+        if (NameTriggerAnim  == "Trig_Grab_Right")
+        {
+            //запускаем один раз анимацию у лица
+            if (controllerDisplayScript != null && !HelpVisard)
+            {
+                controllerDisplayScript.Activate();
+                HelpVisard = true;
+            }
+
+            
+            // Если можем вибрировать, запускаем метод вибрации с задержкой
+            if (canVibrate)
+            {
+                InvokeRepeating(nameof(StartVibration), 0f, 1.5f); // Запуск каждые 1.5 секунды
+                canVibrate = false; // Устанавливаем флаг, что вибрация уже начата
+            }
+            // Проверка нажатия кнопки
+            if (InputBridge.Instance.GetControllerBindingValue(RightTriggerDown) && InputBridge.Instance.GetControllerBindingValue(RightGripDown))
+            {
+                //если нажали на кнопку, то сбрасываем контроллеры на стандартные
+                leftTargetScript?.ActivateObject(0);
+                rightTargetScript?.ActivateObject(0);
+                //отменяем повторение вибрации и сбрасываем флаг
+                CancelInvoke(nameof(StartVibration));
+                canVibrate = false;
+                SetTrigger("Stay");
+                CancelInvoke();
+                InputBridge.Instance.VibrateController(0f, 0f, 0f, grab.HandSide); //выключаем вибрацию
+                
+                if (controllerDisplayScript != null)
+                {
+                    controllerDisplayScript.Deactivate();
+                }
+            }
+        }
+        
         
         if (NameTriggerAnim  == "Grab_Right")
         {
@@ -174,6 +268,12 @@ public class HandAnimationController : MonoBehaviour
                 CancelInvoke(nameof(StartVibration));
                 canVibrate = false;
                 SetTrigger("Stay");
+                CancelInvoke();
+                InputBridge.Instance.VibrateController(0f, 0f, 0f, grab.HandSide); //выключаем вибрацию
+                if (controllerDisplayScript != null)
+                {
+                    controllerDisplayScript.Deactivate();
+                }
             }
         }
         
@@ -204,6 +304,12 @@ public class HandAnimationController : MonoBehaviour
                 CancelInvoke(nameof(StartVibration));
                 canVibrate = false;
                 SetTrigger("Stay");
+                CancelInvoke();
+                InputBridge.Instance.VibrateController(0f, 0f, 0f, grab.HandSide); //выключаем вибрацию
+                if (controllerDisplayScript != null)
+                {
+                    controllerDisplayScript.Deactivate();
+                }
             }
         }
         
@@ -233,6 +339,12 @@ public class HandAnimationController : MonoBehaviour
                 CancelInvoke(nameof(StartVibration));
                 canVibrate = false;
                 SetTrigger("Stay");
+                CancelInvoke();
+                InputBridge.Instance.VibrateController(0f, 0f, 0f, grab.HandSide); //выключаем вибрацию
+                if (controllerDisplayScript != null)
+                {
+                    controllerDisplayScript.Deactivate();
+                }
             }
         }
         
@@ -262,6 +374,12 @@ public class HandAnimationController : MonoBehaviour
                 CancelInvoke(nameof(StartVibration));
                 canVibrate = false;
                 SetTrigger("Stay");
+                CancelInvoke();
+                InputBridge.Instance.VibrateController(0f, 0f, 0f, grab.HandSide); //выключаем вибрацию
+                if (controllerDisplayScript != null)
+                {
+                    controllerDisplayScript.Deactivate();
+                }
             }
         }
         
@@ -291,6 +409,12 @@ public class HandAnimationController : MonoBehaviour
                 CancelInvoke(nameof(StartVibration));
                 canVibrate = false;
                 SetTrigger("Stay");
+                CancelInvoke();
+                InputBridge.Instance.VibrateController(0f, 0f, 0f, grab.HandSide); //выключаем вибрацию
+                if (controllerDisplayScript != null)
+                {
+                    controllerDisplayScript.Deactivate();
+                }
             }
         }
         
@@ -320,6 +444,12 @@ public class HandAnimationController : MonoBehaviour
                 CancelInvoke(nameof(StartVibration));
                 canVibrate = false;
                 SetTrigger("Stay");
+                CancelInvoke();
+                InputBridge.Instance.VibrateController(0f, 0f, 0f, grab.HandSide); //выключаем вибрацию
+                if (controllerDisplayScript != null)
+                {
+                    controllerDisplayScript.Deactivate();
+                }
             }
         }
         
@@ -331,7 +461,10 @@ public class HandAnimationController : MonoBehaviour
         InputBridge.Instance.VibrateController(1f, 1f, 0.5f, grab.HandSide);
     }
 
-    
+   public void StopVibration()
+    {
+        CancelInvoke();
+    }
     
     
 }

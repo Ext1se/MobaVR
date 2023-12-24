@@ -22,102 +22,140 @@ public class TriggerHandler : MonoBehaviour
     //как только входим в зону обучения у нас включаются контроллеры 
     void OnTriggerEnter(Collider other)
     {
-
-   
-            FindFunction();
-            if (other.CompareTag("TriggerLocalPlayer"))
-            {
-                leftTargetScript?.ActivateObject(2);
-                rightTargetScript?.ActivateObject(2);
-               
-            }
-        
-
+        if (other.CompareTag("TriggerLocalPlayer"))
+        {
+            Start_Trigger();//Если зашёл в коллайдер, то говорим включить показ триггера
+        }
     }
 
     //как только входим выключаются
     void OnTriggerExit(Collider other)
     {
-      
-            FindFunction();
-            if (other.CompareTag("TriggerLocalPlayer"))
+        if (other.CompareTag("TriggerLocalPlayer"))
             {
+                //Если выходим из коллайдера, то выключаем показ контроллеров
                 leftTargetScript?.ActivateObject(0);
                 rightTargetScript?.ActivateObject(0);
-               
+
             }
-        
     }
 
-
-
+    
     void FindFunction()
     {
-        // Найти все объекты с компонентом PhotonView
-        PhotonView[] allPhotonViews = FindObjectsOfType<PhotonView>();
-
-        foreach (var photonView in allPhotonViews)
+        // Найти все объекты с тегом LeftTargetScript и проверить их PhotonView
+        foreach (GameObject leftTarget in GameObject.FindGameObjectsWithTag("LeftTargetScript"))
         {
-            // Проверяем, принадлежит ли объект текущему игроку
-            if (photonView.IsMine)
+            PhotonView photonView = leftTarget.GetComponent<PhotonView>();
+            if (photonView != null && photonView.IsMine)
             {
-                // Проверяем имя объекта
-                if (photonView.gameObject.name == "LeftTarget")
-                {
-                    leftTargetScript = photonView.GetComponent<MassivHandsPlayer>();
-                }
-                else if (photonView.gameObject.name == "RightTarget")
-                {
-                    rightTargetScript = photonView.GetComponent<MassivHandsPlayer>();
-                }
-                else if (photonView.gameObject.name == "TriggerRight")
-                {
-                    triggerRight = photonView.GetComponent<HandAnimationController>();
-                    
-                    // Отправляем команду для запуска триггера
-                    if (triggerRight != null)
-                    {
-                        triggerRight.GetComponent<HandAnimationController>().SetTrigger(NameAnimationRight);
-                    }
-                    
-                }                
-                else if (photonView.gameObject.name == "TriggerLeft")
-                {
-                    triggerLeft = photonView.GetComponent<HandAnimationController>();
-                    
-                    // Отправляем команду для запуска триггера
-                    if (triggerLeft  != null)
-                    {
-                        triggerLeft .GetComponent<HandAnimationController>().SetTrigger(NameAnimationLeft);
-                    }
-                }
+                leftTargetScript = leftTarget.GetComponent<MassivHandsPlayer>();
+            }
+        }
 
+        // Найти все объекты с тегом RightTargetScript и проверить их PhotonView
+        foreach (GameObject rightTarget in GameObject.FindGameObjectsWithTag("RightTargetScript"))
+        {
+            PhotonView photonView = rightTarget.GetComponent<PhotonView>();
+            if (photonView != null && photonView.IsMine)
+            {
+                rightTargetScript = rightTarget.GetComponent<MassivHandsPlayer>();
+            }
+        }
+
+        //Включаем наши контроллеры
+        leftTargetScript?.ActivateObject(2);
+        rightTargetScript?.ActivateObject(2);
+        
+        
+        // Аналогично для TriggerRight и TriggerLeft
+        foreach (GameObject trigger in GameObject.FindGameObjectsWithTag("TriggerRight"))
+        {
+            PhotonView photonView = trigger.GetComponent<PhotonView>();
+            if (photonView != null && photonView.IsMine)
+            {
+                triggerRight = trigger.GetComponent<HandAnimationController>();
+            }
+        }
+
+        foreach (GameObject trigger in GameObject.FindGameObjectsWithTag("TriggerLeft"))
+        {
+            PhotonView photonView = trigger.GetComponent<PhotonView>();
+            if (photonView != null && photonView.IsMine)
+            {
+                triggerLeft = trigger.GetComponent<HandAnimationController>();
             }
         }
     }
 
+    
+    
+        
+    public void Start_Trigger()
+    {
+        
+        NameAnimationRight = "Trigger_Right";
+        NameAnimationLeft = "Stay";
 
-    //включаем помощь для контроллеров нажатине на Х
+        if (leftTargetScript == null && rightTargetScript == null && triggerRight == null && triggerLeft == null)
+        {
+            FindFunction();
+            triggerRight.SetTrigger(NameAnimationRight);
+            triggerLeft.SetTrigger(NameAnimationLeft);
+        }
+        else
+        {
+            leftTargetScript?.ActivateObject(2);
+            rightTargetScript?.ActivateObject(2);
+
+            // Отправляем команду для запуска триггера
+            if (triggerRight != null)
+            {
+                triggerRight.SetTrigger(NameAnimationRight);
+            }
+            // Отправляем команду для запуска триггера
+            if (triggerLeft != null)
+            {
+                triggerLeft.SetTrigger(NameAnimationLeft);
+            }
+        }
+    }
+    
+    
+    
+    
     public void Button_x()
     {
-        leftTargetScript?.ActivateObject(2);
-        rightTargetScript?.ActivateObject(2);
+        
+        NameAnimationRight = "Stay";
+        NameAnimationLeft = "Button1_Left";
 
-      
-        // Отправляем команду для запуска триггера
-        if (triggerRight != null)
+        if (leftTargetScript == null && rightTargetScript == null && triggerRight == null && triggerLeft == null)
         {
-            triggerRight.GetComponent<HandAnimationController>().SetTrigger("Stay");
-           
+            FindFunction();
+            triggerRight.SetTrigger(NameAnimationRight);
+            triggerLeft.SetTrigger(NameAnimationLeft);
         }
-        
-        // Отправляем команду для запуска триггера
-        if (triggerLeft  != null)
+        else
         {
-            triggerLeft .GetComponent<HandAnimationController>().SetTrigger("Button1_Left");
-           
+            leftTargetScript?.ActivateObject(2);
+            rightTargetScript?.ActivateObject(2);
+
+            // Отправляем команду для запуска триггера
+            if (triggerRight != null)
+            {
+                triggerRight.SetTrigger(NameAnimationRight);
+            }
+            // Отправляем команду для запуска триггера
+            if (triggerLeft != null)
+            {
+                triggerLeft.SetTrigger(NameAnimationLeft);
+            }
         }
-        
     }
+    
+    
+    
+    
 
 }

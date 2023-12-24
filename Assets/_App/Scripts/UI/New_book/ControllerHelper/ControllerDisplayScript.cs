@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class ControllerDisplayScript : MonoBehaviour
 {
+    
+    // Установить вращение объекта
+    public float rotationX = 0.0f; // Угол вращения вокруг оси X
+    public float rotationY = 0.0f; // Угол вращения вокруг оси Y
+    public float rotationZ = 0.0f; // Угол вращения вокруг оси Z
+    
     public Transform targetPosition; // Переменная 2: точка, куда переместится объект с контроллером
     public AudioClip soundClip; // Переменная 3: звук
     public Transform originalParent; // Переменная 4: стандартное положение контроллера
@@ -21,7 +27,6 @@ public class ControllerDisplayScript : MonoBehaviour
 
     public float rotationTime = 1f; // Время в секундах, за которое объект должен совершить полный оборот на 360 градусов
     private float rotationTimer = 0f; // Таймер для отслеживания времени вращения
-
     
     
     private void Start()
@@ -54,7 +59,8 @@ public class ControllerDisplayScript : MonoBehaviour
         }
         else if (isRotating)
         {
-            RotateAround();
+            //RotateAround();
+            Ogidanie();
         }
         else if (isReturning)
         {
@@ -103,6 +109,30 @@ public class ControllerDisplayScript : MonoBehaviour
             rotationTimer = 0f; // Сбрасываем таймер вращения
         }
     }
+    
+    private void Ogidanie()
+    {
+        // Сброс вращения объекта перед началом вращения
+        if (rotationTimer == 0f)
+        {
+            transform.localRotation = Quaternion.Euler(rotationX, rotationY, rotationZ);
+        }
+
+        // Увеличиваем таймер на время, прошедшее с последнего кадра
+        rotationTimer += Time.deltaTime;
+
+        // Вычисляем долю времени, прошедшую от начала вращения
+        float fraction = rotationTimer / rotationTime;
+        
+        // Проверяем, достиг ли объект полного вращения на 360 градусов
+        if (fraction >= 1f)
+        {
+            isRotating = false;
+            isReturning = true;
+            rotationTimer = 0f; // Сбрасываем таймер вращения
+        }
+    }
+    
 
 
 
@@ -111,7 +141,7 @@ public class ControllerDisplayScript : MonoBehaviour
        
         transform.SetParent(originalParent);
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, originalPosition, Time.deltaTime);
-       // transform.localRotation = Quaternion.RotateTowards(transform.localRotation, originalRotation, Time.deltaTime);
+        // transform.localRotation = Quaternion.RotateTowards(transform.localRotation, originalRotation, Time.deltaTime);
         transform.localRotation = Quaternion.identity;
 
         if (transform.localPosition == originalPosition && transform.localRotation == originalRotation)
