@@ -22,17 +22,15 @@ public class TriggerHandler : MonoBehaviour
     //как только входим в зону обучения у нас включаются контроллеры 
     void OnTriggerEnter(Collider other)
     {
-
-   
-            FindFunction();
+        FindFunction();
             if (other.CompareTag("TriggerLocalPlayer"))
             {
+                NameAnimationRight = "Trigger_Right";
+                NameAnimationLeft = "Stay";
                 leftTargetScript?.ActivateObject(2);
                 rightTargetScript?.ActivateObject(2);
                
             }
-        
-
     }
 
     //как только входим выключаются
@@ -42,6 +40,7 @@ public class TriggerHandler : MonoBehaviour
             FindFunction();
             if (other.CompareTag("TriggerLocalPlayer"))
             {
+                EndColider();
                 leftTargetScript?.ActivateObject(0);
                 rightTargetScript?.ActivateObject(0);
                
@@ -107,17 +106,37 @@ public class TriggerHandler : MonoBehaviour
         // Отправляем команду для запуска триггера
         if (triggerRight != null)
         {
-            triggerRight.GetComponent<HandAnimationController>().SetTrigger("Stay");
-           
+            NameAnimationRight = "Stay";
         }
         
         // Отправляем команду для запуска триггера
         if (triggerLeft  != null)
         {
-            triggerLeft .GetComponent<HandAnimationController>().SetTrigger("Button1_Left");
-           
+            NameAnimationLeft = "Button1_Left";
         }
         
     }
+    
+    
+    public void EndColider()
+    {
+        leftTargetScript?.ActivateObject(2);
+        rightTargetScript?.ActivateObject(2);
+
+      
+        // Отправляем команду для запуска триггера
+        if (triggerRight != null)
+        {
+            NameAnimationRight = "Stay";
+        }
+        
+        // Отправляем команду для запуска триггера
+        if (triggerLeft  != null)
+        {
+            NameAnimationLeft = "Stay";
+        }
+        
+    }
+    
 
 }

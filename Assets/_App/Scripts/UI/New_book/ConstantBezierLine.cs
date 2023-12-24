@@ -40,6 +40,12 @@ public class ConstantBezierLine : MonoBehaviour {
             Strelka.SetActive(false);
         }
     }
+    
+    
+    void OnDisable()
+    {
+        Strelka.SetActive(false);
+    }
 
     void DrawBezierCurve() {
         Vector3 point0 = startPoint.transform.position;

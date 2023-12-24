@@ -87,10 +87,10 @@ public class BookAnimationAndMovement : MonoBehaviour
             {
                 AudioSource.PlayClipAtPoint(soundClip, transform.position);
             }
-            /*if (triggerHandlerScript != null)
+            if (triggerHandlerScript != null)
             {
                 triggerHandlerScript.Button_x();
-            }*/
+            }
             
 
         }

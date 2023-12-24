@@ -71,21 +71,22 @@ public class Shit_obuchenie : MonoBehaviour
                 if (InputBridge.Instance.GetControllerBindingValue(currentLessonObj.Button) &&
                     InputBridge.Instance.GetControllerBindingValue(currentLessonObj.ButtonGrab) ||
                     currentLessonObj.test || currentLessonObj.autoStop)
-                {
-                    if (currentLessonObj.autoStop)
                     {
+                        if (currentLessonObj.autoStop)
+                        {
 
-                        //Debug.Log("Запускаем звук");
-                        StartCoroutine(StartEndLessonAuto());
+                            Debug.Log("Запускаем звук");
+                            StartCoroutine(StartEndLessonAuto());
+                            currentLessonObj.autoStop = false;
+                        }
+                        else if (!timerStarted)
+                        {
+                            currentLessonObj.test = false;
+                            timerStarted = true;
+                            //Debug.Log("Запускаем ожидание");
+                            StartCoroutine(StartEndLessonTimer());
+                        }
                     }
-                    else if (!timerStarted)
-                    {
-                        currentLessonObj.test = false;
-                        timerStarted = true;
-                        //Debug.Log("Запускаем ожидание");
-                        StartCoroutine(StartEndLessonTimer());
-                    }
-                }
                 else
                 {
                     // Если кнопка больше не нажимается, сбрасываем таймер
