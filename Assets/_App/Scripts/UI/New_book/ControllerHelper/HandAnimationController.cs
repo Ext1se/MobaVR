@@ -116,8 +116,8 @@ public class HandAnimationController : MonoBehaviour
             // Проверка нажатия кнопки
             if (InputBridge.Instance.GetControllerBindingValue(RightTriggerDown))
             {
-                //если нажали на кнопку, то сбрасываем контроллеры на стандартные
-                leftTargetScript?.ActivateObject(0);
+                    //если нажали на кнопку, то сбрасываем контроллеры на стандартные
+                    leftTargetScript?.ActivateObject(0);
                     rightTargetScript?.ActivateObject(0);
                     //отменяем повторение вибрации и сбрасываем флаг
                     CancelInvoke(nameof(StartVibration));

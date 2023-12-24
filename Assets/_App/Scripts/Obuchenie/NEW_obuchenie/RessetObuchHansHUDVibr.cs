@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BNG;
+using UnityEngine.SceneManagement;
 
 //Этот скрипт, при смене цены выключает вибрацию контроллеров, ставит все HUD на место, ставит все руки на метсо и включает нужные.
 public class RessetObuchHansHUDVibr : MonoBehaviour
@@ -12,13 +13,20 @@ public class RessetObuchHansHUDVibr : MonoBehaviour
 
     public HandAnimationController HandAnimationControllerLeft;//через этот скрипт могу управлять анимациями и вибрациями рук
     public HandAnimationController HandAnimationControlRight;//через этот скрипт могу управлять анимациями и вибрациями рук
+    public MassivHandsPlayer leftTargetScript;//включаем стандартные контроллеры
+    public MassivHandsPlayer rightTargetScript;//включаем стандартные контроллеры
     
-    
-    
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
+    { 
+
+        // Подписываемся на событие загрузки сцены
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
     {
-        
+        // Отписываемся от события загрузки сцены
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     // Update is called once per frame
@@ -35,4 +43,25 @@ public class RessetObuchHansHUDVibr : MonoBehaviour
         InputBridge.Instance.VibrateController(0f, 0f, 0f, grabLeft.HandSide); //выключаем вибрацию
         InputBridge.Instance.VibrateController(0f, 0f, 0f, grabRight.HandSide); //выключаем вибрацию
     }
+    
+
+    
+    
+    
+    //если вдруг выходим из сцены, т овсё резко возвращаем на место
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+
+        OffVibro();// отключаем вибрацию
+        
+        //если нажали на кнопку, то сбрасываем контроллеры на стандартные
+        leftTargetScript?.ActivateObject(0);
+        rightTargetScript?.ActivateObject(0);
+
+
+
+    }
+    
+    
+    
 }
