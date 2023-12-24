@@ -1,7 +1,6 @@
 using MobaVR;
 using System.Collections;
 using System.Collections.Generic;
-using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using TMPro;
 using UnityEngine;
 
@@ -57,6 +56,12 @@ public class DieView : MonoBehaviour
 
     public void SetDieInfo(string nickname)
     {
+        //TODO: вызывается даже у удаленных игроков. Плохо.
+        if (gameSession == null)
+        {
+            return;
+        }
+        
         if (gameSession.Mode.GameModeType is GameModeType.PVP or GameModeType.MOBA)
         {
             DieInfoPanelPvE.SetActive(false);

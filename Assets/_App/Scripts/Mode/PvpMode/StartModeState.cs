@@ -17,6 +17,7 @@ namespace MobaVR.ClassicModeStateMachine.PVP
 
         public override void Enter()
         {
+            m_Content.ModeView.PvpVictoryView.Hide();
             m_Content.ModeView.InfoView.Show();
             
             m_Content.ZoneManager.Hide();

@@ -55,6 +55,7 @@ namespace MobaVR.ClassicModeStateMachine.PVP
             m_Content.KillZoneManager.Show();
             
             m_Content.ModeView.InfoView.Hide();
+            m_Content.ModeView.PvpVictoryView.Hide();
 
             if (m_Mode.Player != null)
             {
