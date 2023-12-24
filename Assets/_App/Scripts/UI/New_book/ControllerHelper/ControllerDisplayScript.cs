@@ -29,6 +29,9 @@ public class ControllerDisplayScript : MonoBehaviour
     private float rotationTimer = 0f; // Таймер для отслеживания времени вращения
     
     
+    public float moveSpeed = 3f; // Скорость перемещения объекта
+    
+    
     private void Start()
     {
         // Сохранить исходное положение и ориентацию
@@ -70,7 +73,8 @@ public class ControllerDisplayScript : MonoBehaviour
 
     private void MoveToTarget()
     {
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, Time.deltaTime);
+       // transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, Time.deltaTime);
+       transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, moveSpeed * Time.deltaTime);
 
         if (transform.localPosition == Vector3.zero)
         {
@@ -140,7 +144,8 @@ public class ControllerDisplayScript : MonoBehaviour
     {
        
         transform.SetParent(originalParent);
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, originalPosition, Time.deltaTime);
+        //transform.localPosition = Vector3.MoveTowards(transform.localPosition, originalPosition, Time.deltaTime);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, originalPosition, moveSpeed * Time.deltaTime);
         // transform.localRotation = Quaternion.RotateTowards(transform.localRotation, originalRotation, Time.deltaTime);
         transform.localRotation = Quaternion.identity;
 
@@ -155,7 +160,6 @@ public class ControllerDisplayScript : MonoBehaviour
         // Мгновенно вернуть в исходное положение
         transform.SetParent(originalParent);
         transform.localPosition = originalPosition;
-        transform.localRotation = originalRotation;
 
         isMovingToTarget = false;
         isRotating = false;

@@ -17,7 +17,7 @@ public class obuchenie_Voice: MonoBehaviour
         [HideInInspector] public bool isPlaying;
     }
 	public int NomerUroka;
-    public bool isMainTaskSoundRunInSecondStep;
+        //public bool isMainTaskSoundRunInSecondStep;
     public SaveInfoClass _SaveInfoClass;// получаем класс ирока
     public string ID;//вводим класс игрока, который будем сравнивать с полученным
     private CharacterActions characterActions; // Ссылка на ваш скрипт CharacterActions
@@ -58,11 +58,8 @@ public class obuchenie_Voice: MonoBehaviour
 
         if (ID == _SaveInfoClass.targetID)
         {
-            // Проверяем значение mainTaskSoundRun для второго урока (индекс 1, так как индексы в массивах обычно начинаются с 0).
-            // isMainTaskSoundRunInSecondStep = characterActions.tutorialSteps[NomerUroka].mainTaskSoundRun;
             
             if (characterActions && characterActions.tutorialSteps[NomerUroka].mainTaskSoundRun && !RunUrok0)
-            //if (characterActions && characterActions.CurrentStepIndex == NomerUroka &&  characterActions.tutorialSteps[characterActions.CurrentStepIndex].mainTaskSoundRun  && !RunUrok0)
                     {
                         //если у нас есть урок и не воспроизводится звук урока
                         if (currentLesson < lessons.Length && !lessons[currentLesson].isPlaying)
@@ -85,6 +82,7 @@ public class obuchenie_Voice: MonoBehaviour
                                
                         // Debug.Log("Запускаем звук");
                         StartCoroutine(StartEndLessonAuto());
+                        currentLessonObj.autoStop = false;
                     }
                     else if (!timerStarted)
                     {
@@ -168,7 +166,10 @@ public class obuchenie_Voice: MonoBehaviour
         {
             // Уроки закончились, вызываем завершающую функцию
           // Debug.Log("Уроки кончились");
-
+          if (characterActions.tutorialSteps.Length > NomerUroka)
+          {
+              characterActions.tutorialSteps[NomerUroka].isTaskCompleted = true;
+          }
             characterActions.OnTutorialsCompleted();
         }
     }

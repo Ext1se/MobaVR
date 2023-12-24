@@ -14,13 +14,13 @@ public class HandAnimationController : MonoBehaviour
     //всевозможные кнопки
     public ControllerBinding XButtonDown = ControllerBinding.XButtonDown;
     public ControllerBinding YButtonDown = ControllerBinding.YButtonDown;
-    public ControllerBinding RightGripDown= ControllerBinding.RightGripDown;
-    public ControllerBinding RightTriggerDown= ControllerBinding.RightTriggerDown;
+    public ControllerBinding RightGripDown= ControllerBinding.RightGrip;
+    public ControllerBinding RightTriggerDown= ControllerBinding.RightTrigger;
     
     public ControllerBinding AButtonDown= ControllerBinding.AButtonDown;
     public ControllerBinding BButtonDown= ControllerBinding.BButtonDown;
-    public ControllerBinding LeftGripDown= ControllerBinding.LeftGripDown;
-    public ControllerBinding LeftTriggerDown= ControllerBinding.LeftTriggerDown;
+    public ControllerBinding LeftGripDown= ControllerBinding.LeftGrip;
+    public ControllerBinding LeftTriggerDown= ControllerBinding.LeftTrigger;
 
     public string NameTriggerAnim;
     
@@ -348,6 +348,9 @@ public class HandAnimationController : MonoBehaviour
             }
         }
         
+        
+        
+        
         if (NameTriggerAnim  == "Button2_Left")
         {
             
@@ -382,6 +385,14 @@ public class HandAnimationController : MonoBehaviour
                 }
             }
         }
+   
+        
+        
+        
+        
+        
+        
+        
         
         if (NameTriggerAnim  == "Button1_Right")
         {
