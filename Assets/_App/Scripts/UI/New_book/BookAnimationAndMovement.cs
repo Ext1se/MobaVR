@@ -101,6 +101,11 @@ public class BookAnimationAndMovement : MonoBehaviour
         {
             OffBook();
         }
+
+        if (Application.platform != RuntimePlatform.Android && Input.GetKeyDown(KeyCode.X) && !Exit)
+        {
+            OffBook();
+        }
         
     }
 

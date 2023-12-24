@@ -40,6 +40,10 @@ namespace MobaVR
         {
             HideAllEffects();
             m_HealVFX.Play();
+            
+            m_DamageNumber.SpawnNumber(m_DamageNumber.transform.position,
+                10f,
+                Monster.MonsterDamageType.HEAL);
         }
 
         public void ShowDamage(HitData hitData)

@@ -729,6 +729,11 @@ namespace MobaVR
                 m_BlindEffect.Show(m_BlindDuration);
                 m_Animator.SetTrigger(m_Stun);
             }
+            
+            m_IsBlind = true;
+            
+            CancelInvoke(nameof(ResetBlind));
+            Invoke(nameof(ResetBlind), m_BlindDuration);
 
             if (!PhotonNetwork.IsMasterClient)
             {
@@ -740,8 +745,8 @@ namespace MobaVR
 
             //m_Animator.SetTrigger(m_Stun);
 
-            CancelInvoke(nameof(ResetBlind));
-            Invoke(nameof(ResetBlind), m_BlindDuration);
+            //CancelInvoke(nameof(ResetBlind));
+            //Invoke(nameof(ResetBlind), m_BlindDuration);
         }
 
         private void ResetBlind()
@@ -749,7 +754,10 @@ namespace MobaVR
             m_Animator.SetTrigger(m_Ready);
 
             m_IsBlind = false;
-            ActivateNavAgent();
+            if (PhotonNetwork.IsMasterClient)
+            {
+                ActivateNavAgent();
+            }
         }
 
         public void Hit(HitData hitData)

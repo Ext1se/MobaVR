@@ -230,13 +230,27 @@ public class MoveUI : MonoBehaviour
         }
         
         // Мгновенное возвращение UI элемента в его исходное положение
-        objectToMove.GetComponent<RectTransform>().anchoredPosition = originalAnchoredPosition;
-        
-        // Мгновенное возвращение UI элемента к его исходному размеру
-        rectTransform.localScale = originalScale;
 
-        imageToFill.fillAmount = 1;
-        
+        if (objectToMove != null)
+        {
+            RectTransform rt = objectToMove.GetComponent<RectTransform>();
+            if (rt != null)
+            {
+                rt.anchoredPosition = originalAnchoredPosition;
+            }
+        }
+
+        if (rectTransform != null)
+        {
+            // Мгновенное возвращение UI элемента к его исходному размеру
+            rectTransform.localScale = originalScale;
+        }
+
+        if (imageToFill != null)
+        {
+            imageToFill.fillAmount = 1;
+        }
+
         if (AnimatorButton != null)
         {
             AnimatorButton.SetActive(true);

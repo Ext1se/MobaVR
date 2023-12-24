@@ -83,6 +83,7 @@ namespace MobaVR
             if (dummy != null)
             {
                 dummy.ShowFire();
+                dummy.Hit(m_EnemyHitData);
             }
         }
 
