@@ -209,6 +209,7 @@ public class ZonaBook : MonoBehaviour
     {
         // Пытаемся получить компонент Skin с дочернего объекта или его дочерних элементов
         Skin skin = child.GetComponentInChildren<Skin>();
+        //Skin skin = child.GetComponent<Skin>();
 
         if (skin != null) // Проверяем, найден ли компонент Skin
         {

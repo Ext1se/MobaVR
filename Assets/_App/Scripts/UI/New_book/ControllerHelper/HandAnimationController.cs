@@ -50,7 +50,8 @@ public class HandAnimationController : MonoBehaviour
     
     
     
-    void Start()
+    //void Start()
+    void Awake()
     {
         // Поиск и получение компонента HandPoseBlender
         handPoseBlender = GetComponent<HandPoseBlender>();
