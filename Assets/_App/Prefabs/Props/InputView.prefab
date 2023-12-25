@@ -1219,7 +1219,9 @@ GameObject:
   m_Component:
   - component: {fileID: 690236073392334343}
   - component: {fileID: 5429543539374865021}
+  - component: {fileID: 712640291440417236}
   - component: {fileID: 3240551797243223798}
+  - component: {fileID: 1417080990947565637}
   m_Layer: 0
   m_Name: Title
   m_TagString: Untagged
@@ -1256,6 +1258,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1561753749779686495}
   m_CullTransparentMesh: 1
+--- !u!114 &712640291440417236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561753749779686495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!114 &3240551797243223798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1346,6 +1367,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1417080990947565637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561753749779686495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Special Ability
+  textRus: "\u041E\u0441\u043E\u0431\u043E\u0435 \u0443\u043C\u0435\u043D\u0438\u0435"
+  textChn: "\u7279\u6B8A\u6280\u80FD"
 --- !u!1 &1606190505804830784
 GameObject:
   m_ObjectHideFlags: 0
@@ -2831,6 +2867,8 @@ GameObject:
   - component: {fileID: 9108032556478975601}
   - component: {fileID: 6165189886957998000}
   - component: {fileID: 8035842437900938072}
+  - component: {fileID: 4538758903685677389}
+  - component: {fileID: 3434531106499095234}
   m_Layer: 0
   m_Name: Title
   m_TagString: Untagged
@@ -2957,6 +2995,40 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4538758903685677389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2611909925177122406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
+--- !u!114 &3434531106499095234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2611909925177122406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Battle Cry
+  textRus: "\u0411\u043E\u0435\u0432\u043E\u0439 \u043A\u043B\u0438\u0447"
+  textChn: "\u6218\u6597\u53E3\u53F7"
 --- !u!1 &2757373948805128892
 GameObject:
   m_ObjectHideFlags: 0
@@ -3764,6 +3836,8 @@ GameObject:
   - component: {fileID: 7475029503876597502}
   - component: {fileID: 3821350031138600270}
   - component: {fileID: 7084843401353664459}
+  - component: {fileID: 8467985534829919726}
+  - component: {fileID: 7375028963498296759}
   m_Layer: 0
   m_Name: Description_1
   m_TagString: Untagged
@@ -3825,8 +3899,8 @@ MonoBehaviour:
     \u043D\u0430 \u043F\u0440\u043E\u0442\u044F\u0436\u0435\u043D\u0438\u0438 \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u0438\u0445
     \u0441\u0435\u043A\u0443\u043D\u0434."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 21a5ce3af0138d240b603ef1624c6924, type: 2}
-  m_sharedMaterial: {fileID: -6125759244955295942, guid: 21a5ce3af0138d240b603ef1624c6924,
+  m_fontAsset: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  m_sharedMaterial: {fileID: -2122355483376272449, guid: 7a2fda231a5792b4098f90f0ea6ef520,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3893,6 +3967,45 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8467985534829919726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3641147641999308370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
+--- !u!114 &7375028963498296759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3641147641999308370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Press <color=#E26700><b>Y on the left controller</b></color> and loudly
+    shout for a few seconds.
+  textRus: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 <color=#E26700><b>Y \u043D\u0430
+    \u043B\u0435\u0432\u043E\u043C \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u043B\u0435\u0440\u0435</b></color>
+    \u0438 \u0433\u0440\u043E\u043C\u043A\u043E \u043A\u0440\u0438\u0447\u0438\u0442\u0435
+    \u043D\u0430 \u043F\u0440\u043E\u0442\u044F\u0436\u0435\u043D\u0438\u0438 \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u0438\u0445
+    \u0441\u0435\u043A\u0443\u043D\u0434."
+  textChn: "\u6309\u4F4F\u5DE6\u4FA7\u63A7\u5236\u5668\u4E0A\u7684<color=#E26700><b>Y\u952E</b></color>\u5E76\u5927\u58F0\u558A\u53EB\u51E0\u79D2\u949F\u3002"
 --- !u!1 &3790502608324683288
 GameObject:
   m_ObjectHideFlags: 0
@@ -4227,6 +4340,8 @@ GameObject:
   - component: {fileID: 8271091493655214437}
   - component: {fileID: 4706995232390390539}
   - component: {fileID: 1649867073617890100}
+  - component: {fileID: 3396177658922625455}
+  - component: {fileID: 6751935148827337253}
   m_Layer: 0
   m_Name: Description_1
   m_TagString: Untagged
@@ -4288,8 +4403,8 @@ MonoBehaviour:
     \u0447\u0442\u043E\u0431\u044B \u0430\u043A\u0442\u0438\u0432\u0438\u0440\u043E\u0432\u0430\u0442\u044C
     \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0435 \u0443\u043C\u0435\u043D\u0438\u0435."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 21a5ce3af0138d240b603ef1624c6924, type: 2}
-  m_sharedMaterial: {fileID: -6125759244955295942, guid: 21a5ce3af0138d240b603ef1624c6924,
+  m_fontAsset: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  m_sharedMaterial: {fileID: -2122355483376272449, guid: 7a2fda231a5792b4098f90f0ea6ef520,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -4356,6 +4471,45 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3396177658922625455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4132348474402238223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
+--- !u!114 &6751935148827337253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4132348474402238223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Press <color=#E26700><b>all triggers on both controllers</b></color> to
+    activate the special ability.
+  textRus: "\u0417\u0430\u0436\u043C\u0438\u0442\u0435 <color=#E26700><b>\u0432\u0441\u0435
+    \u0442\u0440\u0438\u0433\u0435\u0440\u044B \u043D\u0430 \u043E\u0431\u043E\u0438\u0445
+    \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u043B\u0435\u0440\u0430\u0445</b></color>,
+    \u0447\u0442\u043E\u0431\u044B \u0430\u043A\u0442\u0438\u0432\u0438\u0440\u043E\u0432\u0430\u0442\u044C
+    \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0435 \u0443\u043C\u0435\u043D\u0438\u0435."
+  textChn: "\u6309\u4F4F\u4E24\u4E2A\u63A7\u5236\u5668\u4E0A\u7684<color=#E26700><b>\u6240\u6709\u89E6\u53D1\u5668</b></color>\u6765\u6FC0\u6D3B\u7279\u6B8A\u6280\u80FD\u3002"
 --- !u!1 &4171748588724317560
 GameObject:
   m_ObjectHideFlags: 0

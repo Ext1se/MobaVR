@@ -246,7 +246,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3707632289129966145}
   - component: {fileID: 2794460290364888587}
+  - component: {fileID: 2757904255840000313}
   - component: {fileID: 8744430266455010770}
+  - component: {fileID: 731382616967934081}
   m_Layer: 0
   m_Name: Header_1
   m_TagString: Untagged
@@ -282,6 +284,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3231226812498932774}
   m_CullTransparentMesh: 1
+--- !u!114 &2757904255840000313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231226812498932774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Prepare for battle
+  textRus: "\u041F\u0440\u0438\u0433\u043E\u0442\u043E\u0432\u044C\u0442\u0435\u0441\u044C\n\u043A
+    \u0431\u043E\u044E"
+  textChn: "\u51C6\u5907\u6218\u6597"
 --- !u!114 &8744430266455010770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +391,25 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &731382616967934081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231226812498932774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!1 &3348102689163440166
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,6 +1063,8 @@ GameObject:
   - component: {fileID: 7221376536211748798}
   - component: {fileID: 3908004634903546146}
   - component: {fileID: 3032529900990352766}
+  - component: {fileID: 7047730265047692292}
+  - component: {fileID: 5860422299202901339}
   m_Layer: 0
   m_Name: Header_2
   m_TagString: Untagged
@@ -1153,6 +1192,42 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7047730265047692292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3715557862752202786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: The team that gets <color=#C0392C><b>more kills</b></color> wins.
+  textRus: "\u041F\u043E\u0431\u0435\u0436\u0434\u0430\u0435\u0442 \u043A\u043E\u043C\u0430\u043D\u0434\u0430,
+    \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u043D\u0430\u0431\u0435\u0440\u0435\u0442
+    <color=#C0392C><b>\n\u0431\u043E\u043B\u044C\u0448\u0435 \u0443\u0431\u0438\u0439\u0441\u0442\u0432.</b></color>"
+  textChn: "\u83B7\u80DC\u7684\u56E2\u961F\u662F<color=#C0392C><b>\u6740\u654C\u6570\u66F4\u591A\u7684\u56E2\u961F\u3002</b></color>"
+--- !u!114 &5860422299202901339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3715557862752202786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!1 &4664899989190433004
 GameObject:
   m_ObjectHideFlags: 0
@@ -1736,6 +1811,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Book
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257691129645124579, guid: a63716c3d98c62049952f09115b13d32,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8377498401676227768, guid: a63716c3d98c62049952f09115b13d32,
         type: 3}

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 275103465029817124}
   - component: {fileID: 1613010068782624622}
   - component: {fileID: 5331996116603983031}
+  - component: {fileID: 6392740577069244237}
+  - component: {fileID: 9038812404193570611}
   m_Layer: 0
   m_Name: WinLabel
   m_TagString: Untagged
@@ -136,6 +138,40 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6392740577069244237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049952989770124611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Won
+  textRus: "\u041F\u043E\u0431\u0435\u0434\u0438\u043B\u0430"
+  textChn: "\u83B7\u80DC\u4E86"
+--- !u!114 &9038812404193570611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049952989770124611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!1 &2221298676692415958
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,6 +716,8 @@ GameObject:
   - component: {fileID: 2169089450122489806}
   - component: {fileID: 2612836470385697995}
   - component: {fileID: 7415606010449441324}
+  - component: {fileID: 2798984967143312897}
+  - component: {fileID: 6322598479867024722}
   m_Layer: 0
   m_Name: WinLabel
   m_TagString: Untagged
@@ -805,6 +843,40 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2798984967143312897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2971147059182467503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: 
+  textRus: 
+  textChn: 
+--- !u!114 &6322598479867024722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2971147059182467503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!1 &3208362865395067819
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,6 +1101,8 @@ GameObject:
   - component: {fileID: 9108877304278933526}
   - component: {fileID: 7610224722390086686}
   - component: {fileID: 4717341899145948190}
+  - component: {fileID: 4055276598517248475}
+  - component: {fileID: 326366875042362806}
   m_Layer: 0
   m_Name: TeamName
   m_TagString: Untagged
@@ -1154,6 +1228,40 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4055276598517248475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630617614403857872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Blue Team
+  textRus: "\u0421\u0438\u043D\u044F\u044F \u043A\u043E\u043C\u0430\u043D\u0434\u0430"
+  textChn: "\u84DD\u961F"
+--- !u!114 &326366875042362806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630617614403857872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!1 &6458506150547410451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,6 +1273,8 @@ GameObject:
   - component: {fileID: 2326902600323461797}
   - component: {fileID: 8578837607856603902}
   - component: {fileID: 8952773740149162544}
+  - component: {fileID: 2527283127225759748}
+  - component: {fileID: 6454909389592274729}
   m_Layer: 0
   m_Name: WinLabel
   m_TagString: Untagged
@@ -1290,6 +1400,40 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2527283127225759748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6458506150547410451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Won
+  textRus: "\u041F\u043E\u0431\u0435\u0434\u0438\u043B\u0430"
+  textChn: "\u83B7\u80DC\u4E86"
+--- !u!114 &6454909389592274729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6458506150547410451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!1 &6567644308893635821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,6 +1445,8 @@ GameObject:
   - component: {fileID: 4734513022162432970}
   - component: {fileID: 3028140625156893579}
   - component: {fileID: 3982589219966068554}
+  - component: {fileID: 798530886606462916}
+  - component: {fileID: 3579163603568573668}
   m_Layer: 0
   m_Name: TeamName
   m_TagString: Untagged
@@ -1426,6 +1572,40 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &798530886606462916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6567644308893635821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Red Team
+  textRus: "\u041A\u0440\u0430\u0441\u043D\u0430\u044F \u043A\u043E\u043C\u0430\u043D\u0434\u0430"
+  textChn: "\u7EA2\u961F"
+--- !u!114 &3579163603568573668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6567644308893635821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!1 &7210981607547738411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1542,6 +1722,8 @@ GameObject:
   - component: {fileID: 2111502612082149675}
   - component: {fileID: 980233537007891459}
   - component: {fileID: 3168389178090277742}
+  - component: {fileID: 5866997438530068516}
+  - component: {fileID: 1717928750201172132}
   m_Layer: 0
   m_Name: TeamName
   m_TagString: Untagged
@@ -1667,6 +1849,40 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5866997438530068516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7943096969782127191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Blue Team
+  textRus: "\u0421\u0438\u043D\u044F\u044F \u043A\u043E\u043C\u0430\u043D\u0434\u0430"
+  textChn: "\u84DD\u961F"
+--- !u!114 &1717928750201172132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7943096969782127191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!1 &8077336891862786441
 GameObject:
   m_ObjectHideFlags: 0

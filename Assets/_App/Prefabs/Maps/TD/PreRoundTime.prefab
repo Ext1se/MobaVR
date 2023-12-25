@@ -103,6 +103,8 @@ GameObject:
   - component: {fileID: 1680828757117636679}
   - component: {fileID: 2469713011118575522}
   - component: {fileID: 2987524388348217253}
+  - component: {fileID: 1100325520133895332}
+  - component: {fileID: 3946794616668587030}
   m_Layer: 0
   m_Name: Header_2
   m_TagString: Untagged
@@ -229,6 +231,41 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1100325520133895332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895835399004162744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Repel the new wave of monsters.
+  textRus: "\u041E\u0442\u0440\u0430\u0437\u0438\u0442\u0435 \u043D\u043E\u0432\u0443\u044E
+    \u0432\u043E\u043B\u043D\u0443 \u043C\u043E\u043D\u0441\u0442\u0440\u043E\u0432."
+  textChn: "\u62B5\u6321\u65B0\u4E00\u6CE2\u7684\u602A\u7269\u3002"
+--- !u!114 &3946794616668587030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895835399004162744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!1 &3683442592973552722
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +413,8 @@ GameObject:
   - component: {fileID: 5447559691490580759}
   - component: {fileID: 500488203252703813}
   - component: {fileID: 2343256158662829463}
+  - component: {fileID: 5395634294083354568}
+  - component: {fileID: 6372414352397542962}
   m_Layer: 0
   m_Name: Header_1
   m_TagString: Untagged
@@ -502,6 +541,41 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5395634294083354568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4622396058391808816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: "Prepare \nfor battle"
+  textRus: "\u041F\u0440\u0438\u0433\u043E\u0442\u043E\u0432\u044C\u0442\u0435\u0441\u044C\n\u043A
+    \u0431\u043E\u044E"
+  textChn: "\u51C6\u5907\u6218\u6597"
+--- !u!114 &6372414352397542962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4622396058391808816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!1 &5026848850972157336
 GameObject:
   m_ObjectHideFlags: 0

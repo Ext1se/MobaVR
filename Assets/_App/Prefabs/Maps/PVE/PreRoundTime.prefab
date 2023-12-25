@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1900442150489442837}
   - component: {fileID: 4621512625321306322}
   - component: {fileID: 5260269885048040102}
+  - component: {fileID: 2453456471315704338}
+  - component: {fileID: 8471954154752169027}
   m_Layer: 0
   m_Name: Header_2
   m_TagString: Untagged
@@ -68,8 +70,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u041F\u043E\u0431\u0435\u0434\u0438\u0442\u0435 \u041B\u0438\u0447\u0430"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 21a5ce3af0138d240b603ef1624c6924, type: 2}
-  m_sharedMaterial: {fileID: -6125759244955295942, guid: 21a5ce3af0138d240b603ef1624c6924,
+  m_fontAsset: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  m_sharedMaterial: {fileID: -2122355483376272449, guid: 7a2fda231a5792b4098f90f0ea6ef520,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -136,6 +138,40 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2453456471315704338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152892321220537961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
+--- !u!114 &8471954154752169027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152892321220537961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Defeat the Lich
+  textRus: "\u041F\u043E\u0431\u0435\u0434\u0438\u0442\u0435 \u041B\u0438\u0447\u0430"
+  textChn: "\u51FB\u8D25\u5DEB\u5996"
 --- !u!1 &693093743755268556
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +517,8 @@ GameObject:
   - component: {fileID: 2642015602867154728}
   - component: {fileID: 2578113212588424340}
   - component: {fileID: 6808856403135703100}
+  - component: {fileID: 2610756195981053588}
+  - component: {fileID: 4619065680030750437}
   m_Layer: 0
   m_Name: Header_1
   m_TagString: Untagged
@@ -536,8 +574,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041F\u0440\u0438\u0433\u043E\u0442\u043E\u0432\u044C\u0442\u0435\u0441\u044C\n\u043A
-    \u0431\u043E\u044E"
+  m_text: "\u041F\u0440\u0438\u0433\u043E\u0442\u043E\u0432\u044C\u0442\u0435\u0441\u044C
+    \n\u043A \u0431\u043E\u044E"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
   m_sharedMaterial: {fileID: -2122355483376272449, guid: 7a2fda231a5792b4098f90f0ea6ef520,
@@ -607,6 +645,41 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2610756195981053588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2443274489451078623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
+--- !u!114 &4619065680030750437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2443274489451078623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: "Prepare \nfor battle"
+  textRus: "\u041F\u0440\u0438\u0433\u043E\u0442\u043E\u0432\u044C\u0442\u0435\u0441\u044C
+    \n\u043A \u0431\u043E\u044E"
+  textChn: "\u51C6\u5907\u6218\u6597"
 --- !u!1 &4370173760309246257
 GameObject:
   m_ObjectHideFlags: 0

@@ -87,6 +87,8 @@ GameObject:
   - component: {fileID: 6008925890620437404}
   - component: {fileID: 2917086128165671197}
   - component: {fileID: 3665442743444838750}
+  - component: {fileID: 1922976303526122497}
+  - component: {fileID: 6256842129102805502}
   m_Layer: 0
   m_Name: Header_1
   m_TagString: Untagged
@@ -212,6 +214,40 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1922976303526122497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502444365987666555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Cemetery
+  textRus: "\u041A\u043B\u0430\u0434\u0431\u0438\u0449\u0435"
+  textChn: "\u5893\u5730"
+--- !u!114 &6256842129102805502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502444365987666555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!1 &807981390283244052
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +581,8 @@ GameObject:
   - component: {fileID: 2685972133128755823}
   - component: {fileID: 8297435538263696850}
   - component: {fileID: 3807974215645757314}
+  - component: {fileID: 9218855219133233816}
+  - component: {fileID: 7824534653710692308}
   m_Layer: 0
   m_Name: Header_3
   m_TagString: Untagged
@@ -602,8 +640,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0430\u0446\u0438\u0438:"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 21a5ce3af0138d240b603ef1624c6924, type: 2}
-  m_sharedMaterial: {fileID: -6125759244955295942, guid: 21a5ce3af0138d240b603ef1624c6924,
+  m_fontAsset: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  m_sharedMaterial: {fileID: -2122355483376272449, guid: 7a2fda231a5792b4098f90f0ea6ef520,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -670,6 +708,40 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &9218855219133233816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2309602077646105848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Recommendations
+  textRus: "\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0430\u0446\u0438\u0438:"
+  textChn: "\u5EFA\u8BAE"
+--- !u!114 &7824534653710692308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2309602077646105848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!1 &2474712471845939776
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +753,8 @@ GameObject:
   - component: {fileID: 7968850614165968585}
   - component: {fileID: 2182787869177291304}
   - component: {fileID: 8271225925859360365}
+  - component: {fileID: 2312678468340367242}
+  - component: {fileID: 4118563965119982170}
   m_Layer: 0
   m_Name: Header_6
   m_TagString: Untagged
@@ -738,8 +812,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0414\u0435\u0439\u0441\u0442\u0432\u0443\u0439\u0442\u0435 \u043A\u043E\u043C\u0430\u043D\u0434\u043E\u0439."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 21a5ce3af0138d240b603ef1624c6924, type: 2}
-  m_sharedMaterial: {fileID: -6125759244955295942, guid: 21a5ce3af0138d240b603ef1624c6924,
+  m_fontAsset: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  m_sharedMaterial: {fileID: -2122355483376272449, guid: 7a2fda231a5792b4098f90f0ea6ef520,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -806,6 +880,40 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2312678468340367242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2474712471845939776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
+--- !u!114 &4118563965119982170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2474712471845939776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Act as a team.
+  textRus: "\u0414\u0435\u0439\u0441\u0442\u0432\u0443\u0439\u0442\u0435 \u043A\u043E\u043C\u0430\u043D\u0434\u043E\u0439."
+  textChn: "\u4EE5\u56E2\u961F\u5408\u4F5C\u884C\u52A8\u3002"
 --- !u!1 &3065060128783058148
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +925,8 @@ GameObject:
   - component: {fileID: 3014816300353986058}
   - component: {fileID: 8896185944851289630}
   - component: {fileID: 3158790282943943859}
+  - component: {fileID: 2224516124433289195}
+  - component: {fileID: 8114570607919093624}
   m_Layer: 0
   m_Name: Header_5
   m_TagString: Untagged
@@ -875,8 +985,9 @@ MonoBehaviour:
   m_text: "<color=black>\u0426\u0435\u043B\u044C:</color> <size=50><b>\u041F\u043E\u0431\u0435\u0434\u0438\u0442\u044C
     \u041B\u0438\u0447\u0430</b></size>"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  m_sharedMaterial: {fileID: -2122355483376272449, guid: 7a2fda231a5792b4098f90f0ea6ef520,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -942,6 +1053,41 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2224516124433289195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3065060128783058148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: <color=black>Objective:</color> <size=50><b>Defeat the Lich</b></size>
+  textRus: "<color=black>\u0426\u0435\u043B\u044C:</color> <size=50><b>\u041F\u043E\u0431\u0435\u0434\u0438\u0442\u044C
+    \u041B\u0438\u0447\u0430</b></size>"
+  textChn: "<color=black>\u76EE\u6807\uFF1A</color><size=50><b>\u51FB\u8D25\u5DEB\u5996</b></size>"
+--- !u!114 &8114570607919093624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3065060128783058148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!1 &3265282549670257705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,6 +1662,8 @@ GameObject:
   - component: {fileID: 4569801139561679975}
   - component: {fileID: 1906724781971327795}
   - component: {fileID: 710591093403598838}
+  - component: {fileID: 4024154184002089841}
+  - component: {fileID: 916119451191000516}
   m_Layer: 0
   m_Name: Header_2
   m_TagString: Untagged
@@ -1574,8 +1722,8 @@ MonoBehaviour:
   m_text: "\u0421\u0444\u043E\u043A\u0443\u0441\u0438\u0440\u0443\u0439\u0442\u0435\u0441\u044C
     \u043D\u0430 <color=#C0392C>\u041B\u0438\u0447\u0435</color>."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 21a5ce3af0138d240b603ef1624c6924, type: 2}
-  m_sharedMaterial: {fileID: -6125759244955295942, guid: 21a5ce3af0138d240b603ef1624c6924,
+  m_fontAsset: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  m_sharedMaterial: {fileID: -2122355483376272449, guid: 7a2fda231a5792b4098f90f0ea6ef520,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1642,6 +1790,41 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4024154184002089841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5425097878243343235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Focus on the <color=#C0392C>Lich</color>.
+  textRus: "\u0421\u0444\u043E\u043A\u0443\u0441\u0438\u0440\u0443\u0439\u0442\u0435\u0441\u044C
+    \u043D\u0430 <color=#C0392C>\u041B\u0438\u0447\u0435</color>."
+  textChn: "\u4E13\u6CE8\u4E8E<color=#C0392C>\u5DEB\u5996</color>\u3002"
+--- !u!114 &916119451191000516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5425097878243343235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
 --- !u!1 &5673075040298460501
 GameObject:
   m_ObjectHideFlags: 0
@@ -2334,6 +2517,8 @@ GameObject:
   - component: {fileID: 4933341363147492330}
   - component: {fileID: 2573984240606234550}
   - component: {fileID: 2394700890158287384}
+  - component: {fileID: 1121363271128743136}
+  - component: {fileID: 6250210989362017520}
   m_Layer: 0
   m_Name: Header_7
   m_TagString: Untagged
@@ -2393,8 +2578,8 @@ MonoBehaviour:
     \u0443\u043C\u0435\u043D\u0438\u044F</color> \n\u0438 <color=#16A184>\u0431\u043E\u0435\u0432\u043E\u0439
     \u043A\u043B\u0438\u0447</color>."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 21a5ce3af0138d240b603ef1624c6924, type: 2}
-  m_sharedMaterial: {fileID: -6125759244955295942, guid: 21a5ce3af0138d240b603ef1624c6924,
+  m_fontAsset: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  m_sharedMaterial: {fileID: -2122355483376272449, guid: 7a2fda231a5792b4098f90f0ea6ef520,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2461,6 +2646,43 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1121363271128743136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8737200041194545612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bbd4cecde1a1342b21a53c96652303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserFont: 0
+  engFont: {fileID: 0}
+  rusFont: {fileID: 0}
+  chnFont: {fileID: 0}
+  engFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  rusFontTMP: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  chnFontTMP: {fileID: 11400000, guid: 87edb17ea5e82264e96ac8733d5b23ed, type: 2}
+--- !u!114 &6250210989362017520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8737200041194545612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Use <color=#2980B9>special abilities</color> and <color=#16A184>battle
+    cry</color>.
+  textRus: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 <color=#2980B9>\u043E\u0441\u043E\u0431\u044B\u0435
+    \u0443\u043C\u0435\u043D\u0438\u044F</color> \n\u0438 <color=#16A184>\u0431\u043E\u0435\u0432\u043E\u0439
+    \u043A\u043B\u0438\u0447</color>."
+  textChn: "\u4F7F\u7528<color=#2980B9>\u7279\u6B8A\u6280\u80FD</color>\u548C<color=#16A184>\u6218\u6597\u53E3\u53F7</color>\u3002"
 --- !u!1 &8963592997262122134
 GameObject:
   m_ObjectHideFlags: 0
@@ -2472,6 +2694,7 @@ GameObject:
   - component: {fileID: 1859397209374838863}
   - component: {fileID: 7726850886955835623}
   - component: {fileID: 3883651460841639869}
+  - component: {fileID: 1039723778620899011}
   m_Layer: 0
   m_Name: Header_8
   m_TagString: Untagged
@@ -2532,8 +2755,8 @@ MonoBehaviour:
     <color=#16A184>\u0437\u0435\u043B\u0435\u043D\u043E\u0433\u043E \u043B\u0443\u0447\u0430
     \u0441 \u043D\u0435\u0431\u0430</color>."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 21a5ce3af0138d240b603ef1624c6924, type: 2}
-  m_sharedMaterial: {fileID: -6125759244955295942, guid: 21a5ce3af0138d240b603ef1624c6924,
+  m_fontAsset: {fileID: 11400000, guid: 7a2fda231a5792b4098f90f0ea6ef520, type: 2}
+  m_sharedMaterial: {fileID: -2122355483376272449, guid: 7a2fda231a5792b4098f90f0ea6ef520,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2600,6 +2823,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1039723778620899011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8963592997262122134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ce32230b2561647b09addbcd4c5537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textEng: Dodge the attacks and avoid the <color=#16A184>green beam from the sky</color>.
+  textRus: "\u0423\u043A\u043B\u043E\u043D\u044F\u0439\u0442\u0435\u0441\u044C \u043E\u0442
+    \u0430\u0442\u0430\u043A \u0438 \n\u0438\u0437\u0431\u0435\u0433\u0430\u0439\u0442\u0435
+    <color=#16A184>\u0437\u0435\u043B\u0435\u043D\u043E\u0433\u043E \u043B\u0443\u0447\u0430
+    \u0441 \u043D\u0435\u0431\u0430</color>."
+  textChn: "\u8EB2\u907F\u653B\u51FB\u5E76\u907F\u5F00<color=#16A184>\u6765\u81EA\u5929\u7A7A\u7684\u7EFF\u8272\u5149\u675F</color>\u3002"
 --- !u!1001 &3785363289874865809
 PrefabInstance:
   m_ObjectHideFlags: 0
