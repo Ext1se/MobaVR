@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MobaVR;
 using BNG;
+using UnityEngine.SceneManagement;
 
 //скрипт, который включает книгу, переносит в точку все скины игрока, включает туман
 
@@ -33,8 +35,18 @@ public class ZonaBook : MonoBehaviour
     private bool isInTrigger = false; // Находится ли в триггере
     private float initialFogDensity; // Начальная плотность тумана
     private float transitionTimer = 0f; // Таймер для перехода тумана
-    
-    public GameObject[] BookPapper;//страницы книги, когда выходим из книги, чтобы страницы перематывались в исходные.
+
+    private Collider playerCollider = null;
+
+    public GameObject[] BookPapper; //страницы книги, когда выходим из книги, чтобы страницы перематывались в исходные.
+
+    private void OnDisable()
+    {
+        if (playerCollider != null)
+        {
+            TranslateSkinsToPlayer(playerCollider);
+        }
+    }
 
     private void Start()
     {
@@ -92,6 +104,8 @@ public class ZonaBook : MonoBehaviour
             playerCount++;
             if (playerCount == 1)
             {
+                playerCollider = other;
+
                 if (soundOnEnter != null)
                 {
                     audioSource.PlayOneShot(soundOnEnter); // Воспроизвести звук при входе
@@ -124,15 +138,14 @@ public class ZonaBook : MonoBehaviour
                     child.localPosition = Vector3.zero;
                     child.localRotation = Quaternion.identity;
                     child.localScale = Vector3.one;
-                    
+
                     Collider[] colliders = child.GetComponentsInChildren<Collider>(true);
                     foreach (Collider hitCollider in colliders)
                     {
                         hitCollider.enabled = false;
                     }
                 }
-                
-                
+
 
                 UpdateTargetID(targetID); // Обновление ID цели
             }
@@ -143,85 +156,90 @@ public class ZonaBook : MonoBehaviour
     {
         if (other.CompareTag("TriggerLocalPlayer"))
         {
-            playerCount--;
-            if (playerCount == 0)
-            {
-                if (soundOnExit != null)
-                {
-                    audioSource.PlayOneShot(soundOnExit); // Воспроизвести звук при выходе
-                }
-
-                isInTrigger = false; // Сбросить флаг нахождения в триггере
-                isFogCompleted = false; // Начать переход тумана обратно
-
-                meshRenderer.SetActive(true); // Показать meshRenderer
-                objectToActivate.SetActive(false); // Скрыть objectToActivate
-                Book_Menu.SetActive(false); // Скрыть меню книги
-                Book.SetActive(true); // Показать книгу
-
-                int childCount = destinationParent.transform.childCount;
-                GameObject[] childObjects = new GameObject[childCount];
-
-                // Подготовка к возврату всех дочерних объектов на свои исходные позиции
-                for (int i = 0; i < childCount; i++)
-                {
-                    Transform child = destinationParent.transform.GetChild(i);
-                    childObjects[i] = child.gameObject;
-                }
-
-                // Перемещение всех дочерних объектов обратно к исходному родителю
-                foreach (GameObject childObject in childObjects)
-                {
-                    Transform childTransform = childObject.transform;
-                    childTransform.SetParent(other.transform);
-                    childTransform.localPosition = Vector3.zero;
-                    childTransform.localRotation = Quaternion.identity;
-                    childTransform.localScale = Vector3.one;
-                    childObject.SetActive(false);
-
-                    Collider[] colliders = childTransform.GetComponentsInChildren<Collider>(true);
-                    foreach (Collider hitCollider in colliders)
-                    {
-                        hitCollider.enabled = false;
-                    }
-                }
-                
-                
-                // Выключение всех страниц в книге
-                foreach (GameObject paper in BookPapper)
-                {
-                    if (paper != null)
-                    {
-                        paper.SetActive(false);
-                    }
-                }
-                
-            }
+            TranslateSkinsToPlayer(other);
         }
     }
 
-   public void UpdateTargetID(string newTargetID)
-{	
-    targetID = newTargetID; // Обновляем значение targetID на новое, полученное в параметре функции
-
-    // Проходим по всем дочерним объектам объекта, который находится в переменной destinationParent
-    foreach (Transform child in destinationParent)
+    private void TranslateSkinsToPlayer(Collider other)
     {
-        // Пытаемся получить компонент Skin с дочернего объекта или его дочерних элементов
-        Skin skin = child.GetComponentInChildren<Skin>();
-        //Skin skin = child.GetComponent<Skin>();
-
-        if (skin != null) // Проверяем, найден ли компонент Skin
+        playerCount--;
+        if (playerCount == 0)
         {
-            skin.gameObject.SetActive(false); // Деактивируем GameObject, на котором находится компонент Skin
+            playerCollider = null;
 
-            // Если ID компонента Skin совпадает с новым targetID, то...
-            if (skin.ID == targetID)
+            if (soundOnExit != null)
             {
-                skin.gameObject.SetActive(true); // Активируем GameObject
+                audioSource.PlayOneShot(soundOnExit); // Воспроизвести звук при выходе
+            }
+
+            isInTrigger = false; // Сбросить флаг нахождения в триггере
+            isFogCompleted = false; // Начать переход тумана обратно
+
+            meshRenderer.SetActive(true); // Показать meshRenderer
+            objectToActivate.SetActive(false); // Скрыть objectToActivate
+            Book_Menu.SetActive(false); // Скрыть меню книги
+            Book.SetActive(true); // Показать книгу
+
+            int childCount = destinationParent.transform.childCount;
+            GameObject[] childObjects = new GameObject[childCount];
+
+            // Подготовка к возврату всех дочерних объектов на свои исходные позиции
+            for (int i = 0; i < childCount; i++)
+            {
+                Transform child = destinationParent.transform.GetChild(i);
+                childObjects[i] = child.gameObject;
+            }
+
+            // Перемещение всех дочерних объектов обратно к исходному родителю
+            foreach (GameObject childObject in childObjects)
+            {
+                Transform childTransform = childObject.transform;
+                childTransform.SetParent(other.transform);
+                childTransform.localPosition = Vector3.zero;
+                childTransform.localRotation = Quaternion.identity;
+                childTransform.localScale = Vector3.one;
+                childObject.SetActive(false);
+
+                Collider[] colliders = childTransform.GetComponentsInChildren<Collider>(true);
+                foreach (Collider hitCollider in colliders)
+                {
+                    hitCollider.enabled = false;
+                }
+            }
+
+
+            // Выключение всех страниц в книге
+            foreach (GameObject paper in BookPapper)
+            {
+                if (paper != null)
+                {
+                    paper.SetActive(false);
+                }
             }
         }
     }
-}
 
+    public void UpdateTargetID(string newTargetID)
+    {
+        targetID = newTargetID; // Обновляем значение targetID на новое, полученное в параметре функции
+
+        // Проходим по всем дочерним объектам объекта, который находится в переменной destinationParent
+        foreach (Transform child in destinationParent)
+        {
+            // Пытаемся получить компонент Skin с дочернего объекта или его дочерних элементов
+            Skin skin = child.GetComponentInChildren<Skin>();
+            //Skin skin = child.GetComponent<Skin>();
+
+            if (skin != null) // Проверяем, найден ли компонент Skin
+            {
+                skin.gameObject.SetActive(false); // Деактивируем GameObject, на котором находится компонент Skin
+
+                // Если ID компонента Skin совпадает с новым targetID, то...
+                if (skin.ID == targetID)
+                {
+                    skin.gameObject.SetActive(true); // Активируем GameObject
+                }
+            }
+        }
+    }
 }
