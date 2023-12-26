@@ -179,12 +179,14 @@ public class TriggerHandler : MonoBehaviour
         if (triggerRight != null)
         {
             NameAnimationRight = "Stay";
+            triggerRight.SetTrigger(NameAnimationRight);
         }
 
         // Отправляем команду для запуска триггера
         if (triggerLeft != null)
         {
             NameAnimationLeft = "Button1_Left";
+            triggerLeft.SetTrigger(NameAnimationLeft);
         }
     }
 
