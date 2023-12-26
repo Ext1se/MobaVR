@@ -10,6 +10,7 @@ namespace MobaVR
         [Header("Microphone")]
         [SerializeField] protected bool m_UseActivateButton = true;
         [SerializeField] protected float m_Duration = 10f;
+        [SerializeField] protected float m_DurationForTutorial = 5f;
         [SerializeField] protected MicrophoneInput m_MicrophoneInput;
         [SerializeField] protected float m_LoudnessSensibility = 100f;
         [SerializeField] protected float m_Threshold = 0.1f;
@@ -105,8 +106,22 @@ namespace MobaVR
 
         private void Stop()
         {
-            WaitCooldown();
-            Interrupt();
+            if (m_GameSession.Mode.GameModeType == GameModeType.LOBBY)
+            {
+                WaitCooldown();
+                Interrupt();
+                Invoke(nameof(QuickResetForTutorial), m_DurationForTutorial);
+            }
+            else
+            {
+                WaitCooldown();
+                Interrupt();
+            }
+        }
+
+        protected void QuickResetForTutorial()
+        {
+            SetAvailable();
         }
 
         protected override void Update()

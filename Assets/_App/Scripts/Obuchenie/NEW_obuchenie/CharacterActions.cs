@@ -39,6 +39,11 @@ public class CharacterActions : MonoBehaviour
     
     private IEnumerator _rotateCoroutine;
     private bool continueTutorial = false;
+    
+    
+    // Новая переменная для хранения объекта, к которому будет двигаться персонаж.
+    public GameObject TargetWay;
+    
 
     // Класс, описывающий каждый шаг обучения.
     [System.Serializable]
@@ -47,6 +52,8 @@ public class CharacterActions : MonoBehaviour
         public int NomerUroka;
         public string description; // Описание шага.
         public AudioClip startSound; // Звук при старте шага.
+        
+        public Transform TransformTargetWay; //точка в которую будет стрелять луч от игрока
         public string startAnimation; // Анимация при старте шага.
         public GameObject SubStart;//субтитры старта
         public bool startSoundRun; //звук проигрался
@@ -122,13 +129,24 @@ public class CharacterActions : MonoBehaviour
         {
             //Debug.Log("Звук есть, запускаем корутину  PlaySoundAndAnimation и отправляем в неё звук из урока номер: ");
             
-
+            /*
+            // Перемещаем указатель куда нужно идти в заданную точку
+            if (step.TransformTargetWay != null && TargetWay != null)
+            {
+                TargetWay.transform.position = step.TransformTargetWay.position;
+            }*/
+            
+            
             //включаем субтитры
             if (step.SubMainTask)
             {step.SubMainTask.SetActive(false);}
-            if (step.SubStart)
-            {step.SubStart.SetActive(true); }
 
+            if (step.SubStart)
+            {
+                step.SubStart.SetActive(true); 
+             
+            }
+            
             
             
             
@@ -151,6 +169,17 @@ public class CharacterActions : MonoBehaviour
         // Если есть целевая точка, двигаемся к ней.
         if (step.targetPoint)
         {
+            // Перемещаем указатель куда нужно идти в заданную точку и делаем его дочерним элементом
+            if (step.TransformTargetWay)
+            {
+                // Устанавливаем родительский элемент для TargetWay
+                TargetWay.transform.SetParent(step.TransformTargetWay);
+
+                // Устанавливаем локальные позицию и поворот в 0, чтобы TargetWay был точно в позиции TransformTargetWay
+                TargetWay.transform.localPosition = Vector3.zero;
+                TargetWay.transform.localRotation = Quaternion.identity;
+            }
+            
             //отправляем игрока к точке
             mover.MoveToPoint(step.targetPoint.position);
         
@@ -172,7 +201,8 @@ public class CharacterActions : MonoBehaviour
 
         // Запускаем корутину ожидания игрока.
         yield return StartCoroutine(WaitForPlayerRoutine(step));
-       
+        
+
     }
 
    // Корутина ожидания игрока.
@@ -398,12 +428,25 @@ public class CharacterActions : MonoBehaviour
     {
         while (true)
         {
-           
+            Vector3 targetPoint = playerTransform.position;
+            //if (!mover.Agent.isStopped)
+            
+            if (!mover.HasReachedDestination())
+            {
+                mover.Agent.updateRotation = true;
+                targetPoint = mover.Agent.destination;
+            }
+            else
+            {
+                mover.Agent.updateRotation = false;
+            }
                 
-                Vector3 directionToPlayer = playerTransform.position - transform.position;
+                //Vector3 directionToPlayer = playerTransform.position - transform.position;
+                Vector3 directionToPlayer = targetPoint - transform.position;
                 directionToPlayer.y = 0; // Убедитесь, что вращение происходит только по горизонтали
                 Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+                //transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 0.5f);
 
                 yield return null; // Это будет выполнять корутину каждый кадр
 

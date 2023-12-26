@@ -75,7 +75,7 @@ namespace MobaVR
             }
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (!photonView.IsMine)
             {
@@ -89,6 +89,7 @@ namespace MobaVR
         protected virtual void OnAttach(Bow bow)
         {
             m_Bow = bow;
+            m_Bow.OnReleaseArrow.RemoveListener(OnReleaseArrow);
             m_Bow.OnReleaseArrow.AddListener(OnReleaseArrow);
         }
 
