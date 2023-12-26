@@ -6,12 +6,18 @@ namespace MobaVR
     {
         public override void Show()
         {
-            gameObject.SetActive(true);
+            if (gameObject != null)
+            {
+                gameObject.SetActive(true);
+            }
         }
 
         public override void Hide()
         {
-            gameObject.SetActive(false);
+            if (gameObject != null)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }
