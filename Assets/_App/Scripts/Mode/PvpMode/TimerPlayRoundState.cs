@@ -83,10 +83,21 @@ namespace MobaVR.ClassicModeStateMachine.PVP
             m_Content.ModeView.InfoView.Show();
         }
 
+        //TODO: Need to remove listeners when user go to other skin from PVP mode
         private void OnRebornLocalPlayer()
         {
-            m_Content.ZoneManager.Hide();
-            m_Content.ModeView.InfoView.Hide();
+            if (m_Content != null)
+            {
+                if (m_Content.ZoneManager != null)
+                {
+                    m_Content.ZoneManager.Hide();
+                }
+
+                if (m_Content.ModeView != null && m_Content.ModeView.InfoView != null)
+                {
+                    m_Content.ModeView.InfoView.Hide();
+                }
+            }
         }
 
         private void OnDieBluePlayer()
