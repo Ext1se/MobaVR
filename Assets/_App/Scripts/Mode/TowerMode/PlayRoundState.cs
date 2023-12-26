@@ -77,6 +77,8 @@ namespace MobaVR.ClassicModeStateMachine.Tower
 
         public override void Enter()
         {
+            m_Content.ModeView.InfoView.Hide();
+            
             m_MonsterCount = 0;
             m_CurrentMonsterCount = 0;
             m_CurrentPlayerCount = 0;

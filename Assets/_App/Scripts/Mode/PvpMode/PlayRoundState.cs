@@ -27,6 +27,7 @@ namespace MobaVR.ClassicModeStateMachine.PVP
                 }
             }
             
+            m_Content.ModeView.InfoView.Hide();
             m_Content.KillZoneManager.Show();
         }
 

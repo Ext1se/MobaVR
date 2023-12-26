@@ -53,6 +53,18 @@ namespace MobaVR.ClassicModeStateMachine.PVP
             
             m_Content.ZoneManager.Show();
             m_Content.KillZoneManager.Show();
+            
+            m_Content.ModeView.InfoView.Hide();
+            m_Content.ModeView.PvpVictoryView.Hide();
+
+            if (m_Mode.Player != null)
+            {
+                m_Mode.Player.WizardPlayer.OnDie -= OnDieLocalPlayer;
+                m_Mode.Player.WizardPlayer.OnReborn -= OnRebornLocalPlayer;
+
+                m_Mode.Player.WizardPlayer.OnDie += OnDieLocalPlayer;
+                m_Mode.Player.WizardPlayer.OnReborn += OnRebornLocalPlayer;
+            }
 
             foreach (PlayerVR player in m_Mode.RedTeam.Players)
             {
@@ -63,6 +75,18 @@ namespace MobaVR.ClassicModeStateMachine.PVP
             {
                 player.WizardPlayer.OnDie += OnDieBluePlayer;
             }
+        }
+        
+        private void OnDieLocalPlayer()
+        {
+            m_Content.ZoneManager.Show();
+            m_Content.ModeView.InfoView.Show();
+        }
+
+        private void OnRebornLocalPlayer()
+        {
+            m_Content.ZoneManager.Hide();
+            m_Content.ModeView.InfoView.Hide();
         }
 
         private void OnDieBluePlayer()
@@ -151,6 +175,7 @@ namespace MobaVR.ClassicModeStateMachine.PVP
             m_Content.ModeView.RoundTimeView.Hide();
             m_Content.ZoneManager.Hide();
             m_Content.KillZoneManager.Hide();
+            m_Content.ModeView.InfoView.Hide();
 
             /*
             foreach (PlayerVR player in m_Mode.RedTeam.Players)
@@ -168,6 +193,12 @@ namespace MobaVR.ClassicModeStateMachine.PVP
             {
                 player.WizardPlayer.OnDie -= OnDieRedPlayer;
                 player.WizardPlayer.OnDie -= OnDieBluePlayer;
+            }
+
+            if (m_Mode.Player != null)
+            {
+                m_Mode.Player.WizardPlayer.OnDie -= OnDieLocalPlayer;
+                m_Mode.Player.WizardPlayer.OnReborn -= OnRebornLocalPlayer;
             }
         }
     }

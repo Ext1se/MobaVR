@@ -16,6 +16,11 @@ namespace MobaVR.ClassicModeStateMachine.PVE
         
         public override void Enter()
         {
+            m_Content.ModeView.InfoView.Show();
+            m_Content.ModeView.RoundTimeView.Hide();
+            m_Content.ModeView.VictoryView.Hide();
+            m_Content.ModeView.LoseView.Hide();
+            
             if (PhotonNetwork.IsMasterClient)
             {
                 UpdatePlayers();

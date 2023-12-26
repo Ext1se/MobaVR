@@ -29,7 +29,7 @@ namespace CloudFine.ThrowLab
 
         private void Awake()
         {
-            if (!m_CustomReticle)
+            if (m_CustomReticle == null)
             {
                 reticle = GameObject.CreatePrimitive(PrimitiveType.Quad);
                 reticle.GetComponent<Collider>().enabled = false;

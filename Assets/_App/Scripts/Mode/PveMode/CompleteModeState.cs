@@ -30,14 +30,23 @@ namespace MobaVR.ClassicModeStateMachine.PVE
                     pointSpawner.ClearMonsters();
                 }
             }
+            
+            m_Content.ModeView.InfoView.Show();
+            m_Content.ModeView.RoundTimeView.Hide();
+            m_Content.ModeView.VictoryView.Hide();
+            m_Content.ModeView.LoseView.Hide();
 
             if (m_Content.Lich.IsLife)
             {
                 //TODO: WIN
+                m_Content.ModeView.InfoView.Show();
+                m_Content.ModeView.LoseView.Show();
             }
             else
             {
                 //TODO: LOSE
+                m_Content.ModeView.InfoView.Hide();
+                m_Content.ModeView.VictoryView.Show();
             }
             
             m_Content.Lich.RpcPause_Monster();

@@ -37,6 +37,7 @@ namespace MobaVR.ClassicModeStateMachine.Tower
             }
             else
             {
+                m_Content.ModeView.InfoView.Show();
                 m_Content.ModeView.LoseView.Show();
             }
 
