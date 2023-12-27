@@ -19,13 +19,14 @@ public class LocalizeText : MonoBehaviour
     private Text uiText;
     private TextMeshProUGUI tmpText;
 
-    private void Start()
+    private void Awake()
     {
         uiText = GetComponent<Text>();
         tmpText = GetComponent<TextMeshProUGUI>();
-        UpdateText();
+ 
 
         LanguageManager.Instance.LanguageChanged += UpdateText;
+        UpdateText();
     }
 
     private void OnDestroy()

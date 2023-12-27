@@ -43,7 +43,7 @@ namespace MobaVR
 
         private void Awake()
         {
-            m_RoomName = appSettings.AppData.City;
+            m_RoomName = !string.IsNullOrEmpty(appSettings.AppData.Room) ? appSettings.AppData.Room : appSettings.AppData.City;
 
             PhotonNetwork.NetworkingClient.SerializationProtocol = SerializationProtocol.GpBinaryV16;
             PhotonNetwork.EnableCloseConnection = true;
@@ -134,6 +134,7 @@ namespace MobaVR
             PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime = m_Settings.OnlineKey;
             PhotonNetwork.PhotonServerSettings.AppSettings.UseNameServer = true;
             PhotonNetwork.PhotonServerSettings.AppSettings.Server = "";
+            //PhotonNetwork.PhotonServerSettings.AppSettings.UseNameServer = false;//TODO
             PhotonNetwork.ConnectUsingSettings();
         }
 
@@ -167,6 +168,8 @@ namespace MobaVR
             base.OnJoinRoomFailed(returnCode, message);
             Debug.Log($"{TAG}: OnJoinRoomFailed");
             //BackToMenu();
+            PhotonNetwork.Disconnect();
+            //WaitAndLoadMenuScene();
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
@@ -174,6 +177,8 @@ namespace MobaVR
             base.OnJoinRandomFailed(returnCode, message);
             Debug.Log($"{TAG}: OnJoinRandomFailed");
             //BackToMenu();
+            PhotonNetwork.Disconnect();
+            //WaitAndLoadMenuScene();
         }
 
         public override void OnDisconnected(DisconnectCause cause)
@@ -183,7 +188,6 @@ namespace MobaVR
 
             m_IsConnecting = false;
             OnRoomDisconnected?.Invoke();
-            
             WaitAndLoadMenuScene();
         }
 
@@ -206,8 +210,10 @@ namespace MobaVR
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
-            Debug.Log($"{TAG}: OnJoinedRoom");
-
+            Debug.Log($"{TAG}: OnJoinedRoom: {PhotonNetwork.PhotonServerSettings.AppSettings.Port}");
+            var z=PhotonNetwork.CloudRegion;
+            var z1=PhotonNetwork.ServerAddress;
+            var z2=PhotonNetwork.Server;
             OnRoomJoined?.Invoke();
             LoadGameScene(m_GameScene);
         }

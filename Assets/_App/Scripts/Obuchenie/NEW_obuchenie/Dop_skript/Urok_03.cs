@@ -22,9 +22,15 @@ public class Urok_03 : MonoBehaviour
 
     [SerializeField]
     private Transform targetRed;
+    
+    [SerializeField]
+    private Transform targetRedWay; // Точка куда будет смотреть указатель от игрока для команды "RED"
 
     [SerializeField]
     private Transform targetBlue;
+    
+    [SerializeField]
+    private Transform targetBlueWay; //  Точка куда будет смотреть указатель от игрока для команды "BLUE"
 
     private CharacterActions characterActions;
 
@@ -115,10 +121,12 @@ public class Urok_03 : MonoBehaviour
         if (team == "RED")
         {
             characterActions.tutorialSteps[characterActions.CurrentStepIndex].targetPoint = targetRed;
+            characterActions.tutorialSteps[characterActions.CurrentStepIndex].TransformTargetWay = targetRedWay;
         }
         else if (team == "BLUE")
         {
             characterActions.tutorialSteps[characterActions.CurrentStepIndex].targetPoint = targetBlue;
+            characterActions.tutorialSteps[characterActions.CurrentStepIndex].TransformTargetWay = targetBlueWay;
         }
         
         //путь указан и команда выбрана
@@ -147,7 +155,10 @@ public class Urok_03 : MonoBehaviour
         if (characterActions.tutorialSteps.Length > 2)
         {
             //обнуляем точки, для следующего запуска
-            characterActions.tutorialSteps[characterActions.CurrentStepIndex].targetPoint = null;
+            characterActions.tutorialSteps[characterActions.CurrentStepIndex].targetPoint = null; 
+            
+            //обнуляем точки пути, для следующего запуска
+            characterActions.tutorialSteps[characterActions.CurrentStepIndex].TransformTargetWay = null;
             
             //обнуляем звук
             characterActions.tutorialSteps[characterActions.CurrentStepIndex].mainTaskSound = null;

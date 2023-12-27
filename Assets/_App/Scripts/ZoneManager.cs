@@ -12,7 +12,10 @@ namespace MobaVR
         {
             foreach (RespawnZone respawnZone in m_RespawnZones)
             {
-                respawnZone.gameObject.SetActive(true);
+                if (respawnZone != null)
+                {
+                    respawnZone.gameObject.SetActive(true);
+                }
             }
         }
 
@@ -20,7 +23,10 @@ namespace MobaVR
         {
             foreach (RespawnZone respawnZone in m_RespawnZones)
             {
-                respawnZone.gameObject.SetActive(false);
+                if (respawnZone != null)
+                {
+                    respawnZone.gameObject.SetActive(false);
+                }
             }
         }
     }
