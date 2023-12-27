@@ -168,6 +168,8 @@ namespace MobaVR
             base.OnJoinRoomFailed(returnCode, message);
             Debug.Log($"{TAG}: OnJoinRoomFailed");
             //BackToMenu();
+            PhotonNetwork.Disconnect();
+            //WaitAndLoadMenuScene();
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
@@ -175,6 +177,8 @@ namespace MobaVR
             base.OnJoinRandomFailed(returnCode, message);
             Debug.Log($"{TAG}: OnJoinRandomFailed");
             //BackToMenu();
+            PhotonNetwork.Disconnect();
+            //WaitAndLoadMenuScene();
         }
 
         public override void OnDisconnected(DisconnectCause cause)
@@ -184,7 +188,6 @@ namespace MobaVR
 
             m_IsConnecting = false;
             OnRoomDisconnected?.Invoke();
-            
             WaitAndLoadMenuScene();
         }
 
