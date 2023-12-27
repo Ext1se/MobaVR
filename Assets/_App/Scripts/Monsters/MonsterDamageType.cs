@@ -6,6 +6,7 @@
         {
             HP,
             IMMORTAL,
+            HEAL,
             CRIT
         }
 

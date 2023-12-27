@@ -31,9 +31,33 @@ namespace MobaVR
             }
 
             m_CanFog = false;
-            CreateFog();
 
-            Invoke(nameof(EnableFog), m_FogDelay);
+            if (m_GameSession.Mode.GameModeType == GameModeType.LOBBY)
+            {
+                ApplyForDummy();
+                Invoke(nameof(EnableFog), m_FogDelay);
+            }
+            
+            if (m_GameSession.Mode.GameModeType is GameModeType.PVP or GameModeType.MOBA or GameModeType.LOBBY)
+            {
+                CreateFog();
+                Invoke(nameof(EnableFog), m_FogDelay);
+            }
+
+            if (m_GameSession.Mode.GameModeType is GameModeType.PVE or GameModeType.TD)
+            {
+                BlindMonsters();
+                Invoke(nameof(EnableFog), m_FogDelay);
+            }
+        }
+        
+        private void ApplyForDummy()
+        {
+            Dummy dummy = FindObjectOfType<Dummy>();
+            if (dummy != null)
+            {
+                dummy.ShowFog();
+            }
         }
 
         private void CreateFog()
@@ -53,6 +77,15 @@ namespace MobaVR
                 spell.OnDestroySpell += () => OnDestroySpell(spell);
 
                 spell.Init(m_PlayerVR.WizardPlayer, m_PlayerVR.TeamType);
+            }
+        }
+
+        private void BlindMonsters()
+        {
+            Monster[] monsters = FindObjectsOfType<Monster>();
+            foreach (Monster monster in monsters)
+            {
+                monster.Blind();
             }
         }
 

@@ -45,8 +45,8 @@ namespace MobaVR
 
         public void Show(bool isShow)
         {
-            photonView.RPC(nameof(RpcShow), RpcTarget.AllBuffered, isShow);
-            //photonView.RPC(nameof(RpcShow), RpcTarget.All, isShow);
+            //photonView.RPC(nameof(RpcShow), RpcTarget.AllBuffered, isShow);
+            photonView.RPC(nameof(RpcShow), RpcTarget.All, isShow);
         }
 
         [PunRPC]

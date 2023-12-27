@@ -10,9 +10,15 @@ public class Urok_02 : MonoBehaviour
     
     [SerializeField]
     private Transform targetRed; // Точка для команды "RED"
+    
+    [SerializeField]
+    private Transform targetRedWay; // Точка куда будет смотреть указатель от игрока для команды "RED"
 
     [SerializeField]
     private Transform targetBlue; // Точка для команды "BLUE"
+    
+    [SerializeField]
+    private Transform targetBlueWay; //  Точка куда будет смотреть указатель от игрока для команды "BLUE"
 
     private CharacterActions characterActions;
 
@@ -23,6 +29,9 @@ public class Urok_02 : MonoBehaviour
     
     private void OnEnable()
     {
+        // Найти и назначить объекты
+        FindAndAssignTargets();
+        
         //находим компонент с уроками
         characterActions = GetComponent<CharacterActions>();
         RunTeamTarget =false;
@@ -75,6 +84,27 @@ public class Urok_02 : MonoBehaviour
             SetTargetPointBasedOnTeam();
         }
     }
+    
+    
+    private void FindAndAssignTargets()
+    {
+        // Найти объекты с заданными именами
+        GameObject redWayObject = GameObject.Find("FX_Heal_02_Red");
+        GameObject blueWayObject = GameObject.Find("FX_Heal_02_Blue");
+
+        // Проверить, найдены ли объекты, и назначить их соответствующим переменным
+        if (redWayObject != null)
+            targetRedWay = redWayObject.transform;
+        else
+             Debug.LogError("FX_Heal_02_Red object not found!");
+
+        if (blueWayObject != null)
+            targetBlueWay = blueWayObject.transform;
+        else
+            Debug.LogError("FX_Heal_02_Blue object not found!");
+    }
+    
+    
 
     //отправляем позиции в зависимости от команды персонаж топает к кинге
     private void SetTargetPointBasedOnTeam()
@@ -82,10 +112,12 @@ public class Urok_02 : MonoBehaviour
         if (team == "RED")
         {
             characterActions.tutorialSteps[characterActions.CurrentStepIndex].targetPoint = targetRed;
+            characterActions.tutorialSteps[characterActions.CurrentStepIndex].TransformTargetWay = targetRedWay;
         }
         else if (team == "BLUE")
         {
             characterActions.tutorialSteps[characterActions.CurrentStepIndex].targetPoint = targetBlue;
+            characterActions.tutorialSteps[characterActions.CurrentStepIndex].TransformTargetWay = targetBlueWay;
         }
         //путь указан и команда выбрана
         RunTeamTarget = true;
@@ -104,6 +136,7 @@ public class Urok_02 : MonoBehaviour
         {
             //обнуляем переменную, чтобы использовать скрипт повторно
             characterActions.tutorialSteps[characterActions.CurrentStepIndex].targetPoint = null;
+            characterActions.tutorialSteps[characterActions.CurrentStepIndex].TransformTargetWay = null;
             characterActions.tutorialSteps[1].isTaskCompleted = true;
         }
     }

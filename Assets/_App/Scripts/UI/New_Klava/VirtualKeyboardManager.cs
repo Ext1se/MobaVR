@@ -62,6 +62,12 @@ using System.Collections.Generic;
         public void ExitDown()
         {
             ButtonClicked = false;
+        }       
+        
+        
+        public void ExitClava()
+        {
+            this.gameObject.SetActive(false);
         }
         
         public void KlavaRusRun()

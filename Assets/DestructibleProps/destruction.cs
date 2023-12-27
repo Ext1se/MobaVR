@@ -30,9 +30,20 @@ public class destruction : MonoBehaviour
 
     private AudioSource audioSource;
 
+    [Space]
+    [Header("Demo features. Need to refactor")]
+    //TODO: remove it
+    [SerializeField] private bool m_IsEasyDestroy = true;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        
+        //TODO
+        if (m_IsEasyDestroy)
+        {
+            Health = (int)(Health / 1.8f);
+        }
     }
 
 

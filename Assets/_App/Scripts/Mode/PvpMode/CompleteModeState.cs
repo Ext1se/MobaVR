@@ -24,9 +24,26 @@ namespace MobaVR.ClassicModeStateMachine.PVP
                 {
                     m_Content.Environment.ResetEnvironment();
                 }
+
+                if (m_Mode.RedTeam.Score == m_Mode.BlueTeam.Score)
+                {
+                    m_Content.ModeView.PvpVictoryView.SetVictory(PvpVictoryView.PvpVictoryType.DRAW);
+                }
+                else
+                {
+                    if (m_Mode.RedTeam.Score > m_Mode.BlueTeam.Score)
+                    {
+                        m_Content.ModeView.PvpVictoryView.SetVictory(PvpVictoryView.PvpVictoryType.WIN_RED);
+                    }
+                    else
+                    {
+                        m_Content.ModeView.PvpVictoryView.SetVictory(PvpVictoryView.PvpVictoryType.WIN_BLUE);
+                    }
+                }
             }
             
-            m_Content.ModeView.VictoryView.Show();
+            m_Content.ModeView.PvpVictoryView.Show();
+            //m_Content.ModeView.VictoryView.Show();
         }
 
         public override void Update()
@@ -35,7 +52,8 @@ namespace MobaVR.ClassicModeStateMachine.PVP
 
         public override void Exit()
         {
-            m_Content.ModeView.VictoryView.Hide();
+            //m_Content.ModeView.VictoryView.Hide();
+            m_Content.ModeView.PvpVictoryView.Hide();
         }
     }
 }

@@ -79,6 +79,7 @@ public class Defender_Ultimate : MonoBehaviour
                                
                                // Debug.Log("Запускаем звук");
                                 StartCoroutine(StartEndLessonAuto());
+                                currentLessonObj.autoStop = false;
                             }
                             else if (!timerStarted)
                             {
