@@ -30,6 +30,7 @@ namespace MobaVR.ClassicModeStateMachine.Tower
                 m_Content.Lich.RpcPause_Monster();
             }
 
+            m_Content.ModeView.InfoView.Show();
             m_Content.ModeView.PreRoundTimeView.Show();
             m_Content.ModeView.PreRoundTimeView.UpdateTime(m_Time);
             
@@ -56,6 +57,7 @@ namespace MobaVR.ClassicModeStateMachine.Tower
         public override void Exit()
         {
             m_Content.ModeView.PreRoundTimeView.Hide();
+            m_Content.ModeView.InfoView.Hide();
         }
     }
 }
