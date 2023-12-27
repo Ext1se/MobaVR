@@ -132,6 +132,7 @@ namespace MobaVR
             m_IsConnecting = true;
 
             PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime = m_Settings.OnlineKey;
+            PhotonNetwork.PhotonServerSettings.AppSettings.Port = m_Settings.OnlinePort;
             PhotonNetwork.PhotonServerSettings.AppSettings.UseNameServer = true;
             PhotonNetwork.PhotonServerSettings.AppSettings.Server = "";
             //PhotonNetwork.PhotonServerSettings.AppSettings.UseNameServer = false;//TODO
@@ -145,7 +146,8 @@ namespace MobaVR
             m_IsConnecting = true;
             m_IpServer = ipAddress;
 
-            PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime = m_Settings.OfflineKey;
+            PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime = m_Settings.LocalKey;
+            PhotonNetwork.PhotonServerSettings.AppSettings.Port = m_Settings.LocalPort;
             PhotonNetwork.PhotonServerSettings.AppSettings.UseNameServer = false;
             PhotonNetwork.PhotonServerSettings.AppSettings.Server = m_IpServer;
             PhotonNetwork.ConnectUsingSettings();
@@ -162,6 +164,8 @@ namespace MobaVR
                 JoinOrCreateRoom();
             }
         }
+        
+        
 
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
