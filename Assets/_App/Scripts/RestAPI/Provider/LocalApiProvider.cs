@@ -17,7 +17,7 @@ namespace MobaVR
 
         private LocalRepository m_LocalRepository;
         private string m_Token = null;
-        private float m_Delay = 3f;
+        private float m_Delay = 1f;
 
         protected override void Awake()
         {

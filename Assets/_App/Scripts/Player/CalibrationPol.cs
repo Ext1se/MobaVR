@@ -18,9 +18,12 @@ namespace MobaVR
         public GameObject Right_Calibr;
         public Transform additionalObject; // Дополнительный объект из инспектора
         public Transform additionalObjectTarget; // Цель для дополнительного объекта из инспектора
-
-        public GameObject CalibrovkaText;
-
+        
+        
+        public GameObject CalibrovkaText; //откалибруйте в первой точке
+        public GameObject CalibrovkaText2; //откалибруйте во второй точке
+        public GameObject CalibrovkaText3;  //откалибруйте рост
+      
 
         public Transform pointA;
         public Transform pointB;
@@ -83,10 +86,32 @@ namespace MobaVR
             runRost = false;
             _kalibr_ruka = false;
         }
+        
+        
+        private void OnEnable()
+        {
+            if (CalibrovkaText != null && CalibrovkaText2 != null && CalibrovkaText3 != null) 
+            {
+                CalibrovkaText.SetActive(true);
+                CalibrovkaText2.SetActive(false);
+                CalibrovkaText3.SetActive(false);
+            }
+        }
+        
 
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                if (CalibrovkaText != null && CalibrovkaText2 != null && CalibrovkaText3 != null) 
+                {
+                    CalibrovkaText.SetActive(false);
+                    CalibrovkaText2.SetActive(false);
+                    CalibrovkaText3.SetActive(false);
+                }
+            }
+
             //калибровка
             if (calibr == false)
             {
@@ -135,6 +160,18 @@ namespace MobaVR
                     }
 
                     calibr = true;
+                    
+                    
+                    if (CalibrovkaText != null && CalibrovkaText2 != null && CalibrovkaText3 != null) 
+                    {
+                        CalibrovkaText.SetActive(false);
+                        CalibrovkaText2.SetActive(false);
+                        CalibrovkaText3.SetActive(true);
+                      
+                    }
+                    
+                    
+                    
                 }
             }
             else if (calibr == true)
@@ -180,6 +217,16 @@ namespace MobaVR
                 additionalObject.SetParent(
                     additionalObjectTarget); // Устанавливаем additionalObject как дочерний объект для additionalObjectTarget
             }
+            
+                        
+            if (CalibrovkaText != null && CalibrovkaText2 != null && CalibrovkaText3 != null) 
+            {
+                CalibrovkaText.SetActive(false);
+                CalibrovkaText2.SetActive(true);
+                CalibrovkaText3.SetActive(false);
+               
+            }
+            
         }
 
         private void RotateAroundPointC()
@@ -232,6 +279,18 @@ namespace MobaVR
             _rostPlayer += 0.1f;
 
             _rost.SetHeight(_rostPlayer);
+            
+            
+            if (CalibrovkaText != null && CalibrovkaText2 != null && CalibrovkaText3 != null) 
+            {
+                CalibrovkaText.SetActive(false);
+                CalibrovkaText2.SetActive(false);
+                CalibrovkaText3.SetActive(false);
+               
+            }
+            
+            
+            
         }
         
         

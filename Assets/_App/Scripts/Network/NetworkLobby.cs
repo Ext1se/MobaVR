@@ -154,7 +154,7 @@ namespace MobaVR
                 {
                     Debug.Log("Запускаем локальный, через IP " + ipServ);
                     //PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime = "1234567890-1234567890-1234567890";
-                    PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime = m_Settings.OfflineKey;
+                    PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime = m_Settings.LocalKey;
                     PhotonNetwork.PhotonServerSettings.AppSettings.UseNameServer = false;
                     // PhotonNetwork.PhotonServerSettings.AppSettings.Server = "LocalServer";
                     PhotonNetwork.PhotonServerSettings.AppSettings.Server = ipServ;

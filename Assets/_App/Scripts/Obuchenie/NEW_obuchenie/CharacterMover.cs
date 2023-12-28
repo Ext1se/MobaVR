@@ -8,7 +8,10 @@ public class CharacterMover : MonoBehaviour
     private Animator animator;
     public AudioClip footstepsSound; // Zvuk shagov
     private AudioSource footstepsSource; //Komponent AudioSource dlya zvuka shagov
-    private void Start()
+
+    public NavMeshAgent Agent => agent;
+
+    private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();

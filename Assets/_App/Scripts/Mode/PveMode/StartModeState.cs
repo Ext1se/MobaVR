@@ -18,6 +18,11 @@ namespace MobaVR.ClassicModeStateMachine.PVE
         {
             m_Content.Lich.RpcPause_Monster();
             
+            m_Content.ModeView.InfoView.Show();
+            m_Content.ModeView.RoundTimeView.Hide();
+            m_Content.ModeView.VictoryView.Hide();
+            m_Content.ModeView.LoseView.Hide();
+            
             if (PhotonNetwork.IsMasterClient)
             {
                 UpdatePlayers();
