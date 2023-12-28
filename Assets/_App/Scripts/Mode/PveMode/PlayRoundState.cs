@@ -21,6 +21,11 @@ namespace MobaVR.ClassicModeStateMachine.PVE
                 }
             }
 
+            m_Content.ModeView.InfoView.Hide();
+            m_Content.ModeView.RoundTimeView.Hide();
+            m_Content.ModeView.VictoryView.Hide();
+            m_Content.ModeView.LoseView.Hide();
+            
             m_Content.Lich.RpcRelease_Monster();
         }
 

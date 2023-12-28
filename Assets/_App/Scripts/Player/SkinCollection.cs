@@ -217,7 +217,8 @@ namespace MobaVR
                     SetVisibilityFace(false);
                 }
 
-                m_PhotonView.RPC(nameof(RpcSetAliveSkin), RpcTarget.AllBuffered, position);
+                //m_PhotonView.RPC(nameof(RpcSetAliveSkin), RpcTarget.AllBuffered, position);
+                m_PhotonView.RPC(nameof(RpcSetAliveSkin), RpcTarget.All, position);
             }
         }
 
@@ -257,7 +258,8 @@ namespace MobaVR
         {
             if (m_PhotonView != null)
             {
-                m_PhotonView.RPC(nameof(RpcSetAliveSkinById), RpcTarget.AllBuffered, idSkin);
+                //m_PhotonView.RPC(nameof(RpcSetAliveSkinById), RpcTarget.AllBuffered, idSkin);
+                m_PhotonView.RPC(nameof(RpcSetAliveSkinById), RpcTarget.All, idSkin);
             }
         }
 
@@ -304,7 +306,8 @@ namespace MobaVR
         {
             if (m_PhotonView != null)
             {
-                m_PhotonView.RPC(nameof(RpcSetDeadSkin), RpcTarget.AllBuffered, position);
+                //m_PhotonView.RPC(nameof(RpcSetDeadSkin), RpcTarget.AllBuffered, position);
+                m_PhotonView.RPC(nameof(RpcSetDeadSkin), RpcTarget.All, position);
             }
         }
 
@@ -367,7 +370,8 @@ namespace MobaVR
         {
             if (m_PhotonView != null)
             {
-                m_PhotonView.RPC(nameof(RpcSetAnimalSkin), RpcTarget.AllBuffered, position);
+                //m_PhotonView.RPC(nameof(RpcSetAnimalSkin), RpcTarget.AllBuffered, position);
+                m_PhotonView.RPC(nameof(RpcSetAnimalSkin), RpcTarget.All, position);
             }
         }
 
@@ -442,7 +446,8 @@ namespace MobaVR
         {
             if (m_PhotonView != null)
             {
-                m_PhotonView.RPC(nameof(RpcRestoreSkin), RpcTarget.AllBuffered);
+                //m_PhotonView.RPC(nameof(RpcRestoreSkin), RpcTarget.AllBuffered);
+                m_PhotonView.RPC(nameof(RpcRestoreSkin), RpcTarget.All);
             }
         }
 

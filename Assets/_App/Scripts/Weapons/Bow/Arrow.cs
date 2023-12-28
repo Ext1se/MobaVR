@@ -111,8 +111,11 @@ namespace MobaVR.Weapons.Bow
             }
 
             //StartCoroutine(ReEnableColliderFrame());
-            StartCoroutine(ReEnableColliderDelay());
-            queueDestroy = StartCoroutine(QueueDestroy());
+            if (isActiveAndEnabled)
+            {
+                StartCoroutine(ReEnableColliderDelay());
+                queueDestroy = StartCoroutine(QueueDestroy());
+            }
         }
 
         private IEnumerator QueueDestroy()

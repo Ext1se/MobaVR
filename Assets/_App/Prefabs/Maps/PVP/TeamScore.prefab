@@ -338,7 +338,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3052151805673398323}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.615, y: -0.38, z: 1.794}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -614,6 +614,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5067320832693252345, guid: 1cd3d3af6a90610458e0f7b74163b349,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -760981502784350198, guid: 92182ed132c832c458abb3cc9d564898,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cd3d3af6a90610458e0f7b74163b349, type: 3}
 --- !u!224 &1188330327938004065 stripped
@@ -641,51 +647,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3052151804086094181}
     m_Modifications:
-    - target: {fileID: 2020354658715956521, guid: 1cd3d3af6a90610458e0f7b74163b349,
-        type: 3}
-      propertyPath: m_text
-      value: Kills
-      objectReference: {fileID: 0}
-    - target: {fileID: 2020354658715956521, guid: 1cd3d3af6a90610458e0f7b74163b349,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2020354658715956521, guid: 1cd3d3af6a90610458e0f7b74163b349,
-        type: 3}
-      propertyPath: m_fontStyle
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2020354658715956521, guid: 1cd3d3af6a90610458e0f7b74163b349,
-        type: 3}
-      propertyPath: m_fontColor.a
-      value: 0.78431374
-      objectReference: {fileID: 0}
-    - target: {fileID: 2020354658715956521, guid: 1cd3d3af6a90610458e0f7b74163b349,
-        type: 3}
-      propertyPath: m_fontSizeMax
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2020354658715956521, guid: 1cd3d3af6a90610458e0f7b74163b349,
-        type: 3}
-      propertyPath: m_fontSizeMin
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2020354658715956521, guid: 1cd3d3af6a90610458e0f7b74163b349,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2020354658715956521, guid: 1cd3d3af6a90610458e0f7b74163b349,
-        type: 3}
-      propertyPath: m_enableAutoSizing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2020354658715956521, guid: 1cd3d3af6a90610458e0f7b74163b349,
-        type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 3372220415
-      objectReference: {fileID: 0}
     - target: {fileID: 2715729186751511644, guid: 1cd3d3af6a90610458e0f7b74163b349,
         type: 3}
       propertyPath: m_Name
@@ -816,6 +777,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5067320832693252345, guid: 1cd3d3af6a90610458e0f7b74163b349,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -760981502784350198, guid: 92182ed132c832c458abb3cc9d564898,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cd3d3af6a90610458e0f7b74163b349, type: 3}
 --- !u!224 &1188330328388347864 stripped
