@@ -2,14 +2,20 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Lightning
   m_Shader: {fileID: 4800000, guid: 8eeb6772416504849bae66a0cb8ea1e9, type: 3}
-  m_ShaderKeywords: BlendAdd Clip_OFF FrameBlend_ON SoftParticles_OFF VertLight_OFF
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - BlendAdd
+  - Clip_OFF
+  - FrameBlend_ON
+  - SoftParticles_OFF
+  - VertLight_OFF
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -31,6 +37,7 @@ Material:
         m_Texture: {fileID: 2800000, guid: fa88dc79fd335ef419d21110ae9dc1a5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - DstMode: 1
     - SrcMode: 5
@@ -44,3 +51,4 @@ Material:
     - _DistortSpeed: {r: 2, g: 0.4, b: -2, a: 0.25}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _TintColor: {r: 135.58704, g: 7.808677, b: 48.271824, a: 1}
+  m_BuildTextureStacks: []

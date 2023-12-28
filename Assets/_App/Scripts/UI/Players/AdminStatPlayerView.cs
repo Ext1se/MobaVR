@@ -16,12 +16,13 @@ namespace MobaVR
         [SerializeField] private TextMeshProUGUI m_MonsterCountText;
         [SerializeField] private TextMeshProUGUI m_CaloriesCountText;
 
-        [Header("User Settings")]
-        [SerializeField] private Color m_LocalUserColor = Color.white;
+        [Header("User Settings")] [SerializeField]
+        private Color m_LocalUserColor = Color.white;
+
         [SerializeField] private Color m_RemoteUserColor = Color.white;
-        
+
         public Action<TeamType> OnUpdateTeamView;
-        
+
         #region OnUpdate
 
         protected override void OnDestroy()
@@ -50,17 +51,28 @@ namespace MobaVR
             m_CaloriesCountText.text = scoreData.CaloriesCount.ToString();
         }
 
+        //TODO: add correct role name
         protected override void OnUpdateRole(string idRole)
         {
-            m_RoleText.text = idRole;
+            //m_RoleText.text = idRole;
+
+            if (idRole == null)
+            {
+                return;
+            }
+
+            string role = idRole.Replace("_Male", "");
+            role = role.Replace("_Female", "");
+            role = role.Replace("_1", "");
+            m_RoleText.text = role;
         }
-        
+
         private void OnUpdateScore()
         {
             PlayerScoreData scoreData = m_PlayerVR.PlayerScore.ScoreData;
             UpdateScore(scoreData);
         }
-        
+
         protected override void OnUpdateNickName(string nickName)
         {
             if (m_PlayerVR != null && m_PlayerVR.photonView.IsMine)
@@ -83,7 +95,7 @@ namespace MobaVR
                 TeamType.BLUE => "<color=blue>BLUE</color>",
                 _ => m_TeamText.text
             };
-            
+
             OnUpdateTeamView?.Invoke(teamType);
         }
 

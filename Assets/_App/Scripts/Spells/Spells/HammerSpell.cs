@@ -111,7 +111,8 @@ namespace MobaVR
         private void ShowWeapon()
         {
             m_HammerMesh.SetActive(true);
-            photonView.RPC(nameof(RpcShowWeapon), RpcTarget.AllBuffered);
+            //photonView.RPC(nameof(RpcShowWeapon), RpcTarget.AllBuffered);
+            photonView.RPC(nameof(RpcShowWeapon), RpcTarget.All);
         }
 
         [PunRPC]

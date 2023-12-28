@@ -88,6 +88,22 @@ public class CameraManager : MonoBehaviour
 
     void ShowCamera(int index)
     {
+		// Выключаем все камеры UI
+    	for (int i = 0; i < camerasUI.Length; i++)
+    	{
+      	  	camerasUI[i].enabled = false;
+    	}
+
+    	// Выключаем все камеры для второго экрана
+    	if (MonitorDouble)
+    	{
+        	for (int i = 0; i < cameras.Length; i++)
+        	{
+            cameras[i].enabled = false;
+        	}
+   		}
+
+
         // Отображаем выбранную камеру UI
         for (int i = 0; i < camerasUI.Length; i++)
         {

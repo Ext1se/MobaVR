@@ -1,3 +1,5 @@
+using System.Collections;
+using MobaVR;
 using UnityEngine;
 using UnityEngine.SceneManagement; // Для работы со сценами.
 
@@ -5,10 +7,12 @@ public class CityManager : MonoBehaviour
 {
     public static CityManager Instance;
     public AppSetting appSettings; // Добавьте ссылку на ваш ScriptableObject где есть название города
-    
-    private bool isSceneLoading = false;//проверяем, загрузилась ли сцена или нет, чтобы не включать 2 одновременно
 
-    public BannerDropScript bannerDropScript;// скрипт для баннера
+    private bool isSceneLoading = false; //проверяем, загрузилась ли сцена или нет, чтобы не включать 2 одновременно
+
+    [SerializeField] private ClassicGameSession m_GameSession;
+    public BannerDropScript bannerDropScript; // скрипт для баннера
+
     private void Awake()
     {
         Instance = this;
@@ -23,8 +27,10 @@ public class CityManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         */
+
+        m_GameSession = FindObjectOfType<ClassicGameSession>();
     }
-    
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -39,36 +45,46 @@ public class CityManager : MonoBehaviour
     {
         isSceneLoading = false;
     }
-    
-    
+
+
     public void RegisterBannerDropScript(BannerDropScript script)
     {
         bannerDropScript = script;
     }
-    
+
 
     public void LoadCityScene(string baseSceneName)
     {
-        if (isSceneLoading) return; // Если идет загрузка, прекратить выполнение
+        if (isSceneLoading)
+        {
+            return; // Если идет загрузка, прекратить выполнение
+        }
+        
+        isSceneLoading = true;
+        float delay = 0f;
+        if (m_GameSession != null && m_GameSession.Mode != null)
+        {
+            delay = 3f;
+            m_GameSession.CompleteMode();
+        }
 
-        isSceneLoading = true; 
+        StartCoroutine(LoadScene(delay, baseSceneName));
+    }
 
+    private IEnumerator LoadScene(float delay, string baseSceneName)
+    {
+        yield return new WaitForSeconds(delay);
+        
         string sceneName = $"{baseSceneName}_{appSettings.AppData.City}";
-
-      
-            // bannerDropScript = FindObjectOfType<BannerDropScript>();
+        // bannerDropScript = FindObjectOfType<BannerDropScript>();
         if (bannerDropScript != null && baseSceneName != "Taverna")
         {
-        
             //bannerDropScript.SetSceneToLoadNext(sceneName);
             bannerDropScript.TriggerLowerShield(sceneName);
         }
         else
         {
-            
-            
-            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+            SceneManager.LoadScene(sceneName);
         }
     }
-
 }
