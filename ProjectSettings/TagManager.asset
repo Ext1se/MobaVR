@@ -17,6 +17,11 @@ TagManager:
   - TriggerLocalPlayer
   - Pickup
   - mouth
+  - LeftTargetScript
+  - RightTargetScript
+  - TriggerRight
+  - TriggerLeft
+  - HudHelp
   layers:
   - Default
   - TransparentFX
@@ -53,4 +58,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2428250671
     locked: 0

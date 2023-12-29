@@ -49,6 +49,11 @@ namespace MobaVR
             Reset();
         }
 
+        private void Start()
+        {
+            //TODO: photon.isMine
+        }
+
         private void OnPlayerHit(HitData hitData)
         {
             if (hitData.PlayerVR == null)

@@ -15,20 +15,20 @@ MonoBehaviour:
   AppSettings:
     AppIdRealtime: 2a8deb94-f484-4b03-b45a-b37ae3a077cc
     AppIdFusion: 
-    AppIdChat: 1234567890-1234567890-1234567890
+    AppIdChat: 
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: eu
+    FixedRegion: 
     Server: 
-    Port: 5055
+    Port: 0
     ProxyServer: 
     Protocol: 0
     EnableProtocolFallback: 1
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: tr
+  DevRegion: 
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
@@ -193,6 +193,8 @@ MonoBehaviour:
   - RpcPlaySoundClip
   - RpcSumCalories
   - RpcDisconnect
+  - RpcBlind
+  - RpcActivateTusaPashi
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

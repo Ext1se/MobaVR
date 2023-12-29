@@ -1,6 +1,7 @@
 ﻿using System;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MobaVR.ClassicModeStateMachine.PVP
 {
@@ -53,6 +54,19 @@ namespace MobaVR.ClassicModeStateMachine.PVP
             
             m_Content.ZoneManager.Show();
             m_Content.KillZoneManager.Show();
+            
+            m_Content.ModeView.InfoView.Hide();
+            m_Content.ModeView.PvpVictoryView.Hide();
+
+            if (m_Mode.Player != null)
+            {
+                UnsubscribeLocalPlayerEvents();
+
+                m_Mode.Player.WizardPlayer.OnDie += OnDieLocalPlayer;
+                m_Mode.Player.WizardPlayer.OnReborn += OnRebornLocalPlayer;
+                
+                SceneManager.sceneLoaded += UnloadScene;
+            }
 
             foreach (PlayerVR player in m_Mode.RedTeam.Players)
             {
@@ -62,6 +76,57 @@ namespace MobaVR.ClassicModeStateMachine.PVP
             foreach (PlayerVR player in m_Mode.BlueTeam.Players)
             {
                 player.WizardPlayer.OnDie += OnDieBluePlayer;
+            }
+        }
+
+        //TODO: Need to remove listeners when user go to other skin from PVP mode
+        private void UnloadScene(Scene arg0, LoadSceneMode arg1)
+        {
+            UnsubscribeLocalPlayerEvents();
+            SceneManager.sceneLoaded -= UnloadScene;
+        }
+
+        //TODO: Need to remove listeners when user go to other skin from PVP mode
+        private void UnsubscribeLocalPlayerEvents()
+        {
+            if (m_Mode != null && m_Mode.Player != null)
+            {
+                m_Mode.Player.WizardPlayer.OnDie -= OnDieLocalPlayer;
+                m_Mode.Player.WizardPlayer.OnReborn -= OnRebornLocalPlayer;
+            }
+        }
+
+        //TODO: Need to remove listeners when user go to other skin from PVP mode
+        private void OnDieLocalPlayer()
+        {
+            if (m_Content != null)
+            {
+                if (m_Content.ZoneManager != null)
+                {
+                    m_Content.ZoneManager.Show();
+                }
+
+                if (m_Content.ModeView != null && m_Content.ModeView.InfoView != null)
+                {
+                    m_Content.ModeView.InfoView.Show();
+                }
+            }
+        }
+
+        //TODO: Need to remove listeners when user go to other skin from PVP mode
+        private void OnRebornLocalPlayer()
+        {
+            if (m_Content != null)
+            {
+                if (m_Content.ZoneManager != null)
+                {
+                    m_Content.ZoneManager.Hide();
+                }
+
+                if (m_Content.ModeView != null && m_Content.ModeView.InfoView != null)
+                {
+                    m_Content.ModeView.InfoView.Hide();
+                }
             }
         }
 
@@ -78,7 +143,7 @@ namespace MobaVR.ClassicModeStateMachine.PVP
             m_Mode.BlueTeam.Kills = m_BlueScore;
             m_Content.ModeView.BlueTeamKillScoreView.SetScore(m_BlueScore);
         }
-
+        
         public override void Update()
         {
             if (!PhotonNetwork.IsMasterClient)
@@ -151,6 +216,7 @@ namespace MobaVR.ClassicModeStateMachine.PVP
             m_Content.ModeView.RoundTimeView.Hide();
             m_Content.ZoneManager.Hide();
             m_Content.KillZoneManager.Hide();
+            m_Content.ModeView.InfoView.Hide();
 
             /*
             foreach (PlayerVR player in m_Mode.RedTeam.Players)
@@ -168,6 +234,11 @@ namespace MobaVR.ClassicModeStateMachine.PVP
             {
                 player.WizardPlayer.OnDie -= OnDieRedPlayer;
                 player.WizardPlayer.OnDie -= OnDieBluePlayer;
+            }
+
+            if (m_Mode.Player != null)
+            {
+                UnsubscribeLocalPlayerEvents();
             }
         }
     }

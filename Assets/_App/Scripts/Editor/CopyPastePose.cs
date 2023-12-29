@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using MobaVR;
 using UnityEngine;
 using UnityEditor;
 
@@ -69,7 +70,7 @@ public class CopyPastePose : MonoBehaviour
             return result;
         }
     }
-
+    
     [MenuItem("MobaVR/Animation/Copy Pose")]
     static void CopyPose()
     {
@@ -87,11 +88,32 @@ public class CopyPastePose : MonoBehaviour
         return Selection.activeTransform != null;
     }
 
+    [MenuItem("MobaVR/Animation/Set Male A Pose")]
+    static void SetMaleAPose()
+    {
+        Transform obj = Selection.activeTransform;
+        var data = PoseUtils.MaleAPose;
+        PastePose(obj, data);
+    }
+    
+    [MenuItem("MobaVR/Animation/Set Female A Pose")]
+    static void SetFemaleAPose()
+    {
+        Transform obj = Selection.activeTransform;
+        var data = PoseUtils.FemaleAPose;
+        PastePose(obj, data);
+    }
+
     [MenuItem("MobaVR/Animation/Paste Pose")]
     static void PastePose()
     {
         Transform obj = Selection.activeTransform;
         var data = GUIUtility.systemCopyBuffer;
+        PastePose(obj, data);
+    }
+    
+    static void PastePose(Transform obj, string data)
+    {
         int idx = 0;
         var info = TransformInfo.FromString(data.Split(new char[] { '\n' }), ref idx);
         ApplyInfo(obj, info);
@@ -104,7 +126,7 @@ public class CopyPastePose : MonoBehaviour
         return Selection.activeTransform != null && !string.IsNullOrEmpty(GUIUtility.systemCopyBuffer);
     }
 
-    static TransformInfo GetInfo(Transform t)
+    public static TransformInfo GetInfo(Transform t)
     {
         TransformInfo result = new TransformInfo();
         result.name = t.name;

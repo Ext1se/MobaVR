@@ -78,21 +78,57 @@ namespace MobaVR
             int selectedItemIndex = 0;
             switch (idRole)
             {
-                case (AppStrings.ID_ROLE_WIZARD):
+                case (AppStrings.ID_ROLE_MALE_WIZARD):
                 {
                     selectedItemIndex = 0;
                     break;
                 }
 
-                case (AppStrings.ID_ROLE_DEFENDER):
+                case (AppStrings.ID_ROLE_MALE_DEFENDER):
                 {
                     selectedItemIndex = 1;
                     break;
                 }
 
-                case (AppStrings.ID_ROLE_ARCHER):
+                case (AppStrings.ID_ROLE_MALE_ARCHER):
                 {
                     selectedItemIndex = 2;
+                    break;
+                }
+                
+                case (AppStrings.ID_ROLE_FEMALE_WIZARD):
+                {
+                    selectedItemIndex = 3;
+                    break;
+                }
+
+                case (AppStrings.ID_ROLE_FEMALE_WIZARD_1):
+                {
+                    selectedItemIndex = 4;
+                    break;
+                }
+
+                case (AppStrings.ID_ROLE_FEMALE_DEFENDER):
+                {
+                    selectedItemIndex = 5;
+                    break;
+                }
+                
+                case (AppStrings.ID_ROLE_FEMALE_DEFENDER_1):
+                {
+                    selectedItemIndex = 6;
+                    break;
+                }
+
+                case (AppStrings.ID_ROLE_FEMALE_ARCHER):
+                {
+                    selectedItemIndex = 7;
+                    break;
+                }
+
+                case (AppStrings.ID_ROLE_FEMALE_ARCHER_1):
+                {
+                    selectedItemIndex = 8;
                     break;
                 }
             }

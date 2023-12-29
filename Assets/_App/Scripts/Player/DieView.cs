@@ -10,16 +10,23 @@ public class DieView : MonoBehaviour
 
     public GameObject DiePanel;
     public GameObject DieInfoPanel;
+    public GameObject DieInfoPanelPvE;
     public TextMeshProUGUI KillerName;
 
 
     public AudioClip[] sounds;
 
     private AudioSource audioSource;
+    private ClassicGameSession gameSession;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        gameSession = FindObjectOfType<ClassicGameSession>();
+        
+        DieInfoPanel.SetActive(false);
+        DieInfoPanelPvE.SetActive(false);
+        DiePanel.SetActive(false);
     }
 
     private void OnEnable()
@@ -44,12 +51,28 @@ public class DieView : MonoBehaviour
     {
         DiePanel.SetActive(false);
         DieInfoPanel.SetActive(false);
+        DieInfoPanelPvE.SetActive(false);
     }
 
     public void SetDieInfo(string nickname)
     {
-        DieInfoPanel.SetActive(true);
-        KillerName.text = nickname;
+        //TODO: вызывается даже у удаленных игроков. Плохо.
+        if (gameSession == null)
+        {
+            return;
+        }
+        
+        if (gameSession.Mode.GameModeType is GameModeType.PVP or GameModeType.MOBA)
+        {
+            DieInfoPanelPvE.SetActive(false);
+            DieInfoPanel.SetActive(true);
+            KillerName.text = nickname;
+        }
+        else
+        {
+            DieInfoPanel.SetActive(false);
+            DieInfoPanelPvE.SetActive(true);
+        }
     }
 
     public void PlayRandomSound()

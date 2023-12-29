@@ -12,6 +12,7 @@ namespace MobaVR
         [SerializeField] protected BaseTimeView m_RoundTimeView;
         [SerializeField] protected BaseVictoryView m_VictoryView;
         [SerializeField] protected BaseVictoryView m_LoseView;
+        [SerializeField] protected BaseView m_InfoView;
         //[SerializeField] protected BaseTimeView m_GameTimeView;
 
         public BaseTeamScoreView RedTeamScoreView => m_RedTeamScoreView;
@@ -22,7 +23,9 @@ namespace MobaVR
         public BaseVictoryView LoseView => m_LoseView;
         public BaseTeamScoreView RedTeamKillScoreView => m_RedTeamKillScoreView;
         public BaseTeamScoreView BlueTeamKillScoreView => m_BlueTeamKillScoreView;
-        
+
+        public BaseView InfoView => m_InfoView;
+
         //public BaseTimeView GameTimeView => m_GameTimeView;
     }
 }

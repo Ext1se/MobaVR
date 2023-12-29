@@ -27,6 +27,7 @@ namespace MobaVR
         [Header("Network")]
         [SerializeField] protected PhotonView m_PhotonView;
 
+        protected ClassicGameSession m_GameSession;
         protected SpellHandler m_SpellsHandler;
         [SerializeField] [ReadOnly] protected bool m_IsInCooldown = false;
         [SerializeField] [ReadOnly] protected float m_CurrentTime = 0f;
@@ -71,6 +72,8 @@ namespace MobaVR
 
             m_SpellsHandler = spellHandler;
             m_PlayerVR = playerVR;
+
+            m_GameSession = FindObjectOfType<ClassicGameSession>();
         }
 
         protected virtual bool CanCast()

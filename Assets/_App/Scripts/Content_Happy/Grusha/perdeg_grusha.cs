@@ -9,17 +9,24 @@ public class perdeg_grusha : MonoBehaviourPunCallbacks
 
     private void OnEnable()
     {
+        //StartCoroutine(PlaySounds());
+    }
+
+    public void Play()
+    {
         StartCoroutine(PlaySounds());
     }
 
     IEnumerator PlaySounds()
     {
         yield return new WaitForSeconds(2f);
-        photonView.RPC("PlayOtrigkaSound", RpcTarget.All);
+        //photonView.RPC("PlayOtrigkaSound", RpcTarget.All);
+        PlayOtrigkaSound();
 
         yield return new WaitForSeconds(7f);
         int randomIndex = Random.Range(0, perdeg.Length);
-        photonView.RPC("PlayRandomSound", RpcTarget.All, randomIndex);
+        //photonView.RPC("PlayRandomSound", RpcTarget.All, randomIndex);
+        PlayRandomSound(randomIndex);
     }
 
     [PunRPC]
